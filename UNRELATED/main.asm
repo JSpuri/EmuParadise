@@ -76,10 +76,48 @@ MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
 
     .org $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
                                     ;$8000 to $FFFF in ROM with 32KiB
+									
+									
 
 Reset:
 
-    ;NOTE: initialization code goes here
+  SEI          ; disable IRQs
+  CLD          ; disable decimal mode
+  LDX #$40
+  STX $4017    ; disable APU frame IRQ
+  LDX #$FF
+  TXS          ; Set up stack
+  INX          ; now X = 0
+  STX $2000    ; disable NMI
+  STX $2001    ; disable rendering
+  STX $4010    ; disable DMC IRQs
+
+vblankwait1:       ; First wait for vblank to make sure PPU is ready
+  BIT $2002
+  BPL vblankwait1
+
+clrmem:
+  LDA #$00
+  STA $0000, x
+  STA $0100, x
+  STA $0200, x
+  STA $0400, x
+  STA $0500, x
+  STA $0600, x
+  STA $0700, x
+  LDA #$FE
+  STA $0300, x
+  INX
+  BNE clrmem
+   
+vblankwait2:      ; Second wait for vblank, PPU is ready after this
+  BIT $2002
+  BPL vblankwait2
+	 
+  LDA #%00000000   ;intensify blues
+  STA $2001
+Forever:
+  JMP Forever     ;infinite loop
 
 NMI:
 
