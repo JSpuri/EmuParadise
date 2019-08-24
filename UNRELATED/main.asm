@@ -113,9 +113,36 @@ clrmem:
 vblankwait2:      ; Second wait for vblank, PPU is ready after this
   BIT $2002
   BPL vblankwait2
-	 
-  LDA #%00000000   ;intensify blues
+  
+  LDA #%10000000   ;intensify blues
   STA $2001
+  
+  lda #%00000111  ;enable Sq1, Sq2 and Tri channels
+  sta $4015
+ 
+  ;Square 1
+  lda #%00111000  ;Duty 00, Volume 8 (half volume)
+  sta $4000
+  lda #$C9        ;$0C9 is a C# in NTSC mode
+  sta $4002       ;low 8 bits of period
+  lda #$00
+  sta $4003       ;high 3 bits of period
+ 
+  ;Square 2
+  lda #%01110110  ;Duty 01, Volume 6
+  sta $4004
+  lda #$A9        ;$0A9 is an E in NTSC mode
+  sta $4006
+  lda #$00
+  sta $4007
+ 
+  ;Triangle
+  lda #%10000001  ;Triangle channel on
+  sta $4008
+  lda #$42        ;$042 is a G# in NTSC mode
+  sta $400A
+  lda #$00
+  sta $400B
 Forever:
   JMP Forever     ;infinite loop
 
