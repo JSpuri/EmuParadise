@@ -33,6 +33,95 @@ FSCN = %00000000 ;four screen mirroring mode (0 -> no, 1 -> yes)
 ;fifth to eighth bits (%[0000]0000)
 MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
 
+;Octave 1
+A1 = $00    ;"1" means octave 1.
+As1 = $01   ;"s" means "sharp"
+Bb1 = $01   ;"b" means "flat".  A# == Bb
+B1 = $02
+
+;Octave 2
+C2 = $03
+Db2 = $04
+D2 = $05
+Eb2 = $06
+E2 = $07
+F2 = $08
+Gb2 = $09
+G2 = $0A
+Ab2 = $0B
+A2 = $0C
+Bb2 = $0D
+B2 = $0E
+
+;Octave 3
+C3 = $0F
+Db3 = $10
+D3 = $11
+Eb3 = $12
+E3 = $13
+F3 = $14
+Gb3 = $15
+G3 = $16
+Ab3 = $17
+A3 = $18
+Bb3 = $19
+B3 = $1A
+
+;Octave 4
+C4 = $1B
+Db4 = $1C
+D4 = $1D
+Eb4 = $1E
+E4 = $1F
+F4 = $20
+Gb4 = $21
+G4 = $22
+Ab4 = $23
+A4 = $24
+Bb4 = $25
+B4 = $26
+
+;Octave 5
+C5 = $27
+Db5 = $28
+D5 = $29
+Eb5 = $2A
+E5 = $2B
+F5 = $2C
+Gb5 = $2D
+G5 = $2E
+Ab5 = $2F
+A5 = $30
+Bb5 = $31
+B5 = $32
+
+;Octave 6
+C6 = $33
+Db6 = $34
+D6 = $35
+Eb6 = $36
+E6 = $37
+F6 = $38
+Gb6 = $39
+G6 = $3A
+Ab6 = $3B
+A6 = $3C
+Bb6 = $3D
+B6 = $3E
+
+;Octave 7
+C7 = $3F
+Db7 = $40
+D7 = $41
+Eb7 = $42
+E7 = $43
+F7 = $44
+Gb7 = $45
+G7 = $46
+Ab7 = $47
+A7 = $48
+Bb7 = $49
+B7 = $4A
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
@@ -77,8 +166,17 @@ MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
     .org $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
                                     ;$8000 to $FFFF in ROM with 32KiB
 									
+note_table:
+    .word                                                                $07F1, $0780, $0713 ; A1-B1 ($00-$02)
+    .word $06AD, $064D, $05F3, $059D, $054D, $0500, $04B8, $0475, $0435, $03F8, $03BF, $0389 ; C2-B2 ($03-$0E)
+    .word $0356, $0326, $02F9, $02CE, $02A6, $027F, $025C, $023A, $021A, $01FB, $01DF, $01C4 ; C3-B3 ($0F-$1A)
+    .word $01AB, $0193, $017C, $0167, $0151, $013F, $012D, $011C, $010C, $00FD, $00EF, $00E2 ; C4-B4 ($1B-$26)
+    .word $00D2, $00C9, $00BD, $00B3, $00A9, $009F, $0096, $008E, $0086, $007E, $0077, $0070 ; C5-B5 ($27-$32)
+    .word $006A, $0064, $005E, $0059, $0054, $004F, $004B, $0046, $0042, $003F, $003B, $0038 ; C6-B6 ($33-$3E)
+    .word $0034, $0031, $002F, $002C, $0029, $0027, $0025, $0023, $0021, $001F, $001D, $001B ; C7-B7 ($3F-$4A)
+    .word $001A, $0018, $0017, $0015, $0014, $0013, $0012, $0011, $0010, $000F, $000E, $000D ; C8-B8 ($4B-$56)
+    .word $000C, $000C, $000B, $000A, $000A, $0009, $0008                                    ; C9-F#9 ($57-$5D)
 									
-
 Reset:
 
   SEI          ; disable IRQs
@@ -121,27 +219,36 @@ vblankwait2:      ; Second wait for vblank, PPU is ready after this
   sta $4015
  
   ;Square 1
-  lda #%00111000  ;Duty 00, Volume 8 (half volume)
+  lda #%00111000        ;Duty 00, Volume 8 (half volume)
   sta $4000
-  lda #$C9        ;$0C9 is a C# in NTSC mode
-  sta $4002       ;low 8 bits of period
-  lda #$00
-  sta $4003       ;high 3 bits of period
+  lda #Db5
+  asl a                 ;shift once because we are indexing into a table of words 
+  tay
+  lda note_table, y
+  sta $4002             ;low 8 bits of period
+  lda note_table+1, y 
+  sta $4003             ;high 3 bits of period
  
   ;Square 2
   lda #%01110110  ;Duty 01, Volume 6
   sta $4004
-  lda #$A9        ;$0A9 is an E in NTSC mode
+  lda #E5        
+  asl a
+  tay
+  lda note_table, y 
   sta $4006
-  lda #$00
+  lda note_table+1, y
   sta $4007
  
   ;Triangle
   lda #%10000001  ;Triangle channel on
   sta $4008
-  lda #$42        ;$042 is a G# in NTSC mode
+  lda #Ab5        
+  asl a
+  tay
+  lda note_table, y
   sta $400A
-  lda #$00
+  lda note_table+1, y
   sta $400B
 Forever:
   JMP Forever     ;infinite loop
