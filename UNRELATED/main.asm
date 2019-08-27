@@ -51,11 +51,18 @@ BUTTON_RIGHT  = 1 << 0
 ;Game info --------------------------------------------------------------------
 
 ;heart sprite information
-heart_init_pos_x = $80
-sprite_heart_n = $32
-heart_init_pos_y = $80
+heart_init_pos_x EQU #$80
+sprite_heart_n EQU #$00
+heart_init_pos_y EQU #$80
+heart_step_size EQU #$02     ;player speed
 
-heart_step_size = $01
+;Box info ---------------------------------------------------------------------
+;Conta começa do zero
+;Tile 14 -> Primeiro pixel
+;Tile 23 -> Ultimo pixel
+;Horizontal
+;9 -> Primeiro Pixel
+;22 -> Ultimo pixel
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
@@ -76,6 +83,7 @@ last_buttons1   .dsb 1      ;last input read from controller 1
 ;   3 - Menu mode
 heart_state_x   .db $0      ;heart state x
 heart_state_y   .db $0      ;heart state y
+
 player_health   .db $14     ;player health
 
     .ende
@@ -191,8 +199,6 @@ NMI:
     JSR ReadJoy1    ;read data from controller
 
     JSR MoveHeart   ;move player
-
-    ;JSR move_right
 
     RTI             ;Return from Interrupt
 
