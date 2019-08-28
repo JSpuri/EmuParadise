@@ -1,20 +1,27 @@
-  .inesprg 1   ; 1x 16KB PRG code
+;.base $7ff0
+	.inesprg 1   ; 1x 16KB PRG code
   .ineschr 1   ; 1x  8KB CHR data
   .inesmap 0   ; mapper 0 = NROM, no bank swapping
   .inesmir 1   ; background mirroring
-  
+;.pad $8000, $00  
 
-	.rsset $0000		;start variables at ram location 0 in zero page memory
-backgroundLo	.rs 1
-backgroundHi	.rs 1
-counterLo			.rs 1
-counterHi			.rs 1
+.enum $0000		;start variables at ram location 0 in zero page memory
+	backgroundLo:
+		.dsb 1
+	backgroundHi:
+		.dsb 1
+	counterLo:
+		.dsb 1
+	counterHi:
+		.dsb 1
+.ende
+
 
 ;;;;;;;;;;;;;;;
 
     
-  .bank 0
-  .org $C000 
+  .base $C000
+  ;.org $C000 
 RESET:
   SEI          ; disable IRQs
   CLD          ; disable decimal mode
@@ -44,7 +51,7 @@ clrmem:
   STA $0200, x
   INX
   BNE clrmem
-   
+
 vblankwait2:      ; Second wait for vblank, PPU is ready after this
   BIT $2002
   BPL vblankwait2
@@ -95,9 +102,9 @@ LoadBackground:
 	; #tiles on screen = 32 * 30 = 960 bytes = $03C0
 	; need two bytes to represent (a low and a high)
 
-	LDA #LOW(background)
+	LDA #<background
 	STA backgroundLo
-	LDA #HIGH(background)
+	LDA #>background
 	STA backgroundHi	
 	LDA #$C0							
 	STA counterLo
@@ -106,7 +113,7 @@ LoadBackground:
 	
 	LDY #$00
 LoadBackgroundLoop:
-	LDA [backgroundLo], y
+	LDA (backgroundLo), y
 	STA $2007
 	LDA backgroundLo
 	CLC
@@ -175,13 +182,13 @@ NMI:
   STA $2005
   
   RTI             ; return from interrupt
- 
+
 ;;;;;;;;;;;;;;  
   
-  
-  
-  .bank 1
-  .org $E000
+  .pad $e000 
+
+  .base $e000
+  ;.org $E000
 palette:
 	;   actions						action selected		other elements												
   .db $0F,$26,$1A,$0F,  $0F,$28,$17,$0F,  $0F,$30,$21,$0F,  $0F,$09,$17,$0F   ;;background palette
@@ -190,7 +197,7 @@ palette:
 ; first color is for transparency
 
 sprites:
-     ;vert tile attr horiz
+    ;vert tile attr horiz
 ;coracao 
 	.db $80, $0, $00, $80   ;heart sprite	up 0
 	.db $80, $1, $00, $88		;heart sprite up 1
@@ -328,18 +335,19 @@ attribute:
   .db %00000000, %00010000, %01010000, %00010000, %00000000, %00000000, %00000000, %00110000
 
 
-
-  .org $FFFA     ;first of the three vectors starts here
+	.pad $fffa
+  ;.org $FFFA     ;first of the three vectors starts here
   .dw NMI        ;when an NMI happens (once per frame if enabled) the 
-                   ;processor will jump to the label NMI:
+                  ;processor will jump to the label NMI:
   .dw RESET      ;when the processor first turns on or is reset, it will jump
-                   ;to the label RESET:
+                  ;to the label RESET:
   .dw 0          ;external interrupt IRQ is not used in this tutorial
   
   
 ;;;;;;;;;;;;;;  
   
   
-  .bank 2
-  .org $0000
+  .base $0000
+  ;.org $0000
   .incbin "unrelated_chars.chr"   ;includes 8KB graphics file from SMB1
+	.pad $7ff0
