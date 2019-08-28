@@ -50,19 +50,44 @@ BUTTON_RIGHT  = 1 << 0
 
 ;Game info --------------------------------------------------------------------
 
+;player max health
+MAX_HEALTH EQU #$14
+
 ;heart sprite information
 heart_init_pos_x EQU #$80
 sprite_heart_n EQU #$00
 heart_init_pos_y EQU #$80
 heart_step_size EQU #$02     ;player speed
 
+;player states ----------------------------------------------------------------
+FREE_MOV EQU #$00       ; _______________
+MIN_X_MIN_Y EQU #$01    ;|1      3      7|
+MIN_X EQU #$02          ;|               |
+MIN_Y EQU #$03          ;|2      0      4|
+MAX_X EQU #$04          ;|               |
+MAX_Y EQU #$05          ;|6______5______8|
+MIN_X_MAX_Y EQU #$06
+MAX_X_MIN_Y EQU #$07    ; ______   ______
+MAX_X_MAX_Y EQU #$08    ;|9_____| |9_____|
+MENU_MODE EQU #$09
+
 ;Box info ---------------------------------------------------------------------
 ;Conta começa do zero
-;Tile 14 -> Primeiro pixel
-;Tile 23 -> Ultimo pixel
+;H - 32, V - 30
+
+;Vertical
+;Tile 14 -> Primeiro pixel (112)
+;Tile 23 -> Ultimo pixel (191)
+
 ;Horizontal
-;9 -> Primeiro Pixel
-;22 -> Ultimo pixel
+;9 -> Primeiro Pixel (72)
+;22 -> Ultimo pixel (183)
+
+box_y0 EQU $70
+box_yf EQU $BF
+
+box_x0 EQU $48
+box_xf EQU $B7
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
@@ -76,15 +101,13 @@ last_buttons1   .dsb 1      ;last input read from controller 1
 
     .enum $0100
 
-;States: 
-;   0 - Free movement on axis
-;   1 - Cannot add value on axis
-;   2 - Cannot subtract value on axis
-;   3 - Menu mode
-heart_state_x   .db $0      ;heart state x
-heart_state_y   .db $0      ;heart state y
-
+player_state    .db FREE_MOV
 player_health   .db $14     ;player health
+
+box_border_y0   .db $70
+box_border_yf   .db $BF
+box_border_x0   .db $48
+box_border_xf   .db $B7
 
     .ende
 
@@ -150,14 +173,14 @@ clrmem:
     BNE clrmem
 
 LoadPalettes:
-    LDA $2002    ; read PPU status to reset the high/low latch
+    LDA $2002       ; read PPU status to reset the high/low latch
     LDA #$3F
-    STA $2006    ; write the high byte of $3F00 address
+    STA $2006       ; write the high byte of $3F00 address
     LDA #$00
-    STA $2006    ; write the low byte of $3F00 address
+    STA $2006       ; write the low byte of $3F00 address
     LDX #$00
 
-vblankwait2:      ; Second wait for vblank, PPU is ready after this
+vblankwait2:        ; Second wait for vblank, PPU is ready after this
     BIT $2002
     BPL vblankwait2
 
@@ -185,7 +208,6 @@ load_heart:
     STA $2001
 
 Forever:
-    LDY last_buttons1
     JMP Forever     ;jump back to Forever, infinite loop
 
 
@@ -193,12 +215,13 @@ NMI:
 
     LDA #$00        ;set ram address to print sprites on PPU ($0200)
     STA $2003       ;low address
-    LDA #$02
-    STA $4014       ;high address
 
     JSR ReadJoy1    ;read data from controller
 
     JSR MoveHeart   ;move player
+
+    LDA #$02
+    STA $4014       ;high address (activates memory copy (?))
 
     RTI             ;Return from Interrupt
 
@@ -244,21 +267,24 @@ loop_RJ1:
 not_updown:
     RTS
 
-; --------------------- Player Movement
+; ---------------------- Player State Handler
+
+
+; ---------------------- Player Movement
 MoveHeart:
-    LDA buttons1
+    LDA buttons1        ;load pressed buttons byte
 move_right:
     CLC
-    ROR
-    BCC move_left
-    PHA
-    LDA heart_x
+    ROR                 ;rotate right (last bit becomes Carry)
+    BCC move_left       ;check if carry is set (button is pressed)
+    PHA                 ;push pressed buttons to stack
+    LDA heart_x         
     CLC
-    ADC heart_step_size
+    ADC heart_step_size ;movement handler
     STA heart_x
-    PLA
+    PLA                 ;pull pressed buttons from stack
 
-move_left:
+move_left:              ;same process as move_right
     CLC
     ROR
     BCC move_down
@@ -269,7 +295,7 @@ move_left:
     STA heart_x
     PLA
 
-move_down:
+move_down:              ;same process as move_right
     CLC
     ROR
     BCC move_up
@@ -280,7 +306,7 @@ move_down:
     STA heart_y
     PLA
 
-move_up:
+move_up:                ;same process as move_right
     CLC
     ROR
     BCC move_done
