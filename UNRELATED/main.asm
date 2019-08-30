@@ -60,17 +60,26 @@ heart_init_pos_y EQU #$80
 heart_step_size EQU #$02     ;player speed
 
 ;player states ----------------------------------------------------------------
-FREE_MOV EQU #$00       ; _______________
-MIN_X_MIN_Y EQU #$01    ;|1      3      7|
-MIN_X EQU #$02          ;|               |
-MIN_Y EQU #$03          ;|2      0      4|
-MAX_X EQU #$04          ;|               |
-MAX_Y EQU #$05          ;|6______5______8|
-MIN_X_MAX_Y EQU #$06
-MAX_X_MIN_Y EQU #$07    ; ______   ______
-MAX_X_MAX_Y EQU #$08    ;|9_____| |9_____|
-MENU_MODE EQU #$09
+; _______________
+;|A      8      9|
+;|               |
+;|2      0      1|
+;|               |
+;|6______4______5|
+; ______   ______
+;|F_____| |F_____|
 
+
+FREE_MOV    EQU %00000000 ;0x00
+MIN_X_MIN_Y EQU %00001010 ;0x0A
+MIN_X       EQU %00000010 ;0x02
+MIN_Y       EQU %00001000 ;0x08
+MAX_X       EQU %00000001 ;0x01
+MAX_Y       EQU %00000100 ;0x04
+MIN_X_MAX_Y EQU %00000110 ;0x06
+MAX_X_MIN_Y EQU %00001001 ;0x09
+MAX_X_MAX_Y EQU %00000101 ;0x05
+MENU_MODE   EQU %00001111 ;0x0F
 ;Box info ---------------------------------------------------------------------
 ;Conta começa do zero
 ;H - 32, V - 30
@@ -83,40 +92,38 @@ MENU_MODE EQU #$09
 ;9 -> Primeiro Pixel (72)
 ;22 -> Ultimo pixel (183)
 
-box_y0 EQU $70
-box_yf EQU $BF
+box_y0 EQU #$70
+box_yf EQU #$BF
 
-box_x0 EQU $48
-box_xf EQU $B7
+box_x0 EQU #$48
+box_xf EQU #$B7
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
 ;------------------------------------------------------------------------------
 
-    .enum $0000
-
+    .enum $0010
+beg_ram
 buttons1        .dsb 1      ;used to read input from controller 1
 last_buttons1   .dsb 1      ;last input read from controller 1
-    .ende
 
-    .enum $0100
+player_state        .dsb 1
+player_cur_health   .dsb 1
+player_max_health   .dsb 1     ;player health
 
-player_state    .db FREE_MOV
-player_health   .db $14     ;player health
+box_border_y0   .dsb 1
+box_border_yf   .dsb 1
+box_border_x0   .dsb 1
+box_border_xf   .dsb 1
 
-box_border_y0   .db $70
-box_border_yf   .db $BF
-box_border_x0   .db $48
-box_border_xf   .db $B7
+num_oam         .dsb 1
 
     .ende
 
     .enum $0200
-heart_y         .dsb 1
-    .ende
 
-    .enum $0203
-heart_x         .dsb 1
+sprites
+
     .ende
 
 ;------------------------------------------------------------------------------
@@ -137,7 +144,7 @@ heart_x         .dsb 1
 ; Program Bank - The code goes here
 ;------------------------------------------------------------------------------
 
-    .org $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
+    .base $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
                                     ;$8000 to $FFFF in ROM with 32KiB
 
 Reset:
@@ -146,7 +153,7 @@ Reset:
     CLD             ;Clear Decimal Mode
     LDX #$40
     STX $4017       ; disable APU frame IRQ
-    LDX #$FF
+    LDX #$01FF
     TXS             ; Set up stack
     INX             ; now X = 0
     STX $2000       ; disable NMI
@@ -192,14 +199,26 @@ LoadPalettesLoop:
     CPX #$20            
     BNE LoadPalettesLoop    ;if x = $20, 32 bytes copied, all done
 
+LoadInitRam:
+    LDX init_ram
+    LDY #$01
 
-    LDX #$00                ;start at zero
-load_heart:
+load_init_ram_loop:
+    LDA init_ram, y
+    STA $10 - 1, y
+
+    DEX
+    BNE load_init_ram_loop
+
+    LDX #$00
+    LDY num_oam
+
+load_heart_loop:
     LDA heart_sprite, x     ;load data from address (sprites + x)
-    STA $0200, x            ;store into RAM address ($0200 + x)
+    STA $0200, x            ;store into RAM address ($0400 + x)
     INX                     ;x = x + 1
-    CPX #$04                ;check if all 4 bytes of heart were loaded
-    BNE load_heart
+    CPX #$10                ;check if all 16 bytes of heart were loaded
+    BNE load_heart_loop
 
 
     LDA #%10000000  ; enable NMI, sprites from Pattern Table 0
@@ -208,6 +227,10 @@ load_heart:
     STA $2001
 
 Forever:
+
+state_changer:
+    JSR UpdateState     ;check position and update state
+
     JMP Forever     ;jump back to Forever, infinite loop
 
 
@@ -215,13 +238,17 @@ NMI:
 
     LDA #$00        ;set ram address to print sprites on PPU ($0200)
     STA $2003       ;low address
-
+    LDA #$02
+    STA $4014       ;high address (activates memory copy to PPU(?))
     JSR ReadJoy1    ;read data from controller
 
-    JSR MoveHeart   ;move player
+    LDA player_state    ;load current state
+    ;CMP MENU_MODE       ;check if it's in menu mode
+    ;BCC battle_turn     ;if not, it's in battle mode
+                        ;menu move should go in here
 
-    LDA #$02
-    STA $4014       ;high address (activates memory copy (?))
+battle_turn:
+    JSR MvHeartBattle   ;move player
 
     RTI             ;Return from Interrupt
 
@@ -267,69 +294,249 @@ loop_RJ1:
 not_updown:
     RTS
 
-; ---------------------- Player State Handler
+; ---------------------- Player State move-checker
+CheckMoveRight:         ;check if player can move to the right
+    LDX player_state    ;load player state to check impossible movements
 
+    CPX MAX_X_MIN_Y     ;compare state
+    BEQ move_left       ;jump to next possible movement
+
+    CPX MAX_X           ;compare state
+    BEQ move_left       ;jump to next possible movement
+
+    CPX MAX_X_MAX_Y     ;compare state
+    BEQ move_left       ;jump to next possible movement
+
+    JMP right_movement  ;right movement is possible, jump to handle it
+
+CheckMoveLeft:          ;same as CheckMoveRight
+    LDX player_state
+
+    CPX MIN_X_MIN_Y
+    BEQ move_down
+
+    CPX MIN_X
+    BEQ move_down
+
+    CPX MIN_X_MAX_Y
+    BEQ move_down
+
+    JMP left_movement
+
+CheckMoveDown:          ;same as CheckMoveRight
+    LDX player_state
+
+    CPX MIN_X_MAX_Y
+    BEQ move_up
+
+    CPX MAX_Y
+    BEQ move_up
+
+    CPX MAX_X_MAX_Y
+    BEQ move_up
+
+    JMP down_movement
+
+CheckMoveUp:            ;same as CheckMoveRight
+    LDX player_state
+
+    CPX MIN_X_MIN_Y
+    BEQ move_done
+
+    CPX MIN_Y
+    BEQ move_done
+
+    CPX MAX_X_MIN_Y
+    BEQ move_done
+
+    JMP up_movement
 
 ; ---------------------- Player Movement
-MoveHeart:
+MvHeartBattle:
     LDA buttons1        ;load pressed buttons byte
+
 move_right:
     CLC
     ROR                 ;rotate right (last bit becomes Carry)
     BCC move_left       ;check if carry is set (button is pressed)
+
+    ;JMP CheckMoveRight  ;check if right movement is possible
+right_movement:
     PHA                 ;push pressed buttons to stack
-    LDA heart_x         
+
+    LDX #$00
+right_movement_loop:
+    LDA sprites + 3, x  ;load x position of heart
     CLC
-    ADC heart_step_size ;movement handler
-    STA heart_x
+    ADC heart_step_size ;add position in x axis
+    STA sprites + 3, x
+    TAY
+    TXA
+    CLC
+    ADC #$04
+    TAX
+    TYA
+    CPX #$10
+    BNE right_movement_loop
     PLA                 ;pull pressed buttons from stack
+
 
 move_left:              ;same process as move_right
     CLC
     ROR
     BCC move_down
+
+    ;JMP CheckMoveLeft
+left_movement:
     PHA
-    LDA heart_x
+
+    LDX #$00
+left_movement_loop:
+    LDA sprites + 3, x
     SEC
     SBC heart_step_size
-    STA heart_x
+    STA sprites + 3, x
+    TAY
+    TXA
+    CLC
+    ADC #$04
+    TAX
+    TYA
+    CPX #$10
+    BNE left_movement_loop
     PLA
 
 move_down:              ;same process as move_right
     CLC
     ROR
     BCC move_up
+
+    ;JMP CheckMoveDown
+down_movement:
     PHA
-    LDA heart_y
+
+    LDX #$00
+down_movement_loop:
+    LDA sprites, x
     CLC
     ADC heart_step_size
-    STA heart_y
+    STA sprites, x
+    TAY
+    TXA
+    CLC
+    ADC #$04
+    TAX
+    TYA
+    CPX #$10
+    BNE down_movement_loop
     PLA
 
 move_up:                ;same process as move_right
     CLC
     ROR
     BCC move_done
+
+    ;JMP CheckMoveUp
+up_movement:
     PHA
-    LDA heart_y
+
+    LDX #$00
+up_movement_loop:
+    LDA sprites, x
     SEC
     SBC heart_step_size
-    STA heart_y
+    STA sprites, x
+    TAY
+    TXA
+    CLC
+    ADC #$04
+    TAX
+    TYA
+    CPX #$10
+    BNE up_movement_loop
     PLA
 
 move_done:
     RTS
 
+; ---------------------- Player State Updater
+UpdateState:
 
+    LDA #$0f
+
+upper_limit:
+    PHA
+    LDA sprites
+    
+    SEC
+    SBC heart_step_size
+    CMP box_border_y0
+
+    PLA
+    ASL
+    ADC #$00
+
+lower_limit:
+    PHA
+    LDA box_border_yf
+
+    SEC
+    SBC heart_step_size + #$0F
+    CMP sprites
+
+    PLA
+    ASL
+    ADC #$00
+
+left_limit:
+    PHA
+    LDA sprites + #$03
+
+    SEC
+    SBC heart_step_size
+    CMP box_border_x0
+
+    PLA
+    ASL
+    ADC #$00
+
+right_limit:
+    PHA
+    LDA box_border_xf
+
+    SEC
+    SBC heart_step_size + #$0F
+    CMP sprites + #$03
+
+    PLA
+    ASL
+    ADC #$00
+
+    EOR #$FF
+    STA player_state
+
+    RTS
+
+; Init RAM --------------------------------------------------------------------
+    .org $D000
+init_ram:
+    .db #$0A
+    .db #$00, #$00
+    .db FREE_MOV, MAX_HEALTH, MAX_HEALTH
+    .db box_y0, box_yf, box_x0, box_xf
+    .db #$04
 
 ; Graphics information --------------------------------------------------------
   .org $E000        ;palette set
 palette:
-  .db $0F,$31,$32,$33,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
-  .db $0F,$1C,$15,$14,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
+    .db $0F,$31,$32,$33,$0F,$35,$36,$37,$0F,$39,$3A,$3B,$0F,$3D,$3E,$0F
+    .db $0F,$1C,$15,$14,$0F,$02,$38,$3C,$0F,$1C,$15,$14,$0F,$02,$38,$3C
 
 heart_sprite:
-    .db heart_init_pos_x, sprite_heart_n, $00, heart_init_pos_y
+    .db heart_init_pos_x, sprite_heart_n, #$00, heart_init_pos_y
+    .db heart_init_pos_x + 8, sprite_heart_n + 2, #$00, heart_init_pos_y
+    .db heart_init_pos_x, sprite_heart_n + 1, #$00, heart_init_pos_y + 8
+    .db heart_init_pos_x + 8, sprite_heart_n + 3, #$00, heart_init_pos_y + 8
 
 ;------------------------------------------------------------------------------
     ; Interrupt vectors
