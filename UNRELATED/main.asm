@@ -50,28 +50,49 @@ heart_step_size EQU #$02     ;player speed
 ; Variables - Stored in internal RAM [$0000,$0800) 
 ;------------------------------------------------------------------------------
 
-    .enum $0000             ;background graphics variables
-
-backgroundLo:   .dsb 1
-backgroundHi:	.dsb 1
-counterLo:  	.dsb 1
-counterHi:		.dsb 1
-
-    .ende
-
     .enum $0010
 
-buttons1        .db 0      ;used to read input from controller 1
-last_buttons1   .db 0      ;last input read from controller 1
+;background graphics variables
+backgroundLo    .dsb 1
+backgroundHi 	.dsb 1
+counterLo   	.dsb 1
+counterHi 		.dsb 1
 
-player_cur_health   .db MAX_HEALTH
-player_max_health   .db MAX_HEALTH    ;player health
+buttons1        .db 0   ;used to read input from controller 1
+last_buttons1   .db 0   ;last input read from controller 1
+
+p1direction     .dsb 1  ;flag for direction after initial pass
+p1firstpassdir  .dsb 1  ;flag for direction in initial pass
+onWait          .dsb 1  ;determines how long to wait before next sprite loads
+firstPass       .dsb 1  ;flag that determines first pass
+
+max_fireballs   .dsb 1
+
+num_oam .dsb 1  ;number of dynamic sprites
+
+;Player Health
+player_cur_health   .dsb 1
+player_max_health   .dsb 1
+player_state        .dsb 1 ;1 - Start Menu, 2 - Battle, 3 - Battle Menu
 
     .ende
 
     .enum $0200
 
 sprites
+
+    .ende
+
+    .enum $02E4
+hp_d1   .dsb 4
+hp_d2   .dsb 4
+
+
+    .ende
+
+    .enum $02EC
+
+heart   .dsb #$10
 
     .ende
 
@@ -140,6 +161,21 @@ vblankwait2:    ;Second wait for vblank, PPU is ready after this
     BIT $2002
     BPL vblankwait2
 
+; ----------------------------- Toriel's Battle ------------------------------
+LoadVariables:
+    LDA #$14
+    STA player_cur_health   ;set curr health to 20
+    STA player_max_health   ;set max health to 20
+
+    LDA #$38
+    STA max_fireballs 
+
+    LDA #$00
+    STA num_oam ;set number of sprites on screen (heart and hp)
+
+    LDA #$03
+    STA player_state    ;set start state to "Battle Menu"
+
 LoadPalettesLoop:
     LDA palette, x          ;load palette byte
     STA $2007               ;write to PPU
@@ -147,15 +183,23 @@ LoadPalettesLoop:
     CPX #$20            
     BNE LoadPalettesLoop    ;if x = $20, 32 bytes copied, all done
 
-
 LoadSpritesBattle:              ;loads basic elements of battle (heart and hp)
+
     LDX #$00
-LoadSpritesBattleLoop:
-    LDA sprites_rom, x          ;load data from address (sprites_rom +  x)
-    STA sprites, x              ;store into RAM address ($0200 + x)
+LoadHPLoop:                 ;HP has 2 tiles: D1 and D2, first digit and second digit
+    LDA sprite_hp, x        ;in total, 8 bytes
+    STA hp_d1, x
     INX
-    CPX #$18                    ; each sprite multiplies by 4
-    BNE LoadSpritesBattleLoop   ; Branch while not all sprites were loaded
+    CPX #$08
+    BNE LoadHPLoop
+
+    LDX #$00
+LoadHeartLoop:
+    LDA sprite_coracao, x          ;load data from address (sprites_rom +  x)
+    STA heart, x              ;store into RAM address ($heart+ x)
+    INX
+    CPX #$10                    ; each sprite multiplies by 4
+    BNE LoadHeartLoop   ; Branch while not all sprites were loaded
 
 
 LoadBackground:
@@ -227,6 +271,18 @@ LoadAttributeLoop:
     LDA #%00011110          ; enable sprites, enable background
     STA $2001               ; no clipping on left side of screen (8 pixels)
 
+StartBattle:
+
+    ;LDA player_state
+
+    ;CMP #$02
+    ;BEQ TorielTurn
+
+BattleMenu:
+    ;.include battle_menu_handler.asm
+
+TorielTurn:
+    .include fireballs.asm
 
 Forever:
     JMP Forever     ;jump back to Forever, infinite loop

@@ -8,13 +8,13 @@ palette:
 sprites_rom:
     ;vert tile attr horiz
 
-sprite_coracao EQU #$00
+sprite_coracao
 	.db $80, $00, $00, $80   ;heart sprite	up 0
 	.db $80, $01, $00, $88	;heart sprite up 1
 	.db $88, $10, $00, $80  ;heart sprite down 0
 	.db $88, $11, $00, $88  ;heart sprite down 1
 
-sprite_hp EQU #$16
+sprite_hp
     .db $bf, $04, $00, $b6   ;sprite 1 hp first digit
     .db $bf, $02, $00, $be   ;sprite 0 hp second digit
 
@@ -24,9 +24,11 @@ sprite_hp EQU #$16
 	.db $80, $21, $00, $98	;heart sprite up 1
 	.db $88, $30, $00, $90  ;heart sprite down 0
 	.db $88, $31, $00, $98  ;heart sprite down 1
-    ;fogo
-	.db $80, $40, $00, $a0   ;heart sprite	up 0
-	.db $88, $50, $00, $a0		;heart sprite up 1
+
+sprite_fogo
+	.db $60, $40, $00, $a0   ;heart sprite	up 0
+	.db $66, $50, $00, $a0		;heart sprite up 1
+
     ;slash
 	.db $22, $12, $00, $70  ;heart sprite down 0
 	.db $22, $13, $00, $78  ;heart sprite down 1
