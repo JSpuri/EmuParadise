@@ -12,6 +12,8 @@
 ; Constants
 ;------------------------------------------------------------------------------
 
+;iNES Header Constants --------------------------------------------------------
+
 PRG_COUNT = $02 ;PRG ROM size (1 -> 16KiB, 2 -> 32KiB)
 CHR_COUNT = $01 ;CHR ROM size (1-> 8KiB, 2 -> 16KiB)
 
@@ -33,116 +35,66 @@ FSCN = %00000000 ;four screen mirroring mode (0 -> no, 1 -> yes)
 ;fifth to eighth bits (%[0000]0000)
 MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
 
-;Octave 1
-A1 = $00    ;"1" means octave 1.
-As1 = $01   ;"s" means "sharp"
-Bb1 = $01   ;"b" means "flat".  A# == Bb
-B1 = $02
+;Game info --------------------------------------------------------------------
 
-;Octave 2
-C2 = $03
-Db2 = $04
-D2 = $05
-Eb2 = $06
-E2 = $07
-F2 = $08
-Gb2 = $09
-G2 = $0A
-Ab2 = $0B
-A2 = $0C
-Bb2 = $0D
-B2 = $0E
-
-;Octave 3
-C3 = $0F
-Db3 = $10
-D3 = $11
-Eb3 = $12
-E3 = $13
-F3 = $14
-Gb3 = $15
-G3 = $16
-Ab3 = $17
-A3 = $18
-Bb3 = $19
-B3 = $1A
-
-;Octave 4
-C4 = $1B
-Db4 = $1C
-D4 = $1D
-Eb4 = $1E
-E4 = $1F
-F4 = $20
-Gb4 = $21
-G4 = $22
-Ab4 = $23
-A4 = $24
-Bb4 = $25
-B4 = $26
-
-;Octave 5
-C5 = $27
-Db5 = $28
-D5 = $29
-Eb5 = $2A
-E5 = $2B
-F5 = $2C
-Gb5 = $2D
-G5 = $2E
-Ab5 = $2F
-A5 = $30
-Bb5 = $31
-B5 = $32
-
-;Octave 6
-C6 = $33
-Db6 = $34
-D6 = $35
-Eb6 = $36
-E6 = $37
-F6 = $38
-Gb6 = $39
-G6 = $3A
-Ab6 = $3B
-A6 = $3C
-Bb6 = $3D
-B6 = $3E
-
-;Octave 7
-C7 = $3F
-Db7 = $40
-D7 = $41
-Eb7 = $42
-E7 = $43
-F7 = $44
-Gb7 = $45
-G7 = $46
-Ab7 = $47
-A7 = $48
-Bb7 = $49
-B7 = $4A
+;heart sprite information
+heart_step_size EQU #$02     ;player speed
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
 ;------------------------------------------------------------------------------
 
+    ;.inesprg 2 ;2x 16kb PRG code
+    ;.ineschr 1 ;1x 8kb CHR data
+    ;.inesmap 0 ; mapper 0 = NROM, no bank swapping
+    ;.inesmir 1 ;background mirroring (vertical mirroring = horizontal scrolling)
+
+
     .enum $0000
 
-    ;NOTE: declare variables using the DSB and DSW directives, like this:
+;background graphics variables
+backgroundLo        .dsb 1
+backgroundHi 	    .dsb 1
+counterLo   	    .dsb 1
+counterHi 		    .dsb 1
 
-    ;MyVariable0 .dsb 1
-    ;MyVariable1 .dsb 3
+buttons1            .db 0   ;used to read input from controller 1
+last_buttons1       .db 0   ;last input read from controller 1
 
+p1direction         .dsb 1  ;flag for direction after initial pass
+p1firstpassdir      .dsb 1  ;flag for direction in initial pass
+onWait              .dsb 1  ;determines how long to wait before next sprite loads
+firstPass           .dsb 1  ;flag that determines first pass
+patternResetCount   .dsb 1
+
+max_fireballs   .dsb 1
+
+num_oam .dsb 1  ;number of dynamic sprites
+
+;Player Health
+player_cur_health   .dsb 1
+player_max_health   .dsb 1
+player_state        .dsb 1 ;1 - Start Menu, 2 - Battle, 3 - Battle Menu
+
+player_invencibility    .dsb 1
+
+sound_ptr .dsb 2
+current_song .db 2	
+	.ende
+
+   .enum $0200
+sprites
+   .ende
+
+
+   .enum $02E4
+hp_d1   .dsb 4
+hp_d2   .dsb 4
     .ende
-
-    ;NOTE: you can also split the variable declarations into individual pages, like this:
-
-    ;.enum $0100
-    ;.ende
-
-    ;.enum $0200
-    ;.ende
+	
+	.enum $02EC
+heart   .dsb #$10
+	.ende
 
 ;------------------------------------------------------------------------------
 ; iNES header 
@@ -150,7 +102,7 @@ B7 = $4A
 
     .db "NES", $1a  ;identification of the iNES header -> "NES<EOF>"
 
-    .db PRG_COUNT   ;number of PGR ROM banks (2 -> 32KiB)
+    .db PRG_COUNT   ;number of PGR ROM banks (1 -> 16KiB)
     .db CHR_COUNT   ;number of CHR ROM banks (1 -> 8KiB)
 
     .db MAPN|FSCN|TRNR|BATT|MIRR   ;byte 6
@@ -162,102 +114,362 @@ B7 = $4A
 ; Program Bank - The code goes here
 ;------------------------------------------------------------------------------
 
-    .org $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
-                                    ;$8000 to $FFFF in ROM with 32KiB
-	.include "sound_engine.asm"
-									
-Reset:
+    .base $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
+                                     ;$8000 to $FFFF in ROM with 32KiB
 
-  SEI          ; disable IRQs
-  CLD          ; disable decimal mode
-  LDX #$40
-  STX $4017    ; disable APU frame IRQ
-  LDX #$FF
-  TXS          ; Set up stack
-  INX          ; now X = 0
-  STX $2000    ; disable NMI
-  STX $2001    ; disable rendering
-  STX $4010    ; disable DMC IRQs
-
-vblankwait1:       ; First wait for vblank to make sure PPU is ready
-  BIT $2002
-  BPL vblankwait1
-
-clrmem:
-  LDA #$00
-  STA $0000, x
-  STA $0100, x
-  STA $0200, x
-  STA $0400, x
-  STA $0500, x
-  STA $0600, x
-  STA $0700, x
-  LDA #$FE
-  STA $0300, x
-  INX
-  BNE clrmem
-   
-vblankwait2:      ; Second wait for vblank, PPU is ready after this
-  BIT $2002
-  BPL vblankwait2
-  
-  LDA #%10000000   ;intensify blues
-  STA $2001
-  
-  
-  jsr sound_init
-  
-  lda #%00000111  ;enable Sq1, Sq2 and Tri channels
-  sta $4015
- 
-  ;Square 1
-  lda #%00111000        ;Duty 00, Volume 8 (half volume)
-  sta $4000
-  lda #Db5
-  asl a                 ;shift once because we are indexing into a table of words 
-  tay
-  lda note_table, y
-  sta $4002             ;low 8 bits of period
-  lda note_table+1, y 
-  sta $4003             ;high 3 bits of period
- 
-  ;Square 2
-  lda #%01110110  ;Duty 01, Volume 6
-  sta $4004
-  lda #E5        
-  asl a
-  tay
-  lda note_table, y 
-  sta $4006
-  lda note_table+1, y
-  sta $4007
- 
-  ;Triangle
-  lda #%10000001  ;Triangle channel on
-  sta $4008
-  lda #Ab5        
-  asl a
-  tay
-  lda note_table, y
-  sta $400A
-  lda note_table+1, y
-  sta $400B
-Forever:
-  JMP Forever     ;infinite loop
-
-NMI:
-
-    ;NOTE: NMI code goes here
+	.include "sound_engine_asm6f.asm"
+;----- second 8k bank of PRG-ROM    
+    ;bank 1
+    ;.base $a000
+    .org $A000
+     ;.pad $c000
 	
-	jsr sound_play_frame
+;----- third 8k bank of PRG-ROM    
+    ;.bank 2
+	;.base $c000
+    .org $C000
+
+Reset: ; ----------------------------------------------------------------------
+
+    SEI         ;Set Interrupt Disable
+    CLD         ;Clear Decimal Mode
+    LDX #$40
+    STX $4017   ;disable APU frame IRQ
+    LDX #$01FF
+    TXS         ;Set up stack at $01FF
+    INX         ;now X = 0
+    STX $2000   ;disable NMI
+    STX $2001   ;disable rendering
+    STX $4010   ;disable DMC IRQs
+    
+
+vblankwait1:    ;First wait for vblank to make sure PPU is ready
+    BIT $2002
+    BPL vblankwait1
+
+clrmem:         ;memory cleaner
+    LDA #$00
+    STA $0000, x
+    STA $0100, x
+    STA $0200, x
+    STA $0400, x
+    STA $0500, x
+    STA $0600, x
+    STA $0700, x
+    LDA #$FE
+    STA $0200, x
+    INX
+    BNE clrmem
+
+LoadPalettes:
+    LDA $2002   ;read PPU status to reset the high/low latch
+    LDA #$3F
+    STA $2006   ;write the high byte of $3F00 address
+    LDA #$00
+    STA $2006   ;write the low byte of $3F00 address
+    LDX #$00
+
+vblankwait2:    ;Second wait for vblank, PPU is ready after this
+    BIT $2002
+    BPL vblankwait2
+
+; ----------------------------- Toriel's Battle ------------------------------
+LoadVariables:
+    LDA #$42
+    STA player_cur_health   ;set curr health to 20
+    STA player_max_health   ;set max health to 20
+
+    LDA #$98
+    STA max_fireballs 
+
+    LDA #$00
+    STA num_oam ;set number of sprites on screen (heart and hp)
+
+    LDA #$03
+    STA player_state    ;set start state to "Battle Menu"
+
+LoadPalettesLoop:
+    LDA palette, x          ;load palette byte
+    STA $2007               ;write to PPU
+    INX                     ;set index to next byte
+    CPX #$20            
+    BNE LoadPalettesLoop    ;if x = $20, 32 bytes copied, all done
+
+LoadSpritesBattle:              ;loads basic elements of battle (heart and hp)
+
+    LDX #$00
+LoadHPLoop:                 ;HP has 2 tiles: D1 and D2, first digit and second digit
+    LDA sprite_hp, x        ;in total, 8 bytes
+    STA hp_d1, x
+    INX
+    CPX #$08
+    BNE LoadHPLoop
+
+    LDX #$00
+LoadHeartLoop:
+    LDA sprite_coracao, x          ;load data from address (sprites_rom +  x)
+    STA heart, x              ;store into RAM address ($heart+ x)
+    INX
+    CPX #$10                    ; each sprite multiplies by 4
+    BNE LoadHeartLoop   ; Branch while not all sprites were loaded
+
+
+LoadBackground:
+    LDA $2002   ; read PPU status to reset the high/low latch
+    LDA #$20
+    STA $2006   ; write the high byte of $2000 address
+    LDA #$00
+    STA $2006   ; write the low byte of $2000 address
+    LDX #$00    ; start out at 0
+
+	; #tiles on screen = 32 * 30 = 960 bytes = $03C0
+	; need two bytes to represent (a low and a high)
+
+	LDA #<background_rom    ;load low bytes of address ($XX[XX])
+	STA backgroundLo
+	LDA #>background_rom    ;load high bytes of address ($[XX]XX)
+	STA backgroundHi	
+	LDA #$C0				
+	STA counterLo
+	LDA #$03
+	STA counterHi
+
+	LDY #$00
+LoadBackgroundLoop:         ;keep writing background tiles to PPU
+	LDA (backgroundLo), y
+	STA $2007
+	LDA backgroundLo
+	CLC
+	ADC #$01
+	STA backgroundLo
+	LDA backgroundHi
+	ADC #$00				; add 0, but if there is a carry, add 1
+	STA backgroundHi		
+
+	LDA counterLo
+	SEC
+	SBC #$01
+	STA counterLo
+	LDA counterHi
+	SBC #$00
+	STA counterHi
+	SBC #$00
+	STA counterHi
+
+	LDA counterLo           ; load the low byte
+    CMP #$00                ; see if it is zero, if not loop
+    BNE LoadBackgroundLoop
+    LDA counterHi
+    CMP #$00                ; see if the high byte is zero, if not loop
+    BNE LoadBackgroundLoop  ; if the loop counter isn't 0000, keep copying
+
+
+
+LoadAttribute:
+    LDA $2002               ; read PPU status to reset the high/low latch
+    LDA #$23
+    STA $2006               ; write the high byte of $23C0 address
+    LDA #$C0
+    STA $2006               ; write the low byte of $23C0 address
+    LDX #$00                ; start out at 0
+LoadAttributeLoop:
+    LDA attribute, x        ; load data from address (attribute + value in x)
+    STA $2007               ; write to PPU
+    INX                     ; X = X + 1
+    CPX #$08                ; Compare X to hex $08, decimal 8 - copying 8 bytes
+    BNE LoadAttributeLoop   ; branch while attributes arent fully loaded
+
+    ;LDA #%10010000          ; enable NMI, sprites from Pattern Table 0,
+                            ; background from Pattern Table 1
+    ;STA $2000
+    ;LDA #%00011110          ; enable sprites, enable background
+    ;STA $2001               ; no clipping on left side of screen (8 pixels)
+    
+;Enable sound channels
+    jsr sound_init
+    
+    lda #$02
+    sta current_song
+    ;jsr sound_load
+    
+    lda #$88
+    sta $2000   ;enable NMIs
+    lda #$18
+    sta $2001   ;turn PPU on
+	
+	lda current_song
+    jsr sound_load
+
+StartBattle:
+
+    ;LDA player_state
+
+    ;CMP #$02
+    ;BEQ TorielTurn
+
+BattleMenu:
+    ;.include battle_menu_handler.asm
+
+TorielTurn:
+    .include fireballs.asm
+
+Forever:
+    JMP Forever     ;jump back to Forever, infinite loop
+
+
+NMI: ; ------------------------------------------------------------------------
+
+    LDA #$00        ;set ram address to print sprites on PPU ($0200)
+    STA $2003       ;low address
+    LDA #$02
+    STA $4014       ;high address (activates memory copy to PPU(?))
+    JSR ReadJoy1    ;read data from controller
+
+    ;;This is the PPU clean up section, so rendering the next frame starts properly.
+    LDA #%10010000  ; enable NMI, sprites from Pattern Table 0
+    STA $2000       ; background from Pattern Table 1
+
+    LDA #%00011110  ; enable sprites, enable background, no clipping on left side
+    STA $2001
+    LDA #$00        ;;tell the ppu there is no background scrolling
+    STA $2005
+    STA $2005
+
+battle_turn:
+    JSR MvHeartBattle   ;move player inside box
+
+    JSR CheckCollision
+
+	jsr sound_play_frame    ;run our sound engine after all drawing code is done.
+                            ;this ensures our sound engine gets run once per frame.
+
+    RTI             ;Return from Interrupt
+
 
 IRQ:
 
     ;NOTE: IRQ code goes here 
 
+; Subroutines -----------------------------------------------------------------
+
+; ---------------------- Joycontroller1 reading
+.include joypad_reading.asm
+
+
+; ---------------------- Player Movement
+.include player_movement.asm
+
+
+; ---------------------- Collision Handler
+CheckCollision:
+                        ;lets try to debug this
+
+    LDX #$00            ;if the array of fireballs is empty,
+    CMP num_oam         ;there is nothing to do
+    BEQ its_empty
+
+    LDX #$04            ;but if it is not, we need to check only the bottom half
+check_collision_loop:
+check_if_its_below_upper_limit:
+    LDA sprites, x      ;we load the y value of the first bottom half
+    CLC
+    CMP heart           ;we compare to heart's x position: if A >= M,
+    BCS check_if_its_above_lower_limit  ;carry is set
+                        ;so, sprite.y is greater than heart.y
+                        ;we need to check if its less than the lower limit
+                        ;of the heart
+
+check_it_lower:
+    CLC
+    ADC #$07
+    CMP heart
+    BCS maybe_a_hit_check_horizontaly
+    JMP its_not_inside
+
+check_if_its_above_lower_limit: ;so, we need to check if its less than the
+    LDA heart                   ;lower limit of the heart.
+    CLC
+    ADC #$0F                    ;by loading heart.x and adding 0F to it, we have the
+    CMP sprites, x              ;lower limit of the heart. If its value is greater than 
+    BCC maybe_a_hit_check_horizontaly   ;sprites.x, Carry will be set, so, it is inside
+    JMP its_not_inside                  ;vertically, at least.
+    
+maybe_a_hit_check_horizontaly:      ;so, the projectile may hit the player, eh.
+check_if_its_right_of_left_limit:   ;we need to check if sprite.x
+    LDA sprites + 3, x              
+    CLC
+    CMP heart + 3
+    BCS check_if_its_left_of_right_limit
+
+check_it_right:
+    CLC
+    ADC #$07
+    CMP heart + 3
+    BCS its_a_hit
+    JMP its_not_inside
+
+check_if_its_left_of_right_limit:
+    LDA heart + 3
+    CLC
+    ADC #$0F
+    CMP sprites + 3, x
+    BCC its_a_hit
+    JMP its_not_inside
+
+its_a_hit:
+    LDA player_cur_health
+
+    AND #$02
+    ;BEQ Reset   ; GAME OVER ===================================================
+
+    CMP #$02
+    BEQ return_to_B
+
+    LDA player_cur_health
+    SEC
+    SBC #$01
+    STA player_cur_health
+
+return_to_B:
+    LDA player_cur_health
+    AND #$F0
+    CLC
+    ADC #$0B
+    SEC
+    SBC #$10
+    STA player_cur_health
+
+    AND #$0F
+    STA hp_d2 + 1
+
+    LDA player_cur_health
+    LSR #$04
+    STA hp_d1 + 1
+
+    JMP its_not_inside
+
+    
+
+its_not_inside:
+
+    TXA
+    CLC
+    ADC #$08
+    CLC
+    CMP num_oam
+    TAX
+    BCS its_empty
+    JMP check_collision_loop
+
+its_empty:
+    RTS
+
+; Graphics information --------------------------------------------------------
+    .org $E000
+.include background_sprites.asm
 
 ;------------------------------------------------------------------------------
-; Interrupt vectors
+    ; Interrupt vectors
 ;------------------------------------------------------------------------------
 
     .org $fffa
@@ -269,5 +481,8 @@ IRQ:
 ;------------------------------------------------------------------------------
 ; CHR-ROM bank
 ;------------------------------------------------------------------------------
-
-    .incbin "mario.chr" ;placeholder graphics
+.base $0000
+    ;.org $0000
+	;.base $0000
+.incbin "unrelated_chars.chr"   ;includes 8KB graphics file from SMB1
+.pad $7ff0
