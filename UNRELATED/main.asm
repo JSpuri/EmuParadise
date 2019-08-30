@@ -37,13 +37,7 @@ MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
 
 ;Game info --------------------------------------------------------------------
 
-;player max health
-MAX_HEALTH EQU #$14
-
 ;heart sprite information
-heart_init_pos_x EQU #$80
-sprite_heart_n = $00
-heart_init_pos_y EQU #$80
 heart_step_size EQU #$02     ;player speed
 
 ;------------------------------------------------------------------------------
@@ -75,6 +69,8 @@ player_cur_health   .dsb 1
 player_max_health   .dsb 1
 player_state        .dsb 1 ;1 - Start Menu, 2 - Battle, 3 - Battle Menu
 
+player_invencibility    .dsb 1
+
     .ende
 
     .enum $0200
@@ -84,9 +80,9 @@ sprites
     .ende
 
     .enum $02E4
+
 hp_d1   .dsb 4
 hp_d2   .dsb 4
-
 
     .ende
 
@@ -163,7 +159,7 @@ vblankwait2:    ;Second wait for vblank, PPU is ready after this
 
 ; ----------------------------- Toriel's Battle ------------------------------
 LoadVariables:
-    LDA #$14
+    LDA #$42
     STA player_cur_health   ;set curr health to 20
     STA player_max_health   ;set max health to 20
 
@@ -309,6 +305,8 @@ NMI: ; ------------------------------------------------------------------------
 battle_turn:
     JSR MvHeartBattle   ;move player inside box
 
+    JSR CheckCollision
+
     RTI             ;Return from Interrupt
 
 
@@ -325,6 +323,110 @@ IRQ:
 ; ---------------------- Player Movement
 .include player_movement.asm
 
+
+; ---------------------- Collision Handler
+CheckCollision:
+                        ;lets try to debug this
+
+    LDX #$00            ;if the array of fireballs is empty,
+    CMP num_oam         ;there is nothing to do
+    BEQ its_empty
+
+    LDX #$04            ;but if it is not, we need to check only the bottom half
+check_collision_loop:
+check_if_its_below_upper_limit:
+    LDA sprites, x      ;we load the y value of the first bottom half
+    CLC
+    CMP heart           ;we compare to heart's x position: if A >= M,
+    BCS check_if_its_above_lower_limit  ;carry is set
+                        ;so, sprite.y is greater than heart.y
+                        ;we need to check if its less than the lower limit
+                        ;of the heart
+
+check_it_lower:
+    CLC
+    ADC #$07
+    CMP heart
+    BCS maybe_a_hit_check_horizontaly
+    JMP its_not_inside
+
+check_if_its_above_lower_limit: ;so, we need to check if its less than the
+    LDA heart                   ;lower limit of the heart.
+    CLC
+    ADC #$0F                    ;by loading heart.x and adding 0F to it, we have the
+    CMP sprites, x              ;lower limit of the heart. If its value is greater than 
+    BCC maybe_a_hit_check_horizontaly   ;sprites.x, Carry will be set, so, it is inside
+    JMP its_not_inside                  ;vertically, at least.
+    
+maybe_a_hit_check_horizontaly:      ;so, the projectile may hit the player, eh.
+check_if_its_right_of_left_limit:   ;we need to check if sprite.x
+    LDA sprites + 3, x              
+    CLC
+    CMP heart + 3
+    BCS check_if_its_left_of_right_limit
+
+check_it_right:
+    CLC
+    ADC #$07
+    CMP heart + 3
+    BCS its_a_hit
+    JMP its_not_inside
+
+check_if_its_left_of_right_limit:
+    LDA heart + 3
+    CLC
+    ADC #$0F
+    CMP sprites + 3, x
+    BCC its_a_hit
+    JMP its_not_inside
+
+its_a_hit:
+    LDA player_cur_health
+
+    AND #$02
+    ;BEQ Reset   ; GAME OVER ===================================================
+
+    CMP #$02
+    BEQ return_to_B
+
+    LDA player_cur_health
+    SEC
+    SBC #$01
+    STA player_cur_health
+
+return_to_B:
+    LDA player_cur_health
+    AND #$F0
+    CLC
+    ADC #$0B
+    SEC
+    SBC #$10
+    STA player_cur_health
+
+    AND #$0F
+    STA hp_d2 + 1
+
+    LDA player_cur_health
+    LSR #$04
+    STA hp_d1 + 1
+
+    JMP its_not_inside
+
+    
+
+its_not_inside:
+
+    TXA
+    CLC
+    ADC #$08
+    CLC
+    CMP num_oam
+    TAX
+    BCS its_empty
+    JMP check_collision_loop
+
+its_empty:
+    RTS
 
 ; Graphics information --------------------------------------------------------
     .org $E000
