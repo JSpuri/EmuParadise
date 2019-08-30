@@ -47,18 +47,19 @@ heart_step_size EQU #$02     ;player speed
     .enum $0010
 
 ;background graphics variables
-backgroundLo    .dsb 1
-backgroundHi 	.dsb 1
-counterLo   	.dsb 1
-counterHi 		.dsb 1
+backgroundLo        .dsb 1
+backgroundHi 	    .dsb 1
+counterLo   	    .dsb 1
+counterHi 		    .dsb 1
 
-buttons1        .db 0   ;used to read input from controller 1
-last_buttons1   .db 0   ;last input read from controller 1
+buttons1            .db 0   ;used to read input from controller 1
+last_buttons1       .db 0   ;last input read from controller 1
 
-p1direction     .dsb 1  ;flag for direction after initial pass
-p1firstpassdir  .dsb 1  ;flag for direction in initial pass
-onWait          .dsb 1  ;determines how long to wait before next sprite loads
-firstPass       .dsb 1  ;flag that determines first pass
+p1direction         .dsb 1  ;flag for direction after initial pass
+p1firstpassdir      .dsb 1  ;flag for direction in initial pass
+onWait              .dsb 1  ;determines how long to wait before next sprite loads
+firstPass           .dsb 1  ;flag that determines first pass
+patternResetCount   .dsb 1
 
 max_fireballs   .dsb 1
 
@@ -163,7 +164,7 @@ LoadVariables:
     STA player_cur_health   ;set curr health to 20
     STA player_max_health   ;set max health to 20
 
-    LDA #$38
+    LDA #$98
     STA max_fireballs 
 
     LDA #$00

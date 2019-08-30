@@ -8,8 +8,10 @@ vblankwaitLoop:      ; Wait for vblank, PPU is ready after this
     CPX #$00            ; if its in first pass (just after reset)
     BEQ loadFirstPass   ; goes to loadFirstPass
                         ; else keeps going
-
-    LDX #$00
+    LDX patternResetCount
+    CPX #$08
+    BEQ patternReset
+    LDX #$60
 p1Loop:
     JSR pattern1        ; calls pattern1
     INX                 ; X+4 to reach next byte
@@ -23,9 +25,33 @@ p1Loop:
     CPX #$0C            ; after 12 cicles to one side it changes direction
     BMI ignoreChangedir ; jumps to ignoreChangedir if X < 0C (if N flag is set)
     JSR changep1dir
+    LDX patternResetCount
+    INX
+    STX patternResetCount
+    LDX #$00
 
 ignoreChangedir:
     STX num_oam       ; if X < 12 it just increases by one, from INX, else it returns as 0 from changep1dir
+    JMP vblankwaitLoop
+
+patternReset:
+    LDX #$60
+    LDA #$ef
+patternResetLoop:
+    STA $0200, x
+    INX
+    INX
+    INX
+    INX
+    CPX #$98
+    BNE patternResetLoop
+    LDX #$00
+    STX num_oam
+    STX onWait
+    STX p1direction
+    STX p1firstpassdir
+    STX firstPass
+    STX patternResetCount
     JMP vblankwaitLoop
 
 loadFirstPass:        
@@ -36,73 +62,100 @@ loadFirstPass:
     STX onWait          ; resets the onWait counter
 
     LDX num_oam       ; this counter will keep track of how many bytes were written
+    TXA
+    CLC
+    ADC #$60
+    TAY
 
     LDA #$60            ; load first byte of top of fire (vertical position)
-    STA $0200, x
+    STA $0200, y
     INX
+    INY
     LDA sprite_fogo + 1      ; load second byte of top of fire (sprite number)
-    STA $0200, x
+    STA $0200, y
     INX
+    INY
     LDA sprite_fogo + 2      ; load third byte of top of fire (attrs)
-    STA $0200, x
+    STA $0200, y
     INX
     TXA                 ; accumulator will receive X's value to more easily add to the horizontal position
     TAY                 ; y register will receive x's value to add distance relative to first sprite
-                      ; so if the second sprite added +4 to its horizontal position, the third will add +8
+                        ; so if the second sprite added +4 to its horizontal position, the third will add +8
     LDA #$3F            ; load fourth byte of top of fire (horizontal position)
-    INY
 
 loadHorizontalLoop1:  ; this loop sets the horizontal distance between the sprites
+        CLC
+        ADC #$02
+        DEY               
+        CPY #$00
+        BPL loadHorizontalLoop1
+    TAY
+    TXA
+    INX
+    STX num_oam
     CLC
-    ADC #$02
-    DEY               
-    CPY #$00
-    BNE loadHorizontalLoop1
+    ADC #$60
+    TAX
+    TYA
     STA $0200, x
     TXA               ; this is done here so that the current value of x is used in the bottom portion of the sprite
-    TAY               ; the y register will keep the old value of x until the next horizontal position loop
-    INX
+    TAY
+    INY               ; the y register will keep the old value of x until the next horizontal position loop
+    LDX num_oam
 
     ;does the same for bottom of part of the fire
     LDA #$66            
-    STA $0200, x
+    STA $0200, y
     INX
-    LDA sprite_fogo + 5      
-    STA $0200, x
-    INX
-    LDA sprite_fogo + 6      
-    STA $0200, x
-    INX
-    LDA #$3F            
     INY
+    LDA sprite_fogo + 5      
+    STA $0200, y
+    INX
+    INY
+    LDA sprite_fogo + 6      
+    STA $0200, y
+    INX
+    TXA
+    SEC
+    SBC #$04
+    TAY
+    LDA #$3F            
 
 loadHorizontalLoop2:
-    CLC
-    ADC #$02
-    DEY
-    CPY #$00
-    BNE loadHorizontalLoop2
-    STA $0200, x
+        CLC
+        ADC #$02
+        DEY
+        CPY #$00
+        BNE loadHorizontalLoop2
+    TAY
+    TXA
     INX
-
-    STX num_oam       ; after all of this the num_oam was increased by 8
+    STX num_oam
+    CLC
+    ADC #$60
+    TAX
+    TYA
+    STA $0200, x
 
 runOtherSprites:      ; this portion of code also acts as the "wainting" routine
-    LDA num_oam       ; it takes care of moving the already loaded sprites in order to distance them vertically
-                      ; from the ones to be loaded
-    TAX               
-    CPX #$00            ; the sprite movement starts from 8 due to hp sprite
+    LDY num_oam       ; it takes care of moving the already loaded sprites in order to distance them vertically
+                      ; from the ones to be loaded               
+    CPY #$00            ; the sprite movement starts from 8 due to hp sprite
     BEQ skipEndFirstPass
-
+    LDX #$60
 loadPassP1Loop:       ; this loop has almost the same ideia of p1Loop, but in reverse
                       ; instead of going from the first sprite to the last, it goes from the last sprite loaded
                       ; using the current value of num_oam, up to the first one added
-    DEX   
-    DEX
-    DEX
-    DEX
     JSR pattern1
-    CPX #$00            ; stops when reaches hp sprite
+    INX   
+    INX
+    INX
+    INX
+    DEY
+    DEY
+    DEY
+    DEY
+    CPY #$00            ; stops when reaches hp sprite
     BNE loadPassP1Loop
     LDX p1firstpassdir  ; checks if its time to change directions
     INX
@@ -113,7 +166,7 @@ loadPassP1Loop:       ; this loop has almost the same ideia of p1Loop, but in re
 ignoreChange:
     STX p1firstpassdir  ; stores p1firstpassdir+1 if going to same direction, if not x returns as 0 from change1dirfp
     LDX num_oam
-    CPX max_fireballs            ; when p1 counter reaches 56 it means all fire sprites were loaded
+    CPX #$38            ; when p1 counter reaches 56 it means all fire sprites were loaded
     BNE skipEndFirstPass
     LDX #$00            ; so it resets the counter
     STX num_oam
@@ -126,15 +179,13 @@ skipEndFirstPass
 pattern1:                   ; receives one paramenter, wich is the position of the sprite to be moved
     LDA $0200, x            ; first it loads its vertical position
     CMP #$AF                ; if it has reached the bottom of the box
-    BNE skipResetVertical   
-    LDA #$66                ; resets to the top
-
-skipResetVertical:          ; if not just goes down by one
-	CLC
+    BEQ skipVerticalIncrease   
+    CLC               ; resets to the top
     ADC #$01
-	STA $0200, x
-	LDY p1direction         ; checks direction to move sprite
-	CPY #$00                ; 0 == right; 1 == left
+    STA $0200, x
+skipVerticalIncrease:          ; if not just goes down by one
+	LDA p1direction         ; checks direction to move sprite
+	CMP #$00                ; 0 == right; 1 == left
 	BNE p1left
 
 p1right:
