@@ -14,14 +14,88 @@
 		.dsb 1
 	counterHi:
 		.dsb 1
+	p1direction:    ; flag for direction after initial pass
+		.dsb 1
+	p1counter:
+		.dsb 1
+  p1firstpassdir: ; flag for direction in initial pass
+    .dsb 1
+  onWait:         ; determines how long to wait before next sprite loads
+    .dsb 1
+  firstPass       ; flag that determines first pass
+    .dsb 1
 .ende
 
+; .macro pattern1
 
 ;;;;;;;;;;;;;;;
 
     
   .base $C000
-  ;.org $C000 
+  ;.org $C000
+
+pattern1:                 ; receives one paramenter, wich is the position of the sprite to be moved
+	LDA $0200, x            ; first it loads its vertical position
+  CMP #$AF                ; if it has reached the bottom of the box
+  BNE skipResetVertical   
+  LDA #$66                ; resets to the top
+skipResetVertical:        ; if not just goes down by one
+	CLC
+  ADC #$01
+	STA $0200, x
+	LDY p1direction         ; checks direction to move sprite
+	CPY #$00                ; 0 == right; 1 == left
+	BNE p1left
+p1right:
+  LDA $0203, x
+  CMP #$af                ; if going to the right checks if it has reached the right wall
+  BEQ endp1               ; if it has it just goes down
+	CLC
+  ADC #01                 ; if not goes one to the right
+	JMP endp1
+p1left:                   ; same as p1right but to the left (duh)
+  LDA $0203, x
+  CMP #$49
+  BEQ endp1
+	SEC
+  SBC #$01
+endp1:
+	STA $0203, x
+	RTS
+; .endm
+
+changep1dir:            ; changes direction of sprites after first pass
+  LDA #$00
+  STA p1counter         ; resets the p1counter
+  LDA p1direction       ; if it was going to the right (a == 0) sets p1direction to 1 (goes to changeLeft)
+  CMP #$00              ; else sets p1direction to 0 (goes to changeRight)
+  BEQ changeLeft
+changeRight:
+  LDA #$00
+  JMP setDir
+changeLeft:
+  LDA #$01
+setDir:
+  STA p1direction
+  LDX #$00
+  RTS
+
+changep1dirfp:          ; does exactly the same as changep1dir but to p1firstpassdir instead of p1direction
+  LDA #$00
+  STA p1firstpassdir
+  LDA p1direction
+  CMP #$00
+  BEQ changeLeft2
+changeRight2:
+  LDA #$00
+  JMP setDir2
+changeLeft2:
+  LDA #$01
+setDir2:
+  STA p1direction
+  LDX #$00
+  RTS
+   
 RESET:
   SEI          ; disable IRQs
   CLD          ; disable decimal mode
@@ -81,13 +155,13 @@ LoadPalettesLoop:
 LoadSprites:
   LDX #$00              ; start at 0
 LoadSpritesLoop:
-  LDA sprites, x        ; load data from address (sprites +  x)
+  LDA hp, x        ; load data from address (hp +  x)
   STA $0200, x          ; store into RAM address ($0200 + x)
   INX                   ; X = X + 1
-	CPX #$78							; each sprite multiplies by 4
+	CPX #$08							; each sprite multiplies by 4
   BNE LoadSpritesLoop   ; Branch to LoadSpritesLoop if compare was Not Equal to zero
-                        ; if compare was equal to 16, keep going down
-
+                        ; if compare was equal to 8, keep going down
+  STX p1counter
               
               
               
@@ -161,9 +235,123 @@ LoadAttributeLoop:
   LDA #%00011110   ; enable sprites, enable background, no clipping on left side
   STA $2001
 
-Forever:
-  JMP Forever     ;jump back to Forever, infinite loop
-  
+vblankwaitLoop:      ; Wait for vblank, PPU is ready after this
+
+  BIT $2002
+  BPL vblankwaitLoop
+
+  INC onWait          ; when ppu is ready adds one to onWait
+  LDX firstPass     
+  CPX #$00            ; if its in first pass (just after reset)
+  BEQ loadFirstPass   ; goes to loadFirstPass
+                      ; else keeps going
+  LDX #$08            ; starts at 8 because of HP
+p1Loop:
+  JSR pattern1        ; calls pattern1
+  INX                 ; X+4 to reach next byte
+  INX
+  INX
+  INX
+  CPX #$38            ; if X == 56 (7 sprites) it leaves the loop
+  BNE p1Loop
+  LDX p1counter       ; this is the counter that dictates the direction
+  INX
+  CPX #$0C            ; after 12 cicles to one side it changes direction
+  BMI ignoreChangedir ; jumps to ignoreChangedir if X < 0C (if N flag is set)
+  JSR changep1dir
+ignoreChangedir:
+  STX p1counter       ; if X < 12 it just increases by one, from INX, else it returns as 0 from changep1dir
+  JMP vblankwaitLoop
+
+loadFirstPass:        
+  LDX onWait          
+  CPX #$08            ;if 8 cicles of "wainting" has passed another sprite is loaded onto the screen
+  BNE runOtherSprites
+  LDX #$00
+  STX onWait          ; resets the onWait counter
+
+  LDX p1counter       ; this counter will keep track of how many bytes were written
+
+  LDA #$60            ; load first byte of top of fire (vertical position)
+  STA $0200, x
+  INX
+  LDA sprites, x      ; load second byte of top of fire (sprite number)
+  STA $0200, x
+  INX
+  LDA sprites, x      ; load third byte of top of fire (attrs)
+  STA $0200, x
+  INX
+  TXA                 ; accumulator will receive X's value to more easily add to the horizontal position
+  TAY                 ; y register will receive x's value to add distance relative to first sprite
+                      ; so if the second sprite added +4 to its horizontal position, the third will add +8
+  LDA #$3F            ; load fourth byte of top of fire (horizontal position)
+  INY
+loadHorizontalLoop1:  ; this loop sets the horizontal distance between the sprites
+    CLC
+    ADC #$02
+    DEY               
+    CPY #$00
+    BNE loadHorizontalLoop1
+  STA $0200, x
+  TXA               ; this is done here so that the current value of x is used in the bottom portion of the sprite
+  TAY               ; the y register will keep the old value of x until the next horizontal position loop
+  INX
+
+  ;does the same for bottom of part of the fire
+  LDA #$66            
+  STA $0200, x
+  INX
+  LDA sprites, x      
+  STA $0200, x
+  INX
+  LDA sprites, x      
+  STA $0200, x
+  INX
+  LDA #$3F            
+  INY
+loadHorizontalLoop2:
+    CLC
+    ADC #$02
+    DEY
+    CPY #$00
+    BNE loadHorizontalLoop2
+  STA $0200, x
+  INX
+
+  STX p1counter       ; after all of this the p1counter was increased by 8
+
+runOtherSprites:      ; this portion of code also acts as the "wainting" routine
+  LDA p1counter       ; it takes care of moving the already loaded sprites in order to distance them vertically
+                      ; from the ones to be loaded
+  TAX               
+  CPX #$08            ; the sprite movement starts from 8 due to hp sprite
+  BEQ skipEndFirstPass
+loadPassP1Loop:       ; this loop has almost the same ideia of p1Loop, but in reverse
+                      ; instead of going from the first sprite to the last, it goes from the last sprite loaded
+                      ; using the current value of p1counter, up to the first one added
+  DEX   
+  DEX
+  DEX
+  DEX
+  JSR pattern1
+  CPX #$08            ; stops when reaches hp sprite
+  BNE loadPassP1Loop
+  LDX p1firstpassdir  ; checks if its time to change directions
+  INX
+  CPX #$0C
+  BMI ignoreChange
+  JSR changep1dirfp
+ignoreChange:
+  STX p1firstpassdir  ; stores p1firstpassdir+1 if going to same direction, if not x returns as 0 from change1dirfp
+  LDX p1counter
+  CPX #$38            ; when p1 counter reaches 56 it means all fire sprites were loaded
+  BNE skipEndFirstPass
+  LDX #$00            ; so it resets the counter
+  STX p1counter
+  LDX #$01            ; and sets the firstPass flag to 1
+  STX firstPass       
+skipEndFirstPass
+  JMP vblankwaitLoop
 
 NMI:
   LDA #$00
@@ -192,51 +380,70 @@ NMI:
 palette:
 	;   actions						action selected		other elements												
   .db $0F,$26,$1A,$0F,  $0F,$28,$17,$0F,  $0F,$30,$21,$0F,  $0F,$09,$17,$0F   ;;background palette
-  .db $0F,$1C,$15,$14,  $0F,$02,$38,$3C,  $0F,$1C,$15,$14,  $0F,$02,$38,$3C   ;;sprite palette
+  .db $0F,$1C,$15,$14,  $0F,$02,$38,$3C,  $30,$30,$30,$30,  $0F,$02,$38,$3C   ;;sprite palette
 
 ; first color is for transparency
 
 sprites:
     ;vert tile attr horiz
 ;coracao 
-	.db $80, $0, $00, $80   ;heart sprite	up 0
-	.db $80, $1, $00, $88		;heart sprite up 1
-	.db $88, $10, $00, $80  ;heart sprite down 0
-	.db $88, $11, $00, $88  ;heart sprite down 1
+; 	.db $80, $0, $00, $80   ;heart sprite	up 0
+; 	.db $80, $1, $00, $88		;heart sprite up 1
+; 	.db $88, $10, $00, $80  ;heart sprite down 0
+; 	.db $88, $11, $00, $88  ;heart sprite down 1
 	
-;coracao partido
-	.db $80, $20, $00, $90   ;heart sprite	up 0
-	.db $80, $21, $00, $98		;heart sprite up 1
-	.db $88, $30, $00, $90  ;heart sprite down 0
-	.db $88, $31, $00, $98  ;heart sprite down 1
-;fogo
-	.db $80, $40, $00, $a0   ;heart sprite	up 0
-	.db $88, $50, $00, $a0		;heart sprite up 1
-;slash
-	.db $22, $12, $00, $70  ;heart sprite down 0
-	.db $22, $13, $00, $78  ;heart sprite down 1
-	.db $22, $14, $00, $80  ;heart sprite down 0
-	.db $22, $15, $00, $89  ;heart sprite down 0
+; ;coracao partido
+; 	.db $80, $20, $00, $90   ;heart sprite	up 0
+; 	.db $80, $21, $00, $98		;heart sprite up 1
+; 	.db $88, $30, $00, $90  ;heart sprite down 0
+; 	.db $88, $31, $00, $98  ;heart sprite down 1
+; ;fogo
+	.db $60, $40, $02, $a0   ;heart sprite	up 0
+	.db $66, $50, $02, $a0		;heart sprite up 1
+
+  .db $60, $40, $02, $95   ;heart sprite	up 0
+	.db $66, $50, $02, $95		;heart sprite up 1
+
+  .db $60, $40, $02, $90   ;heart sprite	up 0
+	.db $66, $50, $02, $90		;heart sprite up 1
+
+  .db $60, $40, $02, $85   ;heart sprite	up 0
+	.db $66, $50, $02, $85		;heart sprite up 1
+
+  .db $70, $40, $02, $80   ;heart sprite	up 0
+	.db $76, $50, $02, $80		;heart sprite up 1
+
+  .db $70, $40, $02, $75   ;heart sprite	up 0
+	.db $76, $50, $02, $75		;heart sprite up 1
+
+  .db $70, $40, $02, $70   ;heart sprite	up 0
+	.db $76, $50, $02, $70		;heart sprite up 1
+; ;slash
+; 	.db $22, $12, $00, $70  ;heart sprite down 0
+; 	.db $22, $13, $00, $78  ;heart sprite down 1
+; 	.db $22, $14, $00, $80  ;heart sprite down 0
+; 	.db $22, $15, $00, $89  ;heart sprite down 0
 	
-	.db $2a, $23, $00, $78  ;heart sprite down 1
-	.db $2a, $24, $00, $80  ;heart sprite down 0
-	.db $2a, $25, $00, $88  ;heart sprite down 1
+; 	.db $2a, $23, $00, $78  ;heart sprite down 1
+; 	.db $2a, $24, $00, $80  ;heart sprite down 0
+; 	.db $2a, $25, $00, $88  ;heart sprite down 1
 
-	.db $32, $34, $00, $80  ;heart sprite down 0
-	.db $32, $35, $00, $88  ;heart sprite down 1
+; 	.db $32, $34, $00, $80  ;heart sprite down 0
+; 	.db $32, $35, $00, $88  ;heart sprite down 1
 
-	.db $3a, $44, $00, $80  ;heart sprite down 0
-	.db $3a, $45, $00, $88  ;heart sprite down 0
+; 	.db $3a, $44, $00, $80  ;heart sprite down 0
+; 	.db $3a, $45, $00, $88  ;heart sprite down 0
 
-	.db $42, $53, $00, $78  ;heart sprite down 1
-	.db $42, $54, $00, $80  ;heart sprite down 0
-	.db $42, $55, $00, $88  ;heart sprite down 1
+; 	.db $42, $53, $00, $78  ;heart sprite down 1
+; 	.db $42, $54, $00, $80  ;heart sprite down 0
+; 	.db $42, $55, $00, $88  ;heart sprite down 1
 
-	.db $4a, $62, $00, $70  ;heart sprite down 0
-	.db $4a, $63, $00, $78  ;heart sprite down 1
-	.db $4a, $64, $00, $80  ;heart sprite down 0
-	.db $4a, $65, $00, $88  ;heart sprite down 1
+; 	.db $4a, $62, $00, $70  ;heart sprite down 0
+; 	.db $4a, $63, $00, $78  ;heart sprite down 1
+; 	.db $4a, $64, $00, $80  ;heart sprite down 0
+; 	.db $4a, $65, $00, $88  ;heart sprite down 1
 
+hp:
 ;hp
   .db $bf, $3, $00, $b6   ;sprite 1 hp first digit
   .db $bf, $2, $00, $be   ;sprite 0 hp second digit
