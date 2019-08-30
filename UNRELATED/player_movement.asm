@@ -16,11 +16,7 @@ move_right:
 
 CheckMoveRight:                 ;check if player can move to the right
     PHA
-<<<<<<< HEAD
     LDA heart + 3             ;loads X position of first sprite
-=======
-    LDA sprites + 3             ;loads X position of first sprite
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     CLC
     ADC #$10 + heart_step_size
     CLC
@@ -34,17 +30,10 @@ right_movement:
 
     LDX #$00
 right_movement_loop:
-<<<<<<< HEAD
     LDA heart + 3, x  ;load x position of heart
     CLC
     ADC heart_step_size ;add position in x axis
     STA heart + 3, x
-=======
-    LDA sprites + 3, x  ;load x position of heart
-    CLC
-    ADC heart_step_size ;add position in x axis
-    STA sprites + 3, x
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     TAY
     TXA
     CLC
@@ -63,11 +52,7 @@ move_left:              ;same process as move_right
 
 CheckMoveLeft:
     PHA
-<<<<<<< HEAD
     LDA heart + 3
-=======
-    LDA sprites + 3
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     SEC
     SBC #$01 + heart_step_size
     CLC
@@ -81,17 +66,10 @@ left_movement:
 
     LDX #$00
 left_movement_loop:
-<<<<<<< HEAD
     LDA heart + 3, x
     SEC
     SBC heart_step_size
     STA heart + 3, x
-=======
-    LDA sprites + 3, x
-    SEC
-    SBC heart_step_size
-    STA sprites + 3, x
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     TAY
     TXA
     CLC
@@ -109,11 +87,7 @@ move_down:              ;same process as move_right
 
 CheckMoveDown:
     PHA
-<<<<<<< HEAD
     LDA heart
-=======
-    LDA sprites
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     CLC
     ADC #$10 + heart_step_size
     CLC
@@ -126,17 +100,10 @@ down_movement:
     PHA
     LDX #$00
 down_movement_loop:
-<<<<<<< HEAD
     LDA heart, x
     CLC
     ADC heart_step_size
     STA heart, x
-=======
-    LDA sprites, x
-    CLC
-    ADC heart_step_size
-    STA sprites, x
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     TAY
     TXA
     CLC
@@ -154,11 +121,7 @@ move_up:                ;same process as move_right
 
 CheckMoveUp:
     PHA
-<<<<<<< HEAD
     LDA heart
-=======
-    LDA sprites
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     SEC
     SBC #$01 + heart_step_size
     CLC
@@ -171,17 +134,10 @@ up_movement:
     PHA
     LDX #$00
 up_movement_loop:
-<<<<<<< HEAD
     LDA heart, x
     SEC
     SBC heart_step_size
     STA heart, x
-=======
-    LDA sprites, x
-    SEC
-    SBC heart_step_size
-    STA sprites, x
->>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     TAY
     TXA
     CLC

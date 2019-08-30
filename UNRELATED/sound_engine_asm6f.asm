@@ -365,17 +365,9 @@ NUM_SONGS = $06 ;if you add a new song, change this number.
 
 ;this is our pointer table.  Each entry is a pointer to a song header                
 song_headers:
-    .word song0_header  ;this is a silence song.  See song0.i for more details
     .word song1_header  ;evil, demented notes
     .word song2_header  ;heartache (toriel's battle)
-    .word song3_header  ;a little chord progression.
-	.word song4_header ;menu
-	.word song5_header
     
     .include "note_table.i" ;period lookup table for notes
-    .include "song0.i"  ;holds the data for song 0 (header and data streams)
     .include "song1.i"  ;holds the data for song 1
     .include "song2.i"
-    .include "song3.i"
-	.include "song4.i"
-	.include "song5.i"
