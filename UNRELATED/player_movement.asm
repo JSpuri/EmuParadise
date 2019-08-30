@@ -1,9 +1,9 @@
 ;Box info ---------------------------------------------------------------------
-box_ymin EQU #$60   ;box upper limit
-box_ymax EQU #$B0   ;box lower limit
+box_ymin EQU #$64   ;box upper limit
+box_ymax EQU #$B9   ;box lower limit
 
-box_xmin EQU #$48   ;box left limit
-box_xmax EQU #$B7   ;box right limit
+box_xmin EQU #$46   ;box left limit
+box_xmax EQU #$BA   ;box right limit
 
 
 MvHeartBattle:
