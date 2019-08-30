@@ -65,6 +65,8 @@ max_fireballs   .dsb 1
 
 num_oam .dsb 1  ;number of dynamic sprites
 
+spriteCounter .dsb 1
+
 ;Player Health
 player_cur_health   .dsb 1
 player_max_health   .dsb 1
@@ -210,9 +212,9 @@ LoadBackground:
 	; #tiles on screen = 32 * 30 = 960 bytes = $03C0
 	; need two bytes to represent (a low and a high)
 
-	LDA #<background_rom    ;load low bytes of address ($XX[XX])
+	LDA #<background_playing_rom    ;load low bytes of address ($XX[XX])
 	STA backgroundLo
-	LDA #>background_rom    ;load high bytes of address ($[XX]XX)
+	LDA #>background_playing_rom    ;load high bytes of address ($[XX]XX)
 	STA backgroundHi	
 	LDA #$C0				
 	STA counterLo
@@ -256,7 +258,7 @@ LoadAttribute:
     STA $2006               ; write the low byte of $23C0 address
     LDX #$00                ; start out at 0
 LoadAttributeLoop:
-    LDA attribute, x        ; load data from address (attribute + value in x)
+    LDA attributePlaying, x        ; load data from address (attribute + value in x)
     STA $2007               ; write to PPU
     INX                     ; X = X + 1
     CPX #$08                ; Compare X to hex $08, decimal 8 - copying 8 bytes
