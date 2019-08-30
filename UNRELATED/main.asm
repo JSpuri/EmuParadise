@@ -14,7 +14,11 @@
 
 ;iNES Header Constants --------------------------------------------------------
 
+<<<<<<< HEAD
 PRG_COUNT = $02 ;PRG ROM size (1 -> 16KiB, 2 -> 32KiB)
+=======
+PRG_COUNT = $01 ;PRG ROM size (1 -> 16KiB, 2 -> 32KiB)
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 CHR_COUNT = $01 ;CHR ROM size (1-> 8KiB, 2 -> 16KiB)
 
 ;Byte 6 - Flags
@@ -37,13 +41,24 @@ MAPN = %00000000 ;mapper number (D0 to D3) (0 is NROM)
 
 ;Game info --------------------------------------------------------------------
 
+<<<<<<< HEAD
 ;heart sprite information
+=======
+;player max health
+MAX_HEALTH EQU #$14
+
+;heart sprite information
+heart_init_pos_x EQU #$80
+sprite_heart_n = $00
+heart_init_pos_y EQU #$80
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 heart_step_size EQU #$02     ;player speed
 
 ;------------------------------------------------------------------------------
 ; Variables - Stored in internal RAM [$0000,$0800) 
 ;------------------------------------------------------------------------------
 
+<<<<<<< HEAD
     ;.inesprg 2 ;2x 16kb PRG code
     ;.ineschr 1 ;1x 8kb CHR data
     ;.inesmap 0 ; mapper 0 = NROM, no bank swapping
@@ -60,6 +75,14 @@ counterHi 		    .dsb 1
 
 buttons1            .db 0   ;used to read input from controller 1
 last_buttons1       .db 0   ;last input read from controller 1
+=======
+    .enum $0000             ;background graphics variables
+
+backgroundLo:   .dsb 1
+backgroundHi:	.dsb 1
+counterLo:  	.dsb 1
+counterHi:		.dsb 1
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 
 p1direction         .dsb 1  ;flag for direction after initial pass
 p1firstpassdir      .dsb 1  ;flag for direction in initial pass
@@ -73,6 +96,7 @@ num_oam .dsb 1  ;number of dynamic sprites
 
 spriteCounter .dsb 1
 
+<<<<<<< HEAD
 ;Player Health
 player_cur_health   .dsb 1
 player_max_health   .dsb 1
@@ -97,6 +121,23 @@ hp_d2   .dsb 4
 	.enum $02EC
 heart   .dsb #$10
 	.ende
+=======
+    .enum $0010
+
+buttons1        .db 0      ;used to read input from controller 1
+last_buttons1   .db 0      ;last input read from controller 1
+
+player_cur_health   .db MAX_HEALTH
+player_max_health   .db MAX_HEALTH    ;player health
+
+    .ende
+
+    .enum $0200
+
+sprites
+
+    .ende
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 
 ;------------------------------------------------------------------------------
 ; iNES header 
@@ -119,6 +160,7 @@ heart   .dsb #$10
     .base $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
                                      ;$8000 to $FFFF in ROM with 32KiB
 
+<<<<<<< HEAD
 	.include "sound_engine_asm6f.asm"
 ;----- second 8k bank of PRG-ROM    
     ;bank 1
@@ -131,6 +173,8 @@ heart   .dsb #$10
 	;.base $c000
     .org $C000
 
+=======
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 Reset: ; ----------------------------------------------------------------------
 
     SEI         ;Set Interrupt Disable
@@ -175,6 +219,7 @@ vblankwait2:    ;Second wait for vblank, PPU is ready after this
     BIT $2002
     BPL vblankwait2
 
+<<<<<<< HEAD
 ; ----------------------------- Toriel's Battle ------------------------------
 LoadVariables:
     LDA #$42
@@ -190,6 +235,8 @@ LoadVariables:
     LDA #$03
     STA player_state    ;set start state to "Battle Menu"
 
+=======
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 LoadPalettesLoop:
     LDA palette, x          ;load palette byte
     STA $2007               ;write to PPU
@@ -197,6 +244,7 @@ LoadPalettesLoop:
     CPX #$20            
     BNE LoadPalettesLoop    ;if x = $20, 32 bytes copied, all done
 
+<<<<<<< HEAD
 LoadSpritesBattle:              ;loads basic elements of battle (heart and hp)
 
     LDX #$00
@@ -214,6 +262,17 @@ LoadHeartLoop:
     INX
     CPX #$10                    ; each sprite multiplies by 4
     BNE LoadHeartLoop   ; Branch while not all sprites were loaded
+=======
+
+LoadSpritesBattle:              ;loads basic elements of battle (heart and hp)
+    LDX #$00
+LoadSpritesBattleLoop:
+    LDA sprites_rom, x          ;load data from address (sprites_rom +  x)
+    STA sprites, x              ;store into RAM address ($0200 + x)
+    INX
+    CPX #$18                    ; each sprite multiplies by 4
+    BNE LoadSpritesBattleLoop   ; Branch while not all sprites were loaded
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 
 
 LoadBackground:
@@ -227,9 +286,15 @@ LoadBackground:
 	; #tiles on screen = 32 * 30 = 960 bytes = $03C0
 	; need two bytes to represent (a low and a high)
 
+<<<<<<< HEAD
 	LDA #<background_playing_rom    ;load low bytes of address ($XX[XX])
 	STA backgroundLo
 	LDA #>background_playing_rom    ;load high bytes of address ($[XX]XX)
+=======
+	LDA #<background_rom    ;load low bytes of address ($XX[XX])
+	STA backgroundLo
+	LDA #>background_rom    ;load high bytes of address ($[XX]XX)
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 	STA backgroundHi	
 	LDA #$C0				
 	STA counterLo
@@ -265,8 +330,11 @@ LoadBackgroundLoop:         ;keep writing background tiles to PPU
     CMP #$00                ; see if the high byte is zero, if not loop
     BNE LoadBackgroundLoop  ; if the loop counter isn't 0000, keep copying
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 LoadAttribute:
     LDA $2002               ; read PPU status to reset the high/low latch
     LDA #$23
@@ -275,12 +343,17 @@ LoadAttribute:
     STA $2006               ; write the low byte of $23C0 address
     LDX #$00                ; start out at 0
 LoadAttributeLoop:
+<<<<<<< HEAD
     LDA attributePlaying, x        ; load data from address (attribute + value in x)
+=======
+    LDA attribute, x        ; load data from address (attribute + value in x)
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
     STA $2007               ; write to PPU
     INX                     ; X = X + 1
     CPX #$08                ; Compare X to hex $08, decimal 8 - copying 8 bytes
     BNE LoadAttributeLoop   ; branch while attributes arent fully loaded
 
+<<<<<<< HEAD
     ;LDA #%10010000          ; enable NMI, sprites from Pattern Table 0,
                             ; background from Pattern Table 1
     ;STA $2000
@@ -314,6 +387,14 @@ BattleMenu:
 
 TorielTurn:
     .include fireballs.asm
+=======
+    LDA #%10010000          ; enable NMI, sprites from Pattern Table 0,
+                            ; background from Pattern Table 1
+    STA $2000
+    LDA #%00011110          ; enable sprites, enable background
+    STA $2001               ; no clipping on left side of screen (8 pixels)
+
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 
 Forever:
     JMP Forever     ;jump back to Forever, infinite loop
@@ -340,6 +421,7 @@ NMI: ; ------------------------------------------------------------------------
 battle_turn:
     JSR MvHeartBattle   ;move player inside box
 
+<<<<<<< HEAD
     JSR CheckCollision
 
 	jsr sound_play_frame    ;run our sound engine after all drawing code is done.
@@ -347,11 +429,26 @@ battle_turn:
 
     RTI             ;Return from Interrupt
 
+=======
+    RTI             ;Return from Interrupt
+
 
 IRQ:
 
     ;NOTE: IRQ code goes here 
 
+; Subroutines -----------------------------------------------------------------
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
+
+; ---------------------- Joycontroller1 reading
+.include joypad_reading.asm
+
+
+; ---------------------- Player Movement
+.include player_movement.asm
+
+
+<<<<<<< HEAD
 ; Subroutines -----------------------------------------------------------------
 
 ; ---------------------- Joycontroller1 reading
@@ -438,6 +535,8 @@ its_empty:
 
 end_game:
     JMP Reset
+=======
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
 ; Graphics information --------------------------------------------------------
     .org $E000
 .include background_sprites.asm
@@ -455,8 +554,13 @@ end_game:
 ;------------------------------------------------------------------------------
 ; CHR-ROM bank
 ;------------------------------------------------------------------------------
+<<<<<<< HEAD
 .base $0000
     ;.org $0000
 	;.base $0000
 .incbin "unrelated_chars.chr"   ;includes 8KB graphics file from SMB1
 .pad $7ff0
+=======
+
+.incbin "unrelated_chars.chr"   ;includes 8KB graphics file from SMB1
+>>>>>>> b087dcb97746789855b76307d5a766a72f54034a
