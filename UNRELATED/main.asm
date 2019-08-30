@@ -71,6 +71,8 @@ max_fireballs   .dsb 1
 
 num_oam .dsb 1  ;number of dynamic sprites
 
+spriteCounter .dsb 1
+
 ;Player Health
 player_cur_health   .dsb 1
 player_max_health   .dsb 1
@@ -225,9 +227,9 @@ LoadBackground:
 	; #tiles on screen = 32 * 30 = 960 bytes = $03C0
 	; need two bytes to represent (a low and a high)
 
-	LDA #<background_rom    ;load low bytes of address ($XX[XX])
+	LDA #<background_playing_rom    ;load low bytes of address ($XX[XX])
 	STA backgroundLo
-	LDA #>background_rom    ;load high bytes of address ($[XX]XX)
+	LDA #>background_playing_rom    ;load high bytes of address ($[XX]XX)
 	STA backgroundHi	
 	LDA #$C0				
 	STA counterLo
@@ -273,7 +275,7 @@ LoadAttribute:
     STA $2006               ; write the low byte of $23C0 address
     LDX #$00                ; start out at 0
 LoadAttributeLoop:
-    LDA attribute, x        ; load data from address (attribute + value in x)
+    LDA attributePlaying, x        ; load data from address (attribute + value in x)
     STA $2007               ; write to PPU
     INX                     ; X = X + 1
     CPX #$08                ; Compare X to hex $08, decimal 8 - copying 8 bytes
@@ -367,103 +369,75 @@ CheckCollision:
     LDX #$00            ;if the array of fireballs is empty,
     CMP num_oam         ;there is nothing to do
     BEQ its_empty
-
     LDX #$04            ;but if it is not, we need to check only the bottom half
 check_collision_loop:
-check_if_its_below_upper_limit:
-    LDA sprites, x      ;we load the y value of the first bottom half
-    CLC
-    CMP heart           ;we compare to heart's x position: if A >= M,
-    BCS check_if_its_above_lower_limit  ;carry is set
-                        ;so, sprite.y is greater than heart.y
-                        ;we need to check if its less than the lower limit
-                        ;of the heart
 
-check_it_lower:
+check_upper_border:
+    LDA heart
+    CMP sprites, x
+    BCS check_lower_border
+    JMP next_fireball
+
+check_lower_border:
+    LDA sprites, x
     CLC
-    ADC #$07
+   ; ADC #$07
     CMP heart
-    BCS maybe_a_hit_check_horizontaly
-    JMP its_not_inside
+    BCS check_left_border
+    JMP next_fireball
 
-check_if_its_above_lower_limit: ;so, we need to check if its less than the
-    LDA heart                   ;lower limit of the heart.
+check_left_border:
+    LDA heart + $03
+    CMP sprites + $03, x
+    BCS check_right_border
+    JMP next_fireball
+
+check_right_border:
+    LDA sprites + $03, x
     CLC
-    ADC #$0F                    ;by loading heart.x and adding 0F to it, we have the
-    CMP sprites, x              ;lower limit of the heart. If its value is greater than 
-    BCC maybe_a_hit_check_horizontaly   ;sprites.x, Carry will be set, so, it is inside
-    JMP its_not_inside                  ;vertically, at least.
+   ; ADC #$07
+    CMP heart + $03
+    BCC thats_a_hit
+    JMP next_fireball
+
+thats_a_hit:
+
+    LDY hp_d2 + 1
+    DEY
+
+    CPY #$01
+    STY hp_d2 + 1
+    BEQ dec_d1
+    JMP next_fireball
     
-maybe_a_hit_check_horizontaly:      ;so, the projectile may hit the player, eh.
-check_if_its_right_of_left_limit:   ;we need to check if sprite.x
-    LDA sprites + 3, x              
-    CLC
-    CMP heart + 3
-    BCS check_if_its_left_of_right_limit
+dec_d1:
+    LDY hp_d1 + 1
+    CPY #$02
+    BEQ end_game
 
-check_it_right:
-    CLC
-    ADC #$07
-    CMP heart + 3
-    BCS its_a_hit
-    JMP its_not_inside
+    LDY #$0B
+    STY hp_d2 + 1
 
-check_if_its_left_of_right_limit:
-    LDA heart + 3
-    CLC
-    ADC #$0F
-    CMP sprites + 3, x
-    BCC its_a_hit
-    JMP its_not_inside
-
-its_a_hit:
-    LDA player_cur_health
-
-    AND #$02
-    ;BEQ Reset   ; GAME OVER ===================================================
-
+    LDY hp_d1 + 1
+    DEY
     CMP #$02
-    BEQ return_to_B
+    BEQ end_game
 
-    LDA player_cur_health
-    SEC
-    SBC #$01
-    STA player_cur_health
+    STY hp_d1 + 1
 
-return_to_B:
-    LDA player_cur_health
-    AND #$F0
-    CLC
-    ADC #$0B
-    SEC
-    SBC #$10
-    STA player_cur_health
-
-    AND #$0F
-    STA hp_d2 + 1
-
-    LDA player_cur_health
-    LSR #$04
-    STA hp_d1 + 1
-
-    JMP its_not_inside
-
-    
-
-its_not_inside:
-
+next_fireball:
     TXA
     CLC
-    ADC #$08
-    CLC
-    CMP num_oam
+    ADC #$04
     TAX
-    BCS its_empty
-    JMP check_collision_loop
+    CMP num_oam
+    BCC check_collision_loop
 
 its_empty:
     RTS
 
+end_game:
+    JMP Reset
 ; Graphics information --------------------------------------------------------
     .org $E000
 .include background_sprites.asm

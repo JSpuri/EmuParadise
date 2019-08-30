@@ -36,8 +36,7 @@ stream_note_length:	.dsb	6
     .ende
     
 sound_init:
-	;; Enable Square 1, Square 2, Triangle and Noise channels
-	lda	#$0f
+	lda	#$0f  ;; Enable Square 1, Square 2, Triangle and Noise channels
 	sta	$4015
 
 	lda	#$00
@@ -203,24 +202,14 @@ se_fetch_byte:
 @opcode:			; Else it's an opcode
 	;; Do Opcode stuff
 
-	;; If $FF, end of stream so disable it and silence
+	;; If $FF, end of stream so start over
 	cmp	#$ff
 	bne	@end
-	lda	stream_status, x
-	and	#%11111110
-	sta	stream_status, x ; Clear enable flag in status byte
-
-	lda	stream_channel, x
-	cmp	#TRIANGLE
-	;; Triangle is silenced differently from squares and noise
-	beq	@silence_tri
-	lda	#$30		; Squaures and noise silenced with #$30
-	bne	@silence
-@silence_tri:
-	lda	#$80		; Triangle silenced with #$80
-@silence:
-	sta	stream_vol_duty, x ; Store silence value in the stream's volume
-	jmp	@update_pointer	   ; Done
+	ldy #$00
+	lda #$00
+	jsr sound_load
+	lda current_song
+	jsr sound_load
 @note_length:
 	;; Do Note Length stuff
 	and	#%01111111	; Chop off bit 7
@@ -378,7 +367,7 @@ NUM_SONGS = $06 ;if you add a new song, change this number.
 song_headers:
     .word song0_header  ;this is a silence song.  See song0.i for more details
     .word song1_header  ;evil, demented notes
-    .word song2_header  ;a sound effect.  Try playing it over the other songs.
+    .word song2_header  ;heartache (toriel's battle)
     .word song3_header  ;a little chord progression.
 	.word song4_header ;menu
 	.word song5_header

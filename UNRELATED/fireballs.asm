@@ -11,7 +11,7 @@ vblankwaitLoop:      ; Wait for vblank, PPU is ready after this
     LDX patternResetCount
     CPX #$08
     BEQ patternReset
-    LDX #$60
+    LDX #$00
 p1Loop:
     JSR pattern1        ; calls pattern1
     INX                 ; X+4 to reach next byte
@@ -20,7 +20,7 @@ p1Loop:
     INX
     CPX max_fireballs ; if X == 56 (7 sprites) it leaves the loop
     BNE p1Loop
-    LDX num_oam       ; this is the counter that dictates the direction
+    LDX spriteCounter       ; this is the counter that dictates the direction
     INX
     CPX #$0C            ; after 12 cicles to one side it changes direction
     BMI ignoreChangedir ; jumps to ignoreChangedir if X < 0C (if N flag is set)
@@ -31,11 +31,11 @@ p1Loop:
     LDX #$00
 
 ignoreChangedir:
-    STX num_oam       ; if X < 12 it just increases by one, from INX, else it returns as 0 from changep1dir
+    STX spriteCounter       ; if X < 12 it just increases by one, from INX, else it returns as 0 from changep1dir
     JMP vblankwaitLoop
 
 patternReset:
-    LDX #$60
+    LDX #$00
     LDA #$ef
 patternResetLoop:
     STA $0200, x
@@ -46,6 +46,7 @@ patternResetLoop:
     CPX #$98
     BNE patternResetLoop
     LDX #$00
+    STX spriteCounter
     STX num_oam
     STX onWait
     STX p1direction
@@ -61,13 +62,13 @@ loadFirstPass:
     LDX #$00
     STX onWait          ; resets the onWait counter
 
-    LDX num_oam       ; this counter will keep track of how many bytes were written
+    LDX spriteCounter       ; this counter will keep track of how many bytes were written
     TXA
     CLC
-    ADC #$60
+    ADC #$00
     TAY
 
-    LDA #$60            ; load first byte of top of fire (vertical position)
+    LDA #$60          ; load first byte of top of fire (vertical position)
     STA $0200, y
     INX
     INY
@@ -92,16 +93,22 @@ loadHorizontalLoop1:  ; this loop sets the horizontal distance between the sprit
     TAY
     TXA
     INX
-    STX num_oam
+    STX spriteCounter
     CLC
-    ADC #$60
+    ADC #$00
     TAX
     TYA
     STA $0200, x
     TXA               ; this is done here so that the current value of x is used in the bottom portion of the sprite
     TAY
     INY               ; the y register will keep the old value of x until the next horizontal position loop
-    LDX num_oam
+
+	LDX num_oam
+    INX
+    STX num_oam
+
+
+    LDX spriteCounter
 
     ;does the same for bottom of part of the fire
     LDA #$66            
@@ -122,30 +129,34 @@ loadHorizontalLoop1:  ; this loop sets the horizontal distance between the sprit
     LDA #$3F            
 
 loadHorizontalLoop2:
-        CLC
-        ADC #$02
-        DEY
-        CPY #$00
-        BNE loadHorizontalLoop2
+    CLC
+    ADC #$02
+    DEY
+    CPY #$00
+    BNE loadHorizontalLoop2
     TAY
     TXA
     INX
-    STX num_oam
+    STX spriteCounter
     CLC
-    ADC #$60
+    ADC #$00
     TAX
     TYA
     STA $0200, x
 
+    LDX num_oam
+    INX
+    STX num_oam
+
 runOtherSprites:      ; this portion of code also acts as the "wainting" routine
-    LDY num_oam       ; it takes care of moving the already loaded sprites in order to distance them vertically
+    LDY spriteCounter       ; it takes care of moving the already loaded sprites in order to distance them vertically
                       ; from the ones to be loaded               
     CPY #$00            ; the sprite movement starts from 8 due to hp sprite
     BEQ skipEndFirstPass
-    LDX #$60
+    LDX #$00
 loadPassP1Loop:       ; this loop has almost the same ideia of p1Loop, but in reverse
                       ; instead of going from the first sprite to the last, it goes from the last sprite loaded
-                      ; using the current value of num_oam, up to the first one added
+                      ; using the current value of spriteCounter, up to the first one added
     JSR pattern1
     INX   
     INX
@@ -165,11 +176,11 @@ loadPassP1Loop:       ; this loop has almost the same ideia of p1Loop, but in re
 
 ignoreChange:
     STX p1firstpassdir  ; stores p1firstpassdir+1 if going to same direction, if not x returns as 0 from change1dirfp
-    LDX num_oam
+    LDX spriteCounter
     CPX #$38            ; when p1 counter reaches 56 it means all fire sprites were loaded
     BNE skipEndFirstPass
     LDX #$00            ; so it resets the counter
-    STX num_oam
+    STX spriteCounter
     LDX #$01            ; and sets the firstPass flag to 1
     STX firstPass       
 
@@ -209,7 +220,7 @@ endp1:
 
 changep1dir:            ; changes direction of sprites after first pass
     LDA #$00
-    STA num_oam         ; resets the num_oam
+    STA spriteCounter         ; resets the spriteCounter
     LDA p1direction       ; if it was going to the right (a == 0) sets p1direction to 1 (goes to changeLeft)
     CMP #$00              ; else sets p1direction to 0 (goes to changeRight)
     BEQ changeLeft
