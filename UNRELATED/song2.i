@@ -16,11 +16,11 @@ song2_header:
     .byte $42		;tempo
     
     ;.byte MUSIC_TRI     ;which stream
-    ;.byte $01           ;status byte (stream enabled)
+   ; .byte $01           ;status byte (stream enabled)
     ;.byte TRIANGLE      ;which channel
     ;.byte $81           ;initial volume (on)
-    ;.word song1_tri     ;pointer to stream
-    ;.byte $40		;tempo
+    ;.word song2_tri     ;pointer to stream
+    ;.byte $42		;tempo
     
     ;.byte MUSIC_NOI     ;which stream
     ;.byte $00           ;disabled.  Our load routine will skip the
@@ -112,8 +112,8 @@ song2_square2:
 	.byte quarter, Bb4, Bb4, Bb4
 	.byte quarter, rest, rest, rest
 	.byte rest, rest, rest
-	.byte rest, rest, rest
-	.byte rest, rest, rest
+	.byte sixteenth, Bb3, Db4, C4, Db4, Bb3, rest, Bb3, C4, Db4, Ab4, F4, rest
+	.byte sixteenth, Bb3, Db4, C4, Db4, Bb3, rest, Bb3, C4, Db4, Ab4, F4, rest
 	.byte eighth, Eb4, C5, Bb4, sixteenth, Ab4, Fs4, eighth, F4, Ab4
 	.byte Bb4, Gb4, Gb3, rest, sixteenth, Bb3, Ab3, Bb3, rest
 	.byte rest, rest, Gb4, F4, Bb4, F4, rest, Db4, Ab3, rest, rest, rest
@@ -173,7 +173,13 @@ song2_square2:
 	.byte Bb4, Bb4, Bb4
     .byte $FF
     
-;song1_tri:
-    ;.byte thirtysecond, F6, D6, B5, D6, B5, Gs5, B5, Gs5, F5, Gs5, F5, D5, F5, D5, B4, Gs4
+;song2_tri:
+    ;.byte eighth, Fs2, rest, rest, Fs2, rest, rest 
+	;.byte Fs2, rest, rest, Fs2, rest, rest
+	;.byte Bb2, rest, rest, Bb2, rest, rest
+	;.byte quarter, rest, rest, rest
+	;.byte Fs2, rest, rest, rest
+	;.byte Fs2, rest, rest, rest
+	;.byte Bb2, sixteenth, rest, eighth, Bb2, sixteenth, rest, eighth, Bb2, Bb2, Bb2
     ;.byte E6, Db6, Bb5, Db6, Bb5, G5, Bb5, G5, E5, G5, E5, Db5, E5, Db5, Bb4, G4
     ;.byte $FF
