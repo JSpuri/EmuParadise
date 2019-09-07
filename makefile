@@ -1,5 +1,5 @@
 all: main.cpp
-	g++ main.cpp -o nesemu
+	g++ src/main.cpp -o nesemu
 
 clean: 
 	$(RM) myprog
