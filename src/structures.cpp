@@ -79,7 +79,7 @@ int HashMapTable::SearchKey(int k) {
     }
   }
   if (!flag)
-    return NULL;
+    return -1;
 }
 
 HashMapTable::~HashMapTable() {
