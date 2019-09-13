@@ -11,7 +11,7 @@ using namespace std;
 
 
 struct Instrucao {
-  int opcode;
+	int opcode;
 };
 
 Instrucao Decodifica(int pc, char * memblock){

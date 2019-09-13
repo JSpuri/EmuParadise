@@ -5,14 +5,14 @@
 #include <iostream>
 
 struct HashTableEntry {
-  int v, k;
-  HashTableEntry *n;
-  HashTableEntry *p;
-  HashTableEntry(int k, int v) {
+	int v, k;
+	HashTableEntry *n;
+  	HashTableEntry *p;
+	HashTableEntry(int k, int v) {
 		this->k = k;
 		this->v = v;
 		this->n = NULL;
-  }
+	}
 };
 
 class HashMapTable {
