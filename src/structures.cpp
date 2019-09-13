@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 #include "structures.h"
 
 const int T_S = 200;
@@ -71,7 +72,7 @@ class HashMapTable {
 					cout<<"Element Deleted"<<endl;
 				}
       }
-      void SearchKey(int k) {
+      int SearchKey(int k) {
         int hash_v = HashFunc(k);
         bool flag = false;
         HashTableEntry* en = ht[hash_v];
@@ -81,14 +82,13 @@ class HashMapTable {
 							flag = true;
 						}
 						if (flag) {
-							cout<<"Element found at key "<<k<<": ";
-							cout<<en->v<<endl;
+							return en->v;
 						}
 						en = en->n;
 					}
         }
         if (!flag)
-					cout<<"No Element found at key "<<k<<endl;
+					return NULL;
       }
       ~HashMapTable() {
         delete [] ht;
