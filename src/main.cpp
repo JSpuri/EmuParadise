@@ -210,27 +210,42 @@ void LeCartucho(const char *arquivo){
 				break;
 			// TAX
 			case(170): 	//aa -- implied
-				
+				cpu.x = cpu.a;
+				if (cpu.x == 0) cpu.ps[5] = 1;
+				if (cpu.x < 0) cpu.ps[0] = 1;
 				cpu.pc++;
 				break;
 			// TAY
-			case(168): 	//a8
+			case(168): 	//a8 -- implied
+				cpu.y = cpu.a;
+				if (cpu.y == 0) cpu.ps[5] = 1;
+				if (cpu.y < 0) cpu.ps[0] = 1;
 				cpu.pc++;
 				break;
 			// TSX
-			case(186): 	//ba
+			case(186): 	//ba -- implied
+				cpu.x = cpu.sp;
+				if (cpu.x == 0) cpu.ps[5] = 1;
+				if (cpu.x < 0) cpu.ps[0] = 1;
 				cpu.pc++;
 				break;
 			// TXA
-			case(138): 	//8a
+			case(138): 	//8a -- implied
+				cpu.a = cpu.x;
+				if (cpu.a == 0) cpu.ps[5] = 1;
+				if (cpu.a < 0) cpu.ps[0] = 1;
 				cpu.pc++;
 				break;
 			// TXS
-			case(154): 	//9a
+			case(154): 	//9a -- implied
+				cpu.sp = cpu.x;
 				cpu.pc++;
 				break;
 			// TYA
-			case(152): 	//98
+			case(152): 	//98 -- implied
+				cpu.a = cpu.y;
+				if (cpu.a == 0) cpu.ps[5] = 1;
+				if (cpu.a < 0) cpu.ps[0] = 1;
 				cpu.pc++;
 				break;
 			default:
