@@ -27,19 +27,18 @@ class HashMapTable {
 };
 
 struct CPU {
-	int pc;													//program counter
+	int pc;										//program counter
 	int x;			
 	int y;
 	int a;
-	int sp;													//stack pointer
-	int ps[7];											//p[NV-BDIZC]
-	std::stack<int> memStack;
+	int sp;										//stack pointer
+	int ps[7];								//p[NV-BDIZC]
 	CPU() {
 		this->pc = 0;
 		this->x = 0;
 		this->y = 0;
 		this->a = 0;
-		this->sp = 0;
+		this->sp = 0x0100;			//stack pointer goes from 0x0100 to 0x01ff
 		for (int i = 0; i < 7; i++) {
 			this->ps[i] = 0;
 		}
