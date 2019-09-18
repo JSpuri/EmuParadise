@@ -193,20 +193,38 @@ void LeCartucho(const char *arquivo){
 				cpu.pc++;
 				break;
 			// STX
-			case(134): 	//86
-			case(150): 	//96
-				cpu.pc+=2;
+			case(134): 	//86 -- zero page
+				operand = readNextByte(++cpu.pc, memblock);
+				memory.Insert(operand, cpu.x);
+				cpu.pc++;
 				break;
-			case(142): 	//8e
-				cpu.pc+=3;
+			case(150): 	//96 -- zero page, y
+				operand = readNextByte(++cpu.pc, memblock);
+				memory.Insert(operand+cpu.y, cpu.x);
+				cpu.pc++;
+				break;
+			case(142): 	//8e -- absolute
+				operand = readNextByte(++cpu.pc, memblock);
+				operand += (readNextByte(++cpu.pc, memblock) << 8);
+				memory.Insert(operand, cpu.x);
+				cpu.pc++;
 				break;
 			// STY
-			case(132): 	//84
-			case(148): 	//94
-				cpu.pc+=2;
+			case(132): 	//84 -- zero page
+				operand = readNextByte(++cpu.pc, memblock);
+				memory.Insert(operand, cpu.y);
+				cpu.pc++;
 				break;
-			case(140): 	//8c
-				cpu.pc+=3;
+			case(148): 	//94 -- zero page, x
+				operand = readNextByte(++cpu.pc, memblock);
+				memory.Insert(operand+cpu.x, cpu.y);
+				cpu.pc++;
+				break;
+			case(140): 	//8c -- absolute
+				operand = readNextByte(++cpu.pc, memblock);
+				operand += (readNextByte(++cpu.pc, memblock) << 8);
+				memory.Insert(operand, cpu.y);
+				cpu.pc++;
 				break;
 			// TAX
 			case(170): 	//aa -- implied
