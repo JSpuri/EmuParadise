@@ -2,7 +2,7 @@
 #include <stack>
 #include "structures.h"
 
-const int T_S = 200;
+const int T_S = 0x0800;
 using namespace std;
 
 

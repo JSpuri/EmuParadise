@@ -1,6 +1,14 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
+#define C 6
+#define Z 5
+#define I 4
+#define D 3
+#define B 2
+#define V 1
+#define N 0
+
 #include <stack>
 #include <iostream>
 
@@ -28,9 +36,9 @@ class HashMapTable {
 
 struct CPU {
 	int pc;													//program counter
-	int x;			
-	int y;
-	int a;
+	char x;			
+	char y;
+	char a;
 	int sp;													//stack pointer
 	int ps[7];											//p[NV-BDIZC]
 	std::stack<int> memStack;
