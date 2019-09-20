@@ -93,40 +93,47 @@ void LeCartucho(const char *arquivo){
 			case(233): 	//e9 -- immediate
 				operand = readNextByte(++cpu.pc, memblock);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(229): 	//e5 -- zero page
 				operand = readNextByte(++cpu.pc, memblock);
 				operand = memory.SearchKey(operand);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
  			case(245): 	//f5 -- zero page, x
 				operand = readNextByte(++cpu.pc, memblock);
 				operand = memory.SearchKey(operand+cpu.x);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(237): 	//ed -- absolute
 				operand = readNextByte(++cpu.pc, memblock);
 				operand += (readNextByte(++cpu.pc, memblock) << 8);
 				operand = memory.SearchKey(operand);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(253): 	//fd -- absolute, x
 				operand = readNextByte(++cpu.pc, memblock);
 				operand += (readNextByte(++cpu.pc, memblock) << 8);
 				operand = memory.SearchKey(operand+cpu.x);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(249): 	//f9 -- absolute, y
 				operand = readNextByte(++cpu.pc, memblock);
 				operand += (readNextByte(++cpu.pc, memblock) << 8);
 				operand = memory.SearchKey(operand+cpu.y);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(225): 	//e1 -- (indirect, y)
 				operand = readNextByte(++cpu.pc, memblock);
 				operand = memory.SearchKey(operand+cpu.x);
 				operand = memory.SearchKey(operand);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			case(241): 	//f1 -- (indirect), x
 				operand = readNextByte(++cpu.pc, memblock);
@@ -134,6 +141,7 @@ void LeCartucho(const char *arquivo){
 				operand = memory.SearchKey(operand+cpu.y);
 				operand = memory.SearchKey(operand);
 				sbc(&cpu, operand, isOperandNegative);
+				cpu.pc++;
 				break;
 			//SEC
 			case(56):		//38 -- implied
@@ -267,7 +275,7 @@ void LeCartucho(const char *arquivo){
 				cpu.pc++;
 				break;
 			default:
-				printf("erro\n");
+				// printf("erro\n");
 				cpu.pc++;
 		}
 		log(cpu);

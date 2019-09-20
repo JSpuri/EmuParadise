@@ -17,6 +17,7 @@ int HashMapTable::HashFunc(int key) {
 }
 
 void HashMapTable::Insert(int k, int v) {
+  if (k < 0) return;
   int hash_v = HashFunc(k);
   HashTableEntry* p = NULL;
   HashTableEntry* en = ht[hash_v];
@@ -64,19 +65,18 @@ void HashMapTable::Remove(int k) {
 }
 
 int HashMapTable::SearchKey(int k) {
+  if (k < 0) return -1;
   int hash_v = HashFunc(k);
   bool flag = false;
   HashTableEntry* en = ht[hash_v];
-  if (en != NULL) {
-    while (en != NULL) {
-      if (en->k == k) {
-        flag = true;
-      }
-      if (flag) {
-        return en->v;
-      }
-      en = en->n;
+  while (en != NULL) {
+    if (en->k == k) {
+      flag = true;
     }
+    if (flag) {
+      return en->v;
+    }
+    en = en->n;
   }
   if (!flag)
     return -1;
