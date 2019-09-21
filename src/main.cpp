@@ -278,7 +278,7 @@ void LeCartucho(const char *arquivo){
 				// printf("erro\n");
 				cpu.pc++;
 		}
-		log(cpu);
+		//log(cpu);
 		//std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }
