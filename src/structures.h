@@ -1,13 +1,13 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
-#define C 6
-#define Z 5
-#define I 4
+#define C 0
+#define Z 1
+#define I 2
 #define D 3
-#define B 2
-#define V 1
-#define N 0
+#define B 4
+#define V 6
+#define N 7
 
 #include <stack>
 #include <iostream>
@@ -40,7 +40,7 @@ struct CPU {
 	char y;
 	char a;
 	int sp;													//stack pointer
-	int ps[7];											//p[NV-BDIZC]
+	int ps[8];											//p[NV-BDIZC]
 	std::stack<int> memStack;
 	CPU() {
 		this->pc = 0;

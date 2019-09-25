@@ -237,10 +237,67 @@ void LeCartucho(const char *arquivo){
 
                 break;
 
-            //(Indirect, X) -------------------------- Need Help
+            //(Indirect, X)
             case(0x61):
-            //(Indirect), Y -------------------------- Need Help
+                zero_pg_addr = readNextByte(cpu.pc, memblock);
+                zero_pg_addr += cpu.x;
+
+                absolute_addr = memory.SearchKey((int)zero_pg_addr + 1);
+                absolute_addr = absolute_addr << 8;
+                absolute_addr = memory.SearchKey((int)zero_pg_addr);
+
+                value = (char)memory.SearchKey(absolute_addr);
+
+                result = cpu.a + (char)cpu.ps[C] + value;
+
+                cpu.ps[Z] = ((result == 0) ? 1 : 0);
+                cpu.ps[N] = ((result < 0) ? 1 : 0);
+
+                if(immediate > 0 && cpu.a > 0 && result < 0){
+
+                    cpu.ps[C] = 1;
+                    cpu.ps[N] = 1;
+                }
+                else{
+
+                    cpu.ps[C] = 0;
+                    cpu.ps[N] = 0;
+                }
+
+                cpu.a = result;
+                cpu.pc += 2;
+
+                break;
+            //(Indirect), Y
             case(0x71):
+                zero_pg_addr = readNextByte(cpu.pc, memblock);
+
+                absolute_addr = memory.SearchKey((int)zero_pg_addr + 1);
+                absolute_addr = absolute_addr << 8;
+                absolute_addr = memory.SearchKey((int)zero_pg_addr);
+                absolute_addr += (int)cpu.y;
+
+                value = (char)memory.SearchKey(absolute_addr);
+
+                result = cpu.a + (char)cpu.ps[C] + value;
+
+                cpu.ps[Z] = ((result == 0) ? 1 : 0);
+                cpu.ps[N] = ((result < 0) ? 1 : 0);
+
+                if(immediate > 0 && cpu.a > 0 && result < 0){
+
+                    cpu.ps[C] = 1;
+                    cpu.ps[N] = 1;
+                }
+                else{
+
+                    cpu.ps[C] = 0;
+                    cpu.ps[N] = 0;
+                }
+
+                cpu.a = result;
+                cpu.pc += 2;
+
                 break;
 
             //
@@ -344,10 +401,46 @@ void LeCartucho(const char *arquivo){
 
                 break;
 
-            //(Indirect, X) -------------------------- Need Help
+            //(Indirect, X)
             case(0x21):
-            //(Indirect), Y -------------------------- Need Help
+                zero_pg_addr = readNextByte(cpu.pc, memblock);
+                zero_pg_addr += cpu.x;
+
+                absolute_addr = memory.SearchKey((int)zero_pg_addr + 1);
+                absolute_addr = absolute_addr << 8;
+                absolute_addr = memory.SearchKey((int)zero_pg_addr);
+
+                value = (char)memory.SearchKey(absolute_addr);
+
+                result = cpu.a & value;
+
+                cpu.ps[Z] = ((result == 0) ? 1 : 0);
+                cpu.ps[N] = ((result < 0) ? 1 : 0);
+
+                cpu.a = result;
+                cpu.pc += 2;
+
+                break;
+
+            //(Indirect), Y
             case(0x31):
+                zero_pg_addr = readNextByte(cpu.pc, memblock);
+
+                absolute_addr = memory.SearchKey((int)zero_pg_addr + 1);
+                absolute_addr = absolute_addr << 8;
+                absolute_addr = memory.SearchKey((int)zero_pg_addr);
+                absolute_addr += (int)cpu.y;
+
+                value = (char)memory.SearchKey(absolute_addr);
+
+                result = cpu.a & value;
+
+                cpu.ps[Z] = ((result == 0) ? 1 : 0);
+                cpu.ps[N] = ((result < 0) ? 1 : 0);
+
+                cpu.a = result;
+                cpu.pc += 2;
+
                 break;
 
             //
@@ -529,11 +622,30 @@ void LeCartucho(const char *arquivo){
                 break;
 
 			// 
-			//BRK ----------------------- Decisions needed
+			//BRK
 			// 
 			case(0x00):
 
                 cpu.ps[B] = 1;
+
+                value = 0;
+
+                value += ((cpu.ps[C]) ? 1 : 0) << C;
+                value += ((cpu.ps[Z]) ? 1 : 0) << Z;
+                value += ((cpu.ps[I]) ? 1 : 0) << I;
+                value += ((cpu.ps[D]) ? 1 : 0) << D;
+                value += ((cpu.ps[B]) ? 1 : 0) << B;
+                value += 1 << (B+1);
+                value += ((cpu.ps[V]) ? 1 : 0) << V;
+                value += ((cpu.ps[N]) ? 1 : 0) << N;
+
+                memory.Insert(--(cpu.sp), (int)value);
+
+                absolute_addr = readNextByte(0xffff, memblock) << 8;
+                absolute_addr += readNextByte(0xfffe, memblock);
+
+                cpu.pc = absolute_addr;
+
                 break;
 
 			// 
@@ -558,8 +670,7 @@ void LeCartucho(const char *arquivo){
 			//CLC
 			// 
 			case(0x18):
-
-                cpu.ps[C] = 1;
+                cpu.ps[C] = 0;
                 break;
 
 			// 
