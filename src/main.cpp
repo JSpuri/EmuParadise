@@ -496,6 +496,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			//CLC
 			case(0x18):
 				cpu->ps[C] = 0;
+				(cpu->pc)++;
 				break;
 			///	
 			/// CMP
@@ -1629,17 +1630,17 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//SEC
 			case(56):		//38 -- implied
-				cpu->ps[6] = 1;
+				cpu->ps[C] = 1;
 				(cpu->pc)++;
 				break;
 			// SED
 			case(248):	//f8 -- implied
-				cpu->ps[3] = 1;
+				cpu->ps[D] = 1;
 				(cpu->pc)++;
 				break;
 			// SEI
 			case(120):	//78 -- implied
-				cpu->ps[4] = 1;
+				cpu->ps[I] = 1;
 				(cpu->pc)++;
 				break;
 			// STA
