@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 
-#define C 0
-#define Z 1
-#define I 2
-#define D 3
-#define B 4
-#define V 6
-#define N 7
+#define C 7
+#define Z 6
+#define I 5
+#define D 4
+#define B 3
+#define V 1
+#define N 0
 
 // Informacoes na cpu.cpp :)
 class CPU {

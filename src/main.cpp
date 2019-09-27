@@ -52,7 +52,7 @@ void sbc(CPU *cpu, int operand) {
 	(*cpu).pc++;
 }
 
-void setFlagsCMP(int operand, char registrador, CPU *cpu){ // also used in CPX anc CPY
+void setFlagsCMP(int8_t operand, int8_t registrador, CPU *cpu){ // also used in CPX anc CPY
     cpu->ps[N] = ((registrador - operand) < 0);
 
     cpu->ps[Z] = ((registrador - operand) == 0);
@@ -60,13 +60,13 @@ void setFlagsCMP(int operand, char registrador, CPU *cpu){ // also used in CPX a
     cpu->ps[C] = (registrador >= operand);
 }
 
-void setFlagsDEC(int operand, CPU *cpu){ // also used in DEX, DEY, INC, INX, INY
+void setFlagsDEC(int8_t operand, CPU *cpu){ // also used in DEX, DEY, INC, INX, INY
 	cpu->ps[N] = (operand < 0);
 	
 	cpu->ps[Z] = (operand == 0);
 }
 
-void setFlagsEOR(char operand, CPU *cpu){
+void setFlagsEOR(int8_t operand, CPU *cpu){
 	cpu->ps[N] = (operand < 0);
 	
 	cpu->ps[Z] = (operand == 0);
@@ -467,7 +467,7 @@ void readGame(Memory *memory, CPU *cpu) {
 					value += ((cpu->ps[I]) ? 1 : 0) << I;
 					value += ((cpu->ps[D]) ? 1 : 0) << D;
 					value += ((cpu->ps[B]) ? 1 : 0) << B;
-					value += 1 << (B+1);
+					value += 1 << (B-1);
 					value += ((cpu->ps[V]) ? 1 : 0) << V;
 					value += ((cpu->ps[N]) ? 1 : 0) << N;
 
