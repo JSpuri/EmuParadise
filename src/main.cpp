@@ -876,6 +876,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				(cpu->sp) -= 1;
 				cpu->pc = memory->read((cpu->pc)+1);
 				cpu->pc += (memory->read(((cpu->pc)+2)) << 8);
+				cpu->pc += memory->RESET_ADDR;
 				break;
 			//
 			//LDA
@@ -1566,9 +1567,10 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//RTS
 			case(96): 	//60 -- implied
-				// cpu->pc = cpu->memStack.top();
+				cpu->pc = memory->read(cpu->sp);
+				cpu->pc += memory->RESET_ADDR;
+				cpu->sp += 1;
 				(cpu->pc)++;
-				// cpu->memStack.pop();
 				break;
 			//SBC
 			case(233): 	//e9 -- immediate
