@@ -27,12 +27,15 @@ void adc(CPU *cpu, int8_t num) {
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-    if((num > 0 && cpu->a > 0 && result < 0) &&
-            (num < 0 && cpu->a < 0 && result >= 0))
-        cpu->ps[V] = 1;
-
-    else
+    if(((num > 0) && (cpu->a > 0) && (result <= 0)) || ((num < 0) && (cpu->a < 0) && (result >= 0))){
+				cpu->ps[V] = 1;
+			}
+    else if((num + cpu->a == 0x7f) && (cpu->ps[C] == 1)){
+		cpu->ps[V] = 1;
+	}
+    else{
         cpu->ps[V] = 0;
+	}
 
     cpu->a = result;
 
@@ -96,13 +99,12 @@ void readGame(Memory *memory, CPU *cpu) {
 
     bool is_IRQ_enabled = false;
     bool exit_emulation = false;
+	
 
     // a leitura acaba quando o programa encontra um BRK E a interrupcao
     // IRQ esta desabilitada
 	while(!exit_emulation) {
-
 		opcode = memory->read(cpu->pc);
-
 		switch(opcode){
 
 			//ADC
@@ -496,6 +498,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			//CLC
 			case(0x18):
 				cpu->ps[C] = 0;
+				cpu->pc++;
 				break;
 			///	
 			/// CMP
@@ -1627,17 +1630,17 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//SEC
 			case(56):		//38 -- implied
-				cpu->ps[6] = 1;
+				cpu->ps[C] = 1;
 				(cpu->pc)++;
 				break;
 			// SED
 			case(248):	//f8 -- implied
-				cpu->ps[3] = 1;
+				cpu->ps[D] = 1;
 				(cpu->pc)++;
 				break;
 			// SEI
 			case(120):	//78 -- implied
-				cpu->ps[4] = 1;
+				cpu->ps[I] = 1;
 				(cpu->pc)++;
 				break;
 			// STA
@@ -1784,7 +1787,6 @@ void readGame(Memory *memory, CPU *cpu) {
             logls(memory, cpu);
         else
 			log(cpu);
-		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }
 
@@ -1813,10 +1815,9 @@ int main(int argc, const char *argv[]){
 
     // Create memory - RAM and ROM based on file
     Memory memory(memblock);
-
+	
     // Initialize PC with the address for RESET label
     CPU cpu(memory.RESET_ADDR);
-
     binario.close();
 
 	readGame(&memory, &cpu);
