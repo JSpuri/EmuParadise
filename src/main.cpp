@@ -27,7 +27,7 @@ void adc(CPU *cpu, int8_t num) {
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-    if((num > 0 && cpu->a > 0 && result < 0) && 
+    if((num > 0 && cpu->a > 0 && result < 0) &&
             (num < 0 && cpu->a < 0 && result >= 0))
         cpu->ps[V] = 1;
 
@@ -75,467 +75,392 @@ void readGame(Memory *memory, CPU *cpu) {
 
     bool is_IRQ_enabled = false;
     bool exit_emulation = false;
-	
+
     // a leitura acaba quando o programa encontra um BRK E a interrupcao
     // IRQ esta desabilitada
 	while(!exit_emulation) {
 
-        opcode = memory->read(cpu->pc);
+		opcode = memory->read(cpu->pc);
 
 		switch(opcode){
 
-            // JMP absoluto que criei pra testar o novo esquema de memoria
-            case(0x4c):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr += memory->read(++(cpu->pc)) << 8;
+			// JMP absoluto que criei pra testar o novo esquema de memoria
+			case(0x4c):
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += memory->read(++(cpu->pc)) << 8;
 
-                cpu->pc = absolute_addr;
+				cpu->pc = absolute_addr;
 
-                break;
-            //
-            //ADC
-            //
-            //Immediate
-            case(0x69):
-                immediate = memory->read(++(cpu->pc));
+				break;
+			//ADC
+			case(0x69): //Immediate
+				immediate = memory->read(++(cpu->pc));
 
-                adc(cpu, immediate);
-                (cpu->pc)++;
+				adc(cpu, immediate);
+				(cpu->pc)++;
 
-                break;
+				break;
+			case(0x65): //Zero Page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr);
 
-            //Zero Page
-            case(0x65):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr);
+				adc(cpu, value);
+				(cpu->pc)++;
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				break;
+			case(0x75): //Zero Page, X
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr + cpu->x);
 
-                break;
+				adc(cpu, value);
+				(cpu->pc)++;
 
-            //Zero Page, X
-            case(0x75):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr + cpu->x);
+				break;
+			case(0x6d): //Absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += memory->read(++(cpu->pc)) << 8;
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				value = memory->read(absolute_addr);
 
-                break;
+				adc(cpu, value);
+				(cpu->pc)++;
 
-            //Absolute
-            case(0x6d):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr += memory->read(++(cpu->pc)) << 8;
+				break;
+			case(0x7d): //Absolute, X
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                value = memory->read(absolute_addr);
+				value = memory->read(absolute_addr + cpu->x);
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				adc(cpu, value);
+				(cpu->pc)++;
 
-                break;
+				break;
+			case(0x79): //Absolute Y
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-            //Absolute, X
-            case(0x7d):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				value = memory->read((absolute_addr + cpu->y));
 
-                value = memory->read(absolute_addr + cpu->x);
+				adc(cpu, value);
+				(cpu->pc)++;
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				break;
+			case(0x61): //(Indirect, X)
+				zero_pg_addr = memory->read(++(cpu->pc));
+				zero_pg_addr += cpu->x;
 
-                break;
+				absolute_addr = memory->read(zero_pg_addr + 1);
+				absolute_addr = absolute_addr << 8;
+				absolute_addr = memory->read(zero_pg_addr);
 
-            //Absolute Y
-            case(0x79):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				value = (char)memory->read(absolute_addr);
 
-                value = memory->read((absolute_addr + cpu->y));
+				adc(cpu, value);
+				(cpu->pc)++;
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				break;
+			case(0x71): //(Indirect), Y
+				zero_pg_addr = memory->read(++(cpu->pc));
 
-                break;
+				absolute_addr = memory->read(zero_pg_addr + 1);
+				absolute_addr = absolute_addr << 8;
+				absolute_addr = memory->read(zero_pg_addr);
+				absolute_addr += cpu->y;
 
-            //(Indirect, X)
-            case(0x61):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                zero_pg_addr += cpu->x;
+				value = (char)memory->read(absolute_addr);
 
-                absolute_addr = memory->read(zero_pg_addr + 1);
-                absolute_addr = absolute_addr << 8;
-                absolute_addr = memory->read(zero_pg_addr);
+				adc(cpu, value);
+				(cpu->pc)++;
 
-                value = (char)memory->read(absolute_addr);
+				break;
+			//AND
+			case(0x29): //Immediate
+				immediate = memory->read(++(cpu->pc));
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				result = cpu->a & immediate ;
 
-                break;
-            //(Indirect), Y
-            case(0x71):
-                zero_pg_addr = memory->read(++(cpu->pc));
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                absolute_addr = memory->read(zero_pg_addr + 1);
-                absolute_addr = absolute_addr << 8;
-                absolute_addr = memory->read(zero_pg_addr);
-                absolute_addr += cpu->y;
+				cpu->a = result;
+				(cpu->pc)++;
 
-                value = (char)memory->read(absolute_addr);
+				break;
+			case(0x25): //Zero Page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr);
 
-                adc(cpu, value);
-                (cpu->pc)++;
+				result = cpu->a & value;
 
-                break;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-            //
-            //AND
-            //
-            //Immediate
-            case(0x29):
-                immediate = memory->read(++(cpu->pc));
+				cpu->a = result;
+				(cpu->pc)++;
 
-                result = cpu->a & immediate ;
+				break;
+			case(0x35): //Zero Page, X
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read((zero_pg_addr + cpu->x));
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				result = cpu->a & value;
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                break;
+				cpu->a = result;
+				(cpu->pc)++;
 
-            //Zero Page
-            case(0x25):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr);
+				break;
+			case(0x2d): //Absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                result = cpu->a & value;
+				value = (char)memory->read(absolute_addr);
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				result = cpu->a & value;
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                break;
+				cpu->a = result;
+				(cpu->pc)++;
 
-            //Zero Page, X
-            case(0x35):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read((zero_pg_addr + cpu->x));
+				break;
+			case(0x3d): //Absolute, X
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                result = cpu->a & value;
+				value = memory->read((absolute_addr + cpu->x));
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				result = cpu->a & value;
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                break;
+				cpu->a = result;
+				(cpu->pc)++;
 
-            //Absolute
-            case(0x2d):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				break;
+			case(0x39): //Absolute, Y
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                value = (char)memory->read(absolute_addr);
+				value = memory->read((absolute_addr + cpu->y));
 
-                result = cpu->a & value;
+				result = cpu->a & value;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->a = result;
+				(cpu->pc)++;
 
-                break;
+				break;
+			case(0x21): //(Indirect, X)
+				zero_pg_addr = memory->read(++(cpu->pc));
+				zero_pg_addr += cpu->x;
 
-            //Absolute, X
-            case(0x3d):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				absolute_addr = memory->read(zero_pg_addr + 1);
+				absolute_addr = absolute_addr << 8;
+				absolute_addr = memory->read(zero_pg_addr);
 
-                value = memory->read((absolute_addr + cpu->x));
+				value = (char)memory->read(absolute_addr);
 
-                result = cpu->a & value;
+				result = cpu->a & value;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->a = result;
+				(cpu->pc)++;
 
-                break;
+				break;
+			case(0x31): //(Indirect), Y
+				zero_pg_addr = memory->read(++(cpu->pc));
 
-            //Absolute, Y
-            case(0x39):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				absolute_addr = memory->read(zero_pg_addr + 1);
+				absolute_addr = absolute_addr << 8;
+				absolute_addr = memory->read(zero_pg_addr);
+				absolute_addr += cpu->y;
 
-                value = memory->read((absolute_addr + cpu->y));
+				value = (char)memory->read(absolute_addr);
 
-                result = cpu->a & value;
+				result = cpu->a & value;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->a = result;
+				(cpu->pc)++;
 
-                break;
+				break;
+			//ASL
+			case(0x0A): //Accumulator
+				cpu->ps[C] = cpu->a >> 6;
 
-            //(Indirect, X)
-            case(0x21):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                zero_pg_addr += cpu->x;
+				result = cpu->a << 1;
 
-                absolute_addr = memory->read(zero_pg_addr + 1);
-                absolute_addr = absolute_addr << 8;
-                absolute_addr = memory->read(zero_pg_addr);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                value = (char)memory->read(absolute_addr);
+				cpu->a = result;
+				(cpu->pc)++;
 
-                result = cpu->a & value;
+				break;
+			case(0x06): //Zero Page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr);
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[C] = value >> 6;
+				result = value << 1;
 
-                cpu->a = result;
-                (cpu->pc)++;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                break;
+				memory->write(zero_pg_addr, result);
+				(cpu->pc)++;
 
-            //(Indirect), Y
-            case(0x31):
-                zero_pg_addr = memory->read(++(cpu->pc));
+				break;
+			case(0x16): //Zero Page, X
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr + cpu->x);
 
-                absolute_addr = memory->read(zero_pg_addr + 1);
-                absolute_addr = absolute_addr << 8;
-                absolute_addr = memory->read(zero_pg_addr);
-                absolute_addr += cpu->y;
+				cpu->ps[C] = value >> 6;
+				result = value << 1;
 
-                value = (char)memory->read(absolute_addr);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                result = cpu->a & value;
+				memory->write(zero_pg_addr + cpu->x, result);
+				(cpu->pc)++;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				break;
+			case(0x0e): //Absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                cpu->a = result;
-                (cpu->pc)++;
+				value = (char)memory->read(absolute_addr);
 
-                break;
+				cpu->ps[C] = value >> 6;
+				result = value << 1;
 
-            //
-            //ASL
-            //
-            //Accumulator
-            case(0x0A):
-                cpu->ps[C] = cpu->a >> 6;
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                result = cpu->a << 1;
+				memory->write(absolute_addr, result);
+				(cpu->pc)++;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				break;
+			case(0x1e): //Absolute, X
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
-                cpu->a = result;
-                (cpu->pc)++;
+				value = (char)memory->read(absolute_addr + cpu->x);
 
-                break;
+				cpu->ps[C] = value >> 6;
+				result = value << 1;
 
-            //Zero Page
-            case(0x06):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                cpu->ps[C] = value >> 6;
-                result = value << 1;
+				memory->write(absolute_addr + cpu->x, result);
+				(cpu->pc)++;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-                memory->write(zero_pg_addr, result);
-                (cpu->pc)++;
-
-                break;
-
-            //Zero Page, X
-            case(0x16):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr + cpu->x);
-
-                cpu->ps[C] = value >> 6;
-                result = value << 1;
-
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-                memory->write(zero_pg_addr + cpu->x, result);
-                (cpu->pc)++;
-
-                break;
-
-            //Absolute
-            case(0x0e):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
-
-                value = (char)memory->read(absolute_addr);
-
-                cpu->ps[C] = value >> 6;
-                result = value << 1;
-
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-                memory->write(absolute_addr, result);
-                (cpu->pc)++;
-
-                break;
-
-            //Absolute, X
-            case(0x1e):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
-
-                value = (char)memory->read(absolute_addr + cpu->x);
-
-                cpu->ps[C] = value >> 6;
-                result = value << 1;
-
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-                memory->write(absolute_addr + cpu->x, result);
-                (cpu->pc)++;
-
-                break;
-
-			// 
+				break;
 			//BCC
-			// 
 			case(0x90):
-                if(cpu->ps[C] == 0)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[C] == 0)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BCS
-			// 
 			case(0xb0):
-                if(cpu->ps[C] == 1)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[C] == 1)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BEQ
-			// 
 			case(0xf0):
-                if(cpu->ps[Z] == 1)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[Z] == 1)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BIT
-			// 
-            //Zero Page
-            case(0x24):
-                zero_pg_addr = memory->read(++(cpu->pc));
-                value = memory->read(zero_pg_addr);
+			case(0x24): //Zero Page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr);
 
-                result = cpu->a & value;
+				result = cpu->a & value;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[V] = (((result & 0x20) != 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[V] = (((result & 0x20) != 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                (cpu->pc)++;
+				(cpu->pc)++;
 
-                break;
+				break;
+			case(0x2c): //Absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr = absolute_addr << 8;
+				absolute_addr += memory->read(++(cpu->pc));
 
+				value = (char)memory->read(absolute_addr + cpu->x);
 
-            //Absolute
-			case(0x2c):
-                absolute_addr = memory->read(++(cpu->pc));
-                absolute_addr = absolute_addr << 8;
-                absolute_addr += memory->read(++(cpu->pc));
+				result = cpu->a & value;
 
-                value = (char)memory->read(absolute_addr + cpu->x);
+				cpu->ps[Z] = ((result == 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-                result = cpu->a & value;
+				(cpu->pc)++;
 
-                cpu->ps[Z] = ((result == 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-                cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-                (cpu->pc)++;
-
-                break;
-
-			// 
+				break;
 			//BMI
-			// 
 			case(0x30):
-                if(cpu->ps[N] == 1)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[N] == 1)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BNE
-			// 
 			case(0xd0):
-                if(cpu->ps[Z] == 0)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[Z] == 0)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BPL
-			// 
 			case(0x10):
-                if(cpu->ps[N] == 0)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[N] == 0)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BRK
-			// 
 			case(0x00):
+				if(is_IRQ_enabled){
+					cpu->ps[B] = 1;
 
-                if(is_IRQ_enabled){
-                    cpu->ps[B] = 1;
+					value = 0;
 
-                    value = 0;
+					value += ((cpu->ps[C]) ? 1 : 0) << C;
+					value += ((cpu->ps[Z]) ? 1 : 0) << Z;
+					value += ((cpu->ps[I]) ? 1 : 0) << I;
+					value += ((cpu->ps[D]) ? 1 : 0) << D;
+					value += ((cpu->ps[B]) ? 1 : 0) << B;
+					value += 1 << (B+1);
+					value += ((cpu->ps[V]) ? 1 : 0) << V;
+					value += ((cpu->ps[N]) ? 1 : 0) << N;
 
-                    value += ((cpu->ps[C]) ? 1 : 0) << C;
-                    value += ((cpu->ps[Z]) ? 1 : 0) << Z;
-                    value += ((cpu->ps[I]) ? 1 : 0) << I;
-                    value += ((cpu->ps[D]) ? 1 : 0) << D;
-                    value += ((cpu->ps[B]) ? 1 : 0) << B;
-                    value += 1 << (B+1);
-                    value += ((cpu->ps[V]) ? 1 : 0) << V;
-                    value += ((cpu->ps[N]) ? 1 : 0) << N;
+					memory->write(--(cpu->sp), value);
 
-                    memory->write(--(cpu->sp), value);
-
-                    absolute_addr = memory->IRQ_ADDR;
+					absolute_addr = memory->IRQ_ADDR;
 
                     cpu->pc = absolute_addr;
                 }
@@ -543,34 +468,23 @@ void readGame(Memory *memory, CPU *cpu) {
                     exit_emulation = true;
                     return;
 
-                break;
-
-			// 
+				break;
 			//BVC
-			// 
 			case(0x50):
-                if(cpu->ps[V] == 0)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[V] == 0)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//BVS
-			// 
 			case(0x70):
-                if(cpu->ps[V] == 1)
-                    cpu->pc += memory->read(++(cpu->pc));
+				if(cpu->ps[V] == 1)
+						cpu->pc += memory->read(++(cpu->pc));
 
-                break;
-
-			// 
+				break;
 			//CLC
-			// 
 			case(0x18):
-                cpu->ps[C] = 0;
-                break;
-
-			// 
+				cpu->ps[C] = 0;
+				break;
 			//RTS
 			case(96): 	//60 -- implied
 				// cpu->pc = cpu->memStack.top();
@@ -775,7 +689,7 @@ void readGame(Memory *memory, CPU *cpu) {
         if (memory->wasWritten())
             logls(memory, cpu);
         else
-		    log(cpu);
+					log(cpu);
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }
@@ -788,7 +702,7 @@ int main(int argc, const char *argv[]){
 	ifstream binario;
 
 	binario.open(arquivo, ios::in | ios::binary | ios::ate);
-	
+
 	streampos size;
 	char *memblock;
 
@@ -812,7 +726,7 @@ int main(int argc, const char *argv[]){
     binario.close();
 
 	readGame(&memory, &cpu);
-    
+
 	return 0;
 }
 
