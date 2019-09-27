@@ -541,6 +541,7 @@ void readGame(Memory *memory, CPU *cpu) {
                 }
                 else
                     exit_emulation = true;
+                    return;
 
                 break;
 
