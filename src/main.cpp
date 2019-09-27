@@ -7,14 +7,14 @@ using namespace std;
 
 void log(CPU *cpu){
 	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%04x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d |",
-			cpu->pc, cpu->a, cpu->x, cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7]);
+			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7]);
 
 	printf("\n");
 }
 
 void logls(Memory *memory, CPU *cpu){
 	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%04x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x",
-			cpu->pc, cpu->a, cpu->x, cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], memory->last_written_mem, memory->read(memory->last_written_mem));
+			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], memory->last_written_mem, memory->read(memory->last_written_mem));
 
 	printf("\n");
 }
@@ -86,6 +86,7 @@ void readGame(Memory *memory, CPU *cpu) {
 
 	int8_t immediate;
     int8_t value;
+	int8_t aux;
 
     uint8_t zero_pg_addr;
     uint16_t absolute_addr;
@@ -480,230 +481,21 @@ void readGame(Memory *memory, CPU *cpu) {
                     exit_emulation = true;
                     return;
                 }
-
-				break;
 			//BVC
 			case(0x50):
-				if(cpu->ps[V] == 0)
-						cpu->pc += memory->read(++(cpu->pc));
+                if(cpu->ps[V] == 0)
+                    cpu->pc += memory->read(++(cpu->pc));
 
 				break;
 			//BVS
 			case(0x70):
-				if(cpu->ps[V] == 1)
-						cpu->pc += memory->read(++(cpu->pc));
+                if(cpu->ps[V] == 1)
+                    cpu->pc += memory->read(++(cpu->pc));
 
 				break;
 			//CLC
 			case(0x18):
 				cpu->ps[C] = 0;
-				break;
-			//RTS
-			case(96): 	//60 -- implied
-				// cpu->pc = cpu->memStack.top();
-				(cpu->pc)++;
-				// cpu->memStack.pop();
-				break;
-			//SBC
-			case(233): 	//e9 -- immediate
-				immediate = memory->read(++(cpu->pc));
-				sbc(cpu, immediate);
-				(cpu->pc)++;
-				break;
-			case(229): 	//e5 -- zero page
-				zero_pg_addr= memory->read(++(cpu->pc));
-				value = memory->read(zero_pg_addr);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
- 			case(245): 	//f5 -- zero page, x
-				zero_pg_addr = memory->read(++(cpu->pc));
-				value = memory->read(zero_pg_addr + cpu->x);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			case(237): 	//ed -- absolute
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				value = memory->read(absolute_addr);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			case(253): 	//fd -- absolute, x
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				value = memory->read(absolute_addr+cpu->x);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			case(249): 	//f9 -- absolute, y
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				value = memory->read(absolute_addr+cpu->y);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			case(225): 	//e1 -- (indirect, x)
-				zero_pg_addr = memory->read(++(cpu->pc));
-				absolute_addr = memory->read(zero_pg_addr+cpu->x);
-                absolute_addr += memory->read(zero_pg_addr + cpu->x + 1) << 8;
-				value = memory->read(absolute_addr);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			case(241): 	//f1 -- (indirect), y
-				zero_pg_addr = memory->read(++(cpu->pc));
-				absolute_addr = memory->read(zero_pg_addr);
-				absolute_addr += (memory->read(zero_pg_addr + 1) << 8);
-				value = memory->read(absolute_addr+cpu->y);
-				sbc(cpu, value);
-				(cpu->pc)++;
-				break;
-			//SEC
-			case(56):		//38 -- implied
-				cpu->ps[6] = 1;
-				(cpu->pc)++;
-				break;
-			// SED
-			case(248):	//f8 -- implied
-				cpu->ps[3] = 1;
-				(cpu->pc)++;
-				break;
-			// SEI
-			case(120):	//78 -- implied
-				cpu->ps[4] = 1;
-				(cpu->pc)++;
-				break;
-			// STA
-			case(133): 	//85 -- zero page
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(149): 	//95 -- zero page, x
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr+cpu->x, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(141): 	//8d -- absolute
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				memory->write(absolute_addr, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(157): 	//9d -- absolute, x
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				memory->write(absolute_addr+cpu->x, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(153): 	//99 -- absolute, y
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				memory->write(absolute_addr+cpu->y, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(129): 	//81 -- (indirect, x)
-				zero_pg_addr = memory->read(++(cpu->pc));
-				absolute_addr = memory->read(zero_pg_addr+cpu->x);
-				absolute_addr += memory->read(zero_pg_addr+cpu->x+1) << 8;
-				memory->write(absolute_addr, cpu->a);
-				(cpu->pc)++;
-				break;
-			case(145): 	//91 -- (indirect), y
-				zero_pg_addr = memory->read(++(cpu->pc));
-				absolute_addr = (memory->read(zero_pg_addr));
-				absolute_addr += (memory->read(zero_pg_addr + 1) << 8);
-				value = memory->read(absolute_addr+cpu->y);
-				memory->write(value, cpu->a);
-				(cpu->pc)++;
-				break;
-			// STX
-			case(134): 	//86 -- zero page
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr, cpu->x);
-				(cpu->pc)++;
-				break;
-			case(150): 	//96 -- zero page, y
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr+cpu->y, cpu->x);
-				(cpu->pc)++;
-				break;
-			case(142): 	//8e -- absolute
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				memory->write(absolute_addr, cpu->x);
-				(cpu->pc)++;
-				break;
-			// STY
-			case(132): 	//84 -- zero page
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr, cpu->y);
-				(cpu->pc)++;
-				break;
-			case(148): 	//94 -- zero page, x
-				zero_pg_addr = memory->read(++(cpu->pc));
-				memory->write(zero_pg_addr+cpu->x, cpu->y);
-				(cpu->pc)++;
-				break;
-			case(140): 	//8c -- absolute
-				absolute_addr = memory->read(++(cpu->pc));
-				absolute_addr += (memory->read(++(cpu->pc)) << 8);
-				memory->write(absolute_addr, cpu->y);
-				(cpu->pc)++;
-				break;
-			// TAX
-			case(170): 	//aa -- implied
-				cpu->x = cpu->a;
-				if (cpu->x == 0) cpu->ps[Z] = 1;
-				if (cpu->x < 0) cpu->ps[N] = 1;
-				(cpu->pc)++;
-				break;
-			// TAY
-			case(168): 	//a8 -- implied
-				cpu->y = cpu->a;
-				if (cpu->y == 0) cpu->ps[Z] = 1;
-				if (cpu->y < 0) cpu->ps[N] = 1;
-				(cpu->pc)++;
-				break;
-			// TSX
-			case(186): 	//ba -- implied
-				cpu->x = cpu->sp;
-				if (cpu->x == 0) cpu->ps[Z] = 1;
-				if (cpu->x < 0) cpu->ps[N] = 1;
-				(cpu->pc)++;
-				break;
-			// TXA
-			case(138): 	//8a -- implied
-				cpu->a = cpu->x;
-				if (cpu->a == 0) cpu->ps[Z] = 1;
-				if (cpu->a < 0) cpu->ps[N] = 1;
-				(cpu->pc)++;
-				break;
-			// TXS
-			case(154): 	//9a -- implied
-				cpu->sp = cpu->x;
-				(cpu->pc)++;
-				break;
-			// TYA
-			case(152): 	//98 -- implied
-				cpu->a = cpu->y;
-				if (cpu->a == 0) cpu->ps[Z] = 1;
-				if (cpu->a < 0) cpu->ps[N] = 1;
-				(cpu->pc)++;
-				break;
-
-			case(0x58): // CLI
-			    cpu->ps[I] = 0;
-				(cpu->pc)++;
-			    break;
-			case(0xB8): // CLV
-			    cpu->ps[V] = 0;
-				(cpu->pc)++;
-				break;
-			case(0xD8): // CLD
-			    cpu->ps[D] = 0;
-				(cpu->pc)++;
 				break;
 			///	
 			/// CMP
@@ -1075,6 +867,911 @@ void readGame(Memory *memory, CPU *cpu) {
                 cpu->pc += memory->read(absolute_addr + 1);
 
 			    break;
+
+			//
+			//JSR
+			//
+			case(32): //20
+				memory->write((cpu->sp)-1, (cpu->pc)+2);
+				(cpu->sp) -= 1;
+				cpu->pc = memory->read((cpu->pc)+1);
+				cpu->pc += (memory->read(((cpu->pc)+2)) << 8);
+				break;
+			//
+			//LDA
+			//
+			case(169): //a9 - immediate
+				cpu->a = memory->read((cpu->pc)+1);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;					//check zero
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;			//check negative
+
+				cpu->pc += 2;
+				break;
+			case(165): //a5 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->a = memory->read(zero_pg_addr);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(181): //b5 - zeropage,x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->a = memory->read(zero_pg_addr+cpu->x);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(173): //ad - absolute
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->a = memory->read(absolute_addr);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(189): //bd - absolute, x
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->a = memory->read(absolute_addr+cpu->x);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(185): //b9 - absolute, y
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->a = memory->read(absolute_addr+cpu->y);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(161): //a1 - (indirect, x)
+				immediate = memory->read((cpu->pc)+1);
+				absolute_addr = memory->read(immediate+cpu->x);
+				absolute_addr = memory->read(immediate+cpu->x+1) << 8;
+				cpu->a = memory->read(absolute_addr);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(177): //b1 - (indrect), y
+				immediate = memory->read((cpu->pc)+1);
+				absolute_addr = memory->read(immediate);
+				absolute_addr += memory->read(immediate+1) << 8;
+				cpu->a = memory->read(absolute_addr+cpu->y);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			//
+			//LDX
+			//
+			case(162): //a2 - immediate
+				cpu->x = memory->read((cpu->pc)+1);
+
+				if(cpu->x == 0x00)	cpu->ps[6] = 1;
+				if((cpu->x & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(166): //a6 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->x = memory->read(zero_pg_addr);
+
+				if(cpu->x == 0x00)	cpu->ps[6] = 1;
+				if((cpu->x & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(182): //b6 - zeropage,y
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->x = memory->read(zero_pg_addr+cpu->y);
+
+				if(cpu->x == 0x00)	cpu->ps[6] = 1;
+				if((cpu->x & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(174): //ae - absolute
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->x = memory->read(absolute_addr);
+
+				if(cpu->x == 0x00)	cpu->ps[6] = 1;
+				if((cpu->x & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(190): //be - absolute, y
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->x = memory->read(absolute_addr+cpu->y);
+
+				if(cpu->x == 0x00)	cpu->ps[6] = 1;
+				if((cpu->x & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			//
+			//LDY
+			//
+			case(160): //a0 - immediate
+				cpu->y = memory->read((cpu->pc)+1);
+
+				if(cpu->y == 0x00)	cpu->ps[6] = 1;
+				if((cpu->y & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(164): //a4 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->y = memory->read(zero_pg_addr);
+
+				if(cpu->y == 0x00)	cpu->ps[6] = 1;
+				if((cpu->y & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(180): //b4 - zeropage, x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				cpu->y = memory->read(zero_pg_addr+cpu->x);
+
+				if(cpu->y == 0x00)	cpu->ps[6] = 1;
+				if((cpu->y & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(172): //ac - absolute
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->y = memory->read(absolute_addr);
+
+				if(cpu->y == 0x00)	cpu->ps[6] = 1;
+				if((cpu->y & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(188): //bc - absolute, x
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				cpu->y = memory->read(absolute_addr+cpu->x);
+
+				if(cpu->y == 0x00)	cpu->ps[6] = 1;
+				if((cpu->y & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			//
+			//LSR
+			//
+			case(74): //4a - accumulator
+				cpu->ps[0] = 0;					//always positive
+				if((cpu->a & 0x01) == 0x01)		//check carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->a = cpu->a >> 1;
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->a == 0x00)			 	//check zero
+					cpu->ps[6] = 1;
+				else
+					cpu->ps[6] = 0;
+
+				cpu->pc += 1;
+				break;
+			case(70): //46 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				aux = memory->read(zero_pg_addr);
+
+				cpu->ps[0] = 0;					//always positive
+				if((aux & 0x01) == 0x1)			//check carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->a = aux >> 1;
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->a == 0x00)			 	//check zero
+					cpu->ps[6] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(86): //56 - zeropage, x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				aux = memory->read(zero_pg_addr+cpu->x);
+
+				cpu->ps[0] = 0;					//always positive
+				if((aux & 0x01) == 0x1)		//check carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->a = aux >> 1;
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->a == 0x00)			 	//check zero
+					cpu->ps[6] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(78): //4e - absolute
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) <<8);
+				aux = memory->read(absolute_addr);
+
+				cpu->ps[0] = 0;					//always positive
+				if((aux & 0x01) == 0x1)		//check carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->a = aux >> 1;
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->a == 0x00)			 	//check zero
+					cpu->ps[6] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(94): //5e - absolute,x
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) <<8);
+				aux = memory->read(absolute_addr+cpu->x);
+
+				cpu->ps[0] = 0;					//always positive
+				if((aux & 0x01) == 0x1)		//check carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->a = aux >> 1;
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->a == 0x00)			 	//check zero
+					cpu->ps[6] = 1;
+
+				cpu->pc += 3;
+				break;
+			//
+			//NOP
+			//
+			case(234): //ea - implied
+				cpu->pc += 1;
+				break;
+			//
+			//ORA
+			//
+			case(9): //09 - immediate
+				immediate = memory->read((cpu->pc)+1);
+				cpu->a = cpu->a | immediate;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(5): //05 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				aux = memory->read(zero_pg_addr);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(21): //15 - zeropage,x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				aux = memory->read(zero_pg_addr+cpu->x);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(13): //0d - absolute
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				aux = memory->read(absolute_addr);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(29): //1d - absolute,x
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				aux = memory->read(absolute_addr+cpu->x);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(25): //19 - absolute,y
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += (memory->read((cpu->pc)+2) << 8);
+				aux = memory->read(absolute_addr+cpu->y);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 3;
+				break;
+			case(1): //01 - (indirect,x)
+				immediate = memory->read((cpu->pc)+1);
+				absolute_addr = memory->read(immediate+cpu->x);
+				absolute_addr = memory->read(immediate+cpu->x+1) << 8;
+				aux = memory->read(absolute_addr);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			case(17): //11 - (indirect), y
+				immediate = memory->read((cpu->pc)+1);
+				absolute_addr = memory->read(immediate);
+				absolute_addr = memory->read(immediate+1) << 8;
+				aux = memory->read(absolute_addr+cpu->y);
+				cpu->a = cpu->a | aux;
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				cpu->pc += 2;
+				break;
+			//
+			//PHA
+			//
+			case(72): //48 - implied
+				memory->write(--cpu->sp, cpu->a);
+				cpu->pc += 1;
+				break;
+			//
+			//PHP
+			//
+			case(8): //08 - implied
+				cpu->ps[2] = 1;
+				cpu->ps[3] = 1;
+				aux = cpu->ps[7]*2^7;
+				for(int j = 6; j >= 0; j--)
+					aux += cpu->ps[j]*2^j;
+				memory->write(--cpu->sp, aux);
+				cpu->pc += 1;
+				break;
+			//
+			//PLA
+			//
+			case(104): //68 - implied
+				cpu->a = memory->read(cpu->sp);
+
+				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
+
+				(cpu->sp) += 1;
+				cpu->pc += 1;
+				break;
+			//
+			//PLP
+			//
+			case(40): //28 - implied
+				aux = memory->read(cpu->sp);
+				(cpu->sp) += 1;
+				for(int i = 0; i < 8; i++) {
+					if(i != 2 && i != 3){
+						if((aux & 0x01) == 0x01)
+							cpu->ps[i] = 1;
+						else
+							cpu->ps[i] = 0;
+					}
+					aux = aux >> 1;
+					aux = aux & 0x7f; 		//mask and 0b01111111
+				}
+				cpu->pc += 1;
+				break;
+			//
+			//ROL
+			//
+			case(42): //2a - accumulator
+				aux = cpu->a;
+				cpu->a = (cpu->a << 1);
+
+				if(cpu->ps[7] == 1)				//if previous carry was 1
+					cpu->a = (cpu->a | 0x01);
+
+				if(cpu->a == 0)
+					cpu->ps[6] = 1;					//verify zero
+				else
+					cpu->ps[6] = 0;
+
+				if((cpu->a & 0x80) == 0x80)
+					cpu->ps[0] = 1;     //verify neg
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x80) == 0x80)   //update carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->pc += 1;
+				break;
+			case(38): //26 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value << 1);
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x01);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x80) == 0x80)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 2;
+				break;
+			case(54): //36 - zeropage,x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				value = memory->read(zero_pg_addr + cpu->x);
+				aux = value;
+
+				value = (value << 1);
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x01);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x80) == 0x80)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr+cpu->x, value);
+				cpu->pc += 2;
+				break;
+			case(46): //2e - absolute
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value << 1);
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x01);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x80) == 0x80)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 3;
+				break;
+			case(62): //3e - absolute,x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				value = memory->read(zero_pg_addr+cpu->x);
+				aux = value;
+
+				value = (value << 1);
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x01);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x80) == 0x80)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr+cpu->x, value);
+				cpu->pc += 3;
+				break;
+			//
+			//ROR
+			case(106): //6a - accumulator
+				aux = cpu->a;
+				cpu->a = (cpu->a >> 1);
+				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->ps[7] == 1) {
+					cpu->a = (cpu->a | 0x80);
+					cpu->ps[0] = 1;					//is negative
+				}
+
+				if(cpu->a == 0)
+					cpu->ps[6] = 1;					//verify zero
+				else
+					cpu->ps[6] = 0;
+
+				if((cpu->a & 0x80) == 0x80)
+					cpu->ps[0] = 1;     //verify neg
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x01) == 0x01)   //update carry
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				cpu->pc += 1;
+				break;
+			case(102): //66 - zeropage
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value >> 1);
+				value = value & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x80);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x01) == 0x01)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 2;
+				break;
+			case(118): //76 - zeropage,x
+				zero_pg_addr = memory->read((cpu->pc)+1) + cpu->x;
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value >> 1);
+				value = value & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x80);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((value & 0x01) == 0x01)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 2;
+				break;
+			case(110): //6e - absolute
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value >> 1);
+				value = value & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x80);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x01) == 0x01)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 3;
+				break;
+			case(126): //7e - absolute,x
+				zero_pg_addr = memory->read((cpu->pc)+1);
+				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				zero_pg_addr += cpu->x;
+				value = memory->read(zero_pg_addr);
+				aux = value;
+
+				value = (value >> 1);
+				value = value & 0x7f; 		//mask and 0b01111111
+
+				if(cpu->ps[7] == 1)
+					value = (value | 0x80);
+
+				if((value & 0x80) == 0x80)
+					cpu->ps[0] = 1;
+				else
+					cpu->ps[0] = 0;
+
+				if((aux & 0x01) == 0x01)
+					cpu->ps[7] = 1;
+				else
+					cpu->ps[7] = 0;
+
+				memory->write(zero_pg_addr, value);
+				cpu->pc += 3;
+				break;
+			//
+			//RTI
+			//
+			case(64): //40 - implied
+				aux = memory->read(cpu->sp);
+				(cpu->sp) += 1;
+				for(int i = 0; i < 8; i++) {
+					if((aux & 0x01) == 0x01)
+						cpu->ps[i] = 1;
+					else
+						cpu->ps[i] = 0;
+					aux = aux >> 1;
+					aux = aux & 0x7f; 		//mask and 0b01111111
+				}
+
+				cpu->pc = memory->read(cpu->sp) << 8;
+				(cpu->sp) += 1;
+				cpu->pc += memory->read(cpu->sp);
+				(cpu->sp) += 1;
+
+				break;
+			//RTS
+			case(96): 	//60 -- implied
+				// cpu->pc = cpu->memStack.top();
+				(cpu->pc)++;
+				// cpu->memStack.pop();
+				break;
+			//SBC
+			case(233): 	//e9 -- immediate
+				immediate = memory->read(++(cpu->pc));
+				sbc(cpu, immediate);
+				(cpu->pc)++;
+				break;
+			case(229): 	//e5 -- zero page
+				zero_pg_addr= memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+ 			case(245): 	//f5 -- zero page, x
+				zero_pg_addr = memory->read(++(cpu->pc));
+				value = memory->read(zero_pg_addr + cpu->x);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			case(237): 	//ed -- absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				value = memory->read(absolute_addr);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			case(253): 	//fd -- absolute, x
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				value = memory->read(absolute_addr+cpu->x);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			case(249): 	//f9 -- absolute, y
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				value = memory->read(absolute_addr+cpu->y);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			case(225): 	//e1 -- (indirect, x)
+				zero_pg_addr = memory->read(++(cpu->pc));
+				absolute_addr = memory->read(zero_pg_addr+cpu->x);
+                absolute_addr += memory->read(zero_pg_addr + cpu->x + 1) << 8;
+				value = memory->read(absolute_addr);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			case(241): 	//f1 -- (indirect), y
+				zero_pg_addr = memory->read(++(cpu->pc));
+				absolute_addr = memory->read(zero_pg_addr);
+				absolute_addr += (memory->read(zero_pg_addr + 1) << 8);
+				value = memory->read(absolute_addr+cpu->y);
+				sbc(cpu, value);
+				(cpu->pc)++;
+				break;
+			//SEC
+			case(56):		//38 -- implied
+				cpu->ps[6] = 1;
+				(cpu->pc)++;
+				break;
+			// SED
+			case(248):	//f8 -- implied
+				cpu->ps[3] = 1;
+				(cpu->pc)++;
+				break;
+			// SEI
+			case(120):	//78 -- implied
+				cpu->ps[4] = 1;
+				(cpu->pc)++;
+				break;
+			// STA
+			case(133): 	//85 -- zero page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(149): 	//95 -- zero page, x
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr+cpu->x, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(141): 	//8d -- absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				memory->write(absolute_addr, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(157): 	//9d -- absolute, x
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				memory->write(absolute_addr+cpu->x, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(153): 	//99 -- absolute, y
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				memory->write(absolute_addr+cpu->y, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(129): 	//81 -- (indirect, x)
+				zero_pg_addr = memory->read(++(cpu->pc));
+				absolute_addr = memory->read(zero_pg_addr+cpu->x);
+				absolute_addr += memory->read(zero_pg_addr+cpu->x+1) << 8;
+				memory->write(absolute_addr, cpu->a);
+				(cpu->pc)++;
+				break;
+			case(145): 	//91 -- (indirect), y
+				zero_pg_addr = memory->read(++(cpu->pc));
+				absolute_addr = (memory->read(zero_pg_addr));
+				absolute_addr += (memory->read(zero_pg_addr + 1) << 8);
+				value = memory->read(absolute_addr+cpu->y);
+				memory->write(value, cpu->a);
+				(cpu->pc)++;
+				break;
+			// STX
+			case(134): 	//86 -- zero page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr, cpu->x);
+				(cpu->pc)++;
+				break;
+			case(150): 	//96 -- zero page, y
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr+cpu->y, cpu->x);
+				(cpu->pc)++;
+				break;
+			case(142): 	//8e -- absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				memory->write(absolute_addr, cpu->x);
+				(cpu->pc)++;
+				break;
+			// STY
+			case(132): 	//84 -- zero page
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr, cpu->y);
+				(cpu->pc)++;
+				break;
+			case(148): 	//94 -- zero page, x
+				zero_pg_addr = memory->read(++(cpu->pc));
+				memory->write(zero_pg_addr+cpu->x, cpu->y);
+				(cpu->pc)++;
+				break;
+			case(140): 	//8c -- absolute
+				absolute_addr = memory->read(++(cpu->pc));
+				absolute_addr += (memory->read(++(cpu->pc)) << 8);
+				memory->write(absolute_addr, cpu->y);
+				(cpu->pc)++;
+				break;
+			// TAX
+			case(170): 	//aa -- implied
+				cpu->x = cpu->a;
+				if (cpu->x == 0) cpu->ps[Z] = 1;
+				if (cpu->x < 0) cpu->ps[N] = 1;
+				(cpu->pc)++;
+				break;
+			// TAY
+			case(168): 	//a8 -- implied
+				cpu->y = cpu->a;
+				if (cpu->y == 0) cpu->ps[Z] = 1;
+				if (cpu->y < 0) cpu->ps[N] = 1;
+				(cpu->pc)++;
+				break;
+			// TSX
+			case(186): 	//ba -- implied
+				cpu->x = cpu->sp;
+				if (cpu->x == 0) cpu->ps[Z] = 1;
+				if (cpu->x < 0) cpu->ps[N] = 1;
+				(cpu->pc)++;
+				break;
+			// TXA
+			case(138): 	//8a -- implied
+				cpu->a = cpu->x;
+				if (cpu->a == 0) cpu->ps[Z] = 1;
+				if (cpu->a < 0) cpu->ps[N] = 1;
+				(cpu->pc)++;
+				break;
+			// TXS
+			case(154): 	//9a -- implied
+				cpu->sp = cpu->x;
+				(cpu->pc)++;
+				break;
+			// TYA
+			case(152): 	//98 -- implied
+				cpu->a = cpu->y;
+				if (cpu->a == 0) cpu->ps[Z] = 1;
+				if (cpu->a < 0) cpu->ps[N] = 1;
+				(cpu->pc)++;
+				break;
+
+			case(0x58): // CLI
+			    cpu->ps[I] = 0;
+				(cpu->pc)++;
+			    break;
+			case(0xB8): // CLV
+			    cpu->ps[V] = 0;
+				(cpu->pc)++;
+				break;
+			case(0xD8): // CLD
+			    cpu->ps[D] = 0;
+				(cpu->pc)++;
+				break;
+
 			default:
 				printf("erro\n");
 				(cpu->pc)++;
@@ -1086,7 +1783,7 @@ void readGame(Memory *memory, CPU *cpu) {
         if (memory->wasWritten())
             logls(memory, cpu);
         else
-					log(cpu);
+			log(cpu);
 		std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }
@@ -1126,4 +1823,3 @@ int main(int argc, const char *argv[]){
 
 	return 0;
 }
-
