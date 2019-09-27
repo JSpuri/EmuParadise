@@ -1,13 +1,14 @@
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <bits/stdc++.h>
-#include <cstdio>
-#include <iostream>       // std::cout, std::endl
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono>         // std::chrono::seconds
-#include <fstream>
-#include <stack>
+//#include <cstdio>
+//#include <iostream>       // std::cout, std::endl
+//#include <thread>         // std::this_thread::sleep_for
+//#include <chrono>         // std::chrono::seconds
+//#include <fstream>
+//#include <stack>
 
-#include "structures.h"
+#include "memory.hpp"
+#include "cpu.hpp"
 
 using namespace std;
 
@@ -61,41 +62,39 @@ void sbc(CPU *cpu, int operand, bool isOperandNegative) {
 
 // void sta (CPU *cpu, int )
 
-void LeCartucho(const char *arquivo){
-	ifstream binario;
-	binario.open(arquivo, ios::in | ios::binary | ios::ate);
-	
-	CPU cpu;
-	HashMapTable memory;
+void LeCartucho(Memory *memory, CPU *cpu){
 
-	int operand;
-	char immediate;
-    char value;
+    uint8_t opcode;
 
-    char zero_pg_addr;
-    int absolute_addr;
+	//int operand;
+	//char immediate;
+    //char value;
 
-    char result;
+    //char zero_pg_addr;
+    uint16_t absolute_addr;
 
-	bool isOperandNegative;
-    bool is_IRQ_enabled = false;
+    //char result;
+
+	//bool isOperandNegative;
+    //bool is_IRQ_enabled = false;
     bool exit_emulation = false;
-
-	streampos size;
-	char * memblock;
-
-	if(binario.is_open()){
-		size = binario.tellg();
-		memblock = new char [size];
-		binario.seekg(0, ios::beg);
-		binario.read(memblock, size);
-		binario.close();
-	}
 	
-	for(cpu.pc = 0; cpu.pc < size && !exit_emulation;){
-		Instrucao instrucao = Decodifica(cpu.pc, memblock);
+	while(!exit_emulation) {
+		//Instrucao instrucao = Decodifica(cpu.pc, memblock);
+        opcode = memory->read(cpu->pc);
+
+        printf("%02x\n", opcode);
 	
-		switch(instrucao.opcode){
+		switch(opcode){
+
+            case(0x4c):
+                absolute_addr = memory->read(++(cpu->pc));
+                absolute_addr += memory->read(++(cpu->pc)) << 8;
+
+                cpu->pc = absolute_addr;
+
+                break;
+                /*
             //
             //ADC
             //
@@ -898,16 +897,43 @@ void LeCartucho(const char *arquivo){
 			default:
 				// printf("erro\n");
 				cpu.pc++;
-		}
+		*/
+        }
 		//log(cpu);
 		//std::this_thread::sleep_for (std::chrono::seconds(1));
 	}
 }
 
 int main(int argc, const char *argv[]){
-	const char *nomearquivo = argv[1];
 
-	LeCartucho(nomearquivo);
+	const char *arquivo = argv[1];
+	ifstream binario;
 
+	binario.open(arquivo, ios::in | ios::binary | ios::ate);
+	
+	streampos size;
+	char *memblock;
+
+	if(binario.is_open()) {
+		size = binario.tellg();
+		memblock = new char [size];
+		binario.seekg(0, ios::beg);
+		binario.read(memblock, size);
+	}
+	else {
+        printf("Error opening file :(\n");
+        return 1;
+    }
+
+    //Create memory - RAM and ROM based on file
+    Memory memory(memblock);
+
+    CPU cpu(memory.RESET_ADDR);
+
+    binario.close();
+
+	LeCartucho(&memory, &cpu);
+    
 	return 0;
 }
+
