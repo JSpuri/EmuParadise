@@ -468,7 +468,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					exit_emulation = true;
 
-				break;
+				return;
 			//BVC
 			case(0x50):
 				if(cpu->ps[V] == 0)
