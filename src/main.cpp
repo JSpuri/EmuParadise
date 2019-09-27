@@ -15,7 +15,7 @@ struct Instrucao {
 };
 
 Instrucao Decodifica(int pc, char * memblock){
-	int opcode = 0;
+	char opcode = 0;
 	
 	for(int i = 0; i < 8; i++) {
 		opcode = opcode + pow(2, 7-i)*(!!((memblock[pc] << i) & 0x80));
@@ -25,8 +25,8 @@ Instrucao Decodifica(int pc, char * memblock){
 	return instrucao;
 }
 
-int readNextByte(int pc, char *memblock) {
-	int byte = 0;
+char readNextByte(int pc, char *memblock) {
+	char byte = 0;
 
 	for(int i = 0; i < 8; i++) {
 		byte = byte + pow(2, 7-i)*(!!((memblock[pc] << i) & 0x80));
@@ -41,13 +41,33 @@ void log(CPU cpu){
 	printf("\n");
 }
 
+void setFlagsCMP(int operand, char registrador, CPU *cpu){ // also used in CPX anc CPY
+    cpu->ps[N] = ((registrador - operand) < 0);
+
+    cpu->ps[Z] = ((registrador - operand) == 0);
+
+    cpu->ps[C] = (registrador >= operand);
+}
+
+void setFlagsDEC(int operand, CPU *cpu){ // also used in DEX, DEY, INC, INX, INY
+	cpu->ps[N] = (operand < 0);
+	
+	cpu->ps[Z] = (operand == 0);
+}
+
+void setFlagsEOR(char operand, CPU *cpu){
+	cpu->ps[N] = (operand < 0);
+	
+	cpu->ps[Z] = (operand == 0);
+}
+
 void LeCartucho(const char *arquivo){
 	ifstream binario;
 	binario.open(arquivo, ios::in | ios::binary | ios::ate);
 	
 	CPU cpu;
 	HashMapTable memory;
-	int immediate;
+	int operand;
 	bool isOperandNegative;
 
 	streampos size;
@@ -61,7 +81,8 @@ void LeCartucho(const char *arquivo){
 		binario.close();
 	}
 	
-	for(cpu.pc = 0; cpu.pc < size; cpu.pc++){
+	cpu.pc = 0;
+	while(cpu.pc < size){
 		Instrucao instrucao = Decodifica(cpu.pc, memblock);
 
 	
@@ -78,10 +99,10 @@ void LeCartucho(const char *arquivo){
 			//SBC
 			// 
 			case(233): //e9
-				immediate = readNextByte(cpu.pc, memblock);
+				operand = readNextByte(cpu.pc + 1, memblock);
 				if (cpu.a < 0) isOperandNegative = true;
 				else isOperandNegative = false;
-				cpu.a = cpu.a - immediate - (1-cpu.ps[6]);
+				cpu.a = cpu.a - operand - (1-cpu.ps[6]);
 				if (cpu.a == 0) cpu.ps[5] = 1;
 				if (cpu.a < 0) cpu.ps[0] = 1;
 				if (cpu.a < -128) {
@@ -94,11 +115,11 @@ void LeCartucho(const char *arquivo){
 				cpu.pc+=2;
 				break;
 			case(229): //e5
-				immediate = readNextByte(cpu.pc, memblock);
-				immediate = memory.SearchKey(immediate);
+				operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
 				if (cpu.a < 0) isOperandNegative = true;
 				else isOperandNegative = false;
-				cpu.a = cpu.a - immediate - (1-cpu.ps[6]);
+				cpu.a = cpu.a - operand - (1-cpu.ps[6]);
 				if (cpu.a == 0) cpu.ps[5] = 1;
 				if (cpu.a < 0) cpu.ps[0] = 1;
 				if (cpu.a < -128) {
@@ -111,11 +132,11 @@ void LeCartucho(const char *arquivo){
 				cpu.pc+=2;
 				break;
  			case(245): //f5
-				immediate = readNextByte(cpu.pc, memblock);
-				immediate = memory.SearchKey(immediate+cpu.x);
+				operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand+cpu.x);
 				if (cpu.a < 0) isOperandNegative = true;
 				else isOperandNegative = false;
-				cpu.a = cpu.a - immediate - (1-cpu.ps[6]);
+				cpu.a = cpu.a - operand - (1-cpu.ps[6]);
 				if (cpu.a == 0) cpu.ps[5] = 1;
 				if (cpu.a < 0) cpu.ps[0] = 1;
 				if (cpu.a < -128) {
@@ -226,9 +247,379 @@ void LeCartucho(const char *arquivo){
 			case(152): //98
 				cpu.pc++;
 				break;
-			default:
-				printf("erro\n");
+			case(0x58): // CLI
+			    cpu.ps[5] = 0;
 				cpu.pc++;
+			    break;
+			case(0xB8): // CLV
+			    cpu.ps[1] = 0;
+				cpu.pc++;
+				break;
+			case(0xD8): // CLD
+			    cpu.ps[D] = 0;
+				cpu.pc++;
+				break;
+			///	
+			/// CMP
+			///
+			case(0xC9): //immediate
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				
+				setFlagsCMP(operand, cpu.a, &cpu);
+				
+			    cpu.pc += 2;
+				
+			    break;
+			case(0xC5): //zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				 
+				setFlagsCMP(operand, cpu.a, &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0xD5): //zero page + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand + cpu.x);
+				
+				setFlagsCMP(operand, cpu.a, &cpu);
+				
+			    cpu.pc += 2;
+			    break;
+			case(0xCD): //absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			    operand = memory.SearchKey(operand);
+			   
+			    setFlagsCMP(operand, cpu.a, &cpu);
+			   
+			    cpu.pc += 3;
+			    break;
+				
+			case(0xDD): //absolute + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				operand = memory.SearchKey(operand + cpu.x);
+				
+				setFlagsCMP(operand, cpu.a, &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+			case(0xD9): //absolute + y
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				operand = memory.SearchKey(operand + cpu.y);
+			
+			    setFlagsCMP(operand, cpu.a, &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+				
+			case(0xC1): // (indirect, x)
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand + cpu.x);
+				operand = memory.SearchKey(operand);
+				
+				setFlagsCMP(operand, cpu.a, &cpu);
+			
+			    cpu.pc += 2;
+			    break;
+			case(0xD1): // (indirect), y
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				operand = memory.SearchKey(operand + cpu.y);
+				
+				setFlagsCMP(operand, cpu.a, &cpu);
+				
+				cpu.pc += 2;
+				break;
+		    ///	
+			/// CPX
+			///
+			case(0xE0): //immediate
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				
+				setFlagsCMP(operand, cpu.x, &cpu);
+				
+			    cpu.pc += 2;
+				
+			    break;
+			case(0xE4): //zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				 
+				setFlagsCMP(operand, cpu.x, &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0xEC): //absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			    operand = memory.SearchKey(operand);
+			   
+			    setFlagsCMP(operand, cpu.x, &cpu);
+			   
+			    cpu.pc += 3;
+			    break;
+		    ///	
+			/// CPY
+			///
+			case(0xC0): //immediate
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				
+				setFlagsCMP(operand, cpu.y, &cpu);
+				
+			    cpu.pc += 2;
+				
+			    break;
+			case(0xC4): //zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				 
+				setFlagsCMP(operand, cpu.y, &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0xCC): //absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			    operand = memory.SearchKey(operand);
+			   
+			    setFlagsCMP(operand, cpu.y, &cpu);
+			   
+			    cpu.pc += 3;
+			    break;
+				
+			///
+            /// DEC			
+			///	
+			case(0xC6): // zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				memblock[operand] -= 1;
+				
+				setFlagsDEC(memblock[operand], &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0xD6): // zero page + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				memblock[operand + cpu.x] -= 1;
+				
+				setFlagsDEC(memblock[operand + cpu.x], &cpu);
+				
+			    cpu.pc += 2;
+			    break;			
+			case(0xCE): // absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				
+				memblock[operand] -= 1;
+				
+				setFlagsDEC(memblock[operand], &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+			case(0xDE): // absolute + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			
+			    memblock[operand + cpu.x] -= 1;
+			
+			    setFlagsDEC(memblock[operand + cpu.x], &cpu);
+			
+			    cpu.pc += 3;
+			    break;
+			///	
+			/// DEX
+            ///			
+			case(0xCA):
+				cpu.x--;
+				
+				setFlagsDEC(cpu.x, &cpu);
+				
+				cpu.pc++;
+			    break;
+			///
+            /// DEY			
+			///
+            case(0x88):
+               cpu.y--;
+
+               setFlagsDEC(cpu.y, &cpu);
+
+               cpu.pc++;
+               break;
+            ///
+            /// EOR
+			///
+			case(0x49): //immediate
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+			    cpu.pc += 2;
+				
+			    break;
+			case(0x45): //zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				 
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0x55): //zero page + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand + cpu.x);
+				
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+			    cpu.pc += 2;
+			    break;
+			case(0x4D): //absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			    operand = memory.SearchKey(operand);
+			   
+			    cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+			   
+			    cpu.pc += 3;
+			    break;
+				
+			case(0x5D): //absolute + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				operand = memory.SearchKey(operand + cpu.x);
+				
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+			case(0x59): //absolute + y
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				operand = memory.SearchKey(operand + cpu.y);
+			
+			    cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+				
+			case(0x41): // (indirect, x)
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand + cpu.x);
+				operand = memory.SearchKey(operand);
+				
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+			
+			    cpu.pc += 2;
+			    break;
+			case(0x51): // (indirect), y
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand = memory.SearchKey(operand);
+				operand = memory.SearchKey(operand + cpu.y);
+				
+				cpu.a = cpu.a ^ operand;
+				
+				setFlagsEOR(operand, &cpu);
+				
+				cpu.pc += 2;
+				break;				
+			///
+            /// DEC			
+			///	
+			case(0xE6): // zero page
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				memblock[operand] += 1;
+				
+				setFlagsDEC(memblock[operand], &cpu);
+				
+				cpu.pc += 2;
+			    break;
+			case(0xF6): // zero page + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				memblock[operand + cpu.x] += 1;
+				
+				setFlagsDEC(memblock[operand + cpu.x], &cpu);
+				
+			    cpu.pc += 2;
+			    break;			
+			case(0xEE): // absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				
+				memblock[operand] += 1;
+				
+				setFlagsDEC(memblock[operand], &cpu);
+				
+			    cpu.pc += 3;
+			    break;
+			case(0xFE): // absolute + x
+			    operand = readNextByte(cpu.pc + 1, memblock);
+			    operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+			
+			    memblock[operand + cpu.x] += 1;
+			
+			    setFlagsDEC(memblock[operand + cpu.x], &cpu);
+			
+			    cpu.pc += 3;
+			    break;
+			///	
+			/// INX
+            ///			
+			case(0xE8):
+				cpu.x++;
+				
+				setFlagsDEC(cpu.x, &cpu);
+				
+				cpu.pc++;
+			    break;
+			///
+            /// INY			
+			///
+            case(0xC8):
+                cpu.y++;
+
+                setFlagsDEC(cpu.y, &cpu);
+
+                cpu.pc++;
+                break;
+			///	
+			/// JMP	
+			///
+            case(0x4C): // absolute
+			    operand = readNextByte(cpu.pc + 1, memblock);
+				operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+				cpu.pc = operand;
+				
+                cpu.pc += 3;
+                break;
+            case(0x6C): // indirect
+                operand = readNextByte(cpu.pc + 1, memblock);
+                operand += (readNextByte(cpu.pc + 2, memblock)) << 8;
+                cpu.pc = memory.SearchKey(operand);
+
+                cpu.pc += 3;
+			    break;
+			default:
+			    printf("erro\n");
+			
+			    cpu.pc++;
+			    break;
 		}
 		log(cpu);
 		//std::this_thread::sleep_for (std::chrono::seconds(1));

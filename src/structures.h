@@ -4,6 +4,14 @@
 #include <stack>
 #include <iostream>
 
+#define N  0
+#define V  1
+#define B  2
+#define D  3
+#define I  4
+#define Z  5
+#define C  6
+
 struct HashTableEntry {
 	int v, k;
 	HashTableEntry *n;
@@ -28,10 +36,10 @@ class HashMapTable {
 
 struct CPU {
 	int pc;													//program counter
-	int x;			
-	int y;
-	int a;
-	int sp;													//stack pointer
+	char x;			
+	char y;
+	char a;
+	char sp;													//stack pointer
 	int ps[7];											//p[NV-BDIZC]
 	std::stack<int> memStack;
 	CPU() {

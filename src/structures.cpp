@@ -5,7 +5,6 @@
 const int T_S = 200;
 using namespace std;
 
-
 HashMapTable::HashMapTable() {
   ht = new HashTableEntry*[T_S];
   for (int i = 0; i < T_S; i++)
@@ -78,8 +77,8 @@ int HashMapTable::SearchKey(int k) {
       en = en->n;
     }
   }
-  if (!flag)
-    return -1;
+  
+  return -1;
 }
 
 HashMapTable::~HashMapTable() {
