@@ -8,6 +8,7 @@
 #define V 6
 #define N 7
 
+// Informacoes na cpu.cpp :)
 class CPU {
 
     public:

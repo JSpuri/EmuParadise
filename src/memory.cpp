@@ -1,11 +1,19 @@
 #include <bits/stdc++.h>
 
+// Tamanho dos blocos de RAM e ROM
+// Servem para alocar os vetores e fazer
+// calculos de mirroring
 #define PRG_RAM_SIZE 0x0800
 #define PRG_ROM_SIZE 0x4000
 
+// Endereco de inicio de cada um dos bancos de 16kb
+// Servem para os calculos de mirroring tambem
 #define PRG_ROM_1_BANK_START 0x8000
 #define PRG_ROM_2_BANK_START 0xC000
 
+// Esses sao os vetores de cada uma das labels
+// NIM, RESET e IRQ, de tras para frente 
+// (eles sempre ficam no final da memoria (0xfffa)
 #define LWR_NMI_ADDR 6
 #define UPR_NMI_ADDR 5
 
@@ -15,39 +23,53 @@
 #define LWR_IRQ_ADDR 2
 #define UPR_IRQ_ADDR 1
 
+// Classe memoria
 class Memory {
 
     public:
+        // Methods
         Memory(char *nesfile);       // Constructor
         int8_t read(uint16_t addr);
         void write(uint16_t addr, int8_t value);
+        bool wasWritten();          // returns was_written
 
+        // Attributes
         uint16_t NMI_ADDR;
         uint16_t RESET_ADDR;
         uint16_t IRQ_ADDR;
+
+        uint16_t last_written_mem;
 
     private:
         std::vector<uint8_t> PRG_RAM;
         std::vector<uint8_t> PRG_ROM;
         bool has_32kb_PRG_ROM;
+        bool was_written;       //store if any memory was altered
 
 };
 
+// Constructor
 Memory::Memory(char *nesfile) {
 
+    // Verifica o byte que nos diz quantos PGR ROMs de 16kb ele tem
+    // Se tem dois, tem 32kb de ROM
     bool has32kbPRG_ROM = ((nesfile[4] == 2) ? true : false);
     
-    //if the cartridge has 32KB, we must double the PRG_ROM size
+    // E se tem 32kb de ROM, devemos dobrar o tamanho padrao
     uint16_t rom_size =  PRG_ROM_SIZE * ((has32kbPRG_ROM) ? 2 : 1);
 
+    // Reserva a memoria e inicializa tudo com zero
     this->PRG_RAM.resize(PRG_RAM_SIZE, 0);
     this->PRG_ROM.resize(rom_size, 0);
 
+    // Guarda a informacao que tem dois bancos de 16kb de PGR ROM
     this->has_32kb_PRG_ROM = has32kbPRG_ROM;
     
+    // Loop de copia do arquivo binario para o vetor de uint8_t (de fato nossa memoria)
     for(uint16_t i = 0; i < rom_size; i++)
         this->PRG_ROM[i] = nesfile[i + 0x10];
 
+    // Guarda os enderecos de NMI, RESET e IRQ para facilitar no futuro
     this->NMI_ADDR = this->PRG_ROM[(rom_size - UPR_NMI_ADDR)] << 8;
     this->NMI_ADDR += this->PRG_ROM[(rom_size - LWR_NMI_ADDR)];
 
@@ -57,15 +79,18 @@ Memory::Memory(char *nesfile) {
     this->IRQ_ADDR = this->PRG_ROM[(rom_size - UPR_IRQ_ADDR)] << 8;
     this->IRQ_ADDR += this->PRG_ROM[(rom_size - LWR_IRQ_ADDR)];
 
-    /*
-    printf("%02x %02x %02x\n", this->NMI_ADDR, this->RESET_ADDR, this->IRQ_ADDR);
-    for(uint16_t i = 0; i < rom_size; i++)
-        printf("%02x ", this->PRG_ROM[i]);
-    */
+
+    // Inicializa variavel que verifica se a memoria foi escrita
+    this->was_written = false;
+    this->last_written_mem = 0;
 
 }
 
+// Le um determinado endereço da memoria. Nao eh necessario um cast ao entrar um zero_pg_addr
 int8_t Memory::read(uint16_t addr) {
+
+    //reset boolean
+    this->was_written = false;
 
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
@@ -90,7 +115,12 @@ int8_t Memory::read(uint16_t addr) {
 
 }
 
+// Escreve um valor de 8 bits num endereço. Nao eh necessario um cast ao entrar um zero_pg_addr
 void Memory::write(uint16_t addr, int8_t value) {
+
+    //set boolean and las written address
+    this->was_written = true;
+    this->last_written_mem = addr;
 
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
@@ -99,3 +129,7 @@ void Memory::write(uint16_t addr, int8_t value) {
     
 }
 
+// Retorna se a memoria sofreu uma escrita ou nao.
+bool Memory::wasWritten(){
+    return this->was_written;
+}

@@ -8,6 +8,8 @@
 #define V 6
 #define N 7
 
+// Classe CPU - pode facilitar nossa vida no futuro ao precisarmos
+// realizar uma integracao entre varios componentes
 class CPU {
 
     public:
