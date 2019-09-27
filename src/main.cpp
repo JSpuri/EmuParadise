@@ -21,13 +21,35 @@ void logls(Memory *memory, CPU *cpu){
 
 // Precisa considerar quando a carry eh ativada
 void adc(CPU *cpu, int8_t num) {
+	bool carryExist = false;
+	int8_t current_bit_a, current_bit_num, current_bit_result;
+	int8_t aux_a, aux_num, aux_result;
 
     int8_t result = cpu->a + num + cpu->ps[C];
+
+	aux_a = cpu->a;
+	aux_num = num;
+	aux_result = result;
+
+	for(int i = 0; i < 7 && carryExist != true; i++){
+		current_bit_a = aux_a & 0x01;
+		current_bit_num = aux_num & 0x01;
+		current_bit_result = aux_result & 0x01;
+
+		if(current_bit_a == current_bit_num && current_bit_a != current_bit_result)
+			carryExist = true;
+
+		aux_a = aux_a >> 1;
+		aux_num = aux_num >> 1;
+		aux_result = aux_result >> 1;
+	}
+
+	if(carryExist == true)	cpu->ps[C] = 1;
 
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[N] = ((result < 0) ? 1 : 0);
 
-    if((num > 0 && cpu->a > 0 && result < 0) &&
+    if((num > 0 && cpu->a > 0 && result < 0) ||
             (num < 0 && cpu->a < 0 && result >= 0))
         cpu->ps[V] = 1;
 
@@ -39,17 +61,8 @@ void adc(CPU *cpu, int8_t num) {
 }
 
 void sbc(CPU *cpu, int operand) {
-	(*cpu).a = (*cpu).a - operand - (1-(*cpu).ps[6]);
-	if ((*cpu).a == 0) (*cpu).ps[Z] = 1;
-	if ((*cpu).a < 0) (*cpu).ps[N] = 1;
-	if ((*cpu).a < -128) {
-		(*cpu).ps[1] = 1;
-		(*cpu).ps[6] = 0;
-	} else {
-		(*cpu).ps[1] = 0;
-		(*cpu).ps[6] = 1;
-	}
-	(*cpu).pc++;
+	int8_t num = (operand ^ 0xff) + 0x01;
+	adc(cpu, num);
 }
 
 void setFlagsCMP(int8_t operand, int8_t registrador, CPU *cpu){ // also used in CPX anc CPY
@@ -62,13 +75,13 @@ void setFlagsCMP(int8_t operand, int8_t registrador, CPU *cpu){ // also used in 
 
 void setFlagsDEC(int8_t operand, CPU *cpu){ // also used in DEX, DEY, INC, INX, INY
 	cpu->ps[N] = (operand < 0);
-	
+
 	cpu->ps[Z] = (operand == 0);
 }
 
 void setFlagsEOR(int8_t operand, CPU *cpu){
 	cpu->ps[N] = (operand < 0);
-	
+
 	cpu->ps[Z] = (operand == 0);
 }
 
@@ -496,71 +509,72 @@ void readGame(Memory *memory, CPU *cpu) {
 			//CLC
 			case(0x18):
 				cpu->ps[C] = 0;
+				(cpu->pc)++;
 				break;
-			///	
+			///
 			/// CMP
 			///
 			case(0xC9): //immediate
 			    immediate = memory->read(++(cpu->pc));
-				
+
 				setFlagsCMP(immediate, cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
-				
+
 			    break;
 			case(0xC5): //zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr);
-				 
+
 				setFlagsCMP(value, cpu->a, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0xD5): //zero page + x
 			    zero_pg_addr= memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr+ cpu->x);
-				
+
 				setFlagsCMP(value, cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0xCD): //absolute
 			    absolute_addr= memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 			    value = memory->read(absolute_addr);
-			   
+
 			    setFlagsCMP(value, cpu->a, cpu);
-			   
+
 			    (cpu->pc)++;
 			    break;
-				
+
 			case(0xDD): //absolute + x
 			    absolute_addr = memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				value = memory->read(absolute_addr + cpu->x);
-				
+
 				setFlagsCMP(value, cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0xD9): //absolute + y
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				value = memory->read(absolute_addr + cpu->y);
-			
+
 			    setFlagsCMP(value, cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
-				
+
 			case(0xC1): // (indirect, x)
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				absolute_addr = memory->read(zero_pg_addr + cpu->x);
 				absolute_addr += memory->read(zero_pg_addr + cpu->x + 1) << 8;
 				value = memory->read(absolute_addr);
-				
+
 				setFlagsCMP(value, cpu->a, cpu);
-			
+
 			    (cpu->pc)++;
 			    break;
 			case(0xD1): // (indirect), y
@@ -568,79 +582,79 @@ void readGame(Memory *memory, CPU *cpu) {
 				absolute_addr = memory->read(zero_pg_addr);
 				absolute_addr += memory->read(zero_pg_addr + 1);
 				value = memory->read(absolute_addr + cpu->y);
-				
+
 				setFlagsCMP(value, cpu->a, cpu);
-				
+
 				(cpu->pc)++;
 				break;
-		    ///	
+		    ///
 			/// CPX
 			///
 			case(0xE0): //immediate
 			    immediate = memory->read(++(cpu->pc));
-				
+
 				setFlagsCMP(immediate, cpu->x, cpu);
-				
+
 			    (cpu->pc)++;
-				
+
 			    break;
 			case(0xE4): //zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr);
-				 
+
 				setFlagsCMP(value, cpu->x, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0xEC): //absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 			    value = memory->read(absolute_addr);
-			   
+
 			    setFlagsCMP(value, cpu->x, cpu);
-			   
+
 			    (cpu->pc)++;
 			    break;
-		    ///	
+		    ///
 			/// CPY
 			///
 			case(0xC0): //immediate
 			    immediate = memory->read(++(cpu->pc));
-				
+
 				setFlagsCMP(immediate, cpu->y, cpu);
-				
+
 			    (cpu->pc)++;
-				
+
 			    break;
 			case(0xC4): //zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr);
-				 
+
 				setFlagsCMP(value, cpu->y, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0xCC): //absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 			    value = memory->read(absolute_addr);
-			   
+
 			    setFlagsCMP(value, cpu->y, cpu);
-			   
+
 			    (cpu->pc)++;
 			    break;
-				
+
 			///
-            /// DEC			
-			///	
+            /// DEC
+			///
 			case(0xC6): // zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
                 value = memory->read(zero_pg_addr) - 1;
 
                 memory->write(zero_pg_addr, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0xD6): // zero page + x
@@ -648,20 +662,20 @@ void readGame(Memory *memory, CPU *cpu) {
                 value = memory->read(zero_pg_addr + cpu->x) - 1;
 
                 memory->write(zero_pg_addr + cpu->x, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 			    (cpu->pc)++;
-			    break;			
+			    break;
 			case(0xCE): // absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
                 value = memory->read(absolute_addr) - 1;
-				
+
                 memory->write(absolute_addr, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0xDE): // absolute + x
@@ -670,23 +684,23 @@ void readGame(Memory *memory, CPU *cpu) {
 			    value = memory->read(absolute_addr + cpu->x) - 1;
 
                 memory->write(absolute_addr, value);
-			
+
 			    setFlagsDEC(value, cpu);
-			
+
 			    (cpu->pc)++;
 			    break;
-			///	
+			///
 			/// DEX
-            ///			
+            ///
 			case(0xCA):
 				(cpu->x)--;
-				
+
 				setFlagsDEC(cpu->x, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			///
-            /// DEY			
+            /// DEY
 			///
             case(0x88):
                (cpu->y)--;
@@ -700,79 +714,79 @@ void readGame(Memory *memory, CPU *cpu) {
 			///
 			case(0x49): //immediate
 			    immediate = memory->read(++(cpu->pc));
-				
+
 				cpu->a = cpu->a ^ immediate;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
-				
+
 			    break;
 			case(0x45): //zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr);
-				 
+
 				cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0x55): //zero page + x
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr + cpu->x);
-				
+
 				cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0x4D): //absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 			    value = memory->read(zero_pg_addr);
-			   
+
 			    cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-			   
+
 			    (cpu->pc)++;
 			    break;
-				
+
 			case(0x5D): //absolute + x
 			    absolute_addr = memory->read(++(cpu->pc));
 			    absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				value = memory->read(absolute_addr + cpu->x);
-				
+
 				cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0x59): //absolute + y
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				value = memory->read(absolute_addr + cpu->y);
-			
+
 			    cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
-				
+
 			case(0x41): // (indirect, x)
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				absolute_addr = memory->read(zero_pg_addr + cpu->x);
 				absolute_addr += memory->read(zero_pg_addr + cpu->x + 1) << 8;
 				value = memory->read(absolute_addr);
-				
+
 				cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-			
+
 			    (cpu->pc)++;
 			    break;
 			case(0x51): // (indirect), y
@@ -780,24 +794,24 @@ void readGame(Memory *memory, CPU *cpu) {
 				absolute_addr = memory->read(zero_pg_addr);
 				absolute_addr += memory->read(zero_pg_addr + 1) << 8;
 				value = memory->read(absolute_addr + cpu->y);
-				
+
 				cpu->a = cpu->a ^ value;
-				
+
 				setFlagsEOR(cpu->a, cpu);
-				
+
 				(cpu->pc)++;
-				break;				
+				break;
 			///
             /// INC
-			///	
+			///
 			case(0xE6): // zero page
 			    zero_pg_addr = memory->read(++(cpu->pc));
                 value = memory->read(zero_pg_addr) + 1;
 
                 memory->write(zero_pg_addr, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			case(0xF6): // zero page + x
@@ -805,19 +819,19 @@ void readGame(Memory *memory, CPU *cpu) {
                 value = memory->read(zero_pg_addr + cpu->x) + 1;
 
                 memory->write(zero_pg_addr + cpu->x, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 			    (cpu->pc)++;
 			case(0xEE): // absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
                 value = memory->read(absolute_addr) + 1;
-				
+
                 memory->write(absolute_addr, value);
-				
+
 				setFlagsDEC(value, cpu);
-				
+
 			    (cpu->pc)++;
 			    break;
 			case(0xFE): // absolute + x
@@ -826,23 +840,23 @@ void readGame(Memory *memory, CPU *cpu) {
 			    value = memory->read(absolute_addr + cpu->x) + 1;
 
                 memory->write(absolute_addr, value);
-			
+
 			    setFlagsDEC(value, cpu);
-			
+
 			    (cpu->pc)++;
 			    break;
-			///	
+			///
 			/// INX
-            ///			
+            ///
 			case(0xE8):
 				(cpu->x)++;
-				
+
 				setFlagsDEC(cpu->x, cpu);
-				
+
 				(cpu->pc)++;
 			    break;
 			///
-            /// INY			
+            /// INY
 			///
             case(0xC8):
                 (cpu->y)++;
@@ -851,14 +865,14 @@ void readGame(Memory *memory, CPU *cpu) {
 
                 (cpu->pc)++;
                 break;
-			///	
-			/// JMP	
+			///
+			/// JMP
 			///
             case(0x4C): // absolute
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				cpu->pc = absolute_addr;
-				
+
                 break;
             case(0x6C): // indirect
                 absolute_addr = memory->read(++(cpu->pc));
@@ -1629,17 +1643,17 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//SEC
 			case(56):		//38 -- implied
-				cpu->ps[6] = 1;
+				cpu->ps[C] = 1;
 				(cpu->pc)++;
 				break;
 			// SED
 			case(248):	//f8 -- implied
-				cpu->ps[3] = 1;
+				cpu->ps[D] = 1;
 				(cpu->pc)++;
 				break;
 			// SEI
 			case(120):	//78 -- implied
-				cpu->ps[4] = 1;
+				cpu->ps[I] = 1;
 				(cpu->pc)++;
 				break;
 			// STA
