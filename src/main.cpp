@@ -875,7 +875,6 @@ void readGame(Memory *memory, CPU *cpu) {
 			    absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += (memory->read(++(cpu->pc))) << 8;
 				cpu->pc = absolute_addr;
-
                 break;
             case(0x6C): // indirect
                 absolute_addr = memory->read(++(cpu->pc));
