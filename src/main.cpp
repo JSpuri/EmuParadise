@@ -462,14 +462,14 @@ void readGame(Memory *memory, CPU *cpu) {
 
 					value = 0;
 
-					value += ((cpu->ps[C]) ? 1 : 0) << C;
-					value += ((cpu->ps[Z]) ? 1 : 0) << Z;
-					value += ((cpu->ps[I]) ? 1 : 0) << I;
-					value += ((cpu->ps[D]) ? 1 : 0) << D;
-					value += ((cpu->ps[B]) ? 1 : 0) << B;
-					value += 1 << (B-1);
-					value += ((cpu->ps[V]) ? 1 : 0) << V;
 					value += ((cpu->ps[N]) ? 1 : 0) << N;
+					value += ((cpu->ps[V]) ? 1 : 0) << V;
+					value += 1 << (B-1);
+					value += ((cpu->ps[B]) ? 1 : 0) << B;
+					value += ((cpu->ps[D]) ? 1 : 0) << D;
+					value += ((cpu->ps[I]) ? 1 : 0) << I;
+					value += ((cpu->ps[Z]) ? 1 : 0) << Z;
+					value += ((cpu->ps[C]) ? 1 : 0) << C;
 
 					memory->write(--(cpu->sp), value);
 
