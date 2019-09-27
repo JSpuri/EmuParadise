@@ -29,7 +29,7 @@ class Memory {
     public:
         // Methods
         Memory(char *nesfile);       // Constructor
-        int8_t read(uint16_t addr);
+        uint8_t read(uint16_t addr);
         void write(uint16_t addr, int8_t value);
         bool wasWritten();          // returns was_written
 
@@ -87,7 +87,7 @@ Memory::Memory(char *nesfile) {
 }
 
 // Le um determinado endereço da memoria. Nao eh necessario um cast ao entrar um zero_pg_addr
-int8_t Memory::read(uint16_t addr) {
+uint8_t Memory::read(uint16_t addr) {
 
     //reset boolean
     this->was_written = false;
@@ -95,7 +95,7 @@ int8_t Memory::read(uint16_t addr) {
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
     if (addr < 0x2000)
-        return this->PRG_RAM[addr%PRG_RAM_SIZE];
+        return this->PRG_RAM[addr];
 
     if (this->has_32kb_PRG_ROM)
         return this->PRG_ROM[addr - PRG_ROM_1_BANK_START];
@@ -124,8 +124,9 @@ void Memory::write(uint16_t addr, int8_t value) {
 
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
-    if(addr < 0x2000)
+    if(addr < 0x2000){
         this->PRG_RAM[addr%PRG_RAM_SIZE] = value;
+    }
     
 }
 

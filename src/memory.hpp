@@ -5,7 +5,7 @@ class Memory {
 
     public:
         Memory(char *nesfile);       // Constructor
-        int8_t read(uint16_t addr);
+        uint8_t read(uint16_t addr);
         void write(uint16_t addr, int8_t value);
         bool wasWritten();          // returns was_written
 
