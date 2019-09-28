@@ -396,7 +396,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			//BCC
 			case(0x90):
 				if(cpu->ps[C] == 0)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BCS
@@ -408,7 +408,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			//BEQ
 			case(0xf0):
 				if(cpu->ps[Z] == 1)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BIT
@@ -443,19 +443,19 @@ void readGame(Memory *memory, CPU *cpu) {
 			//BMI
 			case(0x30):
 				if(cpu->ps[N] == 1)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BNE
 			case(0xd0):
 				if(cpu->ps[Z] == 0)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BPL
 			case(0x10):
 				if(cpu->ps[N] == 0)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BRK
@@ -487,13 +487,13 @@ void readGame(Memory *memory, CPU *cpu) {
 			//BVC
 			case(0x50):
                 if(cpu->ps[V] == 0)
-                    cpu->pc += memory->read(++(cpu->pc));
+                    cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BVS
 			case(0x70):
                 if(cpu->ps[V] == 1)
-                    cpu->pc += memory->read(++(cpu->pc));
+                    cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//CLC
