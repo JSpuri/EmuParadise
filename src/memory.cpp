@@ -31,20 +31,19 @@ class Memory {
         Memory(char *nesfile);       // Constructor
         uint8_t read(uint16_t addr);
         void write(uint16_t addr, int8_t value);
-        bool wasWritten();          // returns was_written
 
         // Attributes
         uint16_t NMI_ADDR;
         uint16_t RESET_ADDR;
         uint16_t IRQ_ADDR;
 
-        uint16_t last_written_mem;
+        uint16_t last_accessed_mem;
+        bool was_accessed;
 
     private:
         std::vector<uint8_t> PRG_RAM;
         std::vector<uint8_t> PRG_ROM;
         bool has_32kb_PRG_ROM;
-        bool was_written;       //store if any memory was altered
 
 };
 
@@ -80,35 +79,44 @@ Memory::Memory(char *nesfile) {
     this->IRQ_ADDR += this->PRG_ROM[(rom_size - LWR_IRQ_ADDR)];
 
 
-    // Inicializa variavel que verifica se a memoria foi escrita
-    this->was_written = false;
-    this->last_written_mem = 0;
+    // Inicializa variavel que verifica se a memoria foi acessada
+    this->was_accessed = false;
+    this->last_accessed_mem = 0;
 
 }
 
 // Le um determinado endereço da memoria. Nao eh necessario um cast ao entrar um zero_pg_addr
 uint8_t Memory::read(uint16_t addr) {
 
-    //reset boolean
-    this->was_written = false;
+    this->last_accessed_mem = addr;
 
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
-    if (addr < 0x2000)
+    if (addr < 0x2000) {
+        addr = addr%PRG_RAM_SIZE;
+        this->last_accessed_mem = addr;
         return this->PRG_RAM[addr];
+    }
 
-    if (this->has_32kb_PRG_ROM)
+
+    if (this->has_32kb_PRG_ROM) {
+        this->last_accessed_mem = addr;
         return this->PRG_ROM[addr - PRG_ROM_1_BANK_START];
+    }
 
     //if the cartridge doesn't have 32KB, we must mirror
     //$8000-$BFFF and $C000-$FFFF
     else{
 
-        if (addr >= PRG_ROM_1_BANK_START && addr < PRG_ROM_2_BANK_START)
+        if (addr >= PRG_ROM_1_BANK_START && addr < PRG_ROM_2_BANK_START) {
+            this->last_accessed_mem = addr;
             return this->PRG_ROM[addr - PRG_ROM_1_BANK_START];
+        }
 
-        else if (addr >= PRG_ROM_2_BANK_START && addr <= 0xFFFF)
+        else if (addr >= PRG_ROM_2_BANK_START && addr <= 0xFFFF) {
+            this->last_accessed_mem = addr - PRG_ROM_SIZE;
             return this->PRG_ROM[addr - PRG_ROM_1_BANK_START - PRG_ROM_SIZE];
+        }
     }
 
     return 0;
@@ -118,19 +126,17 @@ uint8_t Memory::read(uint16_t addr) {
 // Escreve um valor de 8 bits num endereço. Nao eh necessario um cast ao entrar um zero_pg_addr
 void Memory::write(uint16_t addr, int8_t value) {
 
-    //set boolean and las written address
-    this->was_written = true;
-    this->last_written_mem = addr;
-
+    this->was_accessed= true;
+    this->last_accessed_mem = addr;
     //the % operator is due to the mirroring of the ram on
     //$0800-$0FFF, $1000-$17FF and $1800-1FFF
     if(addr < 0x2000){
-        this->PRG_RAM[addr%PRG_RAM_SIZE] = value;
+
+        addr = addr%PRG_RAM_SIZE;
+        this->last_accessed_mem = addr;
+
+        this->PRG_RAM[addr] = value;
     }
     
 }
 
-// Retorna se a memoria sofreu uma escrita ou nao.
-bool Memory::wasWritten(){
-    return this->was_written;
-}
