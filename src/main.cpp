@@ -402,7 +402,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			//BCS
 			case(0xb0):
 				if(cpu->ps[C] == 1)
-						cpu->pc += memory->read(++(cpu->pc));
+						cpu->pc += memory->read(++(cpu->pc)) + 1;
 
 				break;
 			//BEQ
@@ -888,8 +888,8 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(169): //a9 - immediate
 				cpu->a = memory->read((cpu->pc)+1);
 
-				if(cpu->a == 0x00)	cpu->ps[6] = 1;					//check zero
-				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;			//check negative
+				if(cpu->a == 0x00)	cpu->ps[Z] = 1;					//check zero
+				if((cpu->a & 0x80) == 0x80)	cpu->ps[N] = 1;			//check negative
 
 				cpu->pc += 2;
 				break;
