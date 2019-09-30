@@ -54,3 +54,7 @@ test: ${BIN} ${LOG} ${NES} ${TESTS}
 
 clean:
 	rm -rf ${BIN} ${LOG} ./ext/asm6f/asm6f
+
+res:
+	for f in log/*.log;do cp $f res/$(basename "$f" .log).r;done
+
