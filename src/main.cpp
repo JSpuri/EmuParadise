@@ -6,14 +6,14 @@
 using namespace std;
 
 void log(CPU *cpu){
-	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%04x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d |",
+	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d |",
 			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7]);
 
 	printf("\n");
 }
 
 void logls(Memory *memory, CPU *cpu){
-	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%04x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x",
+	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x",
 			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], memory->last_accessed_mem, memory->read(memory->last_accessed_mem));
 
 	printf("\n");
@@ -106,7 +106,6 @@ void readGame(Memory *memory, CPU *cpu) {
 
     uint8_t zero_pg_addr;
     uint16_t absolute_addr;
-    uint16_t absolute_addr2;
 
     int8_t result;
 
@@ -336,7 +335,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//ASL
 			case(0x0A): //Accumulator
-				cpu->ps[C] = cpu->a >> 7;
+				cpu->ps[C] = (cpu->a & 0x80) >> 7;
 
 				result = cpu->a << 1;
 
@@ -351,7 +350,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr);
 
-				cpu->ps[C] = value >> 7;
+				cpu->ps[C] = (value & 0x80) >> 7;
 				result = value << 1;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
@@ -366,7 +365,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				zero_pg_addr = memory->read(++(cpu->pc));
 				value = memory->read(zero_pg_addr + cpu->x);
 
-				cpu->ps[C] = value >> 7;
+				cpu->ps[C] = (value & 0x80) >> 7;
 				result = value << 1;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
@@ -383,7 +382,7 @@ void readGame(Memory *memory, CPU *cpu) {
 
 				value = memory->read(absolute_addr);
 
-				cpu->ps[C] = value >> 7;
+				cpu->ps[C] = (value & 0x80) >> 7;
 				result = value << 1;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
@@ -400,7 +399,7 @@ void readGame(Memory *memory, CPU *cpu) {
 
 				value = memory->read(absolute_addr + cpu->x);
 
-				cpu->ps[C] = value >> 7;
+				cpu->ps[C] = (value & 0x80) >> 7;
 				result = value << 1;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
@@ -440,8 +439,8 @@ void readGame(Memory *memory, CPU *cpu) {
 				result = cpu->a & value;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
-				cpu->ps[V] = (((result & 0x20) != 0) ? 1 : 0);
-				cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[V] = (((value & 0x40) != 0) ? 1 : 0);
+				cpu->ps[N] = ((value < 0) ? 1 : 0);
 
                 memory->was_accessed = true;
 				(cpu->pc)++;
@@ -451,13 +450,13 @@ void readGame(Memory *memory, CPU *cpu) {
 				absolute_addr = memory->read(++(cpu->pc));
 				absolute_addr += memory->read(++(cpu->pc)) << 8;
 
-				value = (char)memory->read(absolute_addr + cpu->x);
+				value = memory->read(absolute_addr + cpu->x);
 
 				result = cpu->a & value;
 
 				cpu->ps[Z] = ((result == 0) ? 1 : 0);
-				cpu->ps[N] = ((result < 0) ? 1 : 0);
-				cpu->ps[N] = ((result < 0) ? 1 : 0);
+				cpu->ps[V] = (((value & 0x40) != 0) ? 1 : 0);
+				cpu->ps[N] = ((value < 0) ? 1 : 0);
 
                 memory->was_accessed = true;
 				(cpu->pc)++;

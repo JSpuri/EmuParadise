@@ -29,7 +29,7 @@ CPU::CPU(uint16_t reset_addr) {
     this->x = 0;
     this->y = 0;
 
-    this->sp = 0xFA;
+    this->sp = 0xFD;
     this->pc = reset_addr;
 
     this->ps[C] = 0;
