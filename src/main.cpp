@@ -939,7 +939,6 @@ void readGame(Memory *memory, CPU *cpu) {
 			//JSR
 			//
 			case(32): //20
-<<<<<<< HEAD
 				absolute_addr = (cpu->pc) + 3;
 				memory->write(0x0100 + (cpu->sp)--, absolute_addr >> 8);
 				memory->write(0x0100 + (cpu->sp)--, absolute_addr & 0xFF);
@@ -947,14 +946,6 @@ void readGame(Memory *memory, CPU *cpu) {
 				absolute_addr += (memory->read(((cpu->pc)+2)) << 8);
 				cpu->pc = absolute_addr;
 				// cpu->pc += memory->RESET_ADDR;
-=======
-				absolute_addr = (cpu->pc) + 2;
-				memory->write(0x0100 + (cpu->sp)--, absolute_addr >> 8);
-				memory->write(0x0100 + (cpu->sp)--, absolute_addr & 0xFF);
-				cpu->pc = memory->read((cpu->pc)+1);
-				cpu->pc += (memory->read(((cpu->pc)+2)) << 8);
-				cpu->pc += memory->RESET_ADDR;
->>>>>>> b4c4a082977a1b5086c5b6695f8133023111539e
 				memory->was_accessed = false;
 				break;
 			//
@@ -1761,16 +1752,10 @@ void readGame(Memory *memory, CPU *cpu) {
 				break;
 			//RTS
 			case(96): 	//60 -- implied
-<<<<<<< HEAD
 				absolute_addr = memory->read(0x0100 + (++cpu->sp));
 				absolute_addr += memory->read(0x0100 + (++cpu->sp)) << 8;
 				cpu->pc = absolute_addr;
 				// cpu->pc += memory->RESET_ADDR;
-=======
-				cpu->pc = memory->read(0x0100 + (++cpu->sp));
-				cpu->pc += memory->read(0x0100 + (++cpu->sp)) << 8;
-				(cpu->pc)++;
->>>>>>> b4c4a082977a1b5086c5b6695f8133023111539e
                 memory->was_accessed = false;
 				break;
 			//SBC
