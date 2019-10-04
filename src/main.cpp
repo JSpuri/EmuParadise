@@ -21,7 +21,6 @@ void logls(Memory *memory, CPU *cpu){
 
 // Precisa considerar quando a carry eh ativada
 void adc(CPU *cpu, int8_t num) {
-	bool carryExist = false;
 	int8_t current_bit_a, current_bit_num, current_bit_result;
 	int8_t aux_a, aux_num, aux_result;
 
@@ -31,20 +30,13 @@ void adc(CPU *cpu, int8_t num) {
 	aux_num = num;
 	aux_result = result;
 
-	for(int i = 0; i < 7 && carryExist != true; i++){
-		current_bit_a = aux_a & 0x01;
-		current_bit_num = aux_num & 0x01;
-		current_bit_result = aux_result & 0x01;
-
-		if(current_bit_a == current_bit_num && current_bit_a != current_bit_result)
-			carryExist = true;
-
-		aux_a = aux_a >> 1;
-		aux_num = aux_num >> 1;
-		aux_result = aux_result >> 1;
+	uint8_t u_result = (uint8_t) cpu->a + num;
+	if(u_result < (uint8_t) cpu->a || u_result < (uint8_t) num){
+		cpu->ps[C] = 1;
 	}
-
-	if(carryExist == true)	cpu->ps[C] = 1;
+	else{
+		cpu->ps[C] = 0;
+	}
 
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[N] = ((result < 0) ? 1 : 0);
@@ -63,9 +55,18 @@ void adc(CPU *cpu, int8_t num) {
 
 }
 
-void sbc(CPU *cpu, int operand) {
+void sbc(CPU *cpu, int8_t operand) {
 	int8_t num = (operand ^ 0xff) + 0x01;
 	adc(cpu, num);
+
+	uint8_t u_result = (uint8_t) cpu->a;
+	u_result -= (uint8_t) num;
+	if(u_result < (uint8_t) num){
+		cpu->ps[C] = 1;
+	}
+	else{
+		cpu->ps[C] = 0;
+	}
 }
 
 void setFlagsCMP(int8_t operand, int8_t registrador, CPU *cpu){ // also used in CPX anc CPY
@@ -1022,7 +1023,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(161): //a1 - (indirect, x)
 				immediate = memory->read((cpu->pc)+1);
 				absolute_addr = memory->read(immediate+cpu->x);
-				absolute_addr = memory->read(immediate+cpu->x+1) << 8;
+				absolute_addr += memory->read(immediate+cpu->x+1) << 8;
 				cpu->a = memory->read(absolute_addr);
 
 				if(cpu->a == 0x00)	cpu->ps[6] = 1;
@@ -1388,7 +1389,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(1): //01 - (indirect,x)
 				immediate = memory->read((cpu->pc)+1);
 				absolute_addr = memory->read(immediate+cpu->x);
-				absolute_addr = memory->read(immediate+cpu->x+1) << 8;
+				absolute_addr += memory->read(immediate+cpu->x+1) << 8;
 				aux = memory->read(absolute_addr);
 				cpu->a = cpu->a | aux;
 
@@ -1404,7 +1405,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(17): //11 - (indirect), y
 				immediate = memory->read((cpu->pc)+1);
 				absolute_addr = memory->read(immediate);
-				absolute_addr = memory->read(immediate+1) << 8;
+				absolute_addr += memory->read(immediate+1) << 8;
 				aux = memory->read(absolute_addr+cpu->y);
 				cpu->a = cpu->a | aux;
 
@@ -1430,9 +1431,9 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(8): //08 - implied
 				cpu->ps[2] = 1;
 				cpu->ps[3] = 1;
-				aux = cpu->ps[7]*2^7;
+				aux = cpu->ps[7]*pow(2,7);
 				for(int j = 6; j >= 0; j--)
-					aux += cpu->ps[j]*2^j;
+					aux += cpu->ps[j]*pow(2,j);
 				memory->write(--cpu->sp, aux);
 				cpu->pc += 1;
 				break;
@@ -1545,8 +1546,8 @@ void readGame(Memory *memory, CPU *cpu) {
 				cpu->pc += 2;
 				break;
 			case(46): //2e - absolute
-				zero_pg_addr = memory->read((cpu->pc)+1);
-				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += memory->read((cpu->pc)+2) << 8;
 				value = memory->read(zero_pg_addr);
 				aux = value;
 
@@ -1565,12 +1566,12 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					cpu->ps[7] = 0;
 
-				memory->write(zero_pg_addr, value);
+				memory->write(absolute_addr, value);
 				cpu->pc += 3;
 				break;
 			case(62): //3e - absolute,x
-				zero_pg_addr = memory->read((cpu->pc)+1);
-				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += memory->read((cpu->pc)+2) << 8;
 				value = memory->read(zero_pg_addr+cpu->x);
 				aux = value;
 
@@ -1589,7 +1590,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					cpu->ps[7] = 0;
 
-				memory->write(zero_pg_addr+cpu->x, value);
+				memory->write(absolute_addr+cpu->x, value);
 				cpu->pc += 3;
 				break;
 			//
@@ -1666,12 +1667,12 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					cpu->ps[7] = 0;
 
-				memory->write(zero_pg_addr, value);
+				memory->write(absolute_addr, value);
 				cpu->pc += 2;
 				break;
 			case(110): //6e - absolute
-				zero_pg_addr = memory->read((cpu->pc)+1);
-				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += memory->read((cpu->pc)+2) << 8;
 				value = memory->read(zero_pg_addr);
 				aux = value;
 
@@ -1691,14 +1692,14 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					cpu->ps[7] = 0;
 
-				memory->write(zero_pg_addr, value);
+				memory->write(absolute_addr, value);
 				cpu->pc += 3;
 				break;
 			case(126): //7e - absolute,x
-				zero_pg_addr = memory->read((cpu->pc)+1);
-				zero_pg_addr += memory->read((cpu->pc)+2) << 8;
-				zero_pg_addr += cpu->x;
-				value = memory->read(zero_pg_addr);
+				absolute_addr = memory->read((cpu->pc)+1);
+				absolute_addr += memory->read((cpu->pc)+2) << 8;
+				absolute_addr += cpu->x;
+				value = memory->read(absolute_addr);
 				aux = value;
 
 				value = (value >> 1);
@@ -1717,7 +1718,7 @@ void readGame(Memory *memory, CPU *cpu) {
 				else
 					cpu->ps[7] = 0;
 
-				memory->write(zero_pg_addr, value);
+				memory->write(absolute_addr, value);
 				cpu->pc += 3;
 				break;
 			//
