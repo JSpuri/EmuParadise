@@ -1916,28 +1916,36 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(170): 	//aa -- implied
 				cpu->x = cpu->a;
 				if (cpu->x == 0) cpu->ps[Z] = 1;
+                else cpu->ps[Z] = 0;
 				if (cpu->x < 0) cpu->ps[N] = 1;
+                else cpu->ps[N] = 0;
 				(cpu->pc)++;
 				break;
 			// TAY
 			case(168): 	//a8 -- implied
 				cpu->y = cpu->a;
 				if (cpu->y == 0) cpu->ps[Z] = 1;
+                else cpu->ps[Z] = 0;
 				if (cpu->y < 0) cpu->ps[N] = 1;
+                else cpu->ps[N] = 0;
 				(cpu->pc)++;
 				break;
 			// TSX
 			case(186): 	//ba -- implied
 				cpu->x = cpu->sp;
 				if (cpu->x == 0) cpu->ps[Z] = 1;
+                else cpu->ps[Z] = 0;
 				if (cpu->x < 0) cpu->ps[N] = 1;
+                else cpu->ps[N] = 0;
 				(cpu->pc)++;
 				break;
 			// TXA
 			case(138): 	//8a -- implied
 				cpu->a = cpu->x;
 				if (cpu->a == 0) cpu->ps[Z] = 1;
+                else cpu->ps[Z] = 0;
 				if (cpu->a < 0) cpu->ps[N] = 1;
+                else cpu->ps[N] = 0;
 				(cpu->pc)++;
 				break;
 			// TXS
@@ -1949,7 +1957,9 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(152): 	//98 -- implied
 				cpu->a = cpu->y;
 				if (cpu->a == 0) cpu->ps[Z] = 1;
+                else cpu->ps[Z] = 0;
 				if (cpu->a < 0) cpu->ps[N] = 1;
+                else cpu->ps[N] = 0;
 				(cpu->pc)++;
 				break;
 
