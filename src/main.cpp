@@ -611,7 +611,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(0xD1): // (indirect), y
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				absolute_addr = memory->read(zero_pg_addr);
-				absolute_addr += memory->read(zero_pg_addr + 1);
+				absolute_addr += memory->read(zero_pg_addr + 1) << 8;
 				value = memory->read(absolute_addr + cpu->y);
 
 				setFlagsCMP(value, cpu->a, cpu);
