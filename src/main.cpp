@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 
-#include "memory.hpp"
-#include "cpu.hpp"
+#include "headers/opcodes.hpp"
+#include "headers/memory.hpp"
+#include "headers/cpu.hpp"
 
 using namespace std;
 
