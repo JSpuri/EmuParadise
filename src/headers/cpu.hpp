@@ -1,3 +1,6 @@
+#ifndef CPU_H
+#define CPU_H
+
 #include <bits/stdc++.h>
 
 #define C 7
@@ -21,3 +24,5 @@ class CPU {
         uint8_t ps[8];  //p[NV-BDIZC]
 
 };
+
+#endif

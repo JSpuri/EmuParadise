@@ -1,3 +1,6 @@
+#ifndef MEM_H
+#define MEM_H
+
 #include <bits/stdc++.h>
 
 // Informacoes no memory.cpp :)
@@ -24,3 +27,4 @@ class Memory {
 
 };
 
+#endif

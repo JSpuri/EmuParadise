@@ -1,16 +1,18 @@
 #include "headers/opcodes.hpp"
+#include "headers/cpu.hpp"
+#include "headers/memory.hpp"
 #include "../common/constants.hpp"
 
 Opcodes::Opcodes(Memory *memory, CPU *cpu) {
-    this.memory = memory;
-    this.cpu = cpu;
+	this->memory = memory;
+	this->cpu = cpu;
 }
 
-Opcodes::ADC(int mode) {
+int Opcodes::ADC(int mode) {
     int8_t current_bit_a, current_bit_num, current_bit_result;
 	int8_t aux_a, aux_num, aux_result;
 
-    if (mode == )
+	int num = 0;
 
     int8_t result = cpu->a + num + cpu->ps[C];
 
