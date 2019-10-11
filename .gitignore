@@ -1,2 +1,6 @@
 .vscode
 *.out
+bin/
+ext/asm6f/asm6f
+log/
+

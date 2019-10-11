@@ -16,11 +16,20 @@ $ asm6f main.asm game.nes
 $ mednafen game.nes
 ```
 
-NES Emulator Project
+## Phase 2 to 4: Assembling the NES
+In the root folder of the project, run:
+* `$ make` to compile the current state of the emulator;
+* `$ make test` to run current CPU tests;
+* `$ make clean` to remove files created on testing and compiling cases;
 
-**Integrantes do Grupo:**
+### Our emulator currently have:
+* [X] CPU
+* [ ] PPU
+* [ ] APU
 
-- 157642 - Alex Wei
-- 155943 - João Víctor Brazileu Spuri
-- 166779 - Eduardo Moreira Freitas de Souza
-- 176522 - Jonathas Rocha Limirio Sardinha
+
+## Criadores:
+* 157642 - Alex Wei
+* 155943 - João Víctor Brazileu Spuri
+* 166779 - Eduardo Moreira Freitas de Souza
+* 176522 - Jonathas Rocha Limirio Sardinha
