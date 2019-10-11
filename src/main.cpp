@@ -611,7 +611,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(0xD1): // (indirect), y
 			    zero_pg_addr = memory->read(++(cpu->pc));
 				absolute_addr = memory->read(zero_pg_addr);
-				absolute_addr += memory->read(zero_pg_addr + 1);
+				absolute_addr += memory->read(zero_pg_addr + 1) << 8;
 				value = memory->read(absolute_addr + cpu->y);
 
 				setFlagsCMP(value, cpu->a, cpu);
@@ -954,7 +954,7 @@ void readGame(Memory *memory, CPU *cpu) {
 			case(169): //a9 - immediate
 				cpu->a = memory->read((cpu->pc)+1);
 
-				if(cpu->a == 0x00)	cpu->ps[6] = 1;
+				if(cpu->a == 0x00)	cpu->ps[Z] = 1;
 				else cpu->ps[6] = 0;
 
 				if((cpu->a & 0x80) == 0x80)	cpu->ps[0] = 1;
@@ -1519,6 +1519,10 @@ void readGame(Memory *memory, CPU *cpu) {
 				if(cpu->ps[7] == 1)
 					value = (value | 0x01);
 
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
+
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
 				else
@@ -1541,6 +1545,10 @@ void readGame(Memory *memory, CPU *cpu) {
 
 				if(cpu->ps[7] == 1)
 					value = (value | 0x01);
+
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
 
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
@@ -1566,6 +1574,10 @@ void readGame(Memory *memory, CPU *cpu) {
 				if(cpu->ps[7] == 1)
 					value = (value | 0x01);
 
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
+
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
 				else
@@ -1590,6 +1602,10 @@ void readGame(Memory *memory, CPU *cpu) {
 				if(cpu->ps[7] == 1)
 					value = (value | 0x01);
 
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
+
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
 				else
@@ -1610,25 +1626,25 @@ void readGame(Memory *memory, CPU *cpu) {
 				cpu->a = (cpu->a >> 1);
 				cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
 
-				if(cpu->ps[7] == 1) {
+				if(cpu->ps[C] == 1) {
 					cpu->a = (cpu->a | 0x80);
-					cpu->ps[0] = 1;					//is negative
+					cpu->ps[C] = aux & 0x01;					//is negative
 				}
 
 				if(cpu->a == 0)
-					cpu->ps[6] = 1;					//verify zero
+					cpu->ps[Z] = 1;					//verify zero
 				else
-					cpu->ps[6] = 0;
+					cpu->ps[Z] = 0;
 
 				if((cpu->a & 0x80) == 0x80)
-					cpu->ps[0] = 1;     //verify neg
+					cpu->ps[N] = 1;     //verify neg
 				else
-					cpu->ps[0] = 0;
+					cpu->ps[N] = 0;
 
 				if((aux & 0x01) == 0x01)   //update carry
-					cpu->ps[7] = 1;
+					cpu->ps[C] = 1;
 				else
-					cpu->ps[7] = 0;
+					cpu->ps[C] = 0;
 
 				cpu->pc += 1;
 				break;
@@ -1640,8 +1656,12 @@ void readGame(Memory *memory, CPU *cpu) {
 				value = (value >> 1);
 				value = value & 0x7f; 		//mask and 0b01111111
 
-				if(cpu->ps[7] == 1)
+				if(cpu->ps[C] == 1)
 					value = (value | 0x80);
+
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
 
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
@@ -1667,12 +1687,16 @@ void readGame(Memory *memory, CPU *cpu) {
 				if(cpu->ps[7] == 1)
 					value = (value | 0x80);
 
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
+
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
 				else
 					cpu->ps[0] = 0;
 
-				if((value & 0x01) == 0x01)
+				if((aux & 0x01) == 0x01)
 					cpu->ps[7] = 1;
 				else
 					cpu->ps[7] = 0;
@@ -1691,6 +1715,10 @@ void readGame(Memory *memory, CPU *cpu) {
 
 				if(cpu->ps[7] == 1)
 					value = (value | 0x80);
+
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
 
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
@@ -1717,6 +1745,10 @@ void readGame(Memory *memory, CPU *cpu) {
 
 				if(cpu->ps[7] == 1)
 					value = (value | 0x80);
+
+				if (value == 0)
+					cpu->ps[Z] = 1;
+				else cpu->ps[Z] = 0;
 
 				if((value & 0x80) == 0x80)
 					cpu->ps[0] = 1;
