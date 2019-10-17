@@ -26,20 +26,22 @@ class CPU {
         uint8_t ps[8];  //p[NV-BDIZC]
 
         bool ExecuteNextInstruction(Memory *memory);
-        int8_t ResolveOPArgValue(int mode, Memory *memory, uint16_t addr);
-        uint16_t ResolveIndirect(Memory *memory, uint16_t addr);
+        int8_t ResolveOPArgWord(int mode, Memory *memory, uint16_t addr);
+        uint16_t ResolveOPArgAddr(int mode, Memory *memory, uint16_t addr);
 
     private:
-        int8_t ResolveImmediate(Memory *memory, uint16_t addr);
+        int8_t ReadImmediate(Memory *memory, uint16_t addr);
+        uint16_t ReadAbsAddr(Memory *memory, uint16_t addr);
 
         int8_t ResolveZeroAddr(Memory *memory, uint16_t addr);
         int8_t ResolveZeroAddrX(Memory *memory, uint16_t addr);
         int8_t ResolveZeroAddrY(Memory *memory, uint16_t addr);
 
-        int8_t ResolveAbstAddr(Memory *memory, uint16_t addr);
-        int8_t ResolveAbstAddrX(Memory *memory, uint16_t addr);
-        int8_t ResolveAbstAddrY(Memory *memory, uint16_t addr);
+        int8_t ResolveAbsAddr(Memory *memory, uint16_t addr);
+        int8_t ResolveAbsAddrX(Memory *memory, uint16_t addr);
+        int8_t ResolveAbsAddrY(Memory *memory, uint16_t addr);
 
+        uint16_t ResolveIndirect(Memory *memory, uint16_t addr);
         int8_t ResolveIndirectX(Memory *memory, uint16_t addr);
         int8_t ResolveIndirectY(Memory *memory, uint16_t addr);
 
