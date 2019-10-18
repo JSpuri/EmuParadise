@@ -26,16 +26,25 @@ class CPU {
         uint8_t ps[8];  //p[NV-BDIZC]
 
         bool ExecuteNextInstruction(Memory *memory);
+        
         int8_t ResolveOPArgWord(int mode, Memory *memory, uint16_t addr);
         uint16_t ResolveOPArgAddr(int mode, Memory *memory, uint16_t addr);
 
+        void IncrementNumCycles();
+        void IncrementNumCycles(uint8_t num);
+        void ResetNumCycles();
+
     private:
+        unsigned long int num_cycles;
+
         int8_t ReadImmediate(Memory *memory, uint16_t addr);
         uint16_t ReadAbsAddr(Memory *memory, uint16_t addr);
 
         int8_t ResolveZeroAddr(Memory *memory, uint16_t addr);
         int8_t ResolveZeroAddrX(Memory *memory, uint16_t addr);
         int8_t ResolveZeroAddrY(Memory *memory, uint16_t addr);
+
+        int8_t ReadRelative(Memory *memory, uint16_t addr);
 
         int8_t ResolveAbsAddr(Memory *memory, uint16_t addr);
         int8_t ResolveAbsAddrX(Memory *memory, uint16_t addr);

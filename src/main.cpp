@@ -35,6 +35,7 @@ int main(int argc, const char *argv[]){
     CPU cpu(memory.RESET_ADDR);
     binario.close();
 
+    // Main cpu loop
     while(cpu.ExecuteNextInstruction(&memory));
 
 	return 0;

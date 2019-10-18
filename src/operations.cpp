@@ -4,43 +4,19 @@
 
 #include "common/constants.hpp"
 
-void ADC(int mode, CPU *cpu, Memory *memory) {
+// These are the functions that will be used to create
+// Instructions objects. Their addresses will be passed
+// to the operation function wrapper in said constructor.
+//
+// Each instruction from 6502 must be a function, as declared
+// in ./headers/operations.hpp
+//
+// To port the current implementation of all instructions,
+// *cpu and *memory were kept as arguments
 
-	int num = cpu->ResolveOPArgValue(mode, memory, cpu->pc + 1);
 
-    int8_t current_bit_a, current_bit_num, current_bit_result;
-	int8_t aux_a, aux_num, aux_result;
-
-    int8_t result = cpu->a + num + cpu->ps[C];
-
-	aux_a = cpu->a;
-	aux_num = num;
-	aux_result = result;
-
-	uint8_t u_result = (uint8_t) cpu->a + num;
-	if(u_result < (uint8_t) cpu->a || u_result < (uint8_t) num){
-		cpu->ps[C] = 1;
-	}
-	else{
-		cpu->ps[C] = 0;
-	}
-
-    cpu->ps[Z] = ((result == 0) ? 1 : 0);
-    cpu->ps[N] = ((result < 0) ? 1 : 0);
-
-    if(((num > 0) && (cpu->a > 0) && (result <= 0)) || ((num < 0) && (cpu->a < 0) && (result >= 0))){
-				cpu->ps[V] = 1;
-			}
-    else if((num + cpu->a == 0x7f) && (cpu->ps[C] == 1)){
-		cpu->ps[V] = 1;
-	}
-    else{
-        cpu->ps[V] = 0;
-	}
-
-    cpu->a = result;
-}
-
+// Executes a sum operation between cpu->a and num, storing
+// the result in cpu->a, setting flags accordingly
 void adc_aux(CPU *cpu, int8_t num) {
 	int8_t current_bit_a, current_bit_num, current_bit_result;
 	int8_t aux_a, aux_num, aux_result;
@@ -75,9 +51,16 @@ void adc_aux(CPU *cpu, int8_t num) {
     cpu->a = result;
 }
 
+void ADC(int mode, CPU *cpu, Memory *memory) {
+
+	int8_t num = cpu->ResolveOPArgWord(mode, memory, cpu->pc + 1);
+
+    adc_aux(cpu, num);
+}
+
 void SBC(int mode, CPU *cpu, Memory *memory) { 
 
-    int8_t operand = cpu->ResolveOPArgValue(mode, memory, cpu->pc + 1);
+    int8_t operand = cpu->ResolveOPArgWord(mode, memory, cpu->pc + 1);
 
 	int8_t op1, op2, result;
 	result = cpu->a - operand;
@@ -117,15 +100,11 @@ void setFlagsEOR(int8_t operand, CPU *cpu){
 
 	cpu->ps[Z] = (operand == 0);
 }
+// ===========================================================================================
+// A IMPLEMENTACAO DE CADA INSTRUCAO DENTRO DOS CASES DEVE SER PASSADA PARA FUNCOES, COMO
+// EM ADC E SBC
+// ===========================================================================================
 
-// Mudei o tipo das variaveis para facilitar nossa vida - assim espero :)
-//
-// uint8_t eh um unsigned int de 8 bits, o tamanho de uma palavra. As variaveis
-// que sao desse tipo sao: opcodes e endereco da pagina zero
-//
-// int8_t eh um signed int. Serve pros registradores, imediatos e valores carregados da memorio
-//
-// uint16_t eh um signed int de 16 bits, usado apenas para enderecos absolutos.
 void readGame(Memory *memory, CPU *cpu) {
 
     uint8_t opcode;

@@ -6,6 +6,10 @@
 #include "cpu.hpp"
 #include "memory.hpp"
 
+// Instruction class:
+// Stores operation mode - as defined in ./common/constants.hpp
+// and address of corresponding function - declared in ./headers/operations.hpp
+// It can only Run said operation.
 class Instruction {
 
     public:
@@ -15,7 +19,12 @@ class Instruction {
     private:
         Memory *memory;
         CPU *cpu;
+
         int mode;
+        uint8_t opcode;
+        uint8_t num_bytes;
+        uint8_t num_cycles;
+
         std::function<void(int, CPU *, Memory *)>operation;
 
         void log();
