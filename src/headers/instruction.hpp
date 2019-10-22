@@ -1,7 +1,9 @@
 #ifndef OPCODES_H
 #define OPCODES_H
 
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdint>
+#include <vector>
 
 #include "cpu.hpp"
 #include "memory.hpp"
@@ -13,19 +15,19 @@
 class Instruction {
 
     public:
-        Instruction(CPU *cpu, Memory *memory, uint8_t opcode);
+        Instruction(CPU *cpu, uint8_t opcode);
         void Run();
 
     private:
-        Memory *memory;
         CPU *cpu;
 
         int mode;
         uint8_t opcode;
         uint8_t num_bytes;
         uint8_t num_cycles;
+        bool access_memory;
 
-        std::function<void(int, CPU *, Memory *)>operation;
+        std::function<void(int, CPU *)>operation;
 
         void log();
         void logls();

@@ -1,30 +1,12 @@
 #ifndef MEM_H
 #define MEM_H
 
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdint>
+#include <vector>
 
-// Tamanho dos blocos de RAM e ROM
-// Servem para alocar os vetores e fazer
-// calculos de mirroring
-#define PRG_RAM_SIZE 0x0800
-#define PRG_ROM_SIZE 0x4000
-
-// Endereco de inicio de cada um dos bancos de 16kb
-// Servem para os calculos de mirroring tambem
-#define PRG_ROM_1_BANK_START 0x8000
-#define PRG_ROM_2_BANK_START 0xC000
-
-// Esses sao os vetores de cada uma das labels
-// NIM, RESET e IRQ, de tras para frente 
-// (eles sempre ficam no final da memoria (0xfffa)
-#define LWR_NMI_ADDR 6
-#define UPR_NMI_ADDR 5
-
-#define LWR_RST_ADDR 4
-#define UPR_RST_ADDR 3
-
-#define LWR_IRQ_ADDR 2
-#define UPR_IRQ_ADDR 1
+#include "addressbus.hpp"
+#include "../common/constants.hpp"
 
 // Classe memoria
 class Memory {
@@ -32,10 +14,23 @@ class Memory {
     public:
         // Methods
         Memory(char *nesfile);       // Constructor
-        uint8_t read(uint16_t addr);
-        void write(uint16_t addr, int8_t value);
+
+        uint8_t ReadCPURAM(uint16_t addr);
+        uint8_t ReadPRGROM(uint16_t addr);
+
+        void WriteCPURAM(uint16_t addr, int8_t value);
 
         // Attributes
+        uint8_t size_PRG_ROM_in_16kb_units;
+        uint8_t size_CHR_ROM_in_8kb_units;
+
+        uint8_t size_PGR_RAM_in_8kb_units;
+        uint8_t size_CHR_RAM_in_8kb_units;
+
+        unsigned int mirroring_type;
+
+        uint16_t mapper_number;
+
         uint16_t NMI_ADDR;
         uint16_t RESET_ADDR;
         uint16_t IRQ_ADDR;
@@ -44,11 +39,18 @@ class Memory {
         bool was_accessed;
 
     private:
-        std::vector<uint8_t> PRG_RAM;
+        std::vector<uint8_t> INTERNAL_CPU_RAM;
+        // Nametables
+        std::vector<uint8_t> INTERNAL_PPU_RAM;
+
         std::vector<uint8_t> PRG_ROM;
-        bool has_32kb_PRG_ROM;
+        // Pattern Tables - Pode ser CHR_RAM
+        std::vector<uint8_t> CHR_ROM;
+
+        std::vector<uint8_t> PRG_RAM;
+        // Pattern Tables - Pode ser CHR_ROM
+        std::vector<uint8_t> CHR_RAM;
 
 };
-
 
 #endif

@@ -1,14 +1,14 @@
-#include <bits/stdc++.h>
+#include <ios>
+#include <fstream>
 
-#include "headers/memory.hpp"
+#include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"
+#include "headers/memory.hpp"
 
 using namespace std;
 
 int main(int argc, const char *argv[]){
 
-    // Passei a criacao do memblock pra ca, para que a
-    // memoria e a cpu fossem "globais"
 	const char *arquivo = argv[1];
 	ifstream binario;
 
@@ -30,13 +30,17 @@ int main(int argc, const char *argv[]){
 
     // Create memory - RAM and ROM based on file
     Memory memory(memblock);
+    binario.close();
 
     // Initialize PC with the address for RESET label
     CPU cpu(memory.RESET_ADDR);
-    binario.close();
+
+    AddressBus addr_bus(&cpu, &memory);
+
+    cpu.SetAddressBus(&addr_bus);
 
     // Main cpu loop
-    while(cpu.ExecuteNextInstruction(&memory));
+    while(cpu.ExecuteNextInstruction());
 
 	return 0;
 }
