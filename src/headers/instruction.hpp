@@ -1,12 +1,13 @@
-#ifndef OPCODES_H
-#define OPCODES_H
+#ifndef OPCODES_HPP
+#define OPCODES_HPP
 
 #include <cstdlib>
 #include <cstdint>
 #include <vector>
+#include <cstdio>
+#include <functional>
 
 #include "cpu.hpp"
-#include "memory.hpp"
 
 // Instruction class:
 // Stores operation mode - as defined in ./common/constants.hpp

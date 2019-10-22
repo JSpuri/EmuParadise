@@ -1,6 +1,7 @@
 #include "headers/cpu.hpp"
 
 #include "headers/instruction.hpp"
+#include "headers/addressbus.hpp"
 #include "common/constants.hpp"
 
 // CPU class constructor

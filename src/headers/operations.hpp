@@ -1,5 +1,5 @@
-#ifndef OPERATIONS_H
-#define OPERATIONS_H
+#ifndef OPERATIONS_HPP
+#define OPERATIONS_HPP
 
 #include <cstdlib>
 

@@ -1,7 +1,9 @@
-#ifndef ADDRESS_BUS_H
-#define ADDRESS_BUS_H
+#ifndef ADDRESS_BUS_HPP
+#define ADDRESS_BUS_HPP
 
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdint>
+#include <vector>
 
 #include "cpu.hpp"
 #include "memory.hpp"

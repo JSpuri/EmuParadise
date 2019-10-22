@@ -1,8 +1,8 @@
-#ifndef CPU_H
-#define CPU_H
+#ifndef CPU_HPP
+#define CPU_HPP
 
+class AddressBus;
 #include "processor.hpp"
-#include "addressbus.hpp"
 
 #define C 7
 #define Z 6

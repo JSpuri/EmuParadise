@@ -548,7 +548,7 @@ void RTI(int mode, CPU *cpu) {
 
     }
 
-    cpu->pc = cpu->ReadFrom(0x0100 + (++cpu->sp) & 0xFF);
+    cpu->pc = cpu->ReadFrom((0x0100 + (++cpu->sp)) & 0xFF);
     cpu->pc += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8 ;
 }
 
