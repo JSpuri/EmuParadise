@@ -82,7 +82,7 @@ int8_t CPU::ResolveOPArgWord(int mode, uint16_t addr) {
         value = ResolveIndirectX(addr);
 
     else if(mode == M_INDIRECT_INDEXED)
-        value = ResolveIndirectX(addr);
+        value = ResolveIndirectY(addr);
 
     return value;
 
@@ -127,11 +127,12 @@ uint16_t CPU::ResolveOPArgAddr(int mode, uint16_t addr) {
 
 
 void CPU::WriteTo(uint16_t addr, int8_t value) {
-
+    this->last_accessed_mem = addr;
     this->addr_bus->WriteTo(this, addr, value);
 }
 
 uint8_t CPU::ReadFrom(uint16_t addr) {
+    this->last_accessed_mem = addr;
     return this->addr_bus->ReadFrom(this, addr);
 }
 

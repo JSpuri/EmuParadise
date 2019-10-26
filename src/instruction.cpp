@@ -12,7 +12,6 @@ Instruction::Instruction(CPU *cpu, uint8_t opcode) {
     this->cpu = cpu;
     this->opcode = opcode;
     this->access_memory = true;
-
     switch(opcode){
 
         //ADC
@@ -29,7 +28,6 @@ Instruction::Instruction(CPU *cpu, uint8_t opcode) {
             this->operation = ADC;
             this->num_bytes = 2;
             this->num_cycles = 3;
-            this->access_memory = false;
             break;
 
         case(0x75): //Zero Page, X
@@ -113,13 +111,13 @@ Instruction::Instruction(CPU *cpu, uint8_t opcode) {
             this->num_cycles = 4;
             break;
         case(0x21): //(Indirect, X)
-            this->mode = M_IMMEDIATE;
+            this->mode = M_INDEXED_INDIRECT;
             this->operation = AND;
             this->num_bytes = 2;
             this->num_cycles = 6;
             break;
         case(0x31): //(Indirect), Y
-            this->mode = M_IMMEDIATE;
+            this->mode = M_INDIRECT_INDEXED;
             this->operation = AND;
             this->num_bytes = 2;
             this->num_cycles = 5;
