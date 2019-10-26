@@ -1,17 +1,17 @@
 #include "headers/instruction.hpp"
 
-#include <bits/stdc++.h>
-
 #include "headers/operations.hpp"
 #include "common/constants.hpp"
 
+#include <iostream>
+
 // Instruction class constructor
 // It sets the operation function and mode accordingly to opcode
-Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
+Instruction::Instruction(CPU *cpu, uint8_t opcode) {
 
-	this->memory = memory;
     this->cpu = cpu;
     this->opcode = opcode;
+    this->access_memory = true;
 
     switch(opcode){
 
@@ -21,6 +21,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ADC;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         case(0x65): //Zero Page
@@ -28,12 +29,13 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ADC;
             this->num_bytes = 2;
             this->num_cycles = 3;
+            this->access_memory = false;
             break;
 
         case(0x75): //Zero Page, X
             this->mode = M_ZERO_PAGE_X;
             this->operation = ADC;
-            this->num_bytes = 2.
+            this->num_bytes = 2;
             this->num_cycles = 4;
             break;
 
@@ -78,6 +80,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = AND;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0x25): //Zero Page
             this->mode = M_ZERO_PAGE;
@@ -128,6 +131,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ASL;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0x06): //Zero Page
             this->mode = M_ZERO_PAGE;
@@ -160,6 +164,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BCC;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         //BCS
         case(0xb0):
@@ -167,6 +172,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BCS;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         //BEQ
         case(0xf0):
@@ -174,6 +180,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BEQ;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         //BIT
@@ -196,6 +203,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BMI;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         //BNE
         case(0xd0):
@@ -203,6 +211,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BNE;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         //BPL
         case(0x10):
@@ -210,6 +219,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BPL;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         //BRK
@@ -218,6 +228,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BRK;
             this->num_bytes = 1;
             this->num_cycles = 7;
+            this->access_memory = false;
             break;
 
         //BVC
@@ -226,6 +237,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BVC;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         //BVS
         case(0x70):
@@ -233,6 +245,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = BVS;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         //CLC
@@ -241,6 +254,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = CLC;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         ///
@@ -251,6 +265,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = CMP;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0xC5): //zero page
             this->mode = M_IMMEDIATE;
@@ -303,6 +318,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = CPX;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0xE4): //zero page
             this->mode = M_ZERO_PAGE;
@@ -325,6 +341,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = CPY;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0xC4): //zero page
             this->mode = M_ZERO_PAGE;
@@ -375,6 +392,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = DEX;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         ///
         /// DEY
@@ -384,6 +402,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = DEY;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         ///
@@ -394,6 +413,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = EOR;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0x45): //zero page
             this->mode = M_ZERO_PAGE;
@@ -474,6 +494,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = INX;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         ///
         /// INY
@@ -483,6 +504,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = INY;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         ///
@@ -493,12 +515,14 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = JMP;
             this->num_bytes = 3;
             this->num_cycles = 3;
+            this->access_memory = false;
             break;
         case(0x6C): // indirect
             this->mode = M_INDIRECT;
             this->operation = JMP;
             this->num_bytes = 3;
             this->num_cycles = 5;
+            this->access_memory = false;
             break;
 
         //
@@ -509,6 +533,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = JSR;
             this->num_bytes = 3;
             this->num_cycles = 6;
+            this->access_memory = false;
             break;
 
         //
@@ -519,6 +544,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = LDA;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(165): //a5 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -571,6 +597,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = LDX;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(166): //a6 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -605,6 +632,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = LDY;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(164): //a4 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -639,6 +667,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = LSR;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(70): //46 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -673,6 +702,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = NOP;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         //
@@ -683,6 +713,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ORA;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(5): //05 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -772,6 +803,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ROL;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(38): //26 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -806,6 +838,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = ROR;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(102): //66 - zeropage
             this->mode = M_ZERO_PAGE;
@@ -840,6 +873,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = RTI;
             this->num_bytes = 1;
             this->num_cycles = 6;
+            this->access_memory = false;
             break;
 
         //RTS
@@ -848,6 +882,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = RTS;
             this->num_bytes = 1;
             this->num_cycles = 6;
+            this->access_memory = false;
             break;
 
         //SBC
@@ -856,6 +891,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = SBC;
             this->num_bytes = 2;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(229): 	//e5 -- zero page
             this->mode = M_ZERO_PAGE;
@@ -906,6 +942,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = SEC;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // SED
         case(248):	//f8 -- implied
@@ -913,6 +950,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = SED;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // SEI
         case(120):	//78 -- implied
@@ -920,6 +958,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = SEI;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         // STA
@@ -1012,6 +1051,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TAX;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // TAY
         case(168): 	//a8 -- implied
@@ -1019,6 +1059,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TAY;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // TSX
         case(186): 	//ba -- implied
@@ -1026,6 +1067,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TSX;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // TXA
         case(138): 	//8a -- implied
@@ -1033,6 +1075,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TXA;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // TXS
         case(154): 	//9a -- implied
@@ -1040,6 +1083,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TXS;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         // TYA
         case(152): 	//98 -- implied
@@ -1047,6 +1091,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = TYA;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         case(0x58): // CLI
@@ -1054,18 +1099,21 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->operation = CLI;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0xB8): // CLV
             this->mode = M_IMPLICIT;
             this->operation = CLV;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
         case(0xD8): // CLD
             this->mode = M_IMPLICIT;
             this->operation = CLD;
             this->num_bytes = 1;
             this->num_cycles = 2;
+            this->access_memory = false;
             break;
 
         default:
@@ -1075,6 +1123,7 @@ Instruction::Instruction(CPU *cpu, Memory *memory, uint8_t opcode) {
             this->num_cycles = 0;
             break;
     }
+
     
 }
 
@@ -1085,7 +1134,7 @@ void Instruction::Run() {
 
     uint16_t last_pc = cpu->pc;
 
-    this->operation(mode, cpu, memory);
+    this->operation(mode, cpu);
 
     // Add default instructions cycle number to cpu->num_cycles
     cpu->IncrementNumCycles(this->num_cycles);
@@ -1104,12 +1153,10 @@ void Instruction::Run() {
         }
     }
 
-    if (memory->was_accessed)
+    if (this->access_memory)
         logls();
     else
         log();
-
-    memory->was_accessed = false;
 }
 
 
@@ -1122,7 +1169,7 @@ void Instruction::log(){
 
 void Instruction::logls(){
 	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x |",
-			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], memory->last_accessed_mem, memory->read(memory->last_accessed_mem));
+			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], cpu->last_accessed_mem, cpu->ReadFrom(cpu->last_accessed_mem));
 
 	printf("\n");
 }

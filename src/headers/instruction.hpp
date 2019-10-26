@@ -1,10 +1,13 @@
-#ifndef OPCODES_H
-#define OPCODES_H
+#ifndef OPCODES_HPP
+#define OPCODES_HPP
 
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdint>
+#include <vector>
+#include <cstdio>
+#include <functional>
 
 #include "cpu.hpp"
-#include "memory.hpp"
 
 // Instruction class:
 // Stores operation mode - as defined in ./common/constants.hpp
@@ -13,19 +16,19 @@
 class Instruction {
 
     public:
-        Instruction(CPU *cpu, Memory *memory, uint8_t opcode);
+        Instruction(CPU *cpu, uint8_t opcode);
         void Run();
 
     private:
-        Memory *memory;
         CPU *cpu;
 
         int mode;
         uint8_t opcode;
         uint8_t num_bytes;
         uint8_t num_cycles;
+        bool access_memory;
 
-        std::function<void(int, CPU *, Memory *)>operation;
+        std::function<void(int, CPU *)>operation;
 
         void log();
         void logls();
