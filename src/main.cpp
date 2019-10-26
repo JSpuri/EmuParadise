@@ -1,5 +1,6 @@
 #include <ios>
 #include <fstream>
+#include <iostream>
 
 #include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"

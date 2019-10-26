@@ -1,5 +1,6 @@
 #include "headers/memory.hpp"
 
+#include <iostream>
 // Constructor
 Memory::Memory(char *nesfile) {
 
@@ -65,13 +66,11 @@ Memory::Memory(char *nesfile) {
 uint8_t Memory::ReadCPURAM(uint16_t addr) {
 
     this->last_accessed_mem = addr;
-    return this->PRG_RAM[addr];
+    return this->INTERNAL_CPU_RAM[addr];
 }
 
 // Le um determinado endereço da memoria PRG ROM
 uint8_t Memory::ReadPRGROM(uint16_t addr) {
-
-    addr -= PRG_ROM_1_BANK_START;
 
     this->last_accessed_mem = addr;
     return this->PRG_ROM[addr];
@@ -82,7 +81,7 @@ void Memory::WriteCPURAM(uint16_t addr, int8_t value) {
 
     this->was_accessed= true;
     this->last_accessed_mem = addr;
-    this->PRG_RAM[addr] = value;
+    this->INTERNAL_CPU_RAM[addr] = value;
     
 }
 

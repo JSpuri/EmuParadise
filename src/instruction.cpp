@@ -3,6 +3,8 @@
 #include "headers/operations.hpp"
 #include "common/constants.hpp"
 
+#include <iostream>
+
 // Instruction class constructor
 // It sets the operation function and mode accordingly to opcode
 Instruction::Instruction(CPU *cpu, uint8_t opcode) {
@@ -1121,6 +1123,7 @@ Instruction::Instruction(CPU *cpu, uint8_t opcode) {
             this->num_cycles = 0;
             break;
     }
+
     
 }
 

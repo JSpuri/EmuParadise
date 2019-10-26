@@ -1,4 +1,5 @@
 #include "headers/addressbus.hpp"
+#include <iostream>
 
 AddressBus::AddressBus(CPU *cpu, Memory *memory) {
 
@@ -30,6 +31,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
     uint8_t value = 0;
+
 
     if(dynamic_cast<CPU*>(processor)){
 
