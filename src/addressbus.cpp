@@ -1,7 +1,7 @@
 #include "headers/addressbus.hpp"
 #include <iostream>
 
-AddressBus::AddressBus(char *nesfile, CPU *cpu) {
+AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
     this->system_clock = 0;
 
@@ -62,6 +62,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu) {
     this->last_accessed_mem = 0;
 
     this->cpu = cpu;
+    this->ppu = ppu;
 
 }
 
@@ -84,6 +85,8 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
             address = address%PRG_RAM_SIZE;
+
+            this->cpu->last_accessed_mem = address;
             this->INTERNAL_CPU_RAM[address] = word;
         }
         else if(address < PPU_REGISTERS_MIRROR_END){
@@ -91,7 +94,14 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
             //$2008-$3FFF
             address -= PPU_REGISTERS_START;
             address = address%PPU_REGISTERS_NUMBER;
+
+            // Apenas somo pra ficar bonitinho com os valores certos em common/constants.hpp
+            address += PPU_REGISTERS_START;
+
+            // Escrita de fato depende da PPU;
+            ppu->WriteToRegister(address, word);
         }
+
     }
 }
 
@@ -108,6 +118,8 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
             address = address%PRG_RAM_SIZE;
+
+            this->cpu->last_accessed_mem = address;
             value = this->INTERNAL_CPU_RAM[address];
         }
         else if(address < PPU_REGISTERS_MIRROR_END){
@@ -115,6 +127,12 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
             //$2008-$3FFF
             address -= PPU_REGISTERS_START;
             address = address%PPU_REGISTERS_NUMBER;
+
+            // Apenas somo pra ficar bonitinho com os valores certos em common/constants.hpp
+            address += PPU_REGISTERS_START;
+
+            // Leitura depende de fato da ppu
+            value = this->ppu->ReadFromRegister(address);
         }
         else if(address >= PRG_ROM_1_BANK_START){
             if(address < PRG_ROM_2_BANK_START){
@@ -129,6 +147,8 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
                     value = this->PRG_ROM[address];
                 }
             }
+
+            this->cpu->last_accessed_mem = address;
         }
     }
 

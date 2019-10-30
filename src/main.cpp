@@ -5,6 +5,7 @@
 #include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"
 #include "headers/screen.hpp"
+#include "headers/ppu.hpp"
 
 using namespace std;
 
@@ -29,14 +30,17 @@ int main(int argc, const char *argv[]){
         return 1;
     }
 
-    // Initialize PC with the address for RESET label
+    // Create CPU ({} is used to explicitly call default constructor)
     CPU cpu{};
+    // Create PPU ({} is used to explicitly call default constructor)
+    PPU ppu{};
 
     // Create memory - RAM and ROM based on file
-    AddressBus addr_bus(memblock, &cpu);
+    AddressBus addr_bus(memblock, &cpu, &ppu);
     binario.close();
 
     cpu.SetAddressBus(&addr_bus);
+    ppu.SetAddressBus(&addr_bus);
 
 	// tela();
 

@@ -7,15 +7,17 @@
 
 #include "../common/constants.hpp"
 #include "cpu.hpp"
+#include "ppu.hpp"
 
 class CPU;
+class PPU;
 
 // Address Bus Class
 // Handles reading and writing between devices
 class AddressBus {
 
     public:
-        AddressBus(char *nesfile, CPU *cpu);
+        AddressBus(char *nesfile, CPU *cpu, PPU *ppu);
 
         bool Clock();
 
@@ -43,6 +45,8 @@ class AddressBus {
 
     private:
         CPU *cpu;
+        PPU *ppu;
+
         bool run_emulation;
 
         std::vector<uint8_t> INTERNAL_CPU_RAM;
