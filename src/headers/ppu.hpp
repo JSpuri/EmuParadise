@@ -19,11 +19,62 @@ class PPU : public Processor {
     private:
         AddressBus *addr_bus;
 
+        uint8_t PPUCTRL;
+        // ============================ The variables underneath here are contained in PPUCTRL
+        // $2000, $2400, $2800 or $2C00
+        uint16_t base_nametable_addr;
+
+        // add 1 to vram (going across)
+        // add 32 to vram (going down)
+        uint8_t vram_increment_addr_across;
+
+        // $0000 or $1000
+        // Ignored in 8x16 sprite mode
+        uint16_t sprite_pattern_table_addr;
+        
+        // $0000 or $1000
+        uint16_t background_pattern_table_addr;
+
+        // Sprite size: 8x8 (8,8) or 8x16 (8,16) pixels
+        std::pair<uint8_t, uint8_t> sprite_size;
+
+        //PPU master/slave select
+        // (0: read backdrop from EXT pins; 1: output color on EXT pins)
+        bool ppu_master_slave_select;
+        
+        // Generate an NMI at vertical blanking interval
+        bool gen_nmi_at_vblank_interval;
+        // =============================================================== End of PPUCTRL vars
+
+        uint8_t PPUMASK;
+        // ============================ The variables underneath here are contained in PPUMASK
+        bool display_greyscale;
+
+        bool show_background_in_leftmost_8pixels;
+        bool show_sprites_in_leftmost_8pixels;
+
+        bool show_background;
+        bool show_sprites;
+
+        bool emphasize_red;
+        bool emphasize_green;
+        bool emphasize_blue;
+        // =============================================================== End of PPUMASK vars
+        
+        uint8_t PPUSTATUS;
+        // ========================== The variables underneath here are contained in PPUSTATUS
+        // PPUSTATUS stores the least sig 4 bits written to the ppu registers
         uint8_t last_write_to_reg;
 
-        uint8_t PPUCTRL;
-        uint8_t PPUMASK;
-        uint8_t PPUSTATUS;
+        bool sprite_overflow;
+        bool sprite_zero_hit;
+
+        // Vertical blank has started (0: not in vblank; 1: in vblank).
+        // Set at dot 1 of line 241 (the line *after* the post-render
+        // line); cleared after reading $2002 and at dot 1 of the
+        // pre-render line.
+        bool in_vblank;
+        // ============================================================= End of PPUSTATUS vars
 
         uint8_t OAMADDR;
         uint8_t OAMDATA;
@@ -44,6 +95,11 @@ class PPU : public Processor {
         uint16_t palette;
 
         uint8_t PPUGenLatch;
+
+
+        void WriteToPPUCTRL(uint8_t value);
+        void WriteToPPUMASK(uint8_t value);
+        uint8_t ReadFromPPUSTATUS();
 
 };
 
