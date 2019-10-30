@@ -45,8 +45,6 @@ class CPU : public Processor {
         unsigned long int num_cycles;
 
         int8_t ReadImmediate(uint16_t addr);
-        uint16_t ReadZeroAddr(uint16_t addr);
-        uint16_t ReadAbsAddr(uint16_t addr);
 
         int8_t ResolveZeroAddr(uint16_t addr);
         int8_t ResolveZeroAddrX(uint16_t addr);
@@ -58,10 +56,15 @@ class CPU : public Processor {
         int8_t ResolveAbsAddrX(uint16_t addr);
         int8_t ResolveAbsAddrY(uint16_t addr);
 
-        uint16_t ResolveIndirect(uint16_t addr);
         int8_t ResolveIndirectX(uint16_t addr);
         int8_t ResolveIndirectY(uint16_t addr);
 
+        uint16_t ReadZeroAddr(uint16_t addr);
+        uint16_t ReadAbsAddr(uint16_t addr);
+
+        uint16_t ResolveIndirect(uint16_t addr);
+        uint16_t ResolveIndirectAddrX(uint16_t addr);
+        uint16_t ResolveIndirectAddrY(uint16_t addr);
 };
 
 

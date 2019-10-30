@@ -121,17 +121,17 @@ void ASL(int mode, CPU *cpu) {
 
 void BCC(int mode, CPU *cpu) {
     if(cpu->ps[C] == 0)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BCS(int mode, CPU *cpu) {
     if(cpu->ps[C] == 1)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BEQ(int mode, CPU *cpu) {
     if(cpu->ps[Z] == 1)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BIT(int mode, CPU *cpu) {
@@ -146,17 +146,17 @@ void BIT(int mode, CPU *cpu) {
 
 void BMI(int mode, CPU *cpu) {
     if(cpu->ps[N] == 1)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BNE(int mode, CPU *cpu) {
     if(cpu->ps[Z] == 0)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BPL(int mode, CPU *cpu) {
     if(cpu->ps[N] == 0)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BRK(int mode, CPU *cpu) {
@@ -164,12 +164,12 @@ void BRK(int mode, CPU *cpu) {
 
 void BVC(int mode, CPU *cpu) {
     if(cpu->ps[V] == 0)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void BVS(int mode, CPU *cpu) {
     if(cpu->ps[V] == 1)
-        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 1;
+        cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
 }
 
 void CLC(int mode, CPU *cpu) {
