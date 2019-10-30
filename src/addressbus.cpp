@@ -28,6 +28,8 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
     }
 }
 
+// Analisa de qual classe ler e, a partir dai, redireciona o valor
+// para o local correto, de acordo com o endereco dado.
 uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
     uint8_t value = 0;

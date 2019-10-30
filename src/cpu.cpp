@@ -126,12 +126,14 @@ uint16_t CPU::ResolveOPArgAddr(int mode, uint16_t addr) {
 }
 
 
+// Sends write information to bus, storing last_accessed_mem
 void CPU::WriteTo(uint16_t addr, int8_t value) {
 
     this->last_accessed_mem = addr;
     this->addr_bus->WriteTo(this, addr, value);
 }
 
+// Sends read information to bus, storing last_accessed_mem
 uint8_t CPU::ReadFrom(uint16_t addr) {
 
     this->last_accessed_mem = addr;
@@ -143,16 +145,19 @@ void CPU::IncrementNumCycles() {
 
     this->num_cycles += 1;
 }
+// Increments CPU num_cycles with num
 void CPU::IncrementNumCycles(uint8_t num) {
 
     this->num_cycles += num;
 }
 
+// Sets CPU num_cycles to zero
 void CPU::ResetNumCycles() {
 
     this->num_cycles = 0;
 }
 
+// Sets which address bus the CPU will write/read to/from
 void CPU::SetAddressBus(AddressBus *addr_bus){
 
     this->addr_bus = addr_bus;
@@ -300,7 +305,8 @@ uint16_t CPU::ResolveIndirectAddrX(uint16_t addr) {
     return value;
 }
 
-// Retrieves an address from an absolute address + Y
+// Retrieves an address from an absolute address,
+// adding Y to its value
 uint16_t CPU::ResolveIndirectAddrY(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
