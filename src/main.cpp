@@ -5,6 +5,7 @@
 #include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"
 #include "headers/memory.hpp"
+#include "headers/ppu.hpp"
 
 using namespace std;
 
@@ -36,9 +37,13 @@ int main(int argc, const char *argv[]){
     // Initialize PC with the address for RESET label
     CPU cpu(memory.RESET_ADDR);
 
-    AddressBus addr_bus(&cpu, &memory);
+    // Create PPU ({} is used to explicitly call default constructor)
+    PPU ppu{};
+
+    AddressBus addr_bus(&cpu, &memory, &ppu);
 
     cpu.SetAddressBus(&addr_bus);
+    ppu.SetAddressBus(&addr_bus);
 
     // Main cpu loop
     while(cpu.ExecuteNextInstruction());
