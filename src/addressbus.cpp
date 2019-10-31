@@ -102,6 +102,49 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
             ppu->WriteToRegister(address, word);
         }
 
+        else if(address == OAMDMA_ADDR){
+            ppu->WriteToRegister(address, word);
+        }
+    }
+
+    else if(dynamic_cast<PPU*>(processor)){
+        if(address >= NAMETABLE_0_START && address <= NAMETABLE_MIRROR_END){
+
+            // Por causa do mirroring das nametables
+            if(address >= NAMETABLE_MIRROR_START)
+                address -= (4 * NAMETABLES_SIZE);
+
+            if(address <= NAMETABLE_0_END){
+
+                address -= NAMETABLE_0_START;
+                this->memory->WritePPURAM(address, word);
+            }
+
+            else{
+                // Mirroring Horizontal
+                if(this->memory->mirroring_type == 0){
+
+                    if(address <= NAMETABLE_2_END)
+                        address -= NAMETABLES_SIZE;
+
+                    else
+                        address -= (NAMETABLES_SIZE * 2);
+
+
+                    address -= NAMETABLE_0_START;
+                    this->memory->WritePPURAM(address, word);
+                }
+                // Mirroring Vertical
+                else{
+
+                    if(address >= NAMETABLE_2_START && address <= NAMETABLE_3_END)
+                        address -= (NAMETABLES_SIZE * 2);
+
+                    address -= NAMETABLE_0_START;
+                    this->memory->WritePPURAM(address, word);
+                }
+            }
+        }
     }
 }
 
@@ -149,6 +192,53 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
             }
 
             this->cpu->last_accessed_mem = address;
+        }
+    }
+
+    else if(dynamic_cast<PPU*>(processor)){
+
+        if(address <= PATTERN_TABLE_1_END){
+            if(this->memory->size_CHR_ROM_in_8kb_units){
+
+                value = this->memory->ReadCHRROM(address);
+            }
+        }
+        else if(address >= NAMETABLE_0_START && address <= NAMETABLE_MIRROR_END){
+
+            // Por causa do mirroring das nametables
+            if(address >= NAMETABLE_MIRROR_START)
+                address -= (4 * NAMETABLES_SIZE);
+
+            if(address <= NAMETABLE_0_END){
+
+                address -= NAMETABLE_0_START;
+                value = this->memory->ReadPPURAM(address);
+            }
+
+            else{
+                // Mirroring Horizontal
+                if(this->memory->mirroring_type == 0){
+
+                    if(address <= NAMETABLE_2_END)
+                        address -= NAMETABLES_SIZE;
+
+                    else
+                        address -= (NAMETABLES_SIZE * 2);
+
+
+                    address -= NAMETABLE_0_START;
+                    value = this->memory->ReadPPURAM(address);
+                }
+                // Mirroring Vertical
+                else{
+
+                    if(address >= NAMETABLE_2_START && address <= NAMETABLE_3_END)
+                        address -= (NAMETABLES_SIZE * 2);
+
+                    address -= NAMETABLE_0_START;
+                    value = this->memory->ReadPPURAM(address);
+                }
+            }
         }
     }
 

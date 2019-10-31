@@ -5,9 +5,12 @@
 #include <iostream>
 
 // PPU class constructor
+// All information regarding variables are in headers/ppu.hpp
 PPU::PPU() {
 
     this->addr_bus = NULL;
+
+    this->OAM.resize(OAM_SIZE, 0);
     
     this->PPUCTRL = 0;
     this->base_nametable_addr = 0x2000;
@@ -83,43 +86,17 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
             break;
 
         case OAMDATA_ADDR:
-            this->OAMDATA = value;
-            this->OAMADDR += 1;
+            this->WriteToOAMDATA(value);
             break;
 
         // Set pixel on the PPUSCROLL position
         // to be on the top left corner of rendered screen
         case PPUSCROLL_ADDR:
-            this->PPUSCROLL = value;
-
-            if(this->write_to_cam_x){
-
-                this->cam_position_x = this->PPUSCROLL;
-                this->write_to_cam_x = false;
-            }
-
-            else{
-
-                this->cam_position_y = this->PPUSCROLL;
-                this->write_to_cam_x = true;
-            }
-
+            this->WriteToPPUSCROLL(value);
             break;
 
         case PPUADDR_ADDR:
-            if(this->write_to_ppuaddr_lower){
-
-                this->PPUADDR &= 0xFF00;
-                this->PPUADDR += value;
-                this->write_to_ppuaddr_lower = false;
-            }
-            else{
-
-                this->PPUADDR &= 0x00FF;
-                this->PPUADDR += value << 8;
-                this->write_to_ppuaddr_lower = true;
-            }
-
+            this->WriteToPPUADDR(value);
             break;
 
 
@@ -131,6 +108,7 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
         // Not sure what to do
         case OAMDMA_ADDR:
             this->OAMDMA = value;
+            break;
 
         default:
             return;
@@ -151,7 +129,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             break;
 
         case OAMDATA_ADDR:
-            this->PPUGenLatch = this->OAMDATA;
+            this->PPUGenLatch = this->ReadFromOAMDATA();
             break;
 
         // Not sure what to do
@@ -186,6 +164,7 @@ void PPU::WriteToPPUCTRL(uint8_t value) {
 
 }
 
+// Write value to PPUMASK and updates its internal variables for easier use
 void PPU::WriteToPPUMASK(uint8_t value) {
 
     this->PPUMASK = value;
@@ -203,6 +182,7 @@ void PPU::WriteToPPUMASK(uint8_t value) {
     this->emphasize_blue = ((this->PPUMASK & 0x80) ? true : false);
 }
 
+// Read value from its internal variables for easier use and updates PPUSTATUS
 uint8_t PPU::ReadFromPPUSTATUS() {
 
     // Clear least 5 bits and add last_write_to_reg
@@ -213,6 +193,70 @@ uint8_t PPU::ReadFromPPUSTATUS() {
     this->PPUSTATUS |= ((this->sprite_zero_hit) ? 0x40 : 0x00);
     this->PPUSTATUS |= ((this->in_vblank) ? 0x80 : 0x00);
 
+    // Is cleared everytime PPUSTATUS is read
+    this->in_vblank = false;
+
     return this->PPUSTATUS;
+}
+
+void PPU::WriteToOAMDATA(uint8_t value) {
+
+    this->OAMDATA = value;
+    this->WriteToOAM(this->OAMADDR, this->OAMDATA);
+    this->OAMADDR += 1;
+
+}
+
+uint8_t PPU::ReadFromOAMDATA() {
+
+    this->OAMDATA = this->ReadFromOAM(this->OAMADDR);
+    return this->OAMDATA;
+}
+
+void PPU::WriteToPPUSCROLL(uint8_t value) {
+
+    this->PPUSCROLL = value;
+
+    if(this->write_to_cam_x){
+
+        this->cam_position_x = this->PPUSCROLL;
+        this->write_to_cam_x = false;
+    }
+
+    else{
+
+        this->cam_position_y = this->PPUSCROLL;
+        this->write_to_cam_x = true;
+    }
+
+}
+
+void PPU::WriteToPPUADDR(uint8_t value) {
+
+    value %= PPUADDR_WRITE_ADDR_LIMIT;
+
+    if(this->write_to_ppuaddr_lower){
+
+        this->PPUADDR &= 0xFF00;
+        this->PPUADDR += value;
+        this->write_to_ppuaddr_lower = false;
+    }
+    else{
+
+        this->PPUADDR &= 0x00FF;
+        this->PPUADDR += value << 8;
+        this->write_to_ppuaddr_lower = true;
+    }
+
+}
+
+void PPU::WriteToOAM(uint8_t addr, uint8_t value) {
+
+    this->OAM[addr] = value;
+}
+
+uint8_t PPU::ReadFromOAM(uint8_t addr) {
+
+    return this->OAM[addr];
 }
 

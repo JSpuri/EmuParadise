@@ -32,6 +32,7 @@ class AddressBus {
         uint8_t size_PRG_RAM_in_8kb_units;
         uint8_t size_CHR_RAM_in_8kb_units;
 
+        // Determina o tipo de mirroring: 0 eh horizontal, 1 eh vertical
         unsigned int mirroring_type;
 
         uint16_t mapper_number;
@@ -50,7 +51,7 @@ class AddressBus {
         bool run_emulation;
 
         std::vector<uint8_t> INTERNAL_CPU_RAM;
-        // Nametables
+        // Nametables/VRAM
         std::vector<uint8_t> INTERNAL_PPU_RAM;
 
         std::vector<uint8_t> PRG_ROM;
