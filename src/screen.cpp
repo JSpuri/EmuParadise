@@ -17,24 +17,26 @@ void tela() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	SDL_Window* window = SDL_CreateWindow("SDL2 Pixel Drawing",
-		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
+		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 	SDL_Texture* texture = SDL_CreateTexture(renderer,
-		SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, 640, 480);
-	Uint32* pixels = new Uint32[640 * 480];
+		SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, NES_WIDTH, NES_HEIGHT);
+	Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
-	memset(pixels, 255, 640 * 480 * sizeof(Uint32));
-	for (int i = 0; i < SCREEN_WIDTH; i++) {
-		for (int j = 0; j < SCREEN_HEIGHT; j++) {
-			int iSecret = colors[rand() % (16 * 4)];
-			pixels[j * SCREEN_WIDTH + i] = iSecret;
-		}
-	}
+	memset(pixels, 255, NES_WIDTH * NES_HEIGHT * sizeof(Uint32));
+	
 
 	while (!quit)
 	{
-		SDL_UpdateTexture(texture, NULL, pixels, SCREEN_WIDTH* sizeof(Uint32));
+		SDL_UpdateTexture(texture, NULL, pixels, NES_WIDTH* sizeof(Uint32));
+
+		for (int i = 0; i < NES_WIDTH; i++) {
+			for (int j = 0; j < NES_HEIGHT; j++) {
+				int iSecret = colors[rand() % (16 * 4)];
+				pixels[j * NES_WIDTH + i] = iSecret;
+			}
+		}
 
 		SDL_WaitEvent(&event);
 
@@ -57,7 +59,7 @@ void tela() {
 				int mouseY = event.motion.y;
 				srand(time(NULL));
 				int iSecret = colors[rand() % (16 * 4)];
-				pixels[mouseY * 640 + mouseX] = iSecret;
+				pixels[mouseY * NES_WIDTH + mouseX] = iSecret;
 			}
 			break;
 		}
