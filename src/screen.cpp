@@ -16,7 +16,7 @@ void tela() {
 
 	SDL_Init(SDL_INIT_VIDEO);
 
-	SDL_Window* window = SDL_CreateWindow("SDL2 Pixel Drawing",
+	SDL_Window* window = SDL_CreateWindow("EmuParadise",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
