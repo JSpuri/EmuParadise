@@ -15,9 +15,13 @@ class Memory {
         Memory(char *nesfile);       // Constructor
 
         uint8_t ReadCPURAM(uint16_t addr);
+        uint8_t ReadPPURAM(uint16_t addr);
+
         uint8_t ReadPRGROM(uint16_t addr);
+        uint8_t ReadCHRROM(uint16_t addr);
 
         void WriteCPURAM(uint16_t addr, int8_t value);
+        void WritePPURAM(uint16_t addr, int8_t value);
 
         // Attributes
         uint8_t size_PRG_ROM_in_16kb_units;
@@ -26,6 +30,7 @@ class Memory {
         uint8_t size_PGR_RAM_in_8kb_units;
         uint8_t size_CHR_RAM_in_8kb_units;
 
+        // Determina o tipo de mirroring: 0 eh horizontal, 1 eh vertical
         unsigned int mirroring_type;
 
         uint16_t mapper_number;
@@ -39,7 +44,7 @@ class Memory {
 
     private:
         std::vector<uint8_t> INTERNAL_CPU_RAM;
-        // Nametables
+        // Nametables/VRAM
         std::vector<uint8_t> INTERNAL_PPU_RAM;
 
         std::vector<uint8_t> PRG_ROM;

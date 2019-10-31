@@ -62,11 +62,17 @@ Memory::Memory(char *nesfile) {
 
 }
 
-// Le um determinado endereço da memoria RAM
+// Le um determinado endereço da memoria RAM da CPU
 uint8_t Memory::ReadCPURAM(uint16_t addr) {
 
     this->last_accessed_mem = addr;
     return this->INTERNAL_CPU_RAM[addr];
+}
+
+// Le um determinado endereço da memoria RAM da PPU
+uint8_t Memory::ReadPPURAM(uint16_t addr) {
+
+    return this->INTERNAL_PPU_RAM[addr];
 }
 
 // Le um determinado endereço da memoria PRG ROM
@@ -76,12 +82,25 @@ uint8_t Memory::ReadPRGROM(uint16_t addr) {
     return this->PRG_ROM[addr];
 }
 
-// Escreve um determinado valor em um endereco da memoria RAM
+// Le um determinado endereço da memoria PRG ROM
+uint8_t Memory::ReadCHRROM(uint16_t addr) {
+
+    return this->CHR_ROM[addr];
+}
+
+// Escreve um determinado valor em um endereco da memoria RAM da CPU
 void Memory::WriteCPURAM(uint16_t addr, int8_t value) {
 
     this->was_accessed= true;
     this->last_accessed_mem = addr;
     this->INTERNAL_CPU_RAM[addr] = value;
+    
+}
+
+// Escreve um determinado valor em um endereco da memoria RAM da PPU
+void Memory::WritePPURAM(uint16_t addr, int8_t value) {
+
+    this->INTERNAL_PPU_RAM[addr] = value;
     
 }
 

@@ -19,6 +19,13 @@ class PPU : public Processor {
     private:
         AddressBus *addr_bus;
 
+        // OAM stores sprite data (64 sprites with 4 bytes each)
+        // Pos 0: Y Position (OAM_Y_POS)
+        // Pos 1: Index (OAM_INDEX_N)
+        // Pos 2: Attributes (OAM_ATTRIBUTES)
+        // Pos 3: X Position (OAM_X_POS)
+        std::vector<uint8_t> OAM;
+
         uint8_t PPUCTRL;
         // ============================ The variables underneath here are contained in PPUCTRL
         // $2000, $2400, $2800 or $2C00
@@ -40,6 +47,7 @@ class PPU : public Processor {
 
         //PPU master/slave select
         // (0: read backdrop from EXT pins; 1: output color on EXT pins)
+        // MOST LIKELY WE WILL NOT USE THIS
         bool ppu_master_slave_select;
         
         // Generate an NMI at vertical blanking interval
@@ -96,10 +104,17 @@ class PPU : public Processor {
 
         uint8_t PPUGenLatch;
 
-
+        // Write/Read value to/from XXXXXX and updates its internal variables for easier use
         void WriteToPPUCTRL(uint8_t value);
         void WriteToPPUMASK(uint8_t value);
         uint8_t ReadFromPPUSTATUS();
+        void WriteToOAMDATA(uint8_t value);
+        uint8_t ReadFromOAMDATA();
+        void WriteToPPUSCROLL(uint8_t value);
+        void WriteToPPUADDR(uint8_t value);
+
+        void WriteToOAM(uint8_t addr, uint8_t value);
+        uint8_t ReadFromOAM(uint8_t addr);
 
 };
 
