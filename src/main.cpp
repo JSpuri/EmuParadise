@@ -5,6 +5,7 @@
 #include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"
 #include "headers/memory.hpp"
+#include "headers/screen.hpp"
 
 using namespace std;
 
@@ -39,6 +40,8 @@ int main(int argc, const char *argv[]){
     AddressBus addr_bus(&cpu, &memory);
 
     cpu.SetAddressBus(&addr_bus);
+
+	tela();
 
     // Main cpu loop
     while(cpu.ExecuteNextInstruction());

@@ -1,6 +1,8 @@
 #include "headers/operations.hpp"
 
-#include <bits/stdc++.h>
+#include <ios>
+#include <fstream>
+#include <iostream>
 
 #include "common/constants.hpp"
 
