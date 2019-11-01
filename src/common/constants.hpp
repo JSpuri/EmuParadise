@@ -68,6 +68,8 @@
 #define PPUADDR_WRITE_ADDR_LIMIT 0x40
 #define SIZE_PPU_OAM 64
 
+#define SCREEN_SIZE_X 256
+#define SCREEN_SIZE_Y 240
 // ========================================================== OAM Info
 // OAM stores sprites information - 64 sprites * 4 fields of info = 0x100 spaces, [0, 0xFF]
 #define OAM_SIZE 0x100

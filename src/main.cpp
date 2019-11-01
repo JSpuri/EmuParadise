@@ -37,6 +37,7 @@ int main(int argc, const char *argv[]){
     // Initialize PC with the address for RESET label
     CPU cpu(memory.RESET_ADDR, memory.NMI_ADDR);
 
+    std::vector<std::vector<uint8_t>> p_matrix(SCREEN_SIZE_X, std::vector<uint8_t>(SCREEN_SIZE_Y, 0));
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
 
@@ -48,7 +49,7 @@ int main(int argc, const char *argv[]){
     
     // Main cpu loop
     while(cpu.ExecuteNextInstruction()){
-        ppu.Rendering(cpu.GetNumCycles());
+        ppu.Rendering(cpu.GetNumCycles(), &p_matrix);
     }
 
 	return 0;
