@@ -6,6 +6,7 @@
 #include "headers/cpu.hpp"
 #include "headers/memory.hpp"
 #include "headers/ppu.hpp"
+#include "headers/screen.hpp"
 
 using namespace std;
 
@@ -46,7 +47,8 @@ int main(int argc, const char *argv[]){
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-    
+	tela();
+
     // Main cpu loop
     while(cpu.ExecuteNextInstruction()){
         ppu.Rendering(cpu.GetNumCycles(), &p_matrix);

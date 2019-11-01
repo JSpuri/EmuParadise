@@ -21,8 +21,8 @@ CPU::CPU(uint16_t reset_addr, uint16_t nmi_addr) {
     this->ps[Z] = 0;
     this->ps[I] = 1;
     this->ps[D] = 0;
-    this->ps[B] = 1;
-    this->ps[B-1] = 1;
+    this->ps[Bb] = 1;
+    this->ps[Bb-1] = 1;
     this->ps[V] = 0;
     this->ps[N] = 0;
 

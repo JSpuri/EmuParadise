@@ -8,7 +8,7 @@ class AddressBus;
 #define Z 6
 #define I 5
 #define D 4
-#define B 3
+#define Bb 3
 #define V 1
 #define N 0
 
