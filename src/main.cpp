@@ -41,24 +41,26 @@ int main(int argc, const char *argv[]){
     uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y];
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
+	//ppu.WriteToRegister(PPUMASK_ADDR, 8);
+	//ppu.Rendering(2251, &p_matrix);
 
     AddressBus addr_bus(&cpu, &memory, &ppu);
 
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-	tela();
+	tela(p_matrix);
 
     // Main cpu loop
     while(cpu.ExecuteNextInstruction()){
         ppu.Rendering(cpu.GetNumCycles(), p_matrix);
-        for(int i=0;i<SCREEN_SIZE_X;i++){
-            for(int j=0;j<SCREEN_SIZE_Y;j++){
-//                printf("%02x.",p_matrix[i][j]);
-            }
-  //          printf("\n");
-        }
-
+        //for(int i=0;i<SCREEN_SIZE_X;i++){
+            //for(int j=0;j<SCREEN_SIZE_Y;j++){
+                //printf("%02x.",p_matrix[i][j]);
+            //}
+            //printf("\n");
+        //}
+		updateTela(p_matrix);
     }
 
 	return 0;

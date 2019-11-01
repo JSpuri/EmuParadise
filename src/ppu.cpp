@@ -271,13 +271,16 @@ void PPU::WriteToPPUADDR(uint8_t value) {
 void PPU::WriteToPPUDATA(uint8_t value) {
 
     this->WriteTo(this->PPUADDR, value);
+    printf("PPU ADDR increment: %02x\n", this->vram_increment_addr_across);
     this->PPUADDR += this->vram_increment_addr_across;
+    this->PPUADDR %= 0x4000;
 }
 
 uint8_t PPU::ReadFromPPUDATA() {
 
     uint8_t value = this->ReadFrom(this->PPUADDR);
     this->PPUADDR += this->vram_increment_addr_across;
+    this->PPUADDR %= 0x4000;
 
     return value;
 }

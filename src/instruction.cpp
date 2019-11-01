@@ -1130,7 +1130,6 @@ Instruction::Instruction(CPU *cpu, uint8_t opcode) {
 // and reset memory->was_accessed to false (Operation must handle
 // setting memory->was_acessed to true)
 void Instruction::Run() {
-
     uint16_t last_pc = cpu->pc;
 
     this->operation(mode, cpu);
@@ -1152,8 +1151,9 @@ void Instruction::Run() {
         }
     }
 
-    if (this->access_memory)
-        logls();
+	if (this->access_memory) {
+		logls();
+	}
     else
         log();
 }
@@ -1167,8 +1167,9 @@ void Instruction::log(){
 }
 
 void Instruction::logls(){
+	//printf("endereço = %d\n", cpu->last_accessed_mem);
 	printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x |",
-			cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[0], cpu->ps[1], cpu->ps[2], cpu->ps[3], cpu->ps[4], cpu->ps[5], cpu->ps[6], cpu->ps[7], cpu->last_accessed_mem, cpu->ReadFrom(cpu->last_accessed_mem));
+			 cpu->pc, (uint8_t) cpu->a, (uint8_t) cpu->x, (uint8_t) cpu->y, cpu->sp, cpu->ps[N], cpu->ps[V], cpu->ps[Bb - 1], cpu->ps[Bb], cpu->ps[D], cpu->ps[I], cpu->ps[Z], cpu->ps[C], cpu->last_accessed_mem, cpu->ReadFrom(cpu->last_accessed_mem));
 
 	printf("\n");
 }

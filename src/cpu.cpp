@@ -36,9 +36,7 @@ CPU::CPU(uint16_t reset_addr, uint16_t nmi_addr) {
 
 // If it finds a BRK, returns false to stop the main loop
 bool CPU::ExecuteNextInstruction() {
-
     if(this->time_for_NMI){
-
         this->WriteTo(0x0100 + (this->sp)--, this->pc >> 8);
         this->WriteTo(0x0100 + (this->sp)--, this->pc & 0xFF);
         PHP(M_IMPLICIT, this);
@@ -54,8 +52,8 @@ bool CPU::ExecuteNextInstruction() {
         return false;
 
     Instruction curr_instruction(this, curr_opcode);
-    curr_instruction.Run();
 
+    curr_instruction.Run();
 
     return true;
 }

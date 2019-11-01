@@ -46,6 +46,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
     }
 
     else if(dynamic_cast<PPU*>(processor)){
+        printf("PPU %02x -> [%04x]\n", word, address);
         if(address >= NAMETABLE_0_START && address <= NAMETABLE_MIRROR_END){
 
             // Por causa do mirroring das nametables
@@ -62,7 +63,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
                 // Mirroring Horizontal
                 if(this->memory->mirroring_type == 0){
 
-                    if(address <= NAMETABLE_2_END)
+                    if(address <= NAMETABLE_1_END || address <= NAMETABLE_2_END)
                         address -= NAMETABLES_SIZE;
 
                     else
@@ -103,11 +104,11 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
     uint8_t value = 0;
 
     if(dynamic_cast<CPU*>(processor)){
-
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
-            address = address%PRG_RAM_SIZE;
+            address = address % INTERNAL_CPU_RAM_SIZE;
+			//printf("address = %d", address);
             this->cpu->last_accessed_mem = address;
             value = this->memory->ReadCPURAM(address);
         }
