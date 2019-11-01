@@ -59,12 +59,15 @@ PPU::PPU() {
 }
 
 // PPU Rendering
-void PPU::Rendering(unsigned int NumCPUCycles) {
+void PPU::Rendering(unsigned int NumCPUCycles, std::vector<std::vector<uint8_t>> *p_matrix) {
 
     if(NumCPUCycles < 2250 && this->gen_nmi_at_vblank_interval)
         return;
 
     this->in_vblank = false;
+
+    if(this->show_background)
+        this->load_background(p_matrix);
 
     this->in_vblank = true;
     if(this->gen_nmi_at_vblank_interval)
@@ -148,7 +151,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
 
         // Not sure what to do
         case PPUDATA_ADDR:
-            this->PPUGenLatch = this->PPUDATA;
+            this->PPUGenLatch = this->ReadFromPPUDATA();
             break;
     }
 
@@ -271,6 +274,14 @@ void PPU::WriteToPPUDATA(uint8_t value) {
     this->PPUADDR += this->vram_increment_addr_across;
 }
 
+uint8_t PPU::ReadFromPPUDATA() {
+
+    uint8_t value = this->ReadFrom(this->PPUADDR);
+    this->PPUADDR += this->vram_increment_addr_across;
+
+    return value;
+}
+
 void PPU::WriteToOAMDMA(uint8_t value) {
 
     this->OAMDMA = value;
@@ -284,5 +295,175 @@ void PPU::WriteToOAM(uint8_t addr, uint8_t value) {
 uint8_t PPU::ReadFromOAM(uint8_t addr) {
 
     return this->OAM[addr];
+}
+
+// Godspeed to you, reading this
+void PPU::load_background(std::vector<std::vector<uint8_t>> *p_matrix) {
+
+    uint8_t tile_number;
+    uint8_t pallet_number;
+    uint16_t pallet_att_index = 0x2C0;
+    uint8_t row = 0;
+
+    uint8_t tile[8][8] = {0};
+
+    for(uint16_t i = 0; i < 0x400 ; i++){
+
+        //http://wiki.nesdev.com/w/index.php/PPU_nametables
+        // Pega o numero da tile no chr
+        tile_number = this->ReadFrom(this->base_nametable_addr + i);
+        printf("Tile number: %u\n", tile_number);
+
+        //http://wiki.nesdev.com/w/index.php/PPU_attribute_tables
+        // Pega o numero da paleta
+        // Isso esta errado, mas bola pra frente. Nosso jogo eh preto e branco mesmo
+        pallet_number = this->ReadFrom(pallet_att_index);
+        // Ele guarda as cores de quatro tiles numa so
+        if(i % 2 == 0){
+            if(((this->base_nametable_addr + i) & 0xFFF0) % 0x40 != 0){
+                // Top left
+                pallet_number = pallet_number & 0x03;
+            }
+            else{
+                // Bottom left
+                pallet_number = (pallet_number & 0x30) >> 4;
+            }
+        }
+        else if(i % 2 != 0){
+            if(((this->base_nametable_addr + i) & 0xFFF0) % 0x40 != 0){
+                // Top right
+                pallet_number = (pallet_number & 0x0C) >> 2;
+            }
+            else{
+                // Bottom right
+                pallet_number = (pallet_number & 0xC0) >> 6;
+            }
+        }
+
+        printf("Pallet number: %u\n", pallet_number);
+        uint8_t color_1 = this->ReadFrom(PALLETE_RAM_INDEXES_START + 1 + (pallet_number * 0x04));
+        uint8_t color_2 = this->ReadFrom(PALLETE_RAM_INDEXES_START + 2 + (pallet_number * 0x04));
+        uint8_t color_3 = this->ReadFrom(PALLETE_RAM_INDEXES_START + 3 + (pallet_number * 0x04));
+
+        printf("Color number 1: %u\n", color_1);
+        printf("Color number 2: %u\n", color_2);
+        printf("Color number 3: %u\n", color_3);
+
+        //http://wiki.nesdev.com/w/index.php/PPU_pattern_tables
+        // agora vamos de fato carregar o sprite bg
+        for(uint8_t j = 0; j <= 0x07; j++){
+
+            printf("j: %u\n", j);
+            uint8_t pixel_pattern_low = this->ReadFrom(this->background_pattern_table_addr + (0x10 * tile_number) + j);
+            uint8_t pixel_pattern_high = this->ReadFrom(this->background_pattern_table_addr + (0x10 * tile_number) + j + 0x08);
+
+            tile[j][7] = pixel_pattern_low & 0x01;
+            tile[j][7] += (pixel_pattern_high & 0x01) << 1;
+
+            if(tile[j][7] == 1)
+                tile[j][7] = color_1;
+            else if(tile[j][7] == 2)
+                tile[j][7] = color_2;
+            else if(tile[j][7] == 3)
+                tile[j][7] = color_3;
+            else
+                tile[j][7] = 0x0f;
+
+            tile[j][6] = pixel_pattern_low & 0x02;
+            tile[j][6] += (pixel_pattern_high & 0x02) << 1;
+
+            if(tile[j][6] == 1)
+                tile[j][6] = color_1;
+            else if(tile[j][6] == 2)
+                tile[j][6] = color_2;
+            else if(tile[j][6] == 3)
+                tile[j][6] = color_3;
+            else
+                tile[j][6] = 0x0f;
+
+            tile[j][5] = pixel_pattern_low & 0x04;
+            tile[j][5] += (pixel_pattern_high & 0x04) << 1;
+
+            if(tile[j][5] == 1)
+                tile[j][5] = color_1;
+            else if(tile[j][5] == 2)
+                tile[j][5] = color_2;
+            else if(tile[j][5] == 3)
+                tile[j][5] = color_3;
+            else
+                tile[j][5] = 0x0f;
+
+            tile[j][4] = pixel_pattern_low & 0x08;
+            tile[j][4] += (pixel_pattern_high & 0x08) << 1;
+
+            if(tile[j][4] == 1)
+                tile[j][4] = color_1;
+            else if(tile[j][4] == 2)
+                tile[j][4] = color_2;
+            else if(tile[j][4] == 3)
+                tile[j][4] = color_3;
+            else
+                tile[j][4] = 0x0f;
+
+            tile[j][3] = pixel_pattern_low & 0x10;
+            tile[j][3] += (pixel_pattern_high & 0x10) << 1;
+
+            if(tile[j][3] == 1)
+                tile[j][3] = color_1;
+            else if(tile[j][3] == 2)
+                tile[j][3] = color_2;
+            else if(tile[j][3] == 3)
+                tile[j][3] = color_3;
+            else
+                tile[j][3] = 0x0f;
+
+            tile[j][2] = pixel_pattern_low & 0x20;
+            tile[j][2] += (pixel_pattern_high & 0x20) << 1;
+
+            if(tile[j][2] == 1)
+                tile[j][2] = color_1;
+            else if(tile[j][2] == 2)
+                tile[j][2] = color_2;
+            else if(tile[j][2] == 3)
+                tile[j][2] = color_3;
+            else
+                tile[j][2] = 0x0f;
+
+            tile[j][1] = pixel_pattern_low & 0x40;
+            tile[j][1] += (pixel_pattern_high & 0x40) << 1;
+
+            if(tile[j][1] == 1)
+                tile[j][1] = color_1;
+            else if(tile[j][1] == 2)
+                tile[j][1] = color_2;
+            else if(tile[j][1] == 3)
+                tile[j][1] = color_3;
+            else
+                tile[j][1] = 0x0f;
+
+            tile[j][0] = pixel_pattern_low & 0x80;
+            tile[j][0] += (pixel_pattern_high & 0x80) << 1;
+
+            if(tile[j][0] == 1)
+                tile[j][0] = color_1;
+            else if(tile[j][0] == 2)
+                tile[j][0] = color_2;
+            else if(tile[j][0] == 3)
+                tile[j][0] = color_3;
+            else
+                tile[j][0] = 0x0f;
+
+        }
+
+        for(uint8_t j = row * 0x7; j < (row*0x7) + 0x8; j++)
+            for(uint8_t k = i%0x20; k < (i%0x20) + 0x8; k++)
+                (*p_matrix)[j][k] = tile[j - (row*0x8)][k - (i%0x20)];
+
+
+        if(i % 0x20 == 0)
+            row++;
+        printf("New Row: %u\n", row);
+    }
+
 }
 
