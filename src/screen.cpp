@@ -23,12 +23,11 @@ void tela(std::vector<std::vector<uint8_t>> p_matrix) {
 
 	SDL_Init(SDL_INIT_VIDEO);
 
-
-
 	window = SDL_CreateWindow("EmuParadise", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, NES_WIDTH, NES_HEIGHT);
+
 	Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
 	// inicializa todos os pixels da textura como branco
@@ -48,6 +47,7 @@ void tela(std::vector<std::vector<uint8_t>> p_matrix) {
 	SDL_RenderPresent(renderer);
 
 }
+
 void updateTela(std::vector<std::vector<uint8_t>> p_matrix) {
 
 	srand(time(NULL));
@@ -65,7 +65,6 @@ void updateTela(std::vector<std::vector<uint8_t>> p_matrix) {
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
-
 
 }
 

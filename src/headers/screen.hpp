@@ -1,9 +1,12 @@
 #ifndef PPU_H
 #define SDL_MAIN_HANDLED
-#include <SDL.h>
+#include<vector>
+//LINUX
+#include "SDL2/SDL.h"
+//Windows
+//#include <SDL.h>
 #include <stdio.h>
 #include<iostream>
-#include<vector>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;

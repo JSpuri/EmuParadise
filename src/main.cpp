@@ -43,14 +43,14 @@ int main(int argc, const char *argv[]){
     PPU ppu{};
 	//ppu.WriteToRegister(PPUMASK_ADDR, 8);
 	//ppu.Rendering(2251, &p_matrix);
-	tela(p_matrix);
 
     AddressBus addr_bus(&cpu, &memory, &ppu);
 
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-    
+	tela(p_matrix);
+
     // Main cpu loop
     while(cpu.ExecuteNextInstruction()){
         ppu.Rendering(cpu.GetNumCycles(), &p_matrix);
