@@ -65,8 +65,8 @@ void adc_aux(CPU *cpu, int8_t num) {
     cpu->ps[N] = ((result < 0) ? 1 : 0);
 
     if(((num > 0) && (cpu->a > 0) && (result <= 0)) || ((num < 0) && (cpu->a < 0) && (result >= 0))){
-				cpu->ps[V] = 1;
-			}
+	    cpu->ps[V] = 1;
+    }
     else if((num + cpu->a == 0x7f) && (cpu->ps[C] == 1)){
 		cpu->ps[V] = 1;
 	}
