@@ -302,7 +302,7 @@ void PPU::load_background(std::vector<std::vector<uint8_t>> *p_matrix) {
 
     uint8_t tile_number;
     uint8_t pallet_number;
-    uint16_t pallet_att_index = 0x2C0;
+    uint16_t pallet_att_index = 0x23C0;
     uint8_t row = 0;
 
     uint8_t tile[8][8] = {0};
