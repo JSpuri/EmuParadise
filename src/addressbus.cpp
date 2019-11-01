@@ -103,7 +103,13 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
         }
 
         else if(address == OAMDMA_ADDR){
+
             ppu->WriteToRegister(address, word);
+            uint16_t abs_address = word << 8;
+
+            for(uint16_t i = 0x00; i < 0x100; i++){
+                ppu->WriteToRegister(OAMDATA_ADDR, this->cpu->ReadFrom(abs_address + i));
+            }
         }
     }
 
@@ -117,12 +123,12 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
             if(address <= NAMETABLE_0_END){
 
                 address -= NAMETABLE_0_START;
-                this->memory->WritePPURAM(address, word);
+                this->INTERNAL_PPU_RAM[address] = word;
             }
 
             else{
                 // Mirroring Horizontal
-                if(this->memory->mirroring_type == 0){
+                if(this->mirroring_type == 0){
 
                     if(address <= NAMETABLE_2_END)
                         address -= NAMETABLES_SIZE;
@@ -132,7 +138,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 
 
                     address -= NAMETABLE_0_START;
-                    this->memory->WritePPURAM(address, word);
+                    this->INTERNAL_PPU_RAM[address] = word;
                 }
                 // Mirroring Vertical
                 else{
@@ -141,9 +147,17 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
                         address -= (NAMETABLES_SIZE * 2);
 
                     address -= NAMETABLE_0_START;
-                    this->memory->WritePPURAM(address, word);
+                    this->INTERNAL_PPU_RAM[address] = word;
                 }
             }
+        }
+        else if(address <= PALLETE_RAM_INDEXES_END){
+
+            address -= PALLETE_RAM_INDEXES_START;
+        }
+        else{
+
+            address %= PALLETE_RAM_MIRRORING_START;
         }
     }
 }
@@ -153,7 +167,6 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
     uint8_t value = 0;
-
 
     if(dynamic_cast<CPU*>(processor)){
 
@@ -198,9 +211,9 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
     else if(dynamic_cast<PPU*>(processor)){
 
         if(address <= PATTERN_TABLE_1_END){
-            if(this->memory->size_CHR_ROM_in_8kb_units){
+            if(this->size_CHR_ROM_in_8kb_units){
 
-                value = this->memory->ReadCHRROM(address);
+                value = this->CHR_ROM[address];
             }
         }
         else if(address >= NAMETABLE_0_START && address <= NAMETABLE_MIRROR_END){
@@ -212,12 +225,12 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
             if(address <= NAMETABLE_0_END){
 
                 address -= NAMETABLE_0_START;
-                value = this->memory->ReadPPURAM(address);
+                value = this->INTERNAL_PPU_RAM[address];
             }
 
             else{
                 // Mirroring Horizontal
-                if(this->memory->mirroring_type == 0){
+                if(this->mirroring_type == 0){
 
                     if(address <= NAMETABLE_2_END)
                         address -= NAMETABLES_SIZE;
@@ -227,7 +240,7 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
 
                     address -= NAMETABLE_0_START;
-                    value = this->memory->ReadPPURAM(address);
+                    value = this->INTERNAL_PPU_RAM[address];
                 }
                 // Mirroring Vertical
                 else{
@@ -236,11 +249,25 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
                         address -= (NAMETABLES_SIZE * 2);
 
                     address -= NAMETABLE_0_START;
-                    value = this->memory->ReadPPURAM(address);
+                    value = this->INTERNAL_PPU_RAM[address];
                 }
             }
+        }
+        else if(address <= PALLETE_RAM_INDEXES_END){
+
+            address -= PALLETE_RAM_INDEXES_START;
+        }
+        else{
+
+            address %= PALLETE_RAM_MIRRORING_START;
         }
     }
 
     return value;
 }
+
+void AddressBus::GenNMI() {
+
+    this->cpu->time_for_NMI = true;
+}
+

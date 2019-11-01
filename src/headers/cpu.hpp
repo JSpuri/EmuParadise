@@ -28,6 +28,7 @@ class CPU : public Processor {
         uint8_t ps[8];  //p[NV-BDIZC]
 
         uint16_t last_accessed_mem;
+        bool time_for_NMI;
 
         bool Clock();
         

@@ -23,6 +23,7 @@ class AddressBus {
 
         void WriteTo(Processor *processor, uint16_t address, uint8_t word);
         uint8_t ReadFrom(Processor *processor, uint16_t address);
+        void GenNMI();
 
         uint32_t system_clock;
 

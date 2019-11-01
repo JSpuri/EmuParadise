@@ -118,7 +118,7 @@ heart   .dsb #$10
     .base $10000-(PRG_COUNT*$4000)   ;$C000 to $FFFA in ROM with 16KiB
                                      ;$8000 to $FFFF in ROM with 32KiB
 
-	.include "sound_engine_asm6f.asm"
+	;.include "sound_engine_asm6f.asm"
 ;----- second 8k bank of PRG-ROM    
     ;bank 1
     ;.base $a000
@@ -285,10 +285,10 @@ LoadAttributeLoop:
     ;STA $2001               ; no clipping on left side of screen (8 pixels)
     
 ;Enable sound channels
-    jsr sound_init
+    ;jsr sound_init
     
-    lda #$02
-    sta current_song
+    ;lda #$02
+    ;sta current_song
     ;jsr sound_load
     
     lda #$88
@@ -296,8 +296,8 @@ LoadAttributeLoop:
     lda #$18
     sta $2001   ;turn PPU on
 	
-	lda current_song
-    jsr sound_load
+	;lda current_song
+    ;jsr sound_load
 
 StartBattle:
 
@@ -345,7 +345,7 @@ battle_turn:
 
     JSR CheckCollision
 
-	jsr sound_play_frame    ;run our sound engine after all drawing code is done.
+	;jsr sound_play_frame    ;run our sound engine after all drawing code is done.
                             ;this ensures our sound engine gets run once per frame.
 
     RTI             ;Return from Interrupt
