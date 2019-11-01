@@ -1,6 +1,7 @@
 #ifndef PROCESSOR_HPP
 #define PROCESSOR_HPP
 
+#include "../common/constants.hpp"
 #include <cstdlib>
 #include <cstdint>
 #include <vector>

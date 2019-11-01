@@ -59,7 +59,7 @@ PPU::PPU() {
 }
 
 // PPU Rendering
-void PPU::Rendering(unsigned int NumCPUCycles, std::vector<std::vector<uint8_t>> *p_matrix) {
+void PPU::Rendering(unsigned int NumCPUCycles, uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
     if(NumCPUCycles < 2250 && this->gen_nmi_at_vblank_interval)
         return;
@@ -298,7 +298,7 @@ uint8_t PPU::ReadFromOAM(uint8_t addr) {
 }
 
 // Godspeed to you, reading this
-void PPU::load_background(std::vector<std::vector<uint8_t>> *p_matrix) {
+void PPU::load_background(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
     uint8_t tile_number;
     uint8_t pallet_number;
@@ -457,7 +457,7 @@ void PPU::load_background(std::vector<std::vector<uint8_t>> *p_matrix) {
 
         for(uint8_t j = row * 0x7; j < (row*0x7) + 0x8; j++)
             for(uint8_t k = i%0x20; k < (i%0x20) + 0x8; k++)
-                (*p_matrix)[j][k] = tile[j - (row*0x8)][k - (i%0x20)];
+                p_matrix[j][k] = tile[j - (row*0x8)][k - (i%0x20)];
 
 
         if(i % 0x20 == 0)

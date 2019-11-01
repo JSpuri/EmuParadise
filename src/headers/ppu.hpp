@@ -9,15 +9,13 @@ class PPU : public Processor {
     public:
         PPU();
 
-        std::vector< std::vector<uint8_t> > pixel_matrix;
-
         // Vertical blank has started (0: not in vblank; 1: in vblank).
         // Set at dot 1 of line 241 (the line *after* the post-render
         // line); cleared after reading $2002 and at dot 1 of the
         // pre-render line.
         bool in_vblank;
 
-        void Rendering(unsigned int NumCPUCycles, std::vector<std::vector<uint8_t>> *p_matrix);
+        void Rendering(unsigned int NumCPUCycles, uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]);
         void WriteTo(uint16_t addr, int8_t value) override;
         uint8_t ReadFrom(uint16_t addr) override;
 
@@ -123,7 +121,7 @@ class PPU : public Processor {
         void WriteToOAM(uint8_t addr, uint8_t value);
         uint8_t ReadFromOAM(uint8_t addr);
  
-        void load_background(std::vector<std::vector<uint8_t>> *p_matrix);
+        void load_background(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]);
 
 };
 
