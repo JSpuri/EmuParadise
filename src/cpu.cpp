@@ -51,7 +51,6 @@ bool CPU::Clock() {
 
     this->instructionNumCycles--;
 
-
     return true;
 }
 

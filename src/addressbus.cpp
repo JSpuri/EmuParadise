@@ -169,12 +169,10 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
     uint8_t value = 0;
 
     if(dynamic_cast<CPU*>(processor)){
-
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
-            address = address%PRG_RAM_SIZE;
-
+            address = address % INTERNAL_CPU_RAM_SIZE;
             this->cpu->last_accessed_mem = address;
             value = this->INTERNAL_CPU_RAM[address];
         }
