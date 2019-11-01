@@ -6,6 +6,7 @@
 #include "headers/cpu.hpp"
 #include "headers/memory.hpp"
 #include "headers/ppu.hpp"
+#include "headers/screen.hpp"
 
 using namespace std;
 
@@ -40,6 +41,9 @@ int main(int argc, const char *argv[]){
     std::vector<std::vector<uint8_t>> p_matrix(SCREEN_SIZE_X, std::vector<uint8_t>(SCREEN_SIZE_Y, 0));
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
+	//ppu.WriteToRegister(PPUMASK_ADDR, 8);
+	//ppu.Rendering(2251, &p_matrix);
+	tela(p_matrix);
 
     AddressBus addr_bus(&cpu, &memory, &ppu);
 
@@ -50,6 +54,7 @@ int main(int argc, const char *argv[]){
     // Main cpu loop
     while(cpu.ExecuteNextInstruction()){
         ppu.Rendering(cpu.GetNumCycles(), &p_matrix);
+		updateTela(p_matrix);
     }
 
 	return 0;

@@ -66,7 +66,6 @@ Memory::Memory(char *nesfile) {
 
 // Le um determinado endereço da memoria RAM da CPU
 uint8_t Memory::ReadCPURAM(uint16_t addr) {
-
     this->last_accessed_mem = addr;
     return this->INTERNAL_CPU_RAM[addr];
 }
