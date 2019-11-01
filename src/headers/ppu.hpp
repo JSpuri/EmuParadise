@@ -8,6 +8,14 @@ class PPU : public Processor {
 
     public:
         PPU();
+
+        // Vertical blank has started (0: not in vblank; 1: in vblank).
+        // Set at dot 1 of line 241 (the line *after* the post-render
+        // line); cleared after reading $2002 and at dot 1 of the
+        // pre-render line.
+        bool in_vblank;
+
+        void Rendering(unsigned int NumCPUCycles);
         void WriteTo(uint16_t addr, int8_t value) override;
         uint8_t ReadFrom(uint16_t addr) override;
 
@@ -76,12 +84,6 @@ class PPU : public Processor {
 
         bool sprite_overflow;
         bool sprite_zero_hit;
-
-        // Vertical blank has started (0: not in vblank; 1: in vblank).
-        // Set at dot 1 of line 241 (the line *after* the post-render
-        // line); cleared after reading $2002 and at dot 1 of the
-        // pre-render line.
-        bool in_vblank;
         // ============================================================= End of PPUSTATUS vars
 
         uint8_t OAMADDR;
@@ -112,6 +114,8 @@ class PPU : public Processor {
         uint8_t ReadFromOAMDATA();
         void WriteToPPUSCROLL(uint8_t value);
         void WriteToPPUADDR(uint8_t value);
+        void WriteToPPUDATA(uint8_t value);
+        void WriteToOAMDMA(uint8_t value);
 
         void WriteToOAM(uint8_t addr, uint8_t value);
         uint8_t ReadFromOAM(uint8_t addr);

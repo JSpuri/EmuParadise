@@ -16,12 +16,15 @@ class Memory {
 
         uint8_t ReadCPURAM(uint16_t addr);
         uint8_t ReadPPURAM(uint16_t addr);
+        uint8_t ReadPALLETERAM(uint16_t addr);
 
         uint8_t ReadPRGROM(uint16_t addr);
         uint8_t ReadCHRROM(uint16_t addr);
 
         void WriteCPURAM(uint16_t addr, int8_t value);
         void WritePPURAM(uint16_t addr, int8_t value);
+        void WritePALLETERAM(uint16_t addr, uint8_t value);
+
 
         // Attributes
         uint8_t size_PRG_ROM_in_16kb_units;
@@ -54,6 +57,9 @@ class Memory {
         std::vector<uint8_t> PRG_RAM;
         // Pattern Tables - Pode ser CHR_ROM
         std::vector<uint8_t> CHR_RAM;
+
+        // Palette Ram indexes from PPU
+        std::vector<uint8_t> PALLETE_RAM;
 
 };
 

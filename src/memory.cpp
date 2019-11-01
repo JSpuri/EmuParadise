@@ -38,6 +38,8 @@ Memory::Memory(char *nesfile) {
     this->PRG_RAM.resize(pgr_ram_size, 0);
     this->CHR_RAM.resize(chr_ram_size, 0);
 
+    this->PALLETE_RAM.resize(PALLETE_RAM_INDEXES_SIZE, 0);
+
     // Loop de copia do arquivo binario para o vetor de uint8_t (de fato nossa memoria)
     for(uint16_t i = 0; i < pgr_rom_size; i++)
         this->PRG_ROM[i] = nesfile[i + 0x10];
@@ -75,6 +77,12 @@ uint8_t Memory::ReadPPURAM(uint16_t addr) {
     return this->INTERNAL_PPU_RAM[addr];
 }
 
+// Le um determinado endereco da memora PALLETE RAM da PPU
+uint8_t Memory::ReadPALLETERAM(uint16_t addr) {
+
+    return this->PALLETE_RAM[addr];
+}
+
 // Le um determinado endereço da memoria PRG ROM
 uint8_t Memory::ReadPRGROM(uint16_t addr) {
 
@@ -101,6 +109,11 @@ void Memory::WriteCPURAM(uint16_t addr, int8_t value) {
 void Memory::WritePPURAM(uint16_t addr, int8_t value) {
 
     this->INTERNAL_PPU_RAM[addr] = value;
-    
+}
+
+// Escreve um determinado valor em um endereco de memoria PALLETE RAM da PPU
+void Memory::WritePALLETERAM(uint16_t addr, uint8_t value) {
+
+    this->PALLETE_RAM[addr] = value;
 }
 

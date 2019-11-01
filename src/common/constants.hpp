@@ -65,7 +65,7 @@
 // ========================================================== PPU Misc Info
 // Temos apenas duas nametables - mirroring ocorre
 #define INTERNAL_PPU_RAM_SIZE 0x0800
-#define PPUADDR_WRITE_ADDR_LIMIT 0x4000
+#define PPUADDR_WRITE_ADDR_LIMIT 0x40
 #define SIZE_PPU_OAM 64
 
 // ========================================================== OAM Info

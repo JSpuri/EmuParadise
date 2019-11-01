@@ -35,7 +35,7 @@ int main(int argc, const char *argv[]){
     binario.close();
 
     // Initialize PC with the address for RESET label
-    CPU cpu(memory.RESET_ADDR);
+    CPU cpu(memory.RESET_ADDR, memory.NMI_ADDR);
 
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
@@ -45,8 +45,11 @@ int main(int argc, const char *argv[]){
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
+    
     // Main cpu loop
-    while(cpu.ExecuteNextInstruction());
+    while(cpu.ExecuteNextInstruction()){
+        ppu.Rendering(cpu.GetNumCycles());
+    }
 
 	return 0;
 }

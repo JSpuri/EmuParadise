@@ -35,7 +35,13 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
         }
 
         else if(address == OAMDMA_ADDR){
+
             ppu->WriteToRegister(address, word);
+            uint16_t abs_address = word << 8;
+
+            for(uint16_t i = 0x00; i < 0x100; i++){
+                ppu->WriteToRegister(OAMDATA_ADDR, this->cpu->ReadFrom(abs_address + i));
+            }
         }
     }
 
@@ -77,6 +83,16 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
                 }
             }
         }
+        else if(address <= PALLETE_RAM_INDEXES_END){
+
+            address -= PALLETE_RAM_INDEXES_START;
+            this->memory->WritePALLETERAM(address, word);
+        }
+        else{
+
+            address %= PALLETE_RAM_MIRRORING_START;
+            this->memory->WritePALLETERAM(address, word);
+        }
     }
 }
 
@@ -85,7 +101,6 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
     uint8_t value = 0;
-
 
     if(dynamic_cast<CPU*>(processor)){
 
@@ -171,7 +186,24 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
                 }
             }
         }
+        else if(address <= PALLETE_RAM_INDEXES_END){
+
+            address -= PALLETE_RAM_INDEXES_START;
+            value = this->memory->ReadPALLETERAM(address);
+        }
+        else{
+
+            address %= PALLETE_RAM_MIRRORING_START;
+            value = this->memory->ReadPALLETERAM(address);
+        }
     }
 
     return value;
 }
+
+void AddressBus::GenNMI() {
+
+    this->cpu->time_for_NMI = true;
+    this->cpu->ResetNumCycles();
+}
+

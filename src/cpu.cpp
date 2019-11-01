@@ -1,13 +1,14 @@
 #include "headers/cpu.hpp"
 
 #include "headers/instruction.hpp"
+#include "headers/operations.hpp"
 #include "headers/addressbus.hpp"
 #include "common/constants.hpp"
 
 #include <iostream>
 
 // CPU class constructor
-CPU::CPU(uint16_t reset_addr) {
+CPU::CPU(uint16_t reset_addr, uint16_t nmi_addr) {
 
     this->a = 0;
     this->x = 0;
@@ -27,6 +28,8 @@ CPU::CPU(uint16_t reset_addr) {
 
     this->addr_bus = NULL;
     this->num_cycles = 0;
+    this->time_for_NMI = false;
+    this->NMI_addr = nmi_addr;
 
     this->last_accessed_mem = 0;
 }
@@ -34,6 +37,16 @@ CPU::CPU(uint16_t reset_addr) {
 // If it finds a BRK, returns false to stop the main loop
 bool CPU::ExecuteNextInstruction() {
 
+    if(this->time_for_NMI){
+
+        this->WriteTo(0x0100 + (this->sp)--, this->pc >> 8);
+        this->WriteTo(0x0100 + (this->sp)--, this->pc & 0xFF);
+        PHP(M_IMPLICIT, this);
+
+        this->time_for_NMI = false;
+        this->pc = this->NMI_addr;
+
+    }
     uint8_t curr_opcode = this->ReadFrom(this->pc);
 
     // If next instruction is a BRK, stop the program
@@ -41,8 +54,8 @@ bool CPU::ExecuteNextInstruction() {
         return false;
 
     Instruction curr_instruction(this, curr_opcode);
-    
     curr_instruction.Run();
+
 
     return true;
 }
@@ -153,6 +166,11 @@ void CPU::IncrementNumCycles(uint8_t num) {
 void CPU::ResetNumCycles() {
 
     this->num_cycles = 0;
+}
+
+unsigned int CPU::GetNumCycles() {
+
+    return this->num_cycles;
 }
 
 // Sets which address bus the CPU will write/read to/from

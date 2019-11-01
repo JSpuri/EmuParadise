@@ -58,13 +58,27 @@ PPU::PPU() {
     this->PPUGenLatch = 0;
 }
 
+// PPU Rendering
+void PPU::Rendering(unsigned int NumCPUCycles) {
+
+    if(NumCPUCycles < 2250 && this->gen_nmi_at_vblank_interval)
+        return;
+
+    this->in_vblank = false;
+
+    this->in_vblank = true;
+    if(this->gen_nmi_at_vblank_interval)
+        this->addr_bus->GenNMI();
+}
+
 // Write value to memory according to PPU address table
 void PPU::WriteTo(uint16_t addr, int8_t value) {
+    this->addr_bus->WriteTo(this, addr, value);
 }
 
 // Read value from memory according to PPU address table
 uint8_t PPU::ReadFrom(uint16_t addr) {
-    return 0;
+    return this->addr_bus->ReadFrom(this, addr);
 }
 
 // Write value to register (ppu register addresses are in common/constants.hpp)
@@ -102,12 +116,12 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
 
         // Not sure what to do
         case PPUDATA_ADDR:
-            this->PPUDATA = value;
+            this->WriteToPPUDATA(value);
             break;
 
         // Not sure what to do
         case OAMDMA_ADDR:
-            this->OAMDMA = value;
+            this->WriteToOAMDMA(value);
             break;
 
         default:
@@ -213,6 +227,7 @@ uint8_t PPU::ReadFromOAMDATA() {
     return this->OAMDATA;
 }
 
+// Kind of wrong. PPUSCROLL and PPUADDR should be "the same variable"
 void PPU::WriteToPPUSCROLL(uint8_t value) {
 
     this->PPUSCROLL = value;
@@ -233,8 +248,6 @@ void PPU::WriteToPPUSCROLL(uint8_t value) {
 
 void PPU::WriteToPPUADDR(uint8_t value) {
 
-    value %= PPUADDR_WRITE_ADDR_LIMIT;
-
     if(this->write_to_ppuaddr_lower){
 
         this->PPUADDR &= 0xFF00;
@@ -244,10 +257,23 @@ void PPU::WriteToPPUADDR(uint8_t value) {
     else{
 
         this->PPUADDR &= 0x00FF;
+        // Valid addresses only between 0x0000 and 0x3FFF
+        value %= PPUADDR_WRITE_ADDR_LIMIT;
         this->PPUADDR += value << 8;
         this->write_to_ppuaddr_lower = true;
     }
 
+}
+
+void PPU::WriteToPPUDATA(uint8_t value) {
+
+    this->WriteTo(this->PPUADDR, value);
+    this->PPUADDR += this->vram_increment_addr_across;
+}
+
+void PPU::WriteToOAMDMA(uint8_t value) {
+
+    this->OAMDMA = value;
 }
 
 void PPU::WriteToOAM(uint8_t addr, uint8_t value) {

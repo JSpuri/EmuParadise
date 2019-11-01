@@ -17,6 +17,7 @@ class AddressBus {
         AddressBus(CPU *cpu, Memory *memory, PPU *ppu);
         void WriteTo(Processor *processor, uint16_t address, uint8_t word);
         uint8_t ReadFrom(Processor *processor, uint16_t address);
+        void GenNMI();
 
     private:
         CPU *cpu;

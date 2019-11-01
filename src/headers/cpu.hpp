@@ -15,7 +15,7 @@ class AddressBus;
 class CPU : public Processor {
 
     public:
-        CPU(uint16_t reset_addr);
+        CPU(uint16_t reset_addr, uint16_t nmi_addr);
 
         int8_t x;
         int8_t y;
@@ -25,6 +25,7 @@ class CPU : public Processor {
         uint8_t ps[8];  //p[NV-BDIZC]
 
         uint16_t last_accessed_mem;
+        bool time_for_NMI;
 
         bool ExecuteNextInstruction();
         
@@ -37,12 +38,14 @@ class CPU : public Processor {
         void IncrementNumCycles();
         void IncrementNumCycles(uint8_t num);
         void ResetNumCycles();
+        unsigned int GetNumCycles();
 
         void SetAddressBus(AddressBus *addr_bus);
 
     private:
         AddressBus *addr_bus;
-        unsigned long int num_cycles;
+        unsigned int num_cycles;
+        uint16_t NMI_addr;
 
         int8_t ReadImmediate(uint16_t addr);
 
