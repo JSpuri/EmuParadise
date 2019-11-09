@@ -1,5 +1,6 @@
 CC=g++
 CCFLAGS=-std=gnu++11
+SDLFLAG=$$(sdl2-config --cflags --libs)
 
 SRC=./src
 TST=./tst
@@ -15,7 +16,7 @@ CROSS_AS=${EXT}/asm6f/asm6f
 all: ${BIN} ${LOG} ${NES}
 
 ${NES}:
-	${CC} ${CCFLAGS} ${SRC}/*.cpp  -o ${NES}
+	${CC} ${CCFLAGS} ${SRC}/*.cpp  -o ${NES} ${SDLFLAG}
 
 ${BIN}:
 	@mkdir -p ${BIN}

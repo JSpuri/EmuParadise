@@ -1,8 +1,9 @@
 #include "headers/cpu.hpp"
 
-#include "headers/instruction.hpp"
 #include "headers/addressbus.hpp"
 #include "common/constants.hpp"
+#include "headers/operations.hpp"
+#include "headers/instructions.hpp"
 
 #include <iostream>
 
@@ -26,7 +27,7 @@ CPU::CPU(uint16_t reset_addr) {
     this->ps[N] = 0;
 
     this->addr_bus = NULL;
-    this->num_cycles = 0;
+    this->cpuNumCycles = 0;
 
     this->last_accessed_mem = 0;
 }
@@ -40,48 +41,48 @@ bool CPU::ExecuteNextInstruction() {
     if (curr_opcode == 0x00)
         return false;
 
-    Instruction curr_instruction(this, curr_opcode);
+    this->setInstruction(curr_opcode);
     
-    curr_instruction.Run();
+    this->runInstruction();
 
     return true;
 }
 
 // This method returns a word (8 bits) - the instruction argument,
-// depending on the operation mode. If the argument is a address, a word will
+// depending on the operation instructionMode. If the argument is a address, a word will
 // be retrieved from that address - or the indirect address, if applied.
-int8_t CPU::ResolveOPArgWord(int mode, uint16_t addr) {
+int8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
 
     int8_t value = 0;
 
-    if(mode == M_IMMEDIATE)
+    if(instructionMode == M_IMMEDIATE)
         value = ReadImmediate(addr);
 
-    else if(mode == M_ZERO_PAGE)
+    else if(instructionMode == M_ZERO_PAGE)
         value = ResolveZeroAddr(addr);
 
-    else if(mode == M_ZERO_PAGE_X)
+    else if(instructionMode == M_ZERO_PAGE_X)
         value = ResolveZeroAddrX(addr);
 
-    else if(mode == M_ZERO_PAGE_Y)
+    else if(instructionMode == M_ZERO_PAGE_Y)
         value = ResolveZeroAddrY(addr);
 
-    else if(mode == M_RELATIVE)
+    else if(instructionMode == M_RELATIVE)
         value = ReadRelative(addr);
 
-    else if(mode == M_ABSOLUTE)
+    else if(instructionMode == M_ABSOLUTE)
         value = ResolveAbsAddr(addr);
 
-    else if(mode == M_ABSOLUTE_X)
+    else if(instructionMode == M_ABSOLUTE_X)
         value = ResolveAbsAddrX(addr);
 
-    else if(mode == M_ABSOLUTE_Y)
+    else if(instructionMode == M_ABSOLUTE_Y)
         value = ResolveAbsAddrY(addr);
 
-    else if(mode == M_INDEXED_INDIRECT)
+    else if(instructionMode == M_INDEXED_INDIRECT)
         value = ResolveIndirectX(addr);
 
-    else if(mode == M_INDIRECT_INDEXED)
+    else if(instructionMode == M_INDIRECT_INDEXED)
         value = ResolveIndirectY(addr);
 
     return value;
@@ -89,37 +90,37 @@ int8_t CPU::ResolveOPArgWord(int mode, uint16_t addr) {
 }
 
 // This method returns a address (16 bits) - the instruction argument,
-// depending on the operation mode. If the mode is indirect, the address
+// depending on the operation instructionMode. If the instructionMode is indirect, the address
 // will be retrieved from the first address
-uint16_t CPU::ResolveOPArgAddr(int mode, uint16_t addr) {
+uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
 
     uint16_t value = 0;
 
-    if(mode == M_ZERO_PAGE)
+    if(instructionMode == M_ZERO_PAGE)
         value = ReadZeroAddr(addr);
 
-    else if(mode == M_ZERO_PAGE_X)
+    else if(instructionMode == M_ZERO_PAGE_X)
         value = (ReadZeroAddr(addr) + this->x) & 0xFF;
 
-    else if(mode == M_ZERO_PAGE_Y)
+    else if(instructionMode == M_ZERO_PAGE_Y)
         value = ReadZeroAddr(addr) + this->y;
 
-    else if(mode == M_ABSOLUTE)
+    else if(instructionMode == M_ABSOLUTE)
         value = ReadAbsAddr(addr);
 
-    else if(mode == M_ABSOLUTE_X)
+    else if(instructionMode == M_ABSOLUTE_X)
         value = ReadAbsAddr(addr) + this->x;
 
-    else if(mode == M_ABSOLUTE_Y)
+    else if(instructionMode == M_ABSOLUTE_Y)
         value = ReadAbsAddr(addr) + this->y;
 
-    else if(mode == M_INDIRECT)
+    else if(instructionMode == M_INDIRECT)
         value = ResolveIndirect(addr);
     
-    else if(mode == M_INDEXED_INDIRECT)
+    else if(instructionMode == M_INDEXED_INDIRECT)
         value = ResolveIndirectAddrX(addr);
 
-    else if(mode == M_INDIRECT_INDEXED)
+    else if(instructionMode == M_INDIRECT_INDEXED)
         value = ResolveIndirectAddrY(addr);
     
     return value;
@@ -140,21 +141,21 @@ uint8_t CPU::ReadFrom(uint16_t addr) {
     return this->addr_bus->ReadFrom(this, addr);
 }
 
-// Increments CPU num_cycles
+// Increments CPU number of cycles
 void CPU::IncrementNumCycles() {
 
-    this->num_cycles += 1;
+    this->cpuNumCycles += 1;
 }
-// Increments CPU num_cycles with num
+// Increments CPU number of cycles with num
 void CPU::IncrementNumCycles(uint8_t num) {
 
-    this->num_cycles += num;
+    this->cpuNumCycles += num;
 }
 
-// Sets CPU num_cycles to zero
+// Sets CPU number of cycles to zero
 void CPU::ResetNumCycles() {
 
-    this->num_cycles = 0;
+    this->cpuNumCycles = 0;
 }
 
 // Sets which address bus the CPU will write/read to/from
@@ -316,3 +317,71 @@ uint16_t CPU::ResolveIndirectAddrY(uint16_t addr) {
     return value + this->y;
 }
 
+void CPU::runInstruction() {
+    uint16_t last_pc = this->pc;
+
+    this->operation(instructionMode, this);
+
+    // Add default instructions cycle number to cpu->num_cycles
+    this->IncrementNumCycles(this->instructionNumCycles);
+
+    if(last_pc == this->pc){
+        this->pc += this->instructionNumBytes;
+    }
+    else{
+        // If instruction is a branch and it succeeded, add one more cpu cycle
+        if(this->instructionOpcode != 0x4C && this->instructionOpcode != 0x6C && this->instructionOpcode != 20){
+            this->IncrementNumCycles();
+
+            // And if ocurred page-crossing, add two more cpu cycles
+            if((last_pc & 0xFF00) != (this->pc & 0xFF00))
+                this->IncrementNumCycles(2);
+        }
+    }
+
+    if (this->instructionAccessedMemory)
+        logls();
+    else
+        log();
+}
+
+void CPU::setInstruction(uint8_t opcode) {
+    this->instructionOpcode = opcode;
+    this->instructionAccessedMemory = true;
+
+    setInstructionProperties(opcode, this);
+}
+
+void CPU::logls() {
+    printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x |",
+			this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7], this->last_accessed_mem, this->ReadFrom(this->last_accessed_mem));
+
+	printf("\n");
+}
+
+void CPU::log() {
+    printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d |",
+			this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7]);
+
+	printf("\n");
+}
+
+void CPU::setInstructionMode(int mode) {
+    this->instructionMode = mode;
+}
+
+void CPU::setInstructionNumBytes(int bytes) {
+    this->instructionNumBytes = bytes;
+}
+
+void CPU::setInstructionNumCycles(int cycles) {
+    this->instructionNumCycles = cycles;
+}
+
+void CPU::setOperation(std::function<void(int, CPU*)> operation) {
+    this->operation = operation;
+}
+
+void CPU::setInstructionAccessedMemory(bool hasAccessedMemory) {
+    this->instructionAccessedMemory = hasAccessedMemory;
+}

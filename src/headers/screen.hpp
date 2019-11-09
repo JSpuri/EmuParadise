@@ -1,6 +1,6 @@
 #ifndef PPU_H
 #define SDL_MAIN_HANDLED
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include<iostream>
 
@@ -15,4 +15,4 @@ void tela();
 //bool initSDL();
 //bool loadMedia();
 //void closeSDL();
-#endif PPU_H
+#endif

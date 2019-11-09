@@ -41,7 +41,7 @@ int main(int argc, const char *argv[]){
 
     cpu.SetAddressBus(&addr_bus);
 
-	tela();
+	// tela();
 
     // Main cpu loop
     while(cpu.ExecuteNextInstruction());

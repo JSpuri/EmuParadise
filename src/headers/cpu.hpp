@@ -3,6 +3,7 @@
 
 class AddressBus;
 #include "processor.hpp"
+#include <functional>
 
 #define C 7
 #define Z 6
@@ -40,9 +41,26 @@ class CPU : public Processor {
 
         void SetAddressBus(AddressBus *addr_bus);
 
+        void setInstructionMode(int mode);
+        void setOperation(std::function<void(int, CPU*)> operation);
+        void setInstructionNumBytes(int bytes);
+        void setInstructionNumCycles(int cycles);
+        void setInstructionAccessedMemory(bool hasAccessedMemory);
+
+        void setInstruction(uint8_t opcode);
+        void runInstruction();
+
     private:
         AddressBus *addr_bus;
-        unsigned long int num_cycles;
+        unsigned long int cpuNumCycles;
+
+        int instructionMode;
+        uint8_t instructionOpcode;
+        uint8_t instructionNumBytes;
+        uint8_t instructionNumCycles;
+        bool instructionAccessedMemory;
+
+        std::function<void(int, CPU *)>operation;
 
         int8_t ReadImmediate(uint16_t addr);
 
@@ -65,6 +83,9 @@ class CPU : public Processor {
         uint16_t ResolveIndirect(uint16_t addr);
         uint16_t ResolveIndirectAddrX(uint16_t addr);
         uint16_t ResolveIndirectAddrY(uint16_t addr);
+
+        void log();
+        void logls();
 };
 
 
