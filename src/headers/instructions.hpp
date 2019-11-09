@@ -5,7 +5,6 @@
 
 #include "operations.hpp"
 #include "cpu.hpp"
-#include "memory.hpp"
 
 void setInstructionProperties(uint8_t opcode, CPU *cpu){
     switch(opcode) {

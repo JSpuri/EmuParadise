@@ -27,7 +27,7 @@ CPU::CPU() {
     this->ps[N] = 0;
 
     this->addr_bus = NULL;
-    this->cpuNumCycles = 0;
+    this->instructionNumCycles = 0;
 
     this->last_accessed_mem = 0;
 }
@@ -35,15 +35,21 @@ CPU::CPU() {
 // If it finds a BRK, returns false to stop the main loop
 bool CPU::Clock() {
 
-    uint8_t curr_opcode = this->ReadFrom(this->pc);
+    if(this->instructionNumCycles == 0){
 
-    // If next instruction is a BRK, stop the program
-    if (curr_opcode == 0x00)
-        return false;
+        uint8_t curr_opcode = this->ReadFrom(this->pc);
 
-    this->setInstruction(curr_opcode);
-    
-    this->runInstruction();
+        // If next instruction is a BRK, stop the program
+        if (curr_opcode == 0x00)
+            return false;
+
+        this->setInstruction(curr_opcode);
+        
+        this->runInstruction();
+
+    }
+
+    this->instructionNumCycles--;
 
     return true;
 }
@@ -141,23 +147,6 @@ uint8_t CPU::ReadFrom(uint16_t addr) {
     return this->addr_bus->ReadFrom(this, addr);
 }
 
-// Increments CPU number of cycles
-void CPU::IncrementNumCycles() {
-
-    this->cpuNumCycles += 1;
-}
-// Increments CPU number of cycles with num
-void CPU::IncrementNumCycles(uint8_t num) {
-
-    this->cpuNumCycles += num;
-}
-
-// Sets CPU number of cycles to zero
-void CPU::ResetNumCycles() {
-
-    this->cpuNumCycles = 0;
-}
-
 // Sets which address bus the CPU will write/read to/from
 void CPU::SetAddressBus(AddressBus *addr_bus){
 
@@ -224,7 +213,7 @@ int8_t CPU::ResolveAbsAddrX(uint16_t addr) {
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->x) & 0xFF00) != (absolute_addr & 0xFF00))
-        this->IncrementNumCycles();
+        this->instructionNumCycles++;
 
     int8_t value = this->ReadFrom(absolute_addr + this->x);
     return value;
@@ -237,7 +226,7 @@ int8_t CPU::ResolveAbsAddrY(uint16_t addr) {
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
-        this->IncrementNumCycles();
+        this->instructionNumCycles++;
 
     int8_t value = this->ReadFrom(absolute_addr + this->y);
     return value;
@@ -264,7 +253,7 @@ int8_t CPU::ResolveIndirectY(uint16_t addr) {
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
-        this->IncrementNumCycles();
+        this->instructionNumCycles++;
 
     int8_t value = this->ReadFrom(absolute_addr + this->y);
     return value;
@@ -323,20 +312,17 @@ void CPU::runInstruction() {
 
     this->operation(instructionMode, this);
 
-    // Add default instructions cycle number to cpu->num_cycles
-    this->IncrementNumCycles(this->instructionNumCycles);
-
     if(last_pc == this->pc){
         this->pc += this->instructionNumBytes;
     }
     else{
         // If instruction is a branch and it succeeded, add one more cpu cycle
         if(this->instructionOpcode != 0x4C && this->instructionOpcode != 0x6C && this->instructionOpcode != 20){
-            this->IncrementNumCycles();
+            this->instructionNumCycles++;
 
             // And if ocurred page-crossing, add two more cpu cycles
             if((last_pc & 0xFF00) != (this->pc & 0xFF00))
-                this->IncrementNumCycles(2);
+                this->instructionNumCycles += 2;
         }
     }
 

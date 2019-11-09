@@ -37,10 +37,6 @@ class CPU : public Processor {
         void WriteTo(uint16_t addr, int8_t value);
         uint8_t ReadFrom(uint16_t addr);
 
-        void IncrementNumCycles();
-        void IncrementNumCycles(uint8_t num);
-        void ResetNumCycles();
-
         void SetAddressBus(AddressBus *addr_bus);
 
         void setInstructionMode(int mode);
@@ -54,7 +50,6 @@ class CPU : public Processor {
 
     private:
         AddressBus *addr_bus;
-        unsigned long int cpuNumCycles;
 
         int instructionMode;
         uint8_t instructionOpcode;

@@ -3,6 +3,8 @@
 
 AddressBus::AddressBus(char *nesfile, CPU *cpu) {
 
+    this->system_clock = 0;
+
     // Verifica o byte que nos diz quantos PRG ROMs de 16kb ele tem
     // Se tem dois, tem 32kb de ROM
     this->size_PRG_ROM_in_16kb_units = nesfile[4];
@@ -65,7 +67,10 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu) {
 
 bool AddressBus::Clock() {
 
-    this->run_emulation = cpu->Clock();
+    if(this->system_clock % 3 == 0)
+        this->run_emulation = cpu->Clock();
+
+    this->system_clock++;
 
     return this->run_emulation;
 }

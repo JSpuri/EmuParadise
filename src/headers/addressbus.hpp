@@ -22,6 +22,8 @@ class AddressBus {
         void WriteTo(Processor *processor, uint16_t address, uint8_t word);
         uint8_t ReadFrom(Processor *processor, uint16_t address);
 
+        uint32_t system_clock;
+
         uint8_t size_PRG_ROM_in_16kb_units;
         uint8_t size_CHR_ROM_in_8kb_units;
 
