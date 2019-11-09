@@ -4,7 +4,6 @@
 
 #include "headers/addressbus.hpp"
 #include "headers/cpu.hpp"
-#include "headers/memory.hpp"
 #include "headers/screen.hpp"
 
 using namespace std;
@@ -30,21 +29,19 @@ int main(int argc, const char *argv[]){
         return 1;
     }
 
-    // Create memory - RAM and ROM based on file
-    Memory memory(memblock);
-    binario.close();
-
     // Initialize PC with the address for RESET label
-    CPU cpu(memory.RESET_ADDR);
+    CPU cpu{};
 
-    AddressBus addr_bus(&cpu, &memory);
+    // Create memory - RAM and ROM based on file
+    AddressBus addr_bus(memblock, &cpu);
+    binario.close();
 
     cpu.SetAddressBus(&addr_bus);
 
 	// tela();
 
     // Main cpu loop
-    while(cpu.ExecuteNextInstruction());
+    while(addr_bus.Clock());
 
 	return 0;
 }

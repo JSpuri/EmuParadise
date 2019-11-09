@@ -1,8 +1,8 @@
 #ifndef CPU_HPP
 #define CPU_HPP
 
-class AddressBus;
 #include "processor.hpp"
+#include "addressbus.hpp"
 #include <functional>
 
 #define C 7
@@ -13,10 +13,12 @@ class AddressBus;
 #define V 1
 #define N 0
 
+class AddressBus;
+
 class CPU : public Processor {
 
     public:
-        CPU(uint16_t reset_addr);
+        CPU();
 
         int8_t x;
         int8_t y;
@@ -27,7 +29,7 @@ class CPU : public Processor {
 
         uint16_t last_accessed_mem;
 
-        bool ExecuteNextInstruction();
+        bool Clock();
         
         int8_t ResolveOPArgWord(int mode, uint16_t addr);
         uint16_t ResolveOPArgAddr(int mode, uint16_t addr);

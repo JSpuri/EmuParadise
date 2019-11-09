@@ -8,14 +8,14 @@
 #include <iostream>
 
 // CPU class constructor
-CPU::CPU(uint16_t reset_addr) {
+CPU::CPU() {
 
     this->a = 0;
     this->x = 0;
     this->y = 0;
 
     this->sp = 0xFD;
-    this->pc = reset_addr;
+    //this->pc = reset_addr;
 
     this->ps[C] = 0;
     this->ps[Z] = 0;
@@ -33,7 +33,7 @@ CPU::CPU(uint16_t reset_addr) {
 }
 
 // If it finds a BRK, returns false to stop the main loop
-bool CPU::ExecuteNextInstruction() {
+bool CPU::Clock() {
 
     uint8_t curr_opcode = this->ReadFrom(this->pc);
 
@@ -162,6 +162,7 @@ void CPU::ResetNumCycles() {
 void CPU::SetAddressBus(AddressBus *addr_bus){
 
     this->addr_bus = addr_bus;
+    this->pc = this->addr_bus->RESET_ADDR;
 }
 
 // Reads a word (8 bit) from the address, to be used in ResolveOPArgWord

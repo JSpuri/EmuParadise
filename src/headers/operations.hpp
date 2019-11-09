@@ -2,9 +2,9 @@
 #define OPERATIONS_HPP
 
 #include <cstdlib>
+#include <math.h>
 
 #include "cpu.hpp"
-#include "memory.hpp"
 
 void ADC(int mode, CPU *cpu);
 void AND(int mode, CPU *cpu);
