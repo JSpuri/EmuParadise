@@ -15,7 +15,11 @@ SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* texture;
 
-void tela(std::vector<std::vector<uint8_t>> p_matrix) {
+SDL_Event event;
+
+Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
+
+void tela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
 	bool leftMouseButtonDown = false;
 	bool quit = false;
@@ -27,7 +31,6 @@ void tela(std::vector<std::vector<uint8_t>> p_matrix) {
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, NES_WIDTH, NES_HEIGHT);
-	Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
 	// inicializa todos os pixels da textura como branco
 	memset(pixels, 255, NES_WIDTH * NES_HEIGHT * sizeof(Uint32));
@@ -38,7 +41,6 @@ void tela(std::vector<std::vector<uint8_t>> p_matrix) {
 		}
 	}
 
-
 	SDL_UpdateTexture(texture, NULL, pixels, NES_WIDTH * sizeof(Uint32));
 
 	SDL_RenderClear(renderer);
@@ -46,11 +48,11 @@ void tela(std::vector<std::vector<uint8_t>> p_matrix) {
 	SDL_RenderPresent(renderer);
 
 }
-void updateTela(std::vector<std::vector<uint8_t>> p_matrix) {
+
+void updateTela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
 	srand(time(NULL));
 
-	Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 	for (int i = 0; i < NES_WIDTH; i++) {
 		for (int j = 0; j < NES_HEIGHT; j++) {
 			pixels[j * NES_WIDTH + i] = p_matrix[i][j];
@@ -58,13 +60,23 @@ void updateTela(std::vector<std::vector<uint8_t>> p_matrix) {
 	}
 
 
+    while (SDL_PollEvent(&event)) {   /* Loop until there are no events left on the queue */
+        switch (event.type) {         /* Process the appropiate event type */
+        case SDL_KEYDOWN:        /* Handle a KEYDOWN event */
+              printf("Oh! Key press\n");
+              break;
+    case SDL_MOUSEMOTION:
+      break;
+    case SDL_QUIT:
+      exit(1);
+    default:                 /* Report an unhandled event */
+      printf("I don't know what this event is!\n");
+    }
+    }
 	SDL_UpdateTexture(texture, NULL, pixels, NES_WIDTH * sizeof(Uint32));
 
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
-
-
 }
-
 
