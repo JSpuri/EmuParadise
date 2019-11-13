@@ -36,7 +36,6 @@ int main(int argc, const char *argv[]){
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
 
-    //std::vector<std::vector<uint8_t>> p_matrix(SCREEN_SIZE_X, std::vector<uint8_t>(SCREEN_SIZE_Y, 0));
 	//tela(p_matrix);
     //
     // Create memory - RAM and ROM based on file

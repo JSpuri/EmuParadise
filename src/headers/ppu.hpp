@@ -3,6 +3,9 @@
 
 class AddressBus;
 #include "processor.hpp"
+#include "../common/constants.hpp"
+
+#include <vector>
 
 class PPU : public Processor {
 
@@ -15,7 +18,8 @@ class PPU : public Processor {
         // pre-render line.
         bool in_vblank;
 
-        void Rendering(unsigned int NumCPUCycles, uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]);
+        void Clock();
+
         void WriteTo(uint16_t addr, int8_t value) override;
         uint8_t ReadFrom(uint16_t addr) override;
 
@@ -26,6 +30,7 @@ class PPU : public Processor {
 
     private:
         AddressBus *addr_bus;
+        std::vector<std::vector<uint8_t>> *p_matrix;
 
         // OAM stores sprite data (64 sprites with 4 bytes each)
         // Pos 0: Y Position (OAM_Y_POS)
@@ -36,8 +41,9 @@ class PPU : public Processor {
 
         uint8_t PPUCTRL;
         // ============================ The variables underneath here are contained in PPUCTRL
-        // $2000, $2400, $2800 or $2C00
-        uint16_t base_nametable_addr;
+        // Offset of nametable to $2000, $2400, $2800 or $2C00
+        uint8_t nametable_x_offset;
+        uint8_t nametable_y_offset;
 
         // add 1 to vram (going across)
         // add 32 to vram (going down)
@@ -55,7 +61,6 @@ class PPU : public Processor {
 
         //PPU master/slave select
         // (0: read backdrop from EXT pins; 1: output color on EXT pins)
-        // MOST LIKELY WE WILL NOT USE THIS
         bool ppu_master_slave_select;
         
         // Generate an NMI at vertical blanking interval
@@ -89,13 +94,13 @@ class PPU : public Processor {
         uint8_t OAMADDR;
         uint8_t OAMDATA;
 
-        uint8_t PPUSCROLL;
+        uint8_t PPUSCROLLAndADDR;
         uint8_t cam_position_x;
         bool write_to_cam_x;
         uint8_t cam_position_y;
 
-        uint16_t PPUADDR;
         bool write_to_ppuaddr_lower;
+        uint16_t ppuaddr;
 
         uint8_t PPUDATA;
 
@@ -106,20 +111,8 @@ class PPU : public Processor {
 
         uint8_t PPUGenLatch;
 
-        // Write/Read value to/from XXXXXX and updates its internal variables for easier use
-        void WriteToPPUCTRL(uint8_t value);
-        void WriteToPPUMASK(uint8_t value);
-        uint8_t ReadFromPPUSTATUS();
-        void WriteToOAMDATA(uint8_t value);
-        uint8_t ReadFromOAMDATA();
-        void WriteToPPUSCROLL(uint8_t value);
-        void WriteToPPUADDR(uint8_t value);
-        void WriteToPPUDATA(uint8_t value);
-        uint8_t ReadFromPPUDATA();
-        void WriteToOAMDMA(uint8_t value);
-
-        void WriteToOAM(uint8_t addr, uint8_t value);
-        uint8_t ReadFromOAM(uint8_t addr);
+        void WriteToOAM(uint8_t value);
+        uint8_t ReadFromOAM();
  
         void load_background(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]);
 

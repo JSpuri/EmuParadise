@@ -177,6 +177,7 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
             value = this->INTERNAL_CPU_RAM[address];
         }
         else if(address < PPU_REGISTERS_MIRROR_END){
+
             //the % operator is due to the mirroring of the registers on
             //$2008-$3FFF
             address -= PPU_REGISTERS_START;

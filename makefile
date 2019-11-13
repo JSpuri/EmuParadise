@@ -9,6 +9,9 @@ BIN=./bin
 LOG=./log
 EXT=./ext
 NES=./bin/nesemu
+GAMEDIR=./UNRELATED/
+GAMESRC=${GAMEDIR}main.asm
+GAME=./bin/UNRELATED.nes
 
 TESTS=$(addprefix ${BIN}/, $(notdir $(patsubst %.s,%,$(sort $(wildcard ${TST}/*.s)))))
 CROSS_AS=${EXT}/asm6f/asm6f
@@ -17,6 +20,9 @@ all: ${BIN} ${LOG} ${NES}
 
 ${NES}:
 	${CC} ${CCFLAGS} ${SRC}/*.cpp  -o ${NES} ${SDLFLAG}
+
+${GAME}: ${BIN}
+	$(MAKE) -C ${GAMEDIR} all
 
 ${BIN}:
 	@mkdir -p ${BIN}
@@ -52,9 +58,12 @@ test: ${BIN} ${LOG} ${NES} ${TESTS}
 		echo "**************************************************************"; \
 	}
 
+test-game: ${BIN} ${NES} ${GAME}
+	${CC} ${CCFLAGS} ${SRC}/*.cpp  -o ${NES} ${SDLFLAG}
+	${NES} ${GAME}
 
 clean:
-	rm -rf ${BIN} ${LOG} ./ext/asm6f/asm6f
+	rm -rf ${BIN} ${LOG} ./ext/asm6f/asm6f ${GAME}
 
 res:
 	for f in log/*.log;do cp $f res/$(basename "$f" .log).r;done
