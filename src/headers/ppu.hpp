@@ -17,6 +17,7 @@ class PPU : public Processor {
         // line); cleared after reading $2002 and at dot 1 of the
         // pre-render line.
         bool in_vblank;
+        bool nmi;
 
         void Clock();
 
@@ -30,6 +31,22 @@ class PPU : public Processor {
 
     private:
         AddressBus *addr_bus;
+
+        int scanline;
+        int cycle;
+
+        uint8_t next_bg_tile_id;
+        uint8_t next_bg_tile_att;
+
+        uint8_t next_bg_tile_lower;
+        uint8_t next_bg_tile_higher;
+
+        uint16_t vector_bg_pat_lower_bit;
+        uint16_t vector_bg_pat_higher_bit;
+
+        uint16_t vector_bg_att_lower_bit;
+        uint16_t vector_bg_att_higher_bit;
+
         std::vector<std::vector<uint8_t>> *p_matrix;
 
         // OAM stores sprite data (64 sprites with 4 bytes each)
@@ -94,13 +111,13 @@ class PPU : public Processor {
         uint8_t OAMADDR;
         uint8_t OAMDATA;
 
-        uint8_t PPUSCROLLAndADDR;
+        uint8_t PPUSCROLL;
         uint8_t cam_position_x;
         bool write_to_cam_x;
         uint8_t cam_position_y;
 
-        bool write_to_ppuaddr_lower;
         uint16_t ppuaddr;
+        bool write_to_ppuscrollandaddr_lower;
 
         uint8_t PPUDATA;
 

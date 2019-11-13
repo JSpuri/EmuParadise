@@ -39,6 +39,7 @@ bool CPU::Clock() {
 
         uint8_t curr_opcode = this->ReadFrom(this->pc);
 
+        printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
         if (curr_opcode == 0x00)
             return false;
@@ -335,6 +336,22 @@ void CPU::setInstruction(uint8_t opcode) {
     this->instructionAccessedMemory = true;
 
     setInstructionProperties(opcode, this);
+}
+
+void CPU::NMI() {
+
+    this->WriteTo(0x0100 + (this->sp--), this->pc >> 8);
+    this->WriteTo(0x0100 + (this->sp--), this->pc & 0x00FF);
+
+    this->ps[Bb] = 0;
+    this->ps[Bb-1] = 1;
+    this->ps[I] = 1;
+
+    PHP(M_IMPLICIT, this);
+
+    this->pc = this->addr_bus->NMI_ADDR;
+
+    this->instructionNumCycles = 8;
 }
 
 void CPU::logls() {

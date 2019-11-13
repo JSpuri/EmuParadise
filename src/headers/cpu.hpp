@@ -49,6 +49,8 @@ class CPU : public Processor {
         void setInstruction(uint8_t opcode);
         void runInstruction();
 
+        void NMI();
+
     private:
         AddressBus *addr_bus;
 

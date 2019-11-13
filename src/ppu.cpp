@@ -8,7 +8,25 @@
 // All information regarding variables are in headers/ppu.hpp
 PPU::PPU() {
 
+    this->nmi = false;
+
     this->addr_bus = NULL;
+
+    this->scanline = -1;
+    this->cycle = 0;
+
+    this->next_bg_tile_id = 0;
+    this->next_bg_tile_att = 0;
+
+    this->next_bg_tile_lower = 0;
+    this->next_bg_tile_higher = 0;
+
+    this->vector_bg_pat_lower_bit = 0;
+    this->vector_bg_pat_higher_bit = 0;
+
+    this->vector_bg_att_lower_bit = 0;
+    this->vector_bg_att_higher_bit = 0;
+
     this->p_matrix = new std::vector<std::vector<uint8_t>>(SCREEN_SIZE_Y, std::vector<uint8_t>(SCREEN_SIZE_X, 0));
 
     this->OAM.resize(OAM_SIZE, 0);
@@ -42,12 +60,12 @@ PPU::PPU() {
     this->OAMADDR = 0;
     this->OAMDATA = 0;
 
-    this->PPUSCROLLAndADDR = 0;
+    this->PPUSCROLL = 0;
     this->cam_position_x = 0;
     this->write_to_cam_x = true;
     this->cam_position_y = 0;
 
-    this->write_to_ppuaddr_lower = false;
+    this->write_to_ppuscrollandaddr_lower = false;
     this->ppuaddr = 0x0;
 
     this->PPUDATA = 0;
@@ -58,6 +76,82 @@ PPU::PPU() {
     this->palette = 0x3f00;
 
     this->PPUGenLatch = 0;
+}
+
+void PPU::Clock() {
+
+    if(this->scanline >= -1 && this->scanline < 240){
+
+        if(this->scanline == 0 && this->cycle == 0)
+            this->cycle = 1;
+
+        if(this->scanline == -1 && this->cycle == 1)
+            this->in_vblank = false;
+
+        if((this->cycle >= 2 && this->cycle < 258) || (this->cycle >= 321 && this->cycle < 338)){
+
+            if(this->show_background){
+
+                this->vector_bg_pat_lower_bit <<= 1;
+                this->vector_bg_pat_higher_bit <<= 1;
+
+                this->vector_bg_att_lower_bit <<= 1;
+                this->vector_bg_att_higher_bit <<= 1;
+            }
+
+            switch((this->cycle - 1) % 8){
+
+                case 0:
+
+                    this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
+                    this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
+
+                    this->next_bg_tile_id = this->ReadFrom(this->ppuaddr);
+                    break;
+                case 2:
+                    break;
+                case 4:
+                    this->next_bg_tile_lower = this->ReadFrom(this->background_pattern_table_addr
+                                                                + (uint16_t)(this->next_bg_tile_id << 4));
+                    break;
+                case 6:
+                    this->next_bg_tile_higher = this->ReadFrom(this->background_pattern_table_addr
+                                                                + (uint16_t)(this->next_bg_tile_id << 4));
+                    break;
+                case 7:
+                    break;
+            }
+        }
+
+    }
+
+    if(this->scanline >= 241 && this->scanline < 261){
+        
+        if(this->scanline == 241 && this->cycle == 1){
+
+            this->in_vblank = true;
+            
+            if(this->gen_nmi_at_vblank_interval)
+                this->nmi = true;
+        }
+    }
+
+    if(this->show_background){
+    }
+
+    //Set pixel here
+
+    this->cycle++;
+
+    if(this->cycle >= 341){
+
+        this->cycle = 0;
+        this->scanline++;
+
+        if(this->scanline >= 261){
+            this->scanline = -1;
+        }
+    }
 }
 
 
@@ -130,35 +224,35 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
         // Set pixel on the PPUSCROLL position
         // to be on the top left corner of rendered screen
         case PPUSCROLL_ADDR:
-            this->PPUSCROLLAndADDR = value;
+            this->PPUSCROLL = value;
 
-            if(this->write_to_cam_x){
+            if(this->write_to_ppuscrollandaddr_lower){
 
-                this->cam_position_x = this->PPUSCROLLAndADDR;
-                this->write_to_cam_x = false;
+                this->cam_position_y = this->PPUSCROLL;
+                this->write_to_ppuscrollandaddr_lower = false;
             }
 
             else{
 
-                this->cam_position_y = this->PPUSCROLLAndADDR;
-                this->write_to_cam_x = true;
+                this->cam_position_x = this->PPUSCROLL;
+                this->write_to_ppuscrollandaddr_lower = true;
             }
             break;
 
         case PPUADDR_ADDR:
-            this->PPUSCROLLAndADDR = value;
-            if(this->write_to_ppuaddr_lower){
+            this->PPUSCROLL= value;
+            if(this->write_to_ppuscrollandaddr_lower){
 
                 this->ppuaddr &= 0xFF00;
                 this->ppuaddr += value;
-                this->write_to_ppuaddr_lower = false;
+                this->write_to_ppuscrollandaddr_lower = false;
             }
             else{
 
                 this->ppuaddr &= 0x00FF;
                 // Valid addresses only between 0x0000 and 0x3FFF
                 this->ppuaddr += value << 8;
-                this->write_to_ppuaddr_lower = true;
+                this->write_to_ppuscrollandaddr_lower = true;
             }
 
             this->ppuaddr %= PPUADDR_WRITE_ADDR_LIMIT;
@@ -199,7 +293,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             this->PPUSTATUS |= ((this->in_vblank) ? 0x80 : 0x00);
             this->in_vblank = false;
 
-            this->PPUSCROLLAndADDR = 0x0;
+            this->write_to_ppuscrollandaddr_lower = false;
 
             this->PPUGenLatch = this->PPUSTATUS;
             break;
@@ -211,8 +305,12 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
 
         // Not sure what to do
         case PPUDATA_ADDR:
-            this->PPUDATA = this->ReadFrom(this->ppuaddr);
             this->PPUGenLatch = this->PPUDATA;
+            this->PPUDATA = this->ReadFrom(this->ppuaddr);
+
+            if(this->ppuaddr > 0x3F00)
+                this->PPUGenLatch = this->PPUDATA;
+
             this->ppuaddr += this->vram_increment_addr_across;
             this->ppuaddr %= PPUADDR_WRITE_ADDR_LIMIT;
 

@@ -280,6 +280,7 @@ void JSR(int mode, CPU *cpu) {
 
     absolute_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
     cpu->pc = absolute_addr;
+    printf("NMI routine ended. Jumping to %04x\n", cpu->pc);
 
 }
 
@@ -538,6 +539,7 @@ void ROR(int mode, CPU *cpu) {
 
 void RTI(int mode, CPU *cpu) {
 
+    printf("Stack pointer: %02x\n", cpu->sp);
     int8_t aux = cpu->ReadFrom(0x0100 + (++cpu->sp));
 
     for(int i = 0; i < 8; i++) {
@@ -551,8 +553,13 @@ void RTI(int mode, CPU *cpu) {
 
     }
 
+    printf("Stack pointer: %02x\n", cpu->sp);
     cpu->pc = cpu->ReadFrom((0x0100 + (++cpu->sp)) & 0xFF);
+    printf("Stack pointer: %02x\n", cpu->sp);
+    printf("Lower pc: %04x\n", cpu->pc);
     cpu->pc += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8 ;
+    printf("Stack pointer: %02x\n", cpu->sp);
+    printf("higher and lower pc: %04x\n", cpu->pc);
 }
 
 void RTS(int mode, CPU *cpu) {

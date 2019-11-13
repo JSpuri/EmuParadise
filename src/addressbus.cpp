@@ -68,8 +68,16 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
 bool AddressBus::Clock() {
 
+    this->ppu->Clock();
+    
     if(this->system_clock % 3 == 0)
-        this->run_emulation = cpu->Clock();
+        this->run_emulation = this->cpu->Clock();
+
+    if(this->ppu->nmi){
+
+        this->ppu->nmi = false;
+        this->cpu->NMI();
+    }
 
     this->system_clock++;
 
@@ -231,10 +239,13 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
                 // Mirroring Horizontal
                 if(this->mirroring_type == 0){
 
-                    if(address <= NAMETABLE_2_END)
+                    if(address >= NAMETABLE_1_START && address <= NAMETABLE_1_END)
                         address -= NAMETABLES_SIZE;
 
-                    else
+                    else if(address >= NAMETABLE_2_START && address <= NAMETABLE_2_END)
+                        address -= NAMETABLES_SIZE;
+
+                    else if(address >= NAMETABLE_3_START && address <= NAMETABLE_3_END)
                         address -= (NAMETABLES_SIZE * 2);
 
 
