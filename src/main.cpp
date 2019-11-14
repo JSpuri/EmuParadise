@@ -36,8 +36,6 @@ int main(int argc, const char *argv[]){
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
 
-	//tela(p_matrix);
-    //
     // Create memory - RAM and ROM based on file
     AddressBus addr_bus(memblock, &cpu, &ppu);
     binario.close();
@@ -45,10 +43,12 @@ int main(int argc, const char *argv[]){
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-	// tela();
+    tela(ppu.GetPMatrix());
 
     // Main cpu loop
-    while(addr_bus.Clock());
+    while(addr_bus.Clock()){
+        updateTela(ppu.GetPMatrix());
+    }
 
 	return 0;
 }

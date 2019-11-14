@@ -29,6 +29,8 @@ class PPU : public Processor {
 
         void SetAddressBus(AddressBus *addr_bus);
 
+        uint32_t *GetPMatrix();
+
     private:
         AddressBus *addr_bus;
 
@@ -47,7 +49,7 @@ class PPU : public Processor {
         uint16_t vector_bg_att_lower_bit;
         uint16_t vector_bg_att_higher_bit;
 
-        std::vector<std::vector<uint8_t>> *p_matrix;
+        uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y];
 
         // OAM stores sprite data (64 sprites with 4 bytes each)
         // Pos 0: Y Position (OAM_Y_POS)
@@ -112,12 +114,28 @@ class PPU : public Processor {
         uint8_t OAMDATA;
 
         uint8_t PPUSCROLL;
-        uint8_t cam_position_x;
         bool write_to_cam_x;
-        uint8_t cam_position_y;
 
-        uint16_t ppuaddr;
-        bool write_to_ppuscrollandaddr_lower;
+        union loopy_reg {
+            struct {
+
+                uint16_t cam_position_x : 5;
+                uint16_t cam_position_y : 5;
+                uint16_t nametable_x : 1;
+                uint16_t nametable_y : 1;
+                uint16_t fine_cam_position_y :  3;
+                uint16_t NOTUSED : 1;
+            };
+
+            uint16_t reg = 0x0000;
+        };
+
+        loopy_reg vram_addr;
+        loopy_reg tram_addr;
+
+        uint8_t fine_cam_position_x;
+
+        bool address_latch;
 
         uint8_t PPUDATA;
 
@@ -128,11 +146,10 @@ class PPU : public Processor {
 
         uint8_t PPUGenLatch;
 
+        bool frame_complete;
+
         void WriteToOAM(uint8_t value);
         uint8_t ReadFromOAM();
- 
-        void load_background(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]);
-
 };
 
 

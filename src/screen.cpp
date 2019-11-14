@@ -19,7 +19,7 @@ SDL_Event event;
 
 Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
-void tela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
+void tela(uint32_t *p_matrix) {
 
 	bool leftMouseButtonDown = false;
 	bool quit = false;
@@ -29,17 +29,17 @@ void tela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
 	window = SDL_CreateWindow("EmuParadise", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
-	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STATIC, NES_WIDTH, NES_HEIGHT);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, NES_WIDTH, NES_HEIGHT);
 
 	// inicializa todos os pixels da textura como branco
 	memset(pixels, 255, NES_WIDTH * NES_HEIGHT * sizeof(Uint32));
 
-	for (int i = 0; i < NES_WIDTH; i++) {
-		for (int j = 0; j < NES_HEIGHT; j++) {
-			pixels[j * NES_WIDTH + i] = colors[p_matrix[i][j]];
-		}
-	}
+    //for (int i = 0; i < NES_WIDTH; i++) {
+        //for (int j = 0; j < NES_HEIGHT; j++) {
+            //pixels[j * NES_WIDTH + i] = colors[p_matrix)[i][j]];
+        //}
+    //}
 
 	SDL_UpdateTexture(texture, NULL, pixels, NES_WIDTH * sizeof(Uint32));
 
@@ -49,34 +49,34 @@ void tela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
 
 }
 
-void updateTela(uint8_t p_matrix[SCREEN_SIZE_X][SCREEN_SIZE_Y]) {
+void updateTela(uint32_t *p_matrix) {
 
 	srand(time(NULL));
 
-	for (int i = 0; i < NES_WIDTH; i++) {
-		for (int j = 0; j < NES_HEIGHT; j++) {
-			pixels[j * NES_WIDTH + i] = p_matrix[i][j];
-		}
-	}
+	//for (int i = 0; i < NES_WIDTH; i++) {
+		//for (int j = 0; j < NES_HEIGHT; j++) {
+            //pixels[j * NES_WIDTH + i] = colors[(*p_matrix)[i][j]];
+        //}
+    //}
 
 
-    while (SDL_PollEvent(&event)) {   /* Loop until there are no events left on the queue */
-        switch (event.type) {         /* Process the appropiate event type */
-        case SDL_KEYDOWN:        /* Handle a KEYDOWN event */
+    while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
+        switch (event.type) {         //[> Process the appropiate event type <]
+        case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
               printf("Oh! Key press\n");
               break;
     case SDL_MOUSEMOTION:
       break;
     case SDL_QUIT:
       exit(1);
-    default:                 /* Report an unhandled event */
+    default:                 //[> Report an unhandled event <]
       printf("I don't know what this event is!\n");
     }
     }
-	SDL_UpdateTexture(texture, NULL, pixels, NES_WIDTH * sizeof(Uint32));
+    SDL_UpdateTexture(texture, NULL, p_matrix, NES_WIDTH * sizeof(uint32_t));
 
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-	SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_RenderPresent(renderer);
 }
 

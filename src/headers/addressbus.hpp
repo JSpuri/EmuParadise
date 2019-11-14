@@ -62,6 +62,8 @@ class AddressBus {
         std::vector<uint8_t> PRG_RAM;
         // Pattern Tables - Pode ser CHR_ROM
         std::vector<uint8_t> CHR_RAM;
+
+        std::vector<uint8_t> PALLETE_RAM;
 };
 
 #endif

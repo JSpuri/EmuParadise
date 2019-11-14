@@ -38,6 +38,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
     this->CHR_ROM.resize(chr_rom_size, 0);
     this->PRG_RAM.resize(pgr_ram_size, 0);
     this->CHR_RAM.resize(chr_ram_size, 0);
+    this->PALLETE_RAM.resize(PALLETE_RAM_INDEXES_SIZE), 0;
 
     // Loop de copia do arquivo binario para o vetor de uint8_t (de fato nossa memoria)
     for(uint16_t i = 0; i < pgr_rom_size; i++)
@@ -162,6 +163,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
         else if(address <= PALLETE_RAM_INDEXES_END){
 
             address -= PALLETE_RAM_INDEXES_START;
+            this->PALLETE_RAM[address] = word;
         }
         else{
 
@@ -175,6 +177,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
 
     uint8_t value = 0;
+
 
     if(dynamic_cast<CPU*>(processor)){
         if(address < INTERNAL_CPU_RAM_ENDING){
@@ -266,8 +269,12 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
         else if(address <= PALLETE_RAM_INDEXES_END){
 
             address -= PALLETE_RAM_INDEXES_START;
+            //printf("QUERO UMA COR [%04x]\n", address);
+            value = this->PALLETE_RAM[address];
+            //printf("PEGUEI A COR: %02x\n", value);
         }
         else{
+            //printf("QUERO UMA COR 2\n");
 
             address %= PALLETE_RAM_MIRRORING_START;
         }

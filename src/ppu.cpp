@@ -4,6 +4,12 @@
 
 #include <iostream>
 
+const uint32_t colors[16 * 4] = { 0xFF545454, 0xFF001E74, 0xFF081090, 0xFF300088, 0xFF440064, 0xFF5C0030, 0xFF540400, 0xFF3C1800, 0xFF202A00, 0xFF083A00, 0xFF004000, 0xFF003C00, 0xFF00323C, 0xFF000000, 0xFF000000, 0xFF000000,
+								0xFF989698, 0xFF084BC4, 0xFF3032EC, 0xFF5C1EE4, 0xFF8814B0, 0xFFA01464, 0xFF982220, 0xFF783C00, 0xFF545A00, 0xFF287200, 0xFF087C00, 0xFF007628, 0xFF006678, 0xFF000000, 0xFF000000, 0xFF000000,
+								0xFFECEEEC, 0xFF4C9AEC, 0xFF787CEC, 0xFFB062EC, 0xFFE454EC, 0xFFEC58B4, 0xFFEC6A64, 0xFFD48820, 0xFFA0AA00, 0xFF74C400, 0xFF4CD020, 0xFF38CC6C, 0xFF38B4CC, 0xFF3C3C3C, 0xFF000000, 0xFF000000,
+								0xFFECEEEC, 0xFFA8CCEC, 0xFFBCBCEC, 0xFFD4B2EC, 0xFFECAEEC, 0xFFECAED4, 0xFFECB4B0, 0xFFE4C490, 0xFFCCD278, 0xFFB4DE78, 0xFFA8E290, 0xFF98E2B4, 0xFFA0D6E4, 0xFFA0A2A0, 0xFF000000, 0xFF000000
+};
+
 // PPU class constructor
 // All information regarding variables are in headers/ppu.hpp
 PPU::PPU() {
@@ -26,8 +32,6 @@ PPU::PPU() {
 
     this->vector_bg_att_lower_bit = 0;
     this->vector_bg_att_higher_bit = 0;
-
-    this->p_matrix = new std::vector<std::vector<uint8_t>>(SCREEN_SIZE_Y, std::vector<uint8_t>(SCREEN_SIZE_X, 0));
 
     this->OAM.resize(OAM_SIZE, 0);
     
@@ -61,12 +65,12 @@ PPU::PPU() {
     this->OAMDATA = 0;
 
     this->PPUSCROLL = 0;
-    this->cam_position_x = 0;
     this->write_to_cam_x = true;
-    this->cam_position_y = 0;
+    this->vram_addr.reg = 0;
+    this->tram_addr.reg = 0;
+    this->fine_cam_position_x = 0;
 
-    this->write_to_ppuscrollandaddr_lower = false;
-    this->ppuaddr = 0x0;
+    this->address_latch = false;
 
     this->PPUDATA = 0;
 
@@ -80,6 +84,7 @@ PPU::PPU() {
 
 void PPU::Clock() {
 
+    //printf("Beg\nCycle: %d\nScanline: %d\n", cycle, scanline);
     if(this->scanline >= -1 && this->scanline < 240){
 
         if(this->scanline == 0 && this->cycle == 0)
@@ -90,6 +95,8 @@ void PPU::Clock() {
 
         if((this->cycle >= 2 && this->cycle < 258) || (this->cycle >= 321 && this->cycle < 338)){
 
+            //printf("Terceiro if to primeiro if\n");
+            // Update shifters
             if(this->show_background){
 
                 this->vector_bg_pat_lower_bit <<= 1;
@@ -99,30 +106,109 @@ void PPU::Clock() {
                 this->vector_bg_att_higher_bit <<= 1;
             }
 
+            //printf("%d\n", (cycle - 1)%8);
             switch((this->cycle - 1) % 8){
 
                 case 0:
 
                     this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
                     this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
+                    //printf("vram_addr: %04x\n", vram_addr.reg);
 
-                    this->next_bg_tile_id = this->ReadFrom(this->ppuaddr);
+                    this->next_bg_tile_id = this->ReadFrom(0x2000 | (this->vram_addr.reg & 0x0FFF));
                     break;
+
                 case 2:
+                    this->next_bg_tile_att = this->ReadFrom(0x23C0 | (vram_addr.nametable_y << 11)
+                                                                      | (vram_addr.nametable_x << 10)
+                                                                      | ((vram_addr.cam_position_y >> 2) << 3)
+                                                                      | (vram_addr.cam_position_x >> 2));
+
+                    if(vram_addr.cam_position_y & 0x02)
+                        this->next_bg_tile_att >>= 4;
+                    if(vram_addr.cam_position_x & 0x02)
+                        this->next_bg_tile_att >>= 2;
+
+                    this->next_bg_tile_att &= 0x03;
+
                     break;
                 case 4:
                     this->next_bg_tile_lower = this->ReadFrom(this->background_pattern_table_addr
-                                                                + (uint16_t)(this->next_bg_tile_id << 4));
+                                                                + (uint16_t)(this->next_bg_tile_id << 4)
+                                                                + this->vram_addr.fine_cam_position_y);
                     break;
                 case 6:
                     this->next_bg_tile_higher = this->ReadFrom(this->background_pattern_table_addr
-                                                                + (uint16_t)(this->next_bg_tile_id << 4));
+                                                                + (uint16_t)(this->next_bg_tile_id << 4)
+                                                                + this->vram_addr.fine_cam_position_y
+                                                                + 8);
                     break;
                 case 7:
+                    if(this->show_background || this->show_sprites){
+
+                        if(this->vram_addr.cam_position_x == 31){
+                            this->vram_addr.cam_position_x = 0;
+                            this->vram_addr.nametable_x = ~this->vram_addr.nametable_x;
+                        }
+                        else
+                            this->vram_addr.cam_position_x++;
+
+                    }
                     break;
             }
         }
 
+        if(cycle == 256){
+
+            if(this->show_background || this->show_sprites){
+
+                if(this->vram_addr.fine_cam_position_y < 7)
+                    this->vram_addr.fine_cam_position_y++;
+
+                else{
+
+                    this->vram_addr.fine_cam_position_y = 0;
+
+                    if(this->vram_addr.cam_position_y == 29){
+                        this->vram_addr.cam_position_y = 0;
+                        this->vram_addr.nametable_y = ~this->vram_addr.nametable_y;
+                    }
+
+                    else if(this->vram_addr.cam_position_y == 31)
+                        this->vram_addr.cam_position_y = 0;
+
+                    else
+                        this->vram_addr.cam_position_y++;
+                }
+
+            }
+        }
+
+        if(this->cycle == 257){
+
+            this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
+            this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
+
+            if(this->show_background || this->show_sprites){
+            
+                this->vram_addr.nametable_x = this->tram_addr.nametable_x;
+                this->vram_addr.cam_position_x = this->tram_addr.cam_position_x;
+            }
+        }
+
+        if(this->cycle == 338 || cycle == 340)
+            this->next_bg_tile_id = this->ReadFrom(0x2000 | (this->vram_addr.reg & 0x0FFF));
+
+        if(this->scanline == -1 && this->cycle >= 280 && cycle < 305){
+
+            this->vram_addr.fine_cam_position_y = tram_addr.fine_cam_position_y;
+            this->vram_addr.nametable_y = this->tram_addr.nametable_y;
+            this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
+        }
+
+    }
+
+    if(this->scanline == 240){
     }
 
     if(this->scanline >= 241 && this->scanline < 261){
@@ -136,10 +222,31 @@ void PPU::Clock() {
         }
     }
 
+    uint8_t bg_pixel = 0;
+    uint8_t bg_palette = 0;
+
     if(this->show_background){
+
+        uint16_t bit_mux = 0x8000 >> this->fine_cam_position_x;
+
+        uint8_t p0_pixel = (this->vector_bg_pat_lower_bit & bit_mux) > 0;
+        uint8_t p1_pixel = (this->vector_bg_pat_higher_bit & bit_mux) > 0;
+
+        bg_pixel = p1_pixel << 1;
+        bg_pixel |= p0_pixel;
+
+        uint8_t bg_pal0 = (this->vector_bg_att_lower_bit & bit_mux) > 0; 
+        uint8_t bg_pal1 = (this->vector_bg_att_higher_bit & bit_mux) > 0; 
+        bg_palette = (bg_pal1 << 1) | bg_pal0;
+
     }
 
     //Set pixel here
+    uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
+
+    //printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
+    if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240))
+        this->p_matrix[cycle + scanline * SCREEN_SIZE_X] = colors[pixel];
 
     this->cycle++;
 
@@ -150,8 +257,11 @@ void PPU::Clock() {
 
         if(this->scanline >= 261){
             this->scanline = -1;
+            this->frame_complete = true;
         }
     }
+
+    //printf("End\nCycle: %d\nScanline: %d\n", cycle, scanline);
 }
 
 
@@ -175,7 +285,10 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
             this->PPUCTRL = value;
 
             this->nametable_x_offset = value & 0x01;
+            this->tram_addr.nametable_x = this->nametable_x_offset;
+
             this->nametable_y_offset = (value & 0x02) >> 1;
+            this->tram_addr.nametable_y = this->nametable_y_offset;
 
             this->vram_increment_addr_across = ((value & 0x04) ? 0x20 : 0x01);
 
@@ -226,46 +339,44 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
         case PPUSCROLL_ADDR:
             this->PPUSCROLL = value;
 
-            if(this->write_to_ppuscrollandaddr_lower){
+            if(this->address_latch){
 
-                this->cam_position_y = this->PPUSCROLL;
-                this->write_to_ppuscrollandaddr_lower = false;
+                this->tram_addr.fine_cam_position_y = this->PPUSCROLL & 0x07;
+                this->tram_addr.cam_position_y = this->PPUSCROLL >> 3;
+                this->address_latch = false;
             }
 
             else{
 
-                this->cam_position_x = this->PPUSCROLL;
-                this->write_to_ppuscrollandaddr_lower = true;
+                this->fine_cam_position_x = this->PPUSCROLL & 0x07;
+                this->tram_addr.cam_position_x = this->PPUSCROLL >> 3;
+                this->address_latch = true;
             }
             break;
 
         case PPUADDR_ADDR:
             this->PPUSCROLL= value;
-            if(this->write_to_ppuscrollandaddr_lower){
+            if(this->address_latch){
 
-                this->ppuaddr &= 0xFF00;
-                this->ppuaddr += value;
-                this->write_to_ppuscrollandaddr_lower = false;
+                this->tram_addr.reg = (this->tram_addr.reg & 0xFF00) | value;
+                this->vram_addr = this->tram_addr;
+                this->address_latch = false;
             }
             else{
 
-                this->ppuaddr &= 0x00FF;
-                // Valid addresses only between 0x0000 and 0x3FFF
-                this->ppuaddr += value << 8;
-                this->write_to_ppuscrollandaddr_lower = true;
+                this->tram_addr.reg = (uint16_t)((value & 0x3F) << 8) | (this->tram_addr.reg & 0x00FF);
+                this->address_latch = true;
             }
 
-            this->ppuaddr %= PPUADDR_WRITE_ADDR_LIMIT;
             break;
 
 
         // Not sure what to do
         case PPUDATA_ADDR:
             this->PPUDATA = value;
-            this->WriteTo(this->ppuaddr, this->PPUDATA);
 
-            this->ppuaddr += this->vram_increment_addr_across;
-            this->ppuaddr %= PPUADDR_WRITE_ADDR_LIMIT;
+            this->WriteTo(this->vram_addr.reg, value);
+            this->vram_addr.reg += this->vram_increment_addr_across;
             break;
 
         case OAMDMA_ADDR:
@@ -293,7 +404,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             this->PPUSTATUS |= ((this->in_vblank) ? 0x80 : 0x00);
             this->in_vblank = false;
 
-            this->write_to_ppuscrollandaddr_lower = false;
+            this->address_latch = false;
 
             this->PPUGenLatch = this->PPUSTATUS;
             break;
@@ -306,14 +417,12 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
         // Not sure what to do
         case PPUDATA_ADDR:
             this->PPUGenLatch = this->PPUDATA;
-            this->PPUDATA = this->ReadFrom(this->ppuaddr);
+            this->PPUDATA = this->ReadFrom(this->vram_addr.reg);
 
-            if(this->ppuaddr > 0x3F00)
+            if(this->vram_addr.reg > 0x3F00)
                 this->PPUGenLatch = this->PPUDATA;
 
-            this->ppuaddr += this->vram_increment_addr_across;
-            this->ppuaddr %= PPUADDR_WRITE_ADDR_LIMIT;
-
+            this->vram_addr.reg += this->vram_increment_addr_across;
             break;
     }
 
@@ -324,6 +433,10 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
 void PPU::SetAddressBus(AddressBus *addr_bus) {
 
     this->addr_bus = addr_bus;
+}
+
+uint32_t* PPU::GetPMatrix() {
+    return this->p_matrix;
 }
 
 void PPU::WriteToOAM(uint8_t value) {
