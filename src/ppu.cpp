@@ -2,6 +2,7 @@
 
 #include "headers/addressbus.hpp"
 #include "headers/screen.hpp"
+#include <unistd.h>
 #include <iostream>
 
 const uint32_t colors[16 * 4] = { 0xFF545454, 0xFF001E74, 0xFF081090, 0xFF300088, 0xFF440064, 0xFF5C0030, 0xFF540400, 0xFF3C1800, 0xFF202A00, 0xFF083A00, 0xFF004000, 0xFF003C00, 0xFF00323C, 0xFF000000, 0xFF000000, 0xFF000000,
@@ -261,6 +262,7 @@ void PPU::Clock() {
             this->scanline = -1;
             this->frame_complete = true;
             updateTela(GetPMatrix());
+            //sleep(1);
         }
     }
 
@@ -279,7 +281,7 @@ uint8_t PPU::ReadFrom(uint16_t addr) {
 }
 
 // Write value to register (ppu register addresses are in common/constants.hpp)
-void PPU::WriteToRegister(uint16_t addr, int8_t value) {
+void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
 
     this->PPUGenLatch = value;
 
@@ -378,8 +380,12 @@ void PPU::WriteToRegister(uint16_t addr, int8_t value) {
         case PPUDATA_ADDR:
             this->PPUDATA = value;
 
+            //if(value)
+                //printf("PPUDATA: %02x\n", value);
+            vram_addr.reg %= 0x4000;
             this->WriteTo(this->vram_addr.reg, value);
             this->vram_addr.reg += this->vram_increment_addr_across;
+
             break;
 
         case OAMDMA_ADDR:

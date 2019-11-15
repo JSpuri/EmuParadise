@@ -286,6 +286,7 @@ void JSR(int mode, CPU *cpu) {
 void LDA(int mode, CPU *cpu) {
 
     cpu->a = cpu->ResolveOPArgWord(mode, cpu->pc +1);
+    //printf("LDA cpu->A: %02x\n", (uint8_t)cpu->a);
 
     if(cpu->a == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -598,6 +599,8 @@ void SEI(int mode, CPU *cpu) {
 void STA(int mode, CPU *cpu) {
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    //if(addr == 0x2007)
+        //printf("STA cpu->A: %02x\n", (uint8_t)cpu->a);
     cpu->WriteTo(addr, cpu->a);
 }
 

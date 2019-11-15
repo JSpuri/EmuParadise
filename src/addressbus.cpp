@@ -30,6 +30,10 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
     uint16_t chr_rom_size = CHR_ROM_SIZE * this->size_CHR_ROM_in_8kb_units;
     uint16_t pgr_ram_size = PRG_RAM_SIZE * this->size_PRG_RAM_in_8kb_units;
     uint16_t chr_ram_size = CHR_RAM_SIZE * this->size_CHR_RAM_in_8kb_units;
+    //printf("PRG rom size: %04x\n", pgr_rom_size);
+    //printf("CHR rom size: %04x\n", chr_rom_size);
+    //printf("PRG ram size: %04x\n", pgr_ram_size);
+    //printf("CHR ram size: %04x\n", chr_ram_size);
 
     // Reserva as memorias e inicializa tudo com zero
     this->INTERNAL_CPU_RAM.resize(INTERNAL_CPU_RAM_SIZE, 0);
@@ -41,11 +45,14 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
     this->PALLETE_RAM.resize(PALLETE_RAM_INDEXES_SIZE), 0;
 
     // Loop de copia do arquivo binario para o vetor de uint8_t (de fato nossa memoria)
-    for(uint16_t i = 0; i < pgr_rom_size; i++)
-        this->PRG_ROM[i] = nesfile[i + 0x10];
+    for(uint16_t i = 0; i < pgr_rom_size; i++){
+        this->PRG_ROM[i] = (unsigned char)nesfile[i + 0x10];
+        //printf("%02x\n", this->PRG_ROM[i]);
+    }
+
 
     for(uint16_t i = 0; i < chr_rom_size; i++)
-        this->CHR_ROM[i] = nesfile[i + (0x10 + pgr_rom_size)];
+        this->CHR_ROM[i] = (unsigned char)nesfile[i + (0x10 + pgr_rom_size)];
 
     // Guarda os enderecos de NMI, RESET e IRQ para facilitar no futuro
     this->NMI_ADDR = this->PRG_ROM[(pgr_rom_size - UPR_NMI_ADDR)] << 8;
@@ -107,6 +114,8 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
             address += PPU_REGISTERS_START;
 
             // Escrita de fato depende da PPU;
+            //if(word)
+                //printf("Write to register %02x: %02x\n", address, word);
             ppu->WriteToRegister(address, word);
         }
 

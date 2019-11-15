@@ -89,8 +89,10 @@ int8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
     else if(instructionMode == M_INDEXED_INDIRECT)
         value = ResolveIndirectX(addr);
 
-    else if(instructionMode == M_INDIRECT_INDEXED)
+    else if(instructionMode == M_INDIRECT_INDEXED){
         value = ResolveIndirectY(addr);
+        //printf("Value signed: %02x\n", value);
+    }
 
     return value;
 
@@ -137,7 +139,7 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
 // Sends write information to bus, storing last_accessed_mem
 void CPU::WriteTo(uint16_t addr, int8_t value) {
 
-    this->addr_bus->WriteTo(0, addr, value);
+    this->addr_bus->WriteTo(0, addr, (uint8_t)value);
 }
 
 // Sends read information to bus, storing last_accessed_mem
@@ -249,12 +251,14 @@ int8_t CPU::ResolveIndirectY(uint16_t addr) {
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
     uint16_t absolute_addr = ReadAbsAddr(zero_pg_addr);
+    //printf("Resolve Indirect Y: %04x\n", absolute_addr);
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
 
     int8_t value = this->ReadFrom(absolute_addr + this->y);
+    //printf("Value: %02x\n", value);
     return value;
 }
 
