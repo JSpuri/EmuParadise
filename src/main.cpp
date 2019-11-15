@@ -12,7 +12,8 @@ using namespace std;
 
 int main(int argc, const char *argv[]){
 
-	const char *arquivo = argv[1];
+	// const char *arquivo = argv[1];
+    const string arquivo("UNRELATED/game.nes");
 	ifstream binario;
 
 	binario.open(arquivo, ios::in | ios::binary | ios::ate);
@@ -46,9 +47,7 @@ int main(int argc, const char *argv[]){
     tela(ppu.GetPMatrix());
 
     // Main cpu loop
-    while(addr_bus.Clock()){
-        updateTela(ppu.GetPMatrix());
-    }
+    while(addr_bus.Clock()){}
 
 	return 0;
 }

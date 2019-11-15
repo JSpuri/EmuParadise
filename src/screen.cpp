@@ -1,6 +1,8 @@
 #include "headers/screen.hpp"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <signal.h>
+#include <stdio.h>
 
 // tabela de cores da paleta do nes
 const Uint32 colors[16 * 4] = { 0x545454, 0x001E74, 0x081090, 0x300088, 0x440064, 0x5C0030, 0x540400, 0x3C1800, 0x202A00, 0x083A00, 0x004000, 0x003C00, 0x00323C, 0x000000, 0x000000, 0x000000,
@@ -25,7 +27,12 @@ void tela(uint32_t *p_matrix) {
 	bool quit = false;
 	SDL_Event event;
 
-	SDL_Init(SDL_INIT_VIDEO);
+	// SDL_Init(SDL_INIT_VIDEO);
+
+  struct sigaction action;
+  sigaction(SIGINT, NULL, &action);
+  SDL_Init(SDL_INIT_EVERYTHING);
+  sigaction(SIGINT, &action, NULL);
 
 	window = SDL_CreateWindow("EmuParadise", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -51,7 +58,7 @@ void tela(uint32_t *p_matrix) {
 
 void updateTela(uint32_t *p_matrix) {
 
-	srand(time(NULL));
+	// srand(time(NULL));
 
 	//for (int i = 0; i < NES_WIDTH; i++) {
 		//for (int j = 0; j < NES_HEIGHT; j++) {
@@ -60,19 +67,20 @@ void updateTela(uint32_t *p_matrix) {
     //}
 
 
-    while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
-        switch (event.type) {         //[> Process the appropiate event type <]
-        case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
-              printf("Oh! Key press\n");
-              break;
-    case SDL_MOUSEMOTION:
-      break;
-    case SDL_QUIT:
-      exit(1);
-    default:                 //[> Report an unhandled event <]
-      printf("I don't know what this event is!\n");
-    }
-    }
+    // while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
+    //   switch (event.type) {         //[> Process the appropiate event type <]
+    //     case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
+    //       printf("Oh! Key press\n");
+    //       break;
+    //     case SDL_MOUSEMOTION:
+    //       break;
+    //     case SDL_QUIT:
+    //       exit(1);
+    //     default:                 //[> Report an unhandled event <]
+    //       printf("I don't know what this event is!\n");
+    //   }
+    // }
+
     SDL_UpdateTexture(texture, NULL, p_matrix, NES_WIDTH * sizeof(uint32_t));
 
     SDL_RenderClear(renderer);

@@ -39,7 +39,7 @@ bool CPU::Clock() {
 
         uint8_t curr_opcode = this->ReadFrom(this->pc);
 
-        printf("Opcode: %02x\n", curr_opcode);
+        // printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
         if (curr_opcode == 0x00)
             return false;
@@ -137,13 +137,13 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
 // Sends write information to bus, storing last_accessed_mem
 void CPU::WriteTo(uint16_t addr, int8_t value) {
 
-    this->addr_bus->WriteTo(this, addr, value);
+    this->addr_bus->WriteTo(0, addr, value);
 }
 
 // Sends read information to bus, storing last_accessed_mem
 uint8_t CPU::ReadFrom(uint16_t addr) {
 
-    return this->addr_bus->ReadFrom(this, addr);
+    return this->addr_bus->ReadFrom(0, addr);
 }
 
 // Sets which address bus the CPU will write/read to/from
@@ -325,10 +325,10 @@ void CPU::runInstruction() {
         }
     }
 
-    if (this->instructionAccessedMemory)
-        logls();
-    else
-        log();
+    // if (this->instructionAccessedMemory)
+    //     logls();
+    // else
+    //     log();
 }
 
 void CPU::setInstruction(uint8_t opcode) {

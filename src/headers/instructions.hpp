@@ -1109,6 +1109,7 @@ void setInstructionProperties(uint8_t opcode, CPU *cpu){
             break;
 
         default:
+            printf("chegou aqui");
             cpu->setInstructionMode(-1);
             cpu->setOperation(NULL);
             cpu->setInstructionNumBytes(0);

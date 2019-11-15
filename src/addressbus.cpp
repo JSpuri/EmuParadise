@@ -75,7 +75,6 @@ bool AddressBus::Clock() {
         this->run_emulation = this->cpu->Clock();
 
     if(this->ppu->nmi){
-
         this->ppu->nmi = false;
         this->cpu->NMI();
     }
@@ -87,9 +86,9 @@ bool AddressBus::Clock() {
 
 // Analisa qual classe quer escrever e, a partir dai, redireciona o valor
 // para o local correto, de acordo com o endereco dado.
-void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
+void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
 
-    if(dynamic_cast<CPU*>(processor)){
+    if(processorType == 0){
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
@@ -122,7 +121,7 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
         }
     }
 
-    else if(dynamic_cast<PPU*>(processor)){
+    else if(processorType == 1){
         if(address >= NAMETABLE_0_START && address <= NAMETABLE_MIRROR_END){
 
             // Por causa do mirroring das nametables
@@ -174,12 +173,12 @@ void AddressBus::WriteTo(Processor *processor, uint16_t address, uint8_t word) {
 
 // Analisa de qual classe ler e, a partir dai, redireciona o valor
 // para o local correto, de acordo com o endereco dado.
-uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
+uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
 
     uint8_t value = 0;
 
 
-    if(dynamic_cast<CPU*>(processor)){
+    if(processorType == 0){
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
@@ -218,7 +217,7 @@ uint8_t AddressBus::ReadFrom(Processor *processor, uint16_t address) {
         }
     }
 
-    else if(dynamic_cast<PPU*>(processor)){
+    else if(processorType == 1){
 
         if(address <= PATTERN_TABLE_1_END){
             if(this->size_CHR_ROM_in_8kb_units){

@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-std=gnu++11
+CCFLAGS=-std=gnu++11 -O3
 SDLFLAG=$$(sdl2-config --cflags --libs)
 
 SRC=./src

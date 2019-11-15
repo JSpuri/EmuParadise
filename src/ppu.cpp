@@ -1,7 +1,7 @@
 #include "headers/ppu.hpp"
 
 #include "headers/addressbus.hpp"
-
+#include "headers/screen.hpp"
 #include <iostream>
 
 const uint32_t colors[16 * 4] = { 0xFF545454, 0xFF001E74, 0xFF081090, 0xFF300088, 0xFF440064, 0xFF5C0030, 0xFF540400, 0xFF3C1800, 0xFF202A00, 0xFF083A00, 0xFF004000, 0xFF003C00, 0xFF00323C, 0xFF000000, 0xFF000000, 0xFF000000,
@@ -119,10 +119,11 @@ void PPU::Clock() {
                     break;
 
                 case 2:
-                    this->next_bg_tile_att = this->ReadFrom(0x23C0 | (vram_addr.nametable_y << 11)
-                                                                      | (vram_addr.nametable_x << 10)
-                                                                      | ((vram_addr.cam_position_y >> 2) << 3)
-                                                                      | (vram_addr.cam_position_x >> 2));
+                    this->next_bg_tile_att = this->ReadFrom(0x23C0
+                        | (vram_addr.nametable_y << 11)
+                        | (vram_addr.nametable_x << 10)
+                        | ((vram_addr.cam_position_y >> 2) << 3)
+                        | (vram_addr.cam_position_x >> 2));
 
                     if(vram_addr.cam_position_y & 0x02)
                         this->next_bg_tile_att >>= 4;
@@ -245,8 +246,9 @@ void PPU::Clock() {
     uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
 
     //printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
-    if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240))
+    if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240)) {
         this->p_matrix[cycle + scanline * SCREEN_SIZE_X] = colors[pixel];
+    }
 
     this->cycle++;
 
@@ -258,21 +260,22 @@ void PPU::Clock() {
         if(this->scanline >= 261){
             this->scanline = -1;
             this->frame_complete = true;
+            updateTela(GetPMatrix());
         }
     }
 
-    //printf("End\nCycle: %d\nScanline: %d\n", cycle, scanline);
+    // printf("Cycle: %d\nScanline: %d\n", cycle, scanline);
 }
 
 
 // Write value to memory according to PPU address table
 void PPU::WriteTo(uint16_t addr, int8_t value) {
-    this->addr_bus->WriteTo(this, addr, value);
+    this->addr_bus->WriteTo(1, addr, value);
 }
 
 // Read value from memory according to PPU address table
 uint8_t PPU::ReadFrom(uint16_t addr) {
-    return this->addr_bus->ReadFrom(this, addr);
+    return this->addr_bus->ReadFrom(1, addr);
 }
 
 // Write value to register (ppu register addresses are in common/constants.hpp)
