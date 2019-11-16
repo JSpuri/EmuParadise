@@ -440,6 +440,7 @@ its_empty:
     RTS
 
 end_game:
+    BRK
     JMP Reset
 ; Graphics information --------------------------------------------------------
     .org $E000

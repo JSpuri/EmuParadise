@@ -81,8 +81,10 @@ void adc_aux(CPU *cpu, int8_t num) {
 void ADC(int mode, CPU *cpu) {
 
 	int8_t num = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("ADC %02x + (cpu->A: %0x2) = ", num, cpu->a);
 
     adc_aux(cpu, num);
+    printf("%02x\n", cpu->a);
 }
 
 void AND(int mode, CPU *cpu) {
@@ -90,6 +92,7 @@ void AND(int mode, CPU *cpu) {
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
 
     int8_t result = cpu->a & value;
+    printf("AND %02x & (cpu->A: %02x) = %02x", value, cpu->a, result);
 
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[N] = ((result < 0) ? 1 : 0);
@@ -105,6 +108,7 @@ void ASL(int mode, CPU *cpu) {
 
         cpu->ps[C] = (cpu->a & 0x80) >> 7; 
         result = cpu->a << 1;
+        printf("ASL (cpu->A: %02x) = %02x\n", cpu->a, result);
 
         cpu->a = result;
     }
@@ -115,6 +119,7 @@ void ASL(int mode, CPU *cpu) {
         result = value << 1;
 
         uint16_t target_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+        printf("ASL (M[%02x]: %02x) = %02x\n", target_addr, value, result);
         cpu->WriteTo(target_addr, result);
     }
 
@@ -123,24 +128,31 @@ void ASL(int mode, CPU *cpu) {
 }
 
 void BCC(int mode, CPU *cpu) {
+    printf("BCC (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[C] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BCC (pc after): %0x2\n", cpu->pc);
 }
 
 void BCS(int mode, CPU *cpu) {
+    printf("BCS (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[C] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BCS (pc after): %0x2\n", cpu->pc);
 }
 
 void BEQ(int mode, CPU *cpu) {
+    printf("BEQ (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[Z] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BEQ (pc after): %0x2\n", cpu->pc);
 }
 
 void BIT(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
     int8_t result = cpu->a & value;
+    printf("BIT %02x (cpu->A: %02x) => %02x\n", value, cpu->a, result);
 
     cpu->ps[Z] = ((result == 0) ? 1 : 0);
     cpu->ps[V] = (((value & 0x40) != 0) ? 1 : 0);
@@ -148,64 +160,81 @@ void BIT(int mode, CPU *cpu) {
 }
 
 void BMI(int mode, CPU *cpu) {
+    printf("BMI (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[N] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BMI (pc after): %0x2\n", cpu->pc);
 }
 
 void BNE(int mode, CPU *cpu) {
+    printf("BNE (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[Z] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BNE (pc after): %0x2\n", cpu->pc);
 }
 
 void BPL(int mode, CPU *cpu) {
+    printf("BPL (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[N] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BPL (pc after): %0x2\n", cpu->pc);
 }
 
 void BRK(int mode, CPU *cpu) {
 }
 
 void BVC(int mode, CPU *cpu) {
+    printf("BVC (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[V] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BVC (pc after): %0x2\n", cpu->pc);
 }
 
 void BVS(int mode, CPU *cpu) {
+    printf("BVS (pc before): %0x2\n", cpu->pc);
     if(cpu->ps[V] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
+    printf("BVS (pc after): %0x2\n", cpu->pc);
 }
 
 void CLC(int mode, CPU *cpu) {
+    printf("CLC\n");
     cpu->ps[C] = 0;
 }
 
 void CLD(int mode, CPU *cpu) {
+    printf("CLD\n");
     cpu->ps[D] = 0;
 }
 
 void CLI(int mode, CPU *cpu) {
+    printf("CLI\n");
     cpu->ps[I] = 0;
 }
 
 void CLV(int mode, CPU *cpu) {
+    printf("CLV\n");
     cpu->ps[V] = 0;
 }
 
 void CMP(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("CMP %02x (cpu->A: %0x2)\n", value, cpu->a);
     setFlagsCMP(value, cpu->a, cpu);
 }
 
 void CPX(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("CPX %02x (cpu->X: %0x2)\n", value, cpu->x);
     setFlagsCMP(value, cpu->x, cpu);
 }
 
 void CPY(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("CPY %02x (cpu->Y: %0x2)\n", value, cpu->y);
     setFlagsCMP(value, cpu->y, cpu);
 }
 
@@ -217,18 +246,21 @@ void DEC(int mode, CPU *cpu) {
     setFlagsDEC(value, cpu);
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("DEC (M[%0x2]: %02x)\n", addr, value + 1);
     cpu->WriteTo(addr, value);
 
 }
 
 void DEX(int mode, CPU *cpu) {
 
+    printf("DEX (cpu->X: %02x)\n", cpu->x);
     cpu->x -= 1;
     setFlagsDEC(cpu->x, cpu);
 }
 
 void DEY(int mode, CPU *cpu) {
 
+    printf("DEY (cpu->Y: %02x)\n", cpu->y);
     cpu->y -= 1;
     setFlagsDEC(cpu->y, cpu);
 }
@@ -236,7 +268,9 @@ void DEY(int mode, CPU *cpu) {
 void EOR(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("EOR %02x ^ (cpu->A: %02x) = ", value, cpu->a);
     cpu->a = cpu->a ^ value;
+    printf("%02x\n", cpu->a);
 
     setFlagsEOR(cpu->a, cpu);
 }
@@ -249,18 +283,21 @@ void INC(int mode, CPU *cpu) {
     setFlagsDEC(value, cpu);
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("INC (M[%0x2]: %02x)\n", addr, value + 1);
     cpu->WriteTo(addr, value);
 
 }
 
 void INX(int mode, CPU *cpu) {
 
+    printf("INX (cpu->X: %02x)\n", cpu->x);
     cpu->x += 1;
     setFlagsDEC(cpu->x, cpu);
 }
 
 void INY(int mode, CPU *cpu) {
 
+    printf("DEY (cpu->Y: %02x)\n", cpu->y);
     cpu->y += 1;
     setFlagsDEC(cpu->y, cpu);
 }
@@ -268,6 +305,7 @@ void INY(int mode, CPU *cpu) {
 void JMP(int mode, CPU *cpu) {
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("JMP %02x\n", addr);
     cpu->pc = addr;
 }
 
@@ -279,6 +317,7 @@ void JSR(int mode, CPU *cpu) {
     cpu->WriteTo(0x0100 + (cpu->sp)--, absolute_addr & 0xFF);
 
     absolute_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("JSR %02x\n", absolute_addr);
     cpu->pc = absolute_addr;
 
 }
@@ -286,7 +325,7 @@ void JSR(int mode, CPU *cpu) {
 void LDA(int mode, CPU *cpu) {
 
     cpu->a = cpu->ResolveOPArgWord(mode, cpu->pc +1);
-    //printf("LDA cpu->A: %02x\n", (uint8_t)cpu->a);
+    printf("LDA %02x\n", cpu->a);
 
     if(cpu->a == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -299,6 +338,7 @@ void LDA(int mode, CPU *cpu) {
 void LDX(int mode, CPU *cpu) {
 
     cpu->x = cpu->ResolveOPArgWord(mode, cpu->pc +1);
+    printf("LDX %02x\n", cpu->x);
 
     if(cpu->x == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -311,6 +351,7 @@ void LDX(int mode, CPU *cpu) {
 void LDY(int mode, CPU *cpu) {
 
     cpu->y = cpu->ResolveOPArgWord(mode, cpu->pc +1);
+    printf("LDY %02x\n", cpu->y);
 
     if(cpu->y == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -329,8 +370,10 @@ void LSR(int mode, CPU *cpu) {
         else
             cpu->ps[7] = 0;
 
+        printf("LSR (cpu->A: %02x) = ", cpu->a);
         cpu->a = cpu->a >> 1;
         cpu->a = cpu->a & 0x7f; 		//mask and 0b01111111
+        printf("%02x\n", cpu->a);
 
         if(cpu->a == 0x00)			 	//check zero
             cpu->ps[6] = 1;
@@ -356,6 +399,7 @@ void LSR(int mode, CPU *cpu) {
             cpu->ps[6] = 0;
 
         uint16_t target_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+        printf("LSR (M[%02x]: %02x)\n", target_addr, value);
         cpu->WriteTo(target_addr, value);
     }
 }
@@ -366,7 +410,9 @@ void NOP(int mode, CPU *cpu) {
 void ORA(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+    printf("ORA %02x | (cpu->A: %02x) = ", value, cpu->a);
     cpu->a = cpu->a | value;
+    printf("%02x\n", cpu->a);
 
     if(cpu->a == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -377,11 +423,13 @@ void ORA(int mode, CPU *cpu) {
 }
 
 void PHA(int mode, CPU *cpu) {
+    printf("PHA\n");
     cpu->WriteTo(0x0100 + (cpu->sp--), cpu->a);
 }
 
 void PHP(int mode, CPU *cpu) {
     
+    printf("PHP\n");
     cpu->ps[2] = 1;
     cpu->ps[3] = 1;
     int8_t aux = cpu->ps[0]*pow(2,7);
@@ -395,7 +443,9 @@ void PHP(int mode, CPU *cpu) {
 
 void PLA(int mode, CPU *cpu) {
 
+    printf("PLA (cpu->A: %02x => ", cpu->a);
     cpu->a = cpu->ReadFrom((0x0100 + (++cpu->sp)));
+    printf("%02x\n", cpu->a);
 
     if(cpu->a == 0x00)	cpu->ps[6] = 1;
     else cpu->ps[6] = 0;
@@ -407,6 +457,7 @@ void PLA(int mode, CPU *cpu) {
 
 void PLP(int mode, CPU *cpu) {
 
+    printf("PLP\n");
     int8_t aux = cpu->ReadFrom((0x0100 + (++cpu->sp)));
 
     for(int i = 0; i < 8; i++) {
@@ -446,6 +497,8 @@ void ROL(int mode, CPU *cpu) {
             cpu->ps[7] = 1;
         else
             cpu->ps[7] = 0;
+
+        printf("ROL (cpu->A: %02x) => %02x\n", aux, cpu->a);
     }
 
     else{
@@ -473,6 +526,7 @@ void ROL(int mode, CPU *cpu) {
             cpu->ps[7] = 0;
 
         uint16_t target_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+        printf("LSR (M[%02x]: %02x)\n", target_addr, value);
         cpu->WriteTo(target_addr, value);
     }
 }
@@ -505,6 +559,8 @@ void ROR(int mode, CPU *cpu) {
             cpu->ps[C] = 1;
         else
             cpu->ps[C] = 0;
+
+        printf("ROR (cpu->A: %02x) => %02x\n", aux, cpu->a);
     }
 
     else{
@@ -533,6 +589,7 @@ void ROR(int mode, CPU *cpu) {
             cpu->ps[7] = 0;
 
         uint16_t target_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+        printf("LSR (M[%02x]: %02x) => %02x\n", target_addr, aux, value);
         cpu->WriteTo(target_addr, value);
     }
 }
@@ -552,8 +609,10 @@ void RTI(int mode, CPU *cpu) {
 
     }
 
+    printf("RTI (cpu->pc : %02x) => ", cpu->pc);
     cpu->pc = cpu->ReadFrom((0x0100 + (++cpu->sp)));
     cpu->pc += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8 ;
+    printf("%02x\n", cpu->pc);
 }
 
 void RTS(int mode, CPU *cpu) {
@@ -561,6 +620,7 @@ void RTS(int mode, CPU *cpu) {
     uint16_t absolute_addr = cpu->ReadFrom(0x0100 + (++cpu->sp));
     absolute_addr += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8;
 
+    printf("RTS (cpu->pc : %02x) => %02x\n", cpu->pc, absolute_addr);
     cpu->pc = absolute_addr;
 
 }
@@ -582,42 +642,49 @@ void SBC(int mode, CPU *cpu) {
 		cpu->ps[C] = 1;
 	else
 		cpu->ps[C] = 0;
+
+    printf("SBC (cpu->A: %02x) - %02x = %02x\n", op1, op2, cpu->a);
 }
 
 void SEC(int mode, CPU *cpu) {
+    printf("SEC\n");
     cpu->ps[C] = 1;
 }
 
 void SED(int mode, CPU *cpu) {
+    printf("SED\n");
     cpu->ps[D] = 1;
 }
 
 void SEI(int mode, CPU *cpu) {
+    printf("SEI\n");
     cpu->ps[I] = 1;
 }
 
 void STA(int mode, CPU *cpu) {
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
-    //if(addr == 0x2007)
-        //printf("STA cpu->A: %02x\n", (uint8_t)cpu->a);
+    printf("STA (cpu->A: %02x) => (M[%02x])\n", cpu->a, addr);
     cpu->WriteTo(addr, cpu->a);
 }
 
 void STX(int mode, CPU *cpu) {
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("STX (cpu->X: %02x) => (M[%02x])\n", cpu->x, addr);
     cpu->WriteTo(addr, cpu->x);
 }
 
 void STY(int mode, CPU *cpu) {
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
+    printf("STY (cpu->Y: %02x) => (M[%02x])\n", cpu->y, addr);
     cpu->WriteTo(addr, cpu->y);
 }
 
 void TAX(int mode, CPU *cpu) {
 
+    printf("TAX\n");
     cpu->x = cpu->a;
     if (cpu->x == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
@@ -628,6 +695,7 @@ void TAX(int mode, CPU *cpu) {
 
 void TAY(int mode, CPU *cpu) {
 
+    printf("TAY\n");
     cpu->y = cpu->a;
     if (cpu->y == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
@@ -638,6 +706,7 @@ void TAY(int mode, CPU *cpu) {
 
 void TSX(int mode, CPU *cpu) {
 
+    printf("TSX\n");
     cpu->x = cpu->sp;
     if (cpu->x == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
@@ -648,6 +717,7 @@ void TSX(int mode, CPU *cpu) {
 
 void TXA(int mode, CPU *cpu) {
 
+    printf("TXA\n");
     cpu->a = cpu->x;
     if (cpu->a == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
@@ -657,11 +727,13 @@ void TXA(int mode, CPU *cpu) {
 }
 
 void TXS(int mode, CPU *cpu) {
+    printf("TXS\n");
     cpu->sp = cpu->x;
 }
 
 void TYA(int mode, CPU *cpu) {
 
+    printf("TYA\n");
     cpu->a = cpu->y;
     if (cpu->a == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;

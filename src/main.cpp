@@ -12,8 +12,7 @@ using namespace std;
 
 int main(int argc, const char *argv[]){
 
-	// const char *arquivo = argv[1];
-    const string arquivo("UNRELATED/game.nes");
+    const char *arquivo = argv[1];
 	ifstream binario;
 
 	binario.open(arquivo, ios::in | ios::binary | ios::ate);
