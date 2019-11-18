@@ -28,6 +28,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
     // Verifica o tamanho da PRG_RAM (em unidades de 8kb)
     this->size_PRG_RAM_in_8kb_units = nesfile[8];
+    this->size_PRG_RAM_in_8kb_units = 4;
     printf("Size of PRG RAM in 8kb units: %02x\n", this->size_PRG_RAM_in_8kb_units);
 
     // Redimensiona todos os bancos do cartucho de acordo com o necessario
@@ -42,7 +43,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
     // Reserva as memorias e inicializa tudo com zero
     this->INTERNAL_CPU_RAM.resize(INTERNAL_CPU_RAM_SIZE, 0);
-    this->INTERNAL_PPU_RAM.resize(INTERNAL_PPU_RAM_SIZE, 0x20);
+    this->INTERNAL_PPU_RAM.resize(INTERNAL_PPU_RAM_SIZE, 0);
     this->PRG_ROM.resize(pgr_rom_size, 0);
     this->CHR_ROM.resize(chr_rom_size, 0);
     this->PRG_RAM.resize(pgr_ram_size, 0);
@@ -107,7 +108,7 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
-            address = address%PRG_RAM_SIZE;
+            address = address%INTERNAL_CPU_RAM_SIZE;
 
             this->cpu->last_accessed_mem = address;
             this->INTERNAL_CPU_RAM[address] = word;
@@ -125,6 +126,11 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
             //if(word)
                 //printf("Write to register %02x: %02x\n", address, word);
             ppu->WriteToRegister(address, word);
+        }
+
+        else if(address >= PRG_RAM_START && address < PRG_ROM_1_BANK_START){
+            address -= PRG_RAM_START;
+            this->PRG_RAM[address] = word;
         }
 
         else if(address == OAMDMA_ADDR){
@@ -216,17 +222,28 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
             // Leitura depende de fato da ppu
             value = this->ppu->ReadFromRegister(address);
         }
+
+        else if(address >= PRG_RAM_START && address < PRG_ROM_1_BANK_START){
+            address -= PRG_RAM_START;
+            value = this->PRG_RAM[address];
+        }
+
         else if(address >= PRG_ROM_1_BANK_START){
+
             if(address < PRG_ROM_2_BANK_START){
+                address -= PRG_ROM_1_BANK_START;
                 value = this->PRG_ROM[address];
             }
+
             else {
                 if(this->size_PRG_ROM_in_16kb_units == 2){
+                    address -= PRG_ROM_1_BANK_START;
                     value = this->PRG_ROM[address];
                 }
                 else{
                     address -= PRG_ROM_2_BANK_START;
-                    value = this->PRG_ROM[address];
+                    if(address < this->PRG_ROM.size())
+                        value = this->PRG_ROM[address];
                 }
             }
 

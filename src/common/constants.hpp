@@ -34,6 +34,8 @@
 #define PRG_ROM_1_BANK_START 0x8000
 #define PRG_ROM_2_BANK_START 0xC000
 
+#define PRG_RAM_START 0x6000
+
 // Enderecos relativos aos registradores da PPU a partir da CPU
 #define PPU_REGISTERS_START 0x2000
 #define PPU_REGISTERS_MIRROR_END 0x4000

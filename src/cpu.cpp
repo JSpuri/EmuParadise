@@ -39,14 +39,15 @@ bool CPU::Clock() {
 
         uint8_t curr_opcode = this->ReadFrom(this->pc);
 
-        //printf("Opcode: %02x\n", curr_opcode);
+        printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
         if (curr_opcode == 0x00)
             return false;
 
         this->setInstruction(curr_opcode);
         
-        this->runInstruction();
+        if(this->operation)
+            this->runInstruction();
 
     }
 
@@ -329,10 +330,10 @@ void CPU::runInstruction() {
         }
     }
 
-    // if (this->instructionAccessedMemory)
-    //     logls();
-    // else
-    //     log();
+     if (this->instructionAccessedMemory)
+         logls();
+     else
+         log();
 }
 
 void CPU::setInstruction(uint8_t opcode) {

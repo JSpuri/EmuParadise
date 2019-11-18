@@ -526,7 +526,7 @@ void ROL(int mode, CPU *cpu) {
             cpu->ps[7] = 0;
 
         uint16_t target_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
-        printf("LSR (M[%02x]: %02x)\n", target_addr, value);
+        printf("ROL (M[%02x]: %02x)\n", target_addr, value);
         cpu->WriteTo(target_addr, value);
     }
 }
