@@ -8,41 +8,46 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
     // Verifica o byte que nos diz quantos PRG ROMs de 16kb ele tem
     // Se tem dois, tem 32kb de ROM
     this->size_PRG_ROM_in_16kb_units = nesfile[4];
+    printf("Size of PRG ROM in 16kb units: %02x\n", this->size_PRG_ROM_in_16kb_units);
 
     // Verifica o byte que nos diz quantos CHR ROMs de 8kb ele tem
     // Se tem zero, usa CHR RAM
     this->size_CHR_ROM_in_8kb_units = nesfile[5];
+    printf("Size of CHR ROM in 8kb units: %02x\n", this->size_CHR_ROM_in_8kb_units);
 
     if(this->size_CHR_ROM_in_8kb_units)
         this->size_CHR_RAM_in_8kb_units = 0;
     
     // Determina o tipo de mirroring: 0 eh horizontal, 1 eh vertical
     this->mirroring_type = nesfile[6] & 0X01;
+    printf("Mirroring type (0 -> horizontal and 1 -> vertical): %u\n", this->mirroring_type);
 
     // Verifica o numero mapper do cartucho
     this->mapper_number = (nesfile[7] & 0xF0) + (nesfile[6] >> 4);
+    printf("Mapper type: %04x\n", this->mapper_number);
 
     // Verifica o tamanho da PRG_RAM (em unidades de 8kb)
     this->size_PRG_RAM_in_8kb_units = nesfile[8];
+    printf("Size of PRG RAM in 8kb units: %02x\n", this->size_PRG_RAM_in_8kb_units);
 
     // Redimensiona todos os bancos do cartucho de acordo com o necessario
     uint16_t pgr_rom_size = PRG_ROM_SIZE * this->size_PRG_ROM_in_16kb_units;
     uint16_t chr_rom_size = CHR_ROM_SIZE * this->size_CHR_ROM_in_8kb_units;
     uint16_t pgr_ram_size = PRG_RAM_SIZE * this->size_PRG_RAM_in_8kb_units;
     uint16_t chr_ram_size = CHR_RAM_SIZE * this->size_CHR_RAM_in_8kb_units;
-    //printf("PRG rom size: %04x\n", pgr_rom_size);
-    //printf("CHR rom size: %04x\n", chr_rom_size);
-    //printf("PRG ram size: %04x\n", pgr_ram_size);
-    //printf("CHR ram size: %04x\n", chr_ram_size);
+    printf("PRG rom size: %04x\n", pgr_rom_size);
+    printf("CHR rom size: %04x\n", chr_rom_size);
+    printf("PRG ram size: %04x\n", pgr_ram_size);
+    printf("CHR ram size: %04x\n", chr_ram_size);
 
     // Reserva as memorias e inicializa tudo com zero
     this->INTERNAL_CPU_RAM.resize(INTERNAL_CPU_RAM_SIZE, 0);
-    this->INTERNAL_PPU_RAM.resize(INTERNAL_PPU_RAM_SIZE, 0);
+    this->INTERNAL_PPU_RAM.resize(INTERNAL_PPU_RAM_SIZE, 0x20);
     this->PRG_ROM.resize(pgr_rom_size, 0);
     this->CHR_ROM.resize(chr_rom_size, 0);
     this->PRG_RAM.resize(pgr_ram_size, 0);
     this->CHR_RAM.resize(chr_ram_size, 0);
-    this->PALLETE_RAM.resize(PALLETE_RAM_INDEXES_SIZE), 0;
+    this->PALLETE_RAM.resize(PALLETE_RAM_INDEXES_SIZE, 0);
 
     // Loop de copia do arquivo binario para o vetor de uint8_t (de fato nossa memoria)
     for(uint16_t i = 0; i < pgr_rom_size; i++){
@@ -57,12 +62,15 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
     // Guarda os enderecos de NMI, RESET e IRQ para facilitar no futuro
     this->NMI_ADDR = this->PRG_ROM[(pgr_rom_size - UPR_NMI_ADDR)] << 8;
     this->NMI_ADDR += this->PRG_ROM[(pgr_rom_size - LWR_NMI_ADDR)];
+    printf("NMI address: %04x\n", this->NMI_ADDR);
 
     this->RESET_ADDR = this->PRG_ROM[(pgr_rom_size - UPR_RST_ADDR)] << 8;
     this->RESET_ADDR += this->PRG_ROM[(pgr_rom_size - LWR_RST_ADDR)];
+    printf("Reset address: %04x\n", this->RESET_ADDR);
 
     this->IRQ_ADDR = this->PRG_ROM[(pgr_rom_size - UPR_IRQ_ADDR)] << 8;
     this->IRQ_ADDR += this->PRG_ROM[(pgr_rom_size - LWR_IRQ_ADDR)];
+    printf("IRQ address: %04x\n", this->IRQ_ADDR);
 
 
     // Inicializa variavel que verifica se a memoria foi acessada

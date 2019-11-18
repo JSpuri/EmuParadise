@@ -81,7 +81,7 @@ void adc_aux(CPU *cpu, int8_t num) {
 void ADC(int mode, CPU *cpu) {
 
 	int8_t num = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
-    printf("ADC %02x + (cpu->A: %0x2) = ", num, cpu->a);
+    printf("ADC %02x + (cpu->A: %02x) = ", num, cpu->a);
 
     adc_aux(cpu, num);
     printf("%02x\n", cpu->a);
@@ -128,24 +128,24 @@ void ASL(int mode, CPU *cpu) {
 }
 
 void BCC(int mode, CPU *cpu) {
-    printf("BCC (pc before): %0x2\n", cpu->pc);
+    printf("BCC (pc before): %02x\n", cpu->pc);
     if(cpu->ps[C] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BCC (pc after): %0x2\n", cpu->pc);
+    printf("BCC (pc after): %02x\n", cpu->pc);
 }
 
 void BCS(int mode, CPU *cpu) {
-    printf("BCS (pc before): %0x2\n", cpu->pc);
+    printf("BCS (pc before): %02x\n", cpu->pc);
     if(cpu->ps[C] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BCS (pc after): %0x2\n", cpu->pc);
+    printf("BCS (pc after): %02x\n", cpu->pc);
 }
 
 void BEQ(int mode, CPU *cpu) {
-    printf("BEQ (pc before): %0x2\n", cpu->pc);
+    printf("BEQ (pc before): %02x\n", cpu->pc);
     if(cpu->ps[Z] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BEQ (pc after): %0x2\n", cpu->pc);
+    printf("BEQ (pc after): %02x\n", cpu->pc);
 }
 
 void BIT(int mode, CPU *cpu) {
@@ -160,41 +160,41 @@ void BIT(int mode, CPU *cpu) {
 }
 
 void BMI(int mode, CPU *cpu) {
-    printf("BMI (pc before): %0x2\n", cpu->pc);
+    printf("BMI (pc before): %02x\n", cpu->pc);
     if(cpu->ps[N] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BMI (pc after): %0x2\n", cpu->pc);
+    printf("BMI (pc after): %02x\n", cpu->pc);
 }
 
 void BNE(int mode, CPU *cpu) {
-    printf("BNE (pc before): %0x2\n", cpu->pc);
+    printf("BNE (pc before): %02x\n", cpu->pc);
     if(cpu->ps[Z] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BNE (pc after): %0x2\n", cpu->pc);
+    printf("BNE (pc after): %02x\n", cpu->pc);
 }
 
 void BPL(int mode, CPU *cpu) {
-    printf("BPL (pc before): %0x2\n", cpu->pc);
+    printf("BPL (pc before): %02x\n", cpu->pc);
     if(cpu->ps[N] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BPL (pc after): %0x2\n", cpu->pc);
+    printf("BPL (pc after): %02x\n", cpu->pc);
 }
 
 void BRK(int mode, CPU *cpu) {
 }
 
 void BVC(int mode, CPU *cpu) {
-    printf("BVC (pc before): %0x2\n", cpu->pc);
+    printf("BVC (pc before): %02x\n", cpu->pc);
     if(cpu->ps[V] == 0)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BVC (pc after): %0x2\n", cpu->pc);
+    printf("BVC (pc after): %02x\n", cpu->pc);
 }
 
 void BVS(int mode, CPU *cpu) {
-    printf("BVS (pc before): %0x2\n", cpu->pc);
+    printf("BVS (pc before): %02x\n", cpu->pc);
     if(cpu->ps[V] == 1)
         cpu->pc += (int8_t) cpu->ResolveOPArgWord(mode, cpu->pc + 1) + 2;
-    printf("BVS (pc after): %0x2\n", cpu->pc);
+    printf("BVS (pc after): %02x\n", cpu->pc);
 }
 
 void CLC(int mode, CPU *cpu) {
@@ -220,21 +220,21 @@ void CLV(int mode, CPU *cpu) {
 void CMP(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
-    printf("CMP %02x (cpu->A: %0x2)\n", value, cpu->a);
+    printf("CMP %02x (cpu->A: %02x)\n", value, cpu->a);
     setFlagsCMP(value, cpu->a, cpu);
 }
 
 void CPX(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
-    printf("CPX %02x (cpu->X: %0x2)\n", value, cpu->x);
+    printf("CPX %02x (cpu->X: %02x)\n", value, cpu->x);
     setFlagsCMP(value, cpu->x, cpu);
 }
 
 void CPY(int mode, CPU *cpu) {
 
     int8_t value = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
-    printf("CPY %02x (cpu->Y: %0x2)\n", value, cpu->y);
+    printf("CPY %02x (cpu->Y: %02x)\n", value, cpu->y);
     setFlagsCMP(value, cpu->y, cpu);
 }
 
@@ -246,7 +246,7 @@ void DEC(int mode, CPU *cpu) {
     setFlagsDEC(value, cpu);
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
-    printf("DEC (M[%0x2]: %02x)\n", addr, value + 1);
+    printf("DEC (M[%02x]: %02x)\n", addr, value + 1);
     cpu->WriteTo(addr, value);
 
 }
@@ -283,7 +283,7 @@ void INC(int mode, CPU *cpu) {
     setFlagsDEC(value, cpu);
 
     uint16_t addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
-    printf("INC (M[%0x2]: %02x)\n", addr, value + 1);
+    printf("INC (M[%02x]: %02x)\n", addr, value + 1);
     cpu->WriteTo(addr, value);
 
 }
