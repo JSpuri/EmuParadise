@@ -49,7 +49,7 @@ class PPU : public Processor {
         uint16_t vector_bg_att_lower_bit;
         uint16_t vector_bg_att_higher_bit;
 
-        uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y];
+        uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y] = {0};
 
         // OAM stores sprite data (64 sprites with 4 bytes each)
         // Pos 0: Y Position (OAM_Y_POS)

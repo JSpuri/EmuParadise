@@ -43,7 +43,7 @@ int main(int argc, const char *argv[]){
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-    tela(ppu.GetPMatrix());
+    //tela(ppu.GetPMatrix());
 
     // Main cpu loop
     while(addr_bus.Clock()){}

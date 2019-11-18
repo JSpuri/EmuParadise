@@ -136,7 +136,7 @@ Reset: ; ----------------------------------------------------------------------
     CLD         ;Clear Decimal Mode
     LDX #$40
     STX $4017   ;disable APU frame IRQ
-    LDX #$01FF
+    LDX #$FF
     TXS         ;Set up stack at $01FF
     INX         ;now X = 0
     STX $2000   ;disable NMI

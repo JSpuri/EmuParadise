@@ -85,7 +85,7 @@ PPU::PPU() {
 
 void PPU::Clock() {
 
-    //printf("Beg\nCycle: %d\nScanline: %d\n", cycle, scanline);
+    ////printf("Beg\nCycle: %d\nScanline: %d\n", cycle, scanline);
     if(this->scanline >= -1 && this->scanline < 240){
 
         if(this->scanline == 0 && this->cycle == 0)
@@ -96,7 +96,7 @@ void PPU::Clock() {
 
         if((this->cycle >= 2 && this->cycle < 258) || (this->cycle >= 321 && this->cycle < 338)){
 
-            //printf("Terceiro if to primeiro if\n");
+            ////printf("Terceiro if to primeiro if\n");
             // Update shifters
             if(this->show_background){
 
@@ -107,14 +107,14 @@ void PPU::Clock() {
                 this->vector_bg_att_higher_bit <<= 1;
             }
 
-            //printf("%d\n", (cycle - 1)%8);
+            ////printf("%d\n", (cycle - 1)%8);
             switch((this->cycle - 1) % 8){
 
                 case 0:
 
                     this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
                     this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
-                    //printf("vram_addr: %04x\n", vram_addr.reg);
+                    ////printf("vram_addr: %04x\n", vram_addr.reg);
 
                     this->next_bg_tile_id = this->ReadFrom(0x2000 | (this->vram_addr.reg & 0x0FFF));
                     break;
@@ -246,7 +246,7 @@ void PPU::Clock() {
     //Set pixel here
     uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
 
-    //printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
+    ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
     if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240)) {
         this->p_matrix[cycle + scanline * SCREEN_SIZE_X] = colors[pixel];
     }
@@ -261,12 +261,12 @@ void PPU::Clock() {
         if(this->scanline >= 261){
             this->scanline = -1;
             this->frame_complete = true;
-            updateTela(GetPMatrix());
+            //updateTela(GetPMatrix());
             //sleep(1);
         }
     }
 
-    // printf("Cycle: %d\nScanline: %d\n", cycle, scanline);
+    // //printf("Cycle: %d\nScanline: %d\n", cycle, scanline);
 }
 
 
@@ -283,31 +283,31 @@ uint8_t PPU::ReadFrom(uint16_t addr) {
 // Write value to register (ppu register addresses are in common/constants.hpp)
 void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
 
-    printf("=============================================== PPU WriteToRegister Begin\n");
+    //printf("=============================================== PPU WriteToRegister Begin\n");
     this->PPUGenLatch = value;
 
     switch(addr){
         case PPUCTRL_ADDR:
             this->PPUCTRL = value;
-            printf("PPUCTRL: %02x\n", this->PPUCTRL);
+            //printf("PPUCTRL: %02x\n", this->PPUCTRL);
 
             this->nametable_x_offset = value & 0x01;
             this->tram_addr.nametable_x = this->nametable_x_offset;
 
             this->nametable_y_offset = (value & 0x02) >> 1;
             this->tram_addr.nametable_y = this->nametable_y_offset;
-            printf("Nametable offset in (x,y): (%02x, %02x)\n", this->nametable_x_offset, this->nametable_y_offset);
+            //printf("Nametable offset in (x,y): (%02x, %02x)\n", this->nametable_x_offset, this->nametable_y_offset);
 
             this->vram_increment_addr_across = ((value & 0x04) ? 0x20 : 0x01);
-            printf("VRAM increment: %02x\n", this->vram_increment_addr_across);
+            //printf("VRAM increment: %02x\n", this->vram_increment_addr_across);
 
             this->sprite_pattern_table_addr = ((value & 0x08) ? 0x1000 : 0x0000);
-            printf("Sprite pattern table address: %04x\n", this->sprite_pattern_table_addr);
+            //printf("Sprite pattern table address: %04x\n", this->sprite_pattern_table_addr);
             this->background_pattern_table_addr = ((value & 0x10) ? 0x1000 : 0x0000);
-            printf("Background pattern table address: %04x\n", this->background_pattern_table_addr);
+            //printf("Background pattern table address: %04x\n", this->background_pattern_table_addr);
 
             this->sprite_size = ((value & 0x20) ? std::make_pair(8, 16) : std::make_pair(8, 8));
-            printf("Sprite size: (%02x, %02x)\n", this->sprite_size.first, this->sprite_size.second);
+            //printf("Sprite size: (%02x, %02x)\n", this->sprite_size.first, this->sprite_size.second);
 
             this->ppu_master_slave_select = value & 0x40;
             std::cout << "PPU master/slave select: " << this->ppu_master_slave_select << std::endl;
@@ -319,7 +319,7 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
 
         case PPUMASK_ADDR:
             this->PPUMASK = value;
-            printf("PPUMASK: %02x\n", this->PPUMASK);
+            //printf("PPUMASK: %02x\n", this->PPUMASK);
 
             this->display_greyscale = value & 0x01;
             std::cout << "Greyscale: " << this->display_greyscale << std::endl;
@@ -365,18 +365,18 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             if(this->address_latch){
 
                 this->tram_addr.fine_cam_position_y = this->PPUSCROLL & 0x07;
-                printf("tram_addr.fine_cam_position_y: %02x\n", this->tram_addr.fine_cam_position_y);
+                //printf("tram_addr.fine_cam_position_y: %02x\n", this->tram_addr.fine_cam_position_y);
                 this->tram_addr.cam_position_y = this->PPUSCROLL >> 3;
-                printf("tram_addr.cam_position_y: %02x\n", this->tram_addr.cam_position_y);
+                //printf("tram_addr.cam_position_y: %02x\n", this->tram_addr.cam_position_y);
                 this->address_latch = false;
             }
 
             else{
 
                 this->fine_cam_position_x = this->PPUSCROLL & 0x07;
-                printf("fine_cam_position_x: %02x\n", this->fine_cam_position_x);
+                //printf("fine_cam_position_x: %02x\n", this->fine_cam_position_x);
                 this->tram_addr.cam_position_x = this->PPUSCROLL >> 3;
-                printf("tram_addr.cam_position_x: %02x\n", this->tram_addr.cam_position_x);
+                //printf("tram_addr.cam_position_x: %02x\n", this->tram_addr.cam_position_x);
                 this->address_latch = true;
             }
 
@@ -389,7 +389,7 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
                 this->tram_addr.reg = (this->tram_addr.reg & 0xFF00) | value;
                 this->vram_addr.reg = this->tram_addr.reg;
                 this->address_latch = false;
-                printf("(t/v)ram_addr.reg: %04x\n", this->tram_addr.reg);
+                //printf("(t/v)ram_addr.reg: %04x\n", this->tram_addr.reg);
             }
             else{
 
@@ -405,12 +405,12 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             this->PPUDATA = value;
 
             //if(value)
-                //printf("PPUDATA: %02x\n", value);
+                ////printf("PPUDATA: %02x\n", value);
             vram_addr.reg %= 0x4000;
             this->WriteTo(this->vram_addr.reg, value);
             this->vram_addr.reg += this->vram_increment_addr_across;
-            printf("PPUDATA: %02x\n", this->PPUDATA);
-            printf("vram_addr: %02x\n", this->vram_addr.reg);
+            //printf("PPUDATA: %02x\n", this->PPUDATA);
+            //printf("vram_addr: %02x\n", this->vram_addr.reg);
 
             break;
 
@@ -424,25 +424,25 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
 
     // PPUSTATUS stores the least sig 5 bits written to the ppu registers
     this->last_write_to_reg += value & 0x1F;
-    printf("=============================================== PPU WriteToRegister End\n");
+    //printf("=============================================== PPU WriteToRegister End\n");
 }
 
 // Read value from register (ppu register adresses are in common/constants.hpp)
 // PPUGenLatch is the carrier from PPU to CPU
 uint8_t PPU::ReadFromRegister(uint16_t addr) {
 
-    printf("=============================================== PPU ReadFromRegister Begin\n");
+    //printf("=============================================== PPU ReadFromRegister Begin\n");
     switch(addr){
 
         case PPUSTATUS_ADDR:
             this->PPUSTATUS = this->last_write_to_reg & 0x1F;
-            printf("Last write to reg: %02x\n", this->last_write_to_reg & 0x1f);
+            //printf("Last write to reg: %02x\n", this->last_write_to_reg & 0x1f);
             this->PPUSTATUS |= ((this->sprite_overflow) ? 0x20 : 0x00);
             std::cout << "Sprite overflow: " << this->sprite_overflow << std::endl;
             this->PPUSTATUS |= ((this->sprite_zero_hit) ? 0x40 : 0x00);
             std::cout << "In VBlank: " << this->in_vblank << std::endl;
             this->PPUSTATUS |= ((this->in_vblank) ? 0x80 : 0x00);
-            printf("PPUSTATUS: %02x\n", this->PPUSTATUS);
+            //printf("PPUSTATUS: %02x\n", this->PPUSTATUS);
             this->in_vblank = false;
 
             this->address_latch = false;
@@ -463,13 +463,13 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             if(this->vram_addr.reg > 0x3F00)
                 this->PPUGenLatch = this->PPUDATA;
 
-            printf("PPUDATA: %02x\n", this->PPUGenLatch);
+            //printf("PPUDATA: %02x\n", this->PPUGenLatch);
             this->vram_addr.reg += this->vram_increment_addr_across;
-            printf("vram_addr: %04x\n", vram_addr.reg);
+            //printf("vram_addr: %04x\n", vram_addr.reg);
             break;
     }
 
-    printf("=============================================== PPU ReadFromRegister End\n");
+    //printf("=============================================== PPU ReadFromRegister End\n");
     return this->PPUGenLatch;
 }
 

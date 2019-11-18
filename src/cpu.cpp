@@ -39,7 +39,7 @@ bool CPU::Clock() {
 
         uint8_t curr_opcode = this->ReadFrom(this->pc);
 
-        printf("Opcode: %02x\n", curr_opcode);
+        //printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
         if (curr_opcode == 0x00)
             return false;
@@ -92,7 +92,7 @@ int8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
 
     else if(instructionMode == M_INDIRECT_INDEXED){
         value = ResolveIndirectY(addr);
-        //printf("Value signed: %02x\n", value);
+        ////printf("Value signed: %02x\n", value);
     }
 
     return value;
@@ -252,14 +252,14 @@ int8_t CPU::ResolveIndirectY(uint16_t addr) {
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
     uint16_t absolute_addr = ReadAbsAddr(zero_pg_addr);
-    //printf("Resolve Indirect Y: %04x\n", absolute_addr);
+    ////printf("Resolve Indirect Y: %04x\n", absolute_addr);
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
 
     int8_t value = this->ReadFrom(absolute_addr + this->y);
-    //printf("Value: %02x\n", value);
+    ////printf("Value: %02x\n", value);
     return value;
 }
 
@@ -361,16 +361,16 @@ void CPU::NMI() {
 
 void CPU::logls() {
     printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x |",
-			this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7], this->last_accessed_mem, this->ReadFrom(this->last_accessed_mem));
+            this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7], this->last_accessed_mem, this->ReadFrom(this->last_accessed_mem));
 
-	printf("\n");
+    printf("\n");
 }
 
 void CPU::log() {
     printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d |",
-			this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7]);
+            this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7]);
 
-	printf("\n");
+    printf("\n");
 }
 
 void CPU::setInstructionMode(int mode) {
