@@ -261,7 +261,7 @@ void PPU::Clock() {
         if(this->scanline >= 261){
             this->scanline = -1;
             this->frame_complete = true;
-            //updateTela(GetPMatrix());
+            updateTela(GetPMatrix());
             //sleep(1);
         }
     }

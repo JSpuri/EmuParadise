@@ -51,6 +51,8 @@
 #define PPUDATA_ADDR 0x2007
 #define OAMDMA_ADDR 0x4014
 
+#define JOYPAD1_ADDR 0x4016
+#define JOYPAD2_ADDR 0x4017
 // ========================================================== CPU Misc Info
 // Esses sao os vetores de cada uma das labels
 // NIM, RESET e IRQ, de tras para frente 

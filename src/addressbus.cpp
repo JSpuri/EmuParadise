@@ -1,7 +1,7 @@
 #include "headers/addressbus.hpp"
 #include <iostream>
 
-AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
+AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controllers) {
 
     this->system_clock = 0;
 
@@ -80,6 +80,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
     this->cpu = cpu;
     this->ppu = ppu;
+    this->controllers = controllers;
 
 }
 
@@ -141,6 +142,10 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
             for(uint16_t i = 0x00; i < 0x100; i++){
                 ppu->WriteToRegister(OAMDATA_ADDR, this->cpu->ReadFrom(abs_address + i));
             }
+        }
+
+        else if(address == JOYPAD1_ADDR){
+            this->controllers->ToggleStrobe(word);
         }
     }
 
@@ -221,6 +226,13 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
 
             // Leitura depende de fato da ppu
             value = this->ppu->ReadFromRegister(address);
+        }
+
+        else if(address == JOYPAD1_ADDR){
+            value = this->controllers->ReadJoypad1();
+        }
+        else if(address == JOYPAD2_ADDR){
+            value = this->controllers->ReadJoypad2();
         }
 
         else if(address >= PRG_RAM_START && address < PRG_ROM_1_BANK_START){

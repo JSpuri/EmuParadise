@@ -8,6 +8,7 @@
 #include "../common/constants.hpp"
 #include "cpu.hpp"
 #include "ppu.hpp"
+#include "controller.hpp"
 
 class CPU;
 class PPU;
@@ -17,7 +18,7 @@ class PPU;
 class AddressBus {
 
     public:
-        AddressBus(char *nesfile, CPU *cpu, PPU *ppu);
+        AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controllers);
 
         bool Clock();
 
@@ -48,6 +49,7 @@ class AddressBus {
     private:
         CPU *cpu;
         PPU *ppu;
+        Controller *controllers;
 
         bool run_emulation;
 

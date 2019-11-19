@@ -1,4 +1,5 @@
 #include "headers/screen.hpp"
+
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <signal.h>
@@ -11,6 +12,7 @@ const Uint32 colors[16 * 4] = { 0x545454, 0x001E74, 0x081090, 0x300088, 0x440064
 								0xECEEEC, 0xA8CCEC, 0xBCBCEC, 0xD4B2EC, 0xECAEEC, 0xECAED4, 0xECB4B0, 0xE4C490, 0xCCD278, 0xB4DE78, 0xA8E290, 0x98E2B4, 0xA0D6E4, 0xA0A2A0, 0x000000, 0x000000
 };
 
+Controller *joypads;
 
 SDL_Window* window;
 
@@ -21,7 +23,9 @@ SDL_Event event;
 
 Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
-void tela(uint32_t *p_matrix) {
+void tela(uint32_t *p_matrix, Controller *controllers) {
+
+    joypads = controllers;
 
 	bool leftMouseButtonDown = false;
 	bool quit = false;
@@ -67,19 +71,66 @@ void updateTela(uint32_t *p_matrix) {
     //}
 
 
-    // while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
-    //   switch (event.type) {         //[> Process the appropiate event type <]
-    //     case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
-    //       printf("Oh! Key press\n");
-    //       break;
-    //     case SDL_MOUSEMOTION:
-    //       break;
-    //     case SDL_QUIT:
-    //       exit(1);
-    //     default:                 //[> Report an unhandled event <]
-    //       printf("I don't know what this event is!\n");
-    //   }
-    // }
+    while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
+        switch (event.type) {         //[> Process the appropiate event type <]
+
+            case SDL_KEYUP:
+                    printf("Tecla soltada!\n");
+                switch(event.key.keysym.sym){
+                    case SDLK_v: joypads->ReleaseButtonJP1('A'); break;
+                    case SDLK_b: joypads->ReleaseButtonJP1('B'); break;
+                    case SDLK_g: joypads->ReleaseButtonJP1('s'); break;
+                    case SDLK_f: joypads->ReleaseButtonJP1('S'); break;
+                    case SDLK_w: joypads->ReleaseButtonJP1('U'); break;
+                    case SDLK_s: joypads->ReleaseButtonJP1('D'); break;
+                    case SDLK_a: joypads->ReleaseButtonJP1('L'); break;
+                    case SDLK_d: joypads->ReleaseButtonJP1('R'); break;
+
+                    case SDLK_o: joypads->ReleaseButtonJP2('A'); break;
+                    case SDLK_p: joypads->ReleaseButtonJP2('B'); break;
+                    case SDLK_0: joypads->ReleaseButtonJP2('s'); break;
+                    case SDLK_9: joypads->ReleaseButtonJP2('S'); break;
+                    case SDLK_UP: joypads->ReleaseButtonJP2('U'); break;
+                    case SDLK_DOWN: joypads->ReleaseButtonJP2('D'); break;
+                    case SDLK_LEFT: joypads->ReleaseButtonJP2('L'); break;
+                    case SDLK_RIGHT: joypads->ReleaseButtonJP2('R'); break;
+                }
+                break;
+
+            case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
+                    printf("Tecla pressionada!\n");
+                switch(event.key.keysym.sym){
+                    case SDLK_v: joypads->PressButtonJP1('A'); break;
+                    case SDLK_b: joypads->PressButtonJP1('B'); break;
+                    case SDLK_g: joypads->PressButtonJP1('s'); break;
+                    case SDLK_f: joypads->PressButtonJP1('S'); break;
+                    case SDLK_w: joypads->PressButtonJP1('U'); break;
+                    case SDLK_s: joypads->PressButtonJP1('D'); break;
+                    case SDLK_a: joypads->PressButtonJP1('L'); break;
+                    case SDLK_d: joypads->PressButtonJP1('R'); break;
+
+                    case SDLK_o: joypads->PressButtonJP2('A'); break;
+                    case SDLK_p: joypads->PressButtonJP2('B'); break;
+                    case SDLK_0: joypads->PressButtonJP2('s'); break;
+                    case SDLK_9: joypads->PressButtonJP2('S'); break;
+                    case SDLK_UP: joypads->PressButtonJP2('U'); break;
+                    case SDLK_DOWN: joypads->PressButtonJP2('D'); break;
+                    case SDLK_LEFT: joypads->PressButtonJP2('L'); break;
+                    case SDLK_RIGHT: joypads->PressButtonJP2('R'); break;
+                }
+                break;
+
+            case SDL_MOUSEMOTION:
+                break;
+
+            case SDL_QUIT:
+                exit(1);
+                break;
+
+            default:                 //[> Report an unhandled event <]
+                printf("I don't know what this event is!\n");
+    }
+    }
 
     SDL_UpdateTexture(texture, NULL, p_matrix, NES_WIDTH * sizeof(uint32_t));
 
