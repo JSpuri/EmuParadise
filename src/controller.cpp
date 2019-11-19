@@ -27,10 +27,11 @@ void Controller::ToggleStrobe(uint8_t value) {
         this->strobe1 = false;
         this->strobe2 = false;
     }
+    //std::cout << "JOYPAD1 strobe: " << this->strobe1 << std::endl;
 }
 
 uint8_t Controller::ReadJoypad1() {
-
+    
     if(this->strobe1)
         return this->joypad1 & 0x01;
 
@@ -48,8 +49,7 @@ uint8_t Controller::ReadJoypad1() {
 
 void Controller::ReleaseButtonJP1(char button) {
 
-    printf("JOYPAD 1: %02x\n", this->joypad1);
-    if(this->strobe1){
+    if(this->strobe1 == false){
         switch(button){
 
             case 'A':
@@ -77,12 +77,12 @@ void Controller::ReleaseButtonJP1(char button) {
                 this->joypad1 &= 0x7F;
                 break;
         }
+        printf("JOYPAD 1: %02x\n", this->joypad1);
     }
 }
 void Controller::PressButtonJP1(char button) {
 
-    printf("JOYPAD 1: %02x\n", this->joypad1);
-    if(this->strobe1){
+    if(this->strobe1 == false){
         switch(button){
 
             case 'A':
@@ -110,6 +110,7 @@ void Controller::PressButtonJP1(char button) {
                 this->joypad1 |= 0x80;
                 break;
         }
+        printf("JOYPAD 1: %02x\n", this->joypad1);
     }
 }
 
@@ -132,7 +133,7 @@ uint8_t Controller::ReadJoypad2() {
 
 void Controller::ReleaseButtonJP2(char button) {
 
-    if(this->strobe2){
+    if(this->strobe2 == false){
         switch(button){
 
             case 'A':
@@ -165,7 +166,7 @@ void Controller::ReleaseButtonJP2(char button) {
 }
 void Controller::PressButtonJP2(char button) {
 
-    if(this->strobe2){
+    if(this->strobe2 == false){
         switch(button){
 
             case 'A':

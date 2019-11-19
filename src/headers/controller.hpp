@@ -1,6 +1,8 @@
 #ifndef CONTROLLER_HPP
 #define CONTROLLER_HPP
 
+#include <stdio.h>
+#include<iostream>
 #include <cstdlib>
 #include <cstdint>
 #include<string>
