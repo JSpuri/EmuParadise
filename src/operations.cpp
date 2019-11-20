@@ -44,43 +44,44 @@ void setFlagsEOR(int8_t operand, CPU *cpu){
 
 // Executes a sum operation between cpu->a and num, storing
 // the result in cpu->a, setting flags accordingly
-void adc_aux(CPU *cpu, int8_t num) {
-	int8_t current_bit_a, current_bit_num, current_bit_result;
-	int8_t aux_a, aux_num, aux_result;
+void adc_aux(CPU *cpu, uint8_t num) {
+	uint8_t current_bit_a, current_bit_num, current_bit_result;
+	uint8_t aux_a, aux_num, aux_result;
 
-    int8_t result = cpu->a + num + cpu->ps[C];
+
+  //printf("num = %x cpu->a = %x carry = %x\n", num, cpu->a, cpu->ps[C]);
+  uint16_t result = (uint16_t) cpu->a + num + cpu->ps[C];
 
 	aux_a = cpu->a;
 	aux_num = num;
 	aux_result = result;
 
-	uint8_t u_result = (uint8_t) cpu->a + num;
-	if(u_result < (uint8_t) cpu->a || u_result < (uint8_t) num){
+  //printf("result = %d\n", result);
+
+	if(result & 0b100000000){
 		cpu->ps[C] = 1;
 	}
 	else{
 		cpu->ps[C] = 0;
 	}
 
-    cpu->ps[Z] = ((result == 0) ? 1 : 0);
-    cpu->ps[N] = ((result < 0) ? 1 : 0);
+//printf("carry = %d\n", cpu->ps[C]);
+    cpu->ps[Z] = ((aux_result == 0) ? 1 : 0);
+    cpu->ps[N] = ((aux_result & 0b10000000) ? 1 : 0);
 
-    if(((num > 0) && (cpu->a > 0) && (result <= 0)) || ((num < 0) && (cpu->a < 0) && (result >= 0))) {
+    if(~(cpu->a ^ num) & (cpu->a ^ result) & 0x80) {
         cpu->ps[V] = 1;
     }
-    else if((num + cpu->a == 0x7f) && (cpu->ps[C] == 1)){
-		cpu->ps[V] = 1;
-	}
     else{
         cpu->ps[V] = 0;
-	}
+	  }
 
-    cpu->a = result;
+    cpu->a = aux_result;
 }
 
 void ADC(int mode, CPU *cpu) {
 
-	int8_t num = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+	uint8_t num = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
     //printf("ADC %02x + (cpu->A: %02x) = ", num, cpu->a);
 
     adc_aux(cpu, num);
@@ -626,23 +627,12 @@ void RTS(int mode, CPU *cpu) {
 
 }
 
-void SBC(int mode, CPU *cpu) { 
+void SBC(int mode, CPU *cpu) {
 
-    int8_t operand = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
+  uint8_t operand = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
 
-	int8_t op1, op2, result;
-	result = cpu->a - operand;
-	op1 = cpu->a;
-	op2 = operand;
-
-	int8_t num = (operand ^ 0xff) + 0x01;
+	uint8_t num = ~operand;
 	adc_aux(cpu, num);
-	cpu->a -= 1;
-
-	if((op1 >= 0 && op2 > 0 && result < 0))
-		cpu->ps[C] = 1;
-	else
-		cpu->ps[C] = 0;
 
     //printf("SBC (cpu->A: %02x) - %02x = %02x\n", op1, op2, cpu->a);
 }
