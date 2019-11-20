@@ -41,11 +41,10 @@ bool CPU::Clock() {
 
         //printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
-        if (curr_opcode == 0x00)
-            return false;
+        if (curr_opcode == 0x00) return false;
 
         this->setInstruction(curr_opcode);
-        
+
         if(this->operation)
             this->runInstruction();
 
@@ -126,13 +125,13 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
 
     else if(instructionMode == M_INDIRECT)
         value = ResolveIndirect(addr);
-    
+
     else if(instructionMode == M_INDEXED_INDIRECT)
         value = ResolveIndirectAddrX(addr);
 
     else if(instructionMode == M_INDIRECT_INDEXED)
         value = ResolveIndirectAddrY(addr);
-    
+
     return value;
 }
 
@@ -293,7 +292,9 @@ uint16_t CPU::ResolveIndirect(uint16_t addr) {
 // Retrieves an address from an absolute address + X
 uint16_t CPU::ResolveIndirectAddrX(uint16_t addr) {
 
-    uint16_t absolute_addr = this->ReadAbsAddr(addr);
+    uint16_t absolute_addr = this->ReadZeroAddr(addr);
+
+    //printf("addr = %x absolute_addr = %x\n", addr, absolute_addr);
 
     uint16_t value = this->ReadFrom(absolute_addr + this->x);
     value += this->ReadFrom(absolute_addr + 1 + this->x) << 8;
@@ -304,7 +305,7 @@ uint16_t CPU::ResolveIndirectAddrX(uint16_t addr) {
 // adding Y to its value
 uint16_t CPU::ResolveIndirectAddrY(uint16_t addr) {
 
-    uint16_t absolute_addr = this->ReadAbsAddr(addr);
+    uint16_t absolute_addr = this->ReadZeroAddr(addr);
 
     uint16_t value = this->ReadFrom(absolute_addr);
     value += this->ReadFrom(absolute_addr + 1) << 8;
@@ -360,8 +361,10 @@ void CPU::NMI() {
 }
 
 void CPU::logls() {
+    uint16_t real_last_accessed = this->last_accessed_mem;
+    uint8_t real_value = ReadFrom(real_last_accessed);
     printf("| pc = 0x%04x | a = 0x%02x | x = 0x%02x | y = 0x%02x | sp = 0x01%02x | p[NV-BDIZC] = %d%d%d%d%d%d%d%d | MEM[0x%04x] = 0x%02x |",
-            this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7], this->last_accessed_mem, this->ReadFrom(this->last_accessed_mem));
+            this->pc, (uint8_t) this->a, (uint8_t) this->x, (uint8_t) this->y, this->sp, this->ps[0], this->ps[1], this->ps[2], this->ps[3], this->ps[4], this->ps[5], this->ps[6], this->ps[7], real_last_accessed, real_value);
 
     printf("\n");
 }

@@ -22,7 +22,7 @@ class CPU : public Processor {
 
         int8_t x;
         int8_t y;
-        int8_t a;
+        uint8_t a;
         uint8_t sp;     //stack pointer
         uint16_t pc;    //program counter
         uint8_t ps[8];  //p[NV-BDIZC]
@@ -31,7 +31,7 @@ class CPU : public Processor {
         bool time_for_NMI;
 
         bool Clock();
-        
+
         int8_t ResolveOPArgWord(int mode, uint16_t addr);
         uint16_t ResolveOPArgAddr(int mode, uint16_t addr);
 

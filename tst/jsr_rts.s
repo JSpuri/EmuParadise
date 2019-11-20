@@ -1,73 +1,51 @@
-; Author: tokumaru
-; http://forums.nesdev.com/viewtopic.php?%20p=58138#58138
-;----------------------------------------------------------------
-; constants
-;----------------------------------------------------------------
+;################################################################
+; Constants
+;################################################################
+
 PRG_COUNT = 1 ;1 = 16KB, 2 = 32KB
 MIRRORING = %0001 ;%0000 = horizontal, %0001 = vertical, %1000 = four-screen
 
-;----------------------------------------------------------------
-; variables
-;----------------------------------------------------------------
-
-   .enum $0000
-
-   ;NOTE: declare variables using the DSB and DSW directives, like this:
-
-   ;MyVariable0 .dsb 1
-   ;MyVariable1 .dsb 3
-
-   .ende
-
-   ;NOTE: you can also split the variable declarations into individual pages, like this:
-
-   ;.enum $0100
-   ;.ende
-
-   ;.enum $0200
-   ;.ende
-
-;----------------------------------------------------------------
+;################################################################
 ; iNES header
-;----------------------------------------------------------------
+;################################################################
 
-   .db "NES", $1a ;identification of the iNES header
-   .db PRG_COUNT ;number of 16KB PRG-ROM pages
-   .db $01 ;number of 8KB CHR-ROM pages
-   .db $00|MIRRORING ;mapper 0 and mirroring
-   .dsb 9, $00 ;clear the remaining bytes
+	.db "NES", $1a		; Identification of the iNES header
+	.db PRG_COUNT		; Number of 16KB PRG-ROM pages
+	.db $01				; Number of 8KB CHR-ROM pages
+	.db $00|MIRRORING	; Mapper 0 and mirroring
+	.dsb 9, $00			; Clear the remaining bytes
 
-;----------------------------------------------------------------
+;################################################################
 ; program bank(s)
-;----------------------------------------------------------------
+;################################################################
 
-   .base $10000-(PRG_COUNT*$4000)
+	.base $10000-(PRG_COUNT*$4000)
 
-Reset:
-   LDA #$01
-   JSR TestRoutine
-   LDA #$03
-   BRK
+;################################################################
+; RESET
+;################################################################
 
-TestRoutine:
-   LDA #$02
-   RTS
+function:
+    lda #2
+	lda #3
+	lda #4
+	lda #5
+	lda #6
+    rts
 
 
-NMI:
+reset:
+    jsr function
+	brk
 
-   ;NOTE: NMI code goes here
-
-IRQ:
-
-   ;NOTE: IRQ code goes here
-
-;----------------------------------------------------------------
+;################################################################
 ; interrupt vectors
-;----------------------------------------------------------------
+;################################################################
 
-   .org $fffa
+	.org $fffa
 
-   .dw NMI
-   .dw Reset
-   .dw IRQ
+	.dw 0
+	.dw reset
+	.dw 0
+
+	.dsb $2000

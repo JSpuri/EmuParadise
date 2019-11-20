@@ -17,7 +17,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controller
 
     if(this->size_CHR_ROM_in_8kb_units)
         this->size_CHR_RAM_in_8kb_units = 0;
-    
+
     // Determina o tipo de mirroring: 0 eh horizontal, 1 eh vertical
     this->mirroring_type = nesfile[6] & 0X01;
     //printf("Mirroring type (0 -> horizontal and 1 -> vertical): %u\n", this->mirroring_type);
@@ -87,7 +87,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controller
 bool AddressBus::Clock() {
 
     this->ppu->Clock();
-    
+
     if(this->system_clock % 3 == 0)
         this->run_emulation = this->cpu->Clock();
 
@@ -106,13 +106,13 @@ bool AddressBus::Clock() {
 void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
 
     if(processorType == 0){
+        this->cpu->last_accessed_mem = address;
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
             address = address%INTERNAL_CPU_RAM_SIZE;
-
-            this->cpu->last_accessed_mem = address;
             this->INTERNAL_CPU_RAM[address] = word;
+            this->cpu->last_accessed_mem = address;
         }
         else if(address < PPU_REGISTERS_MIRROR_END){
             //the % operator is due to the mirroring of the registers on
@@ -207,12 +207,13 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
 
     if(processorType == 0){
 
+        this->cpu->last_accessed_mem = address;
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
             address = address % INTERNAL_CPU_RAM_SIZE;
-            this->cpu->last_accessed_mem = address;
             value = this->INTERNAL_CPU_RAM[address];
+            this->cpu->last_accessed_mem = address;
         }
 
         else if(address < PPU_REGISTERS_MIRROR_END){
@@ -333,4 +334,3 @@ void AddressBus::GenNMI() {
 
     this->cpu->time_for_NMI = true;
 }
-

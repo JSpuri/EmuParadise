@@ -1,75 +1,63 @@
-; Author: tokumaru
-; http://forums.nesdev.com/viewtopic.php?%20p=58138#58138
-;----------------------------------------------------------------
-; constants
-;----------------------------------------------------------------
+;################################################################
+; Constants
+;################################################################
+
 PRG_COUNT = 1 ;1 = 16KB, 2 = 32KB
 MIRRORING = %0001 ;%0000 = horizontal, %0001 = vertical, %1000 = four-screen
 
-;----------------------------------------------------------------
-; variables
-;----------------------------------------------------------------
+;################################################################
+; Variables
+;################################################################
+	.enum $0100
+flag: .dsb 1
+	.ende
 
-   .enum $0000
-
-   ;NOTE: declare variables using the DSB and DSW directives, like this:
-   var3 .dsb 1
-    var2 .dsb 1
-   var1 .dsb 8
-   var1_lo .dsb 1
-   var1_hi .dsb 1
-
-   .ende
-
-   ;NOTE: you can also split the variable declarations into individual pages, like this:
-
-   ;.enum $0100
-   ;.ende
-
-   ;.enum $0200
-   ;.ende
-
-;----------------------------------------------------------------
+;################################################################
 ; iNES header
-;----------------------------------------------------------------
+;################################################################
 
-   .db "NES", $1a ;identification of the iNES header
-   .db PRG_COUNT ;number of 16KB PRG-ROM pages
-   .db $01 ;number of 8KB CHR-ROM pages
-   .db $00|MIRRORING ;mapper 0 and mirroring
-   .dsb 9, $00 ;clear the remaining bytes
+	.db "NES", $1a		; Identification of the iNES header
+	.db PRG_COUNT		; Number of 16KB PRG-ROM pages
+	.db $01				; Number of 8KB CHR-ROM pages
+	.db $00|MIRRORING	; Mapper 0 and mirroring
+	.dsb 9, $00			; Clear the remaining bytes
 
-;----------------------------------------------------------------
+;################################################################
 ; program bank(s)
-;----------------------------------------------------------------
+;################################################################
 
-   .base $10000-(PRG_COUNT*$4000)
+	.base $10000-(PRG_COUNT*$4000)
 
-Reset:
-   SEC
-   LDA #$01
-   BCS TestBranch
-   LDA #$03
+;################################################################
+; RESET
+;################################################################
+reset:
 
-TestBranch:
-    LDA #$02
-    BRK
+label1:
+    ; Setting Carry flag
+    lda #%00000001
+    pha
+    plp
 
+    bcs label2
+	lda #2
+	lda #3
+	lda #4
+	lda #5
+	lda #6
+	brk
 
-NMI:
+label2:
+	brk
 
-   ;NOTE: NMI code goes here
-
-IRQ:
-
-   ;NOTE: IRQ code goes here
-
-;----------------------------------------------------------------
+;################################################################
 ; interrupt vectors
-;----------------------------------------------------------------
+;################################################################
 
-   .org $fffa
+	.org $fffa
 
-   .dw NMI
-   .dw Reset
-   .dw IRQ
+	.dw 0
+	.dw reset
+	.dw 0
+
+	.dsb $2000
