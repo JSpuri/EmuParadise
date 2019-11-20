@@ -17,7 +17,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 
     if(this->size_CHR_ROM_in_8kb_units)
         this->size_CHR_RAM_in_8kb_units = 0;
-    
+
     // Determina o tipo de mirroring: 0 eh horizontal, 1 eh vertical
     this->mirroring_type = nesfile[6] & 0X01;
     //printf("Mirroring type (0 -> horizontal and 1 -> vertical): %u\n", this->mirroring_type);
@@ -86,7 +86,7 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu) {
 bool AddressBus::Clock() {
 
     this->ppu->Clock();
-    
+
     if(this->system_clock % 3 == 0)
         this->run_emulation = this->cpu->Clock();
 
@@ -321,4 +321,3 @@ void AddressBus::GenNMI() {
 
     this->cpu->time_for_NMI = true;
 }
-

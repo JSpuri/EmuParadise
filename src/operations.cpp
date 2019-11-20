@@ -106,7 +106,7 @@ void ASL(int mode, CPU *cpu) {
 
     if(mode == M_ACCUMULATOR){
 
-        cpu->ps[C] = (cpu->a & 0x80) >> 7; 
+        cpu->ps[C] = (cpu->a & 0x80) >> 7;
         result = cpu->a << 1;
         //printf("ASL (cpu->A: %02x) = %02x\n", cpu->a, result);
 
@@ -310,9 +310,9 @@ void JMP(int mode, CPU *cpu) {
 }
 
 void JSR(int mode, CPU *cpu) {
-    
+
     uint16_t absolute_addr = (cpu->pc) + 3;
-    
+
     cpu->WriteTo(0x0100 + (cpu->sp)--, absolute_addr >> 8);
     cpu->WriteTo(0x0100 + (cpu->sp)--, absolute_addr & 0xFF);
 
@@ -435,7 +435,7 @@ void PHP(int mode, CPU *cpu) {
 
     for(int j = 1; j < 8; j++)
         aux += cpu->ps[j]*pow(2,7-j);
-    
+
     //printf("PHP (cpu->ps: %02x\n", aux);
 
     cpu->WriteTo(0x0100 + (cpu->sp--), aux);
@@ -626,7 +626,7 @@ void RTS(int mode, CPU *cpu) {
 
 }
 
-void SBC(int mode, CPU *cpu) { 
+void SBC(int mode, CPU *cpu) {
 
     int8_t operand = cpu->ResolveOPArgWord(mode, cpu->pc + 1);
 
@@ -639,10 +639,10 @@ void SBC(int mode, CPU *cpu) {
 	adc_aux(cpu, num);
 	cpu->a -= 1;
 
-	if((op1 >= 0 && op2 > 0 && result < 0))
+	/*if((op1 >= 0 && op2 > 0 && result < 0))
 		cpu->ps[C] = 1;
 	else
-		cpu->ps[C] = 0;
+		cpu->ps[C] = 0;*/
 
     //printf("SBC (cpu->A: %02x) - %02x = %02x\n", op1, op2, cpu->a);
 }
@@ -742,4 +742,3 @@ void TYA(int mode, CPU *cpu) {
     else cpu->ps[N] = 0;
 
 }
-
