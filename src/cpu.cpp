@@ -38,7 +38,6 @@ bool CPU::Clock() {
     if(this->instructionNumCycles == 0){
 
         uint8_t curr_opcode = this->ReadFrom(this->pc);
-
         //printf("Opcode: %02x\n", curr_opcode);
         // If next instruction is a BRK, stop the program
         if (curr_opcode == 0x00) return false;
@@ -87,10 +86,10 @@ int8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
         value = ResolveAbsAddrY(addr);
 
     else if(instructionMode == M_INDEXED_INDIRECT)
-        value = ResolveIndirectX(addr);
+        value = ResolveIndirectX(addr);//ResolveIndirectX(addr);
 
     else if(instructionMode == M_INDIRECT_INDEXED){
-        value = ResolveIndirectY(addr);
+        value = ResolveIndirectY(addr);//ResolveIndirectY(addr);
         ////printf("Value signed: %02x\n", value);
     }
 
@@ -109,19 +108,19 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
         value = ReadZeroAddr(addr);
 
     else if(instructionMode == M_ZERO_PAGE_X)
-        value = (ReadZeroAddr(addr) + this->x) & 0xFF;
+        value = (ReadZeroAddr(addr) + (this->x & 0x00FF)) & 0xFF;
 
     else if(instructionMode == M_ZERO_PAGE_Y)
-        value = ReadZeroAddr(addr) + this->y;
+        value = ReadZeroAddr(addr) + (this->y & 0x00FF);
 
     else if(instructionMode == M_ABSOLUTE)
         value = ReadAbsAddr(addr);
 
     else if(instructionMode == M_ABSOLUTE_X)
-        value = ReadAbsAddr(addr) + this->x;
+        value = ReadAbsAddr(addr) + (this->x & 0x00FF);
 
     else if(instructionMode == M_ABSOLUTE_Y)
-        value = ReadAbsAddr(addr) + this->y;
+        value = ReadAbsAddr(addr) + (this->y & 0x00FF);
 
     else if(instructionMode == M_INDIRECT)
         value = ResolveIndirect(addr);
@@ -166,7 +165,7 @@ int8_t CPU::ReadImmediate(uint16_t addr) {
 // Retrieves a word from a zero page address
 int8_t CPU::ResolveZeroAddr(uint16_t addr) {
 
-    uint8_t zero_pg_addr = this->ReadFrom(addr);
+    uint8_t zero_pg_addr = this->ReadFrom(addr) & 0x00FF;
 
     int8_t value = this->ReadFrom(zero_pg_addr);
     return value;
@@ -177,7 +176,7 @@ int8_t CPU::ResolveZeroAddrX(uint16_t addr) {
 
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
-    int8_t value = this->ReadFrom(zero_pg_addr + this->x);
+    int8_t value = this->ReadFrom((zero_pg_addr + (this->x & 0x00FF)) & 0x00FF);
     return value;
 }
 
@@ -186,7 +185,7 @@ int8_t CPU::ResolveZeroAddrY(uint16_t addr) {
 
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
-    int8_t value = this->ReadFrom(zero_pg_addr + this->y);
+    int8_t value = this->ReadFrom((zero_pg_addr + (this->y & 0x00FF))&0x00FF);
     return value;
 }
 
@@ -215,8 +214,7 @@ int8_t CPU::ResolveAbsAddrX(uint16_t addr) {
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->x) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
-
-    int8_t value = this->ReadFrom(absolute_addr + this->x);
+    int8_t value = this->ReadFrom(absolute_addr + (this->x & 0x00FF));
     return value;
 }
 
@@ -229,44 +227,41 @@ int8_t CPU::ResolveAbsAddrY(uint16_t addr) {
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
 
-    int8_t value = this->ReadFrom(absolute_addr + this->y);
+    int8_t value = this->ReadFrom(absolute_addr + (this->y & 0x00FF));
     return value;
 }
 
 // Retrieves a word from an indirect address with x offset
 int8_t CPU::ResolveIndirectX(uint16_t addr) {
 
-    uint8_t zero_pg_addr = this->ReadFrom(addr);
-    zero_pg_addr += this->x;
+    uint16_t absolute_addr = this->ReadAbsAddr(addr) & 0x00FF;
 
-    uint16_t absolute_addr = this->ReadAbsAddr(zero_pg_addr);
-
-    int8_t value = this->ReadFrom(absolute_addr);
+    uint16_t value = this->ReadFrom((absolute_addr + (this->x & 0x00FF)) & 0x00FF) & 0x00FF;
+    value += this->ReadFrom((absolute_addr + 1 + (this->x & 0x00FF)) & 0x00FF) << 8;
+    value = this->ReadFrom(value);
     return value;
 }
 
 // Retrieves a word from an indirect address with y offset
 int8_t CPU::ResolveIndirectY(uint16_t addr) {
 
-    uint8_t zero_pg_addr = this->ReadFrom(addr);
+    uint16_t absolute_addr = this->ReadAbsAddr(addr) & 0x00FF;
 
-    uint16_t absolute_addr = ReadAbsAddr(zero_pg_addr);
-    ////printf("Resolve Indirect Y: %04x\n", absolute_addr);
+    uint16_t value = this->ReadFrom(absolute_addr) & 0x00FF;
+    value += this->ReadFrom((absolute_addr + 1) & 0x00FF) << 8;
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
 
-    int8_t value = this->ReadFrom(absolute_addr + this->y);
-    ////printf("Value: %02x\n", value);
-    return value;
+    return this->ReadFrom(value + (this->y & 0x00FF));
 }
 
 // Reads a address (16 bit) from a address, to be used in ResolveOPArgAddr
 // to retrieve a zero page address argument from instructions
 uint16_t CPU::ReadZeroAddr(uint16_t addr) {
 
-    uint16_t address = this->ReadFrom(addr);
+    uint16_t address = this->ReadFrom(addr) & 0x00FF;
     return address;
 }
 
@@ -284,7 +279,7 @@ uint16_t CPU::ResolveIndirect(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
 
-    uint16_t value = this->ReadFrom(absolute_addr);
+    uint16_t value = this->ReadFrom(absolute_addr) & 0x00FF;
     value += this->ReadFrom(absolute_addr + 1) << 8;
     return value;
 }
@@ -296,8 +291,8 @@ uint16_t CPU::ResolveIndirectAddrX(uint16_t addr) {
 
     //printf("addr = %x absolute_addr = %x\n", addr, absolute_addr);
 
-    uint16_t value = this->ReadFrom(absolute_addr + this->x);
-    value += this->ReadFrom(absolute_addr + 1 + this->x) << 8;
+    uint16_t value = this->ReadFrom((absolute_addr + (this->x & 0x00FF)) & 0x00FF) & 0x00FF;
+    value += this->ReadFrom((absolute_addr + 1 + (this->x & 0x00FF)) & 0x00FF) << 8;
     return value;
 }
 
@@ -307,9 +302,9 @@ uint16_t CPU::ResolveIndirectAddrY(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadZeroAddr(addr);
 
-    uint16_t value = this->ReadFrom(absolute_addr);
-    value += this->ReadFrom(absolute_addr + 1) << 8;
-    return value + this->y;
+    uint16_t value = this->ReadFrom(absolute_addr) & 0x00FF;
+    value += this->ReadFrom((absolute_addr + 1) & 0x00FF) << 8;
+    return value + (this->y & 0x00FF);
 }
 
 void CPU::runInstruction() {
