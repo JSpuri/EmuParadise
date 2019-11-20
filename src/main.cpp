@@ -7,6 +7,7 @@
 #include "headers/screen.hpp"
 #include "headers/ppu.hpp"
 #include "headers/screen.hpp"
+#include "headers/controller.hpp"
 
 using namespace std;
 
@@ -36,14 +37,16 @@ int main(int argc, const char *argv[]){
     // Create PPU ({} is used to explicitly call default constructor)
     PPU ppu{};
 
+    Controller controllers{};
+
     // Create memory - RAM and ROM based on file
-    AddressBus addr_bus(memblock, &cpu, &ppu);
+    AddressBus addr_bus(memblock, &cpu, &ppu, &controllers);
     binario.close();
 
     cpu.SetAddressBus(&addr_bus);
     ppu.SetAddressBus(&addr_bus);
 
-    //tela(ppu.GetPMatrix());
+    tela(ppu.GetPMatrix(), &controllers);
 
     // Main cpu loop
     while(addr_bus.Clock()){}
