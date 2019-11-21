@@ -635,7 +635,7 @@ void SBC(int mode, CPU *cpu) {
 	op1 = cpu->a;
 	op2 = operand;
 
-	int8_t num = (operand ^ 0xff) + 0x01;
+	int8_t num = (operand ^ 0xff);
 	adc_aux(cpu, num);
 	cpu->a -= 1;
 

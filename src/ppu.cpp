@@ -2,7 +2,8 @@
 
 #include "headers/addressbus.hpp"
 #include "headers/screen.hpp"
-#include <unistd.h>
+
+#include <cstdint>
 #include <iostream>
 
 const uint32_t colors[16 * 4] = { 0x545454, 0x001E74, 0x081090, 0x300088, 0x440064, 0x5C0030, 0x540400, 0x3C1800, 0x202A00, 0x083A00, 0x004000, 0x003C00, 0x00323C, 0x000000, 0x000000, 0x000000,
@@ -34,8 +35,9 @@ PPU::PPU() {
     this->vector_bg_att_lower_bit = 0;
     this->vector_bg_att_higher_bit = 0;
 
-    this->OAM.resize(OAM_SIZE, 0);
-    
+    this->sprite_zero_hit_possible = false;
+    //this->structless_OAM = (uint8_t *)&(this->OAM);
+
     this->PPUCTRL = 0;
     this->nametable_x_offset = 0;
     this->nametable_y_offset = 0;
@@ -84,6 +86,8 @@ PPU::PPU() {
 }
 
 void PPU::Clock() {
+
+    printf("Shits going down on scanline %d ans cycle %d!\n", this->scanline, this->cycle);
 
     ////printf("Beg\nCycle: %d\nScanline: %d\n", cycle, scanline);
     if(this->scanline >= -1 && this->scanline < 240){
@@ -208,6 +212,140 @@ void PPU::Clock() {
             this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
         }
 
+        if(this->cycle == 257 && this->scanline >= 0){
+
+            std::memset(this->sprite_scanline, 0xff, 8*sizeof(oam_object));
+
+            this->sprite_count = 0;
+
+            for(uint8_t i = 0 ; i < 8; ++i){
+
+                this->sprite_shifter_patt_low[i] = 0;
+                this->sprite_shifter_patt_high[i] = 0;
+            }
+
+            uint8_t n_curr_OAM = 0;
+            this->sprite_zero_hit_possible = false;
+
+            while((n_curr_OAM < 64) && (this->sprite_count < 9)){
+
+                int16_t diff = ((int16_t)this->scanline - (int16_t)this->OAM[n_curr_OAM].y);
+
+                if((diff >= 0) && (diff < (this->sprite_size.second))){
+
+                    if(this->sprite_count < 8){
+
+                        if(n_curr_OAM == 0)
+                            this->sprite_zero_hit_possible= true; 
+
+                        memcpy(&(this->sprite_scanline[n_curr_OAM]), &(this->OAM[n_curr_OAM]), sizeof(oam_object));
+
+                        this->sprite_count += 1;
+                    }
+                }
+
+                n_curr_OAM += 1;
+            }
+
+            this->sprite_overflow = (this->sprite_count > 8);
+
+        }
+
+        if(cycle == 340){
+
+            printf("Cycle 340!\n");
+
+            for(uint8_t i = 0; i < this->sprite_count; ++i){
+
+                uint8_t sprite_patt_bits_low, sprite_patt_bits_high;
+                uint16_t sprite_patt_addr_low, sprite_patt_addr_high;
+
+                printf("i = %02x\n", i);
+
+                // Sprites 8x8
+                if(this->sprite_size.second == 8){
+
+                    // Check if sprite is flipped vertically
+                    // It isnt
+                    if((this->sprite_scanline[i].att & 0x80) == 0){
+                        sprite_patt_addr_low = (this->sprite_pattern_table_addr) 
+                                                | (this->sprite_scanline[i].id << 4)
+                                                | (this->scanline - sprite_scanline[i].y);
+                    }
+                    // It is
+                    else{
+                        sprite_patt_addr_low = (this->sprite_pattern_table_addr) 
+                                                | (this->sprite_scanline[i].id << 4)
+                                                | (7 - (sprite_scanline[i].y - this->scanline));
+                    }
+                }
+
+                //Sprites 8x16
+                else{
+
+                    // Check if sprite is flipped vertically
+                    // It isnt
+                    if((this->sprite_scanline[i].att & 0x80) == 0){
+
+                        // Reading top tile
+                        if((this->scanline - this->sprite_scanline[i].y) < 8){
+                            sprite_patt_addr_low =  ( (this->sprite_scanline[i].id & 0x01) << 12)
+                                                    |((this->sprite_scanline[i].id & 0x0FE) << 4)
+                                                    |((this->scanline - sprite_scanline[i].y) & 0x07);
+                        }
+                        // Reading bottom tile
+                        else{
+                            sprite_patt_addr_low = ((this->sprite_scanline[i].id & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i].id & 0x0FE) + 1) << 4)
+                                                    |((this->scanline - sprite_scanline[i].y) & 0x07);
+                        }
+                    }
+
+                    // It is
+                    else{
+                        // Reading top tile
+                        if((this->scanline - this->sprite_scanline[i].y) < 8){
+                            sprite_patt_addr_low =  ( (this->sprite_scanline[i].id & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i].id & 0x0FE) + 1) << 4)
+                                                    |((this->scanline - sprite_scanline[i].y) & 0x07);
+                        }
+                        // Reading bottom tile
+                        else{
+                            sprite_patt_addr_low = ((this->sprite_scanline[i].id & 0x01) << 12)
+                                                    |((this->sprite_scanline[i].id & 0x0FE) << 4)
+                                                    |((this->scanline - sprite_scanline[i].y) & 0x07);
+                        }
+                    }
+                }
+
+
+                sprite_patt_addr_high = sprite_patt_addr_low + 8;
+
+                sprite_patt_bits_low = this->ReadFrom(sprite_patt_addr_low);
+                sprite_patt_bits_high = this->ReadFrom(sprite_patt_addr_high);
+
+                if(this->sprite_scanline[i].att & 0x40){
+
+					auto flipbyte = [](uint8_t b)
+					{
+						b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+						b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+						b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+						return b;
+					};
+
+                    sprite_patt_bits_low = flipbyte(sprite_patt_bits_low);
+                    sprite_patt_bits_high = flipbyte(sprite_patt_bits_high);
+                }
+
+                this->sprite_shifter_patt_low[i] = sprite_patt_bits_low;
+                this->sprite_shifter_patt_high[i] = sprite_patt_bits_high;
+                
+            }
+
+
+        }
+
     }
 
     if(this->scanline == 240){
@@ -243,8 +381,82 @@ void PPU::Clock() {
 
     }
 
+    uint8_t fg_pixel = 0x00;
+    uint8_t fg_palette = 0x00;
+    uint8_t fg_priority = 0x00;
+
+    if(this->show_sprites){
+
+        this->sprite_zero_being_rendered = false;
+
+        for(uint8_t i = 0; i < this->sprite_count; ++i){
+
+            uint8_t fg_pixel_low = (this->sprite_shifter_patt_low[i] & 0x80) > 0;
+            uint8_t fg_pixel_high = (this->sprite_shifter_patt_high[i] & 0x80) > 0;
+
+            fg_pixel = fg_pixel_high << 1;
+            fg_pixel |= fg_pixel_low;
+
+            fg_palette = (this->sprite_scanline[i].att & 0x03) + 0x04;
+            fg_priority = (this->sprite_scanline[i].att & 0x20) == 0;
+
+            if(fg_pixel != 0){
+
+                if(i == 0)
+                    this->sprite_zero_being_rendered = true;
+
+                break;
+            }
+        }
+    }
+
     //Set pixel here
-    uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
+    uint8_t pixel = 0x00;
+    uint8_t pallete = 0x00;
+
+    if(bg_pixel == 0 && fg_pixel == 0){
+
+        pixel = 0x00;
+        pallete = 0x00;
+    }
+    else if(bg_pixel == 0 && fg_pixel > 0){
+
+        pixel = fg_pixel;
+        pallete = fg_palette;
+    }
+    else if(bg_pixel > 0 && fg_pixel > 0){
+
+        pixel = bg_pixel;
+        pallete = bg_palette;
+    }
+    else if(bg_pixel > 0 && fg_pixel > 0){
+
+        if(fg_priority){
+            pixel = fg_pixel;
+            pallete = fg_palette;
+        }
+        else{
+            pixel = bg_pixel;
+            pallete = bg_palette;
+        }
+
+        if(this->sprite_zero_hit_possible && this->sprite_zero_being_rendered){
+
+            if(this->show_background && this->show_sprites){
+
+                if(!(this->show_background_in_leftmost_8pixels || this->show_sprites_in_leftmost_8pixels)){
+                    if(this->cycle >= 9 && this->cycle < 258)
+                        this->sprite_zero_hit = true;
+                }
+                else{
+                    if(this->cycle >= 1 && cycle < 258)
+                        this->sprite_zero_hit = true; 
+                }
+            }
+        }
+    }
+
+    pixel = this->ReadFrom(0x3F00 + (palette << 2) + pixel);
 
     ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
     if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240)) {
@@ -265,6 +477,8 @@ void PPU::Clock() {
             //sleep(1);
         }
     }
+
+    printf("Nevermind.\n");
 
     // //printf("Cycle: %d\nScanline: %d\n", cycle, scanline);
 }
@@ -322,37 +536,47 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             //printf("PPUMASK: %02x\n", this->PPUMASK);
 
             this->display_greyscale = value & 0x01;
-            std::cout << "Greyscale: " << this->display_greyscale << std::endl;
+            //std::cout << "Greyscale: " << this->display_greyscale << std::endl;
 
             this->show_background_in_leftmost_8pixels = value & 0x02;
-            std::cout << "Show bg in leftmost 8px: " << this->show_background_in_leftmost_8pixels << std::endl;
+            //std::cout << "Show bg in leftmost 8px: " << this->show_background_in_leftmost_8pixels << std::endl;
             this->show_sprites_in_leftmost_8pixels = value & 0x04;
-            std::cout << "Show sprites in leftmost 8px: " << this->show_sprites_in_leftmost_8pixels << std::endl;
+            //std::cout << "Show sprites in leftmost 8px: " << this->show_sprites_in_leftmost_8pixels << std::endl;
 
             this->show_background = value & 0x08;
-            std::cout << "Show background: " << this->show_background << std::endl;
+            //std::cout << "Show background: " << this->show_background << std::endl;
             this->show_sprites = value & 0x10;
-            std::cout << "Show sprites: " << this->show_sprites << std::endl;
+            //std::cout << "Show sprites: " << this->show_sprites << std::endl;
 
             this->emphasize_red = value & 0x20;
-            std::cout << "Emphasize red: " << this->emphasize_red << std::endl;
+            //std::cout << "Emphasize red: " << this->emphasize_red << std::endl;
             this->emphasize_green = value & 0x40;
-            std::cout << "Emphasize green: " << this->emphasize_green << std::endl;
+            //std::cout << "Emphasize green: " << this->emphasize_green << std::endl;
             this->emphasize_blue = value & 0x80;
-            std::cout << "Emphasize blue: " << this->emphasize_blue << std::endl;
+            //std::cout << "Emphasize blue: " << this->emphasize_blue << std::endl;
 
             this->last_write_to_reg = value;
             break;
 
         case OAMADDR_ADDR:
+            printf("Vou escrever %02x no OAMADDR!\n", value);
             this->OAMADDR = value;
 
             this->last_write_to_reg = value;
             break;
 
         case OAMDATA_ADDR:
+            printf("Writing %02x on %04x\n", value, this->OAMADDR);
             this->OAMDATA = value;
-            this->WriteToOAM( this->OAMDATA);
+
+            if(this->OAMDATA % 4 == 0)
+                this->OAM[this->OAMADDR].y = this->OAMDATA;
+            if(this->OAMDATA % 4 == 1)
+                this->OAM[this->OAMADDR].id = this->OAMDATA;
+            if(this->OAMDATA % 4 == 2)
+                this->OAM[this->OAMADDR].att = this->OAMDATA;
+            if(this->OAMDATA % 4 == 3)
+                this->OAM[this->OAMADDR].x = this->OAMDATA;
 
             this->last_write_to_reg = value;
             break;
@@ -451,7 +675,16 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             break;
 
         case OAMDATA_ADDR:
-            this->OAMDATA = this->ReadFromOAM();
+
+            if(this->OAMDATA % 4 == 0)
+                this->OAMDATA = this->OAM[this->OAMADDR].y;
+            if(this->OAMDATA % 4 == 1)
+                this->OAMDATA = this->OAM[this->OAMADDR].id;
+            if(this->OAMDATA % 4 == 2)
+                this->OAMDATA = this->OAM[this->OAMADDR].att;
+            if(this->OAMDATA % 4 == 3)
+                this->OAMDATA = this->OAM[this->OAMADDR].x;
+
             this->PPUGenLatch = this->OAMDATA;
             break;
 
@@ -481,16 +714,5 @@ void PPU::SetAddressBus(AddressBus *addr_bus) {
 
 uint32_t* PPU::GetPMatrix() {
     return this->p_matrix;
-}
-
-void PPU::WriteToOAM(uint8_t value) {
-
-    this->OAM[this->OAMADDR] = value;
-    this->OAMADDR++;
-}
-
-uint8_t PPU::ReadFromOAM() {
-
-    return this->OAM[this->OAMADDR];
 }
 

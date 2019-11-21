@@ -136,12 +136,14 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
 
         else if(address == OAMDMA_ADDR){
 
+            printf("Vou escrever no OAMDMA\n");
             ppu->WriteToRegister(address, word);
             uint16_t abs_address = word << 8;
 
             for(uint16_t i = 0x00; i < 0x100; i++){
                 ppu->WriteToRegister(OAMDATA_ADDR, this->cpu->ReadFrom(abs_address + i));
             }
+            printf("Terminei de escrever!\n");
         }
 
         else if(address == JOYPAD1_ADDR){

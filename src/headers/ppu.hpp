@@ -6,6 +6,7 @@ class AddressBus;
 #include "../common/constants.hpp"
 
 #include <vector>
+#include <cstring>
 
 class PPU : public Processor {
 
@@ -56,7 +57,22 @@ class PPU : public Processor {
         // Pos 1: Index (OAM_INDEX_N)
         // Pos 2: Attributes (OAM_ATTRIBUTES)
         // Pos 3: X Position (OAM_X_POS)
-        std::vector<uint8_t> OAM;
+        typedef struct OAM_object {
+            uint8_t y;
+            uint8_t id;
+            uint8_t att;
+            uint8_t x;
+        } oam_object;
+
+        oam_object OAM[64], sprite_scanline[8];
+
+        uint8_t sprite_count;
+        uint8_t sprite_shifter_patt_low[8];
+        uint8_t sprite_shifter_patt_high[8];
+
+        bool sprite_zero_hit_possible;
+        bool sprite_zero_being_rendered;
+        bool sprite_zero_hit;
 
         uint8_t PPUCTRL;
         // ============================ The variables underneath here are contained in PPUCTRL
@@ -107,7 +123,6 @@ class PPU : public Processor {
         uint8_t last_write_to_reg;
 
         bool sprite_overflow;
-        bool sprite_zero_hit;
         // ============================================================= End of PPUSTATUS vars
 
         uint8_t OAMADDR;
