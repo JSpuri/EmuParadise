@@ -1,1 +1,17 @@
 adc_abs_x.s:		Na linha 56 do arquivo o asm6f acaba otimizando e considerando $00FF como apenas $FF, desta forma há a errada interpretação como zeropage, x quando na verdade é absolute, x
+
+cmp_family_tests.s:	Não deveria ser possível escrever no endereço MEM[0xFEFE]. Podemos então considerar o nosso correto
+
+ld_absolute_xy.s:	Não deveria ser possível escrever nos endereços da APU ($4000-$4020
+
+lsr_zero2.s:		Há uma divergência entre como o nosso e o outro grupo lidam para ativar a flag carry em SBC. Estou confiante de que estamos certos (espero).
+
+mirror_ram.s:		O nosso não imprime o endereço de memória 0x0800. Isso em termos práticos pouco importa porque 0x0800 serve de mirror para 0x0000, que é o que imprimimos. 
+
+nestest.s:		Sei lá, mano. Grande demais, sem tempo, irmão.
+
+rol_absx.s:		Endereços de memória maiores que 0x5000. "Não tem coisa lá com cartucho de mapper 0" - Chamys.
+
+ror_abs.s:		O mesmo de antes. Vamos confiar, galera.
+
+ror_absx.s:		O mesmo. Gzus.
