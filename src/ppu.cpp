@@ -95,12 +95,20 @@ void PPU::Clock() {
         if(this->scanline == 0 && this->cycle == 0)
             this->cycle = 1;
 
-        if(this->scanline == -1 && this->cycle == 1)
+        if(this->scanline == -1 && this->cycle == 1){
+
             this->in_vblank = false;
+            this->sprite_overflow = false;
+            this->sprite_zero_hit = false;
+
+            for(uint8_t i = 0; i < 8; ++i){
+                this->sprite_shifter_patt_low[i] = 0;
+                this->sprite_shifter_patt_high[i] = 0;
+            }
+        }
 
         if((this->cycle >= 2 && this->cycle < 258) || (this->cycle >= 321 && this->cycle < 338)){
 
-            ////printf("Terceiro if to primeiro if\n");
             // Update shifters
             if(this->show_background){
 
@@ -111,6 +119,17 @@ void PPU::Clock() {
                 this->vector_bg_att_higher_bit <<= 1;
             }
 
+            if(this->show_sprites && this->cycle >= 1 && cycle < 258){
+                for(uint8_t i = 0; i < this->sprite_count; ++i){
+                    if(this->sprite_scanline[i].x > 0)
+                        this->sprite_scanline[i].x -= 1;
+                    else{
+                        this->sprite_shifter_patt_low[i] <<= 1;
+                        this->sprite_shifter_patt_high[i] <<= 1;
+                    }
+                }
+            }
+
             ////printf("%d\n", (cycle - 1)%8);
             switch((this->cycle - 1) % 8){
 
@@ -118,7 +137,8 @@ void PPU::Clock() {
 
                     this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
                     this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
-                    ////printf("vram_addr: %04x\n", vram_addr.reg);
+                    this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | ((this->next_bg_tile_att & 0b01) ? 0xFF : 0x00);
+                    this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | ((this->next_bg_tile_att & 0b10) ? 0xFF : 0x00);
 
                     this->next_bg_tile_id = this->ReadFrom(0x2000 | (this->vram_addr.reg & 0x0FFF));
                     break;
@@ -194,6 +214,8 @@ void PPU::Clock() {
 
             this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
             this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
+            this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | ((this->next_bg_tile_att & 0b01) ? 0xFF : 0x00);
+            this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | ((this->next_bg_tile_att & 0b10) ? 0xFF : 0x00);
 
             if(this->show_background || this->show_sprites){
             
@@ -203,13 +225,19 @@ void PPU::Clock() {
         }
 
         if(this->cycle == 338 || cycle == 340)
+        {
+            printf("Estou no ciclo %d e quero acessar %04x\n", this->cycle, (0x2000 | (this->vram_addr.reg & 0x0FFF)));
             this->next_bg_tile_id = this->ReadFrom(0x2000 | (this->vram_addr.reg & 0x0FFF));
+        }
 
         if(this->scanline == -1 && this->cycle >= 280 && cycle < 305){
 
-            this->vram_addr.fine_cam_position_y = tram_addr.fine_cam_position_y;
-            this->vram_addr.nametable_y = this->tram_addr.nametable_y;
-            this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
+            if(this->show_sprites || this->show_background){
+
+                this->vram_addr.fine_cam_position_y = tram_addr.fine_cam_position_y;
+                this->vram_addr.nametable_y = this->tram_addr.nametable_y;
+                this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
+            }
         }
 
         if(this->cycle == 257 && this->scanline >= 0){
@@ -391,21 +419,23 @@ void PPU::Clock() {
 
         for(uint8_t i = 0; i < this->sprite_count; ++i){
 
-            uint8_t fg_pixel_low = (this->sprite_shifter_patt_low[i] & 0x80) > 0;
-            uint8_t fg_pixel_high = (this->sprite_shifter_patt_high[i] & 0x80) > 0;
+            if(this->sprite_scanline[i].x == 0){
+                uint8_t fg_pixel_low = (this->sprite_shifter_patt_low[i] & 0x80) > 0;
+                uint8_t fg_pixel_high = (this->sprite_shifter_patt_high[i] & 0x80) > 0;
 
-            fg_pixel = fg_pixel_high << 1;
-            fg_pixel |= fg_pixel_low;
+                fg_pixel = fg_pixel_high << 1;
+                fg_pixel |= fg_pixel_low;
 
-            fg_palette = (this->sprite_scanline[i].att & 0x03) + 0x04;
-            fg_priority = (this->sprite_scanline[i].att & 0x20) == 0;
+                fg_palette = (this->sprite_scanline[i].att & 0x03) + 0x04;
+                fg_priority = (this->sprite_scanline[i].att & 0x20) == 0;
 
-            if(fg_pixel != 0){
+                if(fg_pixel != 0){
 
-                if(i == 0)
-                    this->sprite_zero_being_rendered = true;
+                    if(i == 0)
+                        this->sprite_zero_being_rendered = true;
 
-                break;
+                    break;
+                }
             }
         }
     }
@@ -424,7 +454,7 @@ void PPU::Clock() {
         pixel = fg_pixel;
         pallete = fg_palette;
     }
-    else if(bg_pixel > 0 && fg_pixel > 0){
+    else if(bg_pixel > 0 && fg_pixel == 0){
 
         pixel = bg_pixel;
         pallete = bg_palette;
