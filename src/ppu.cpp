@@ -35,7 +35,7 @@ PPU::PPU() {
     this->vector_bg_att_higher_bit = 0;
 
     this->OAM.resize(OAM_SIZE, 0);
-    
+
     this->PPUCTRL = 0;
     this->nametable_x_offset = 0;
     this->nametable_y_offset = 0;
@@ -192,7 +192,7 @@ void PPU::Clock() {
             this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
 
             if(this->show_background || this->show_sprites){
-            
+
                 this->vram_addr.nametable_x = this->tram_addr.nametable_x;
                 this->vram_addr.cam_position_x = this->tram_addr.cam_position_x;
             }
@@ -214,11 +214,11 @@ void PPU::Clock() {
     }
 
     if(this->scanline >= 241 && this->scanline < 261){
-        
+
         if(this->scanline == 241 && this->cycle == 1){
 
             this->in_vblank = true;
-            
+
             if(this->gen_nmi_at_vblank_interval)
                 this->nmi = true;
         }
@@ -237,8 +237,8 @@ void PPU::Clock() {
         bg_pixel = p1_pixel << 1;
         bg_pixel |= p0_pixel;
 
-        uint8_t bg_pal0 = (this->vector_bg_att_lower_bit & bit_mux) > 0; 
-        uint8_t bg_pal1 = (this->vector_bg_att_higher_bit & bit_mux) > 0; 
+        uint8_t bg_pal0 = (this->vector_bg_att_lower_bit & bit_mux) > 0;
+        uint8_t bg_pal1 = (this->vector_bg_att_higher_bit & bit_mux) > 0;
         bg_palette = (bg_pal1 << 1) | bg_pal0;
 
     }
@@ -310,9 +310,9 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             //printf("Sprite size: (%02x, %02x)\n", this->sprite_size.first, this->sprite_size.second);
 
             this->ppu_master_slave_select = value & 0x40;
-            std::cout << "PPU master/slave select: " << this->ppu_master_slave_select << std::endl;
+            //std::cout << "PPU master/slave select: " << this->ppu_master_slave_select << std::endl;
             this->gen_nmi_at_vblank_interval = value & 0x80;
-            std::cout << "Gen NMI at vblank: " << this->gen_nmi_at_vblank_interval << std::endl;
+            //std::cout << "Gen NMI at vblank: " << this->gen_nmi_at_vblank_interval << std::endl;
 
             this->last_write_to_reg = value;
             break;
@@ -322,24 +322,24 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             //printf("PPUMASK: %02x\n", this->PPUMASK);
 
             this->display_greyscale = value & 0x01;
-            std::cout << "Greyscale: " << this->display_greyscale << std::endl;
+            //std::cout << "Greyscale: " << this->display_greyscale << std::endl;
 
             this->show_background_in_leftmost_8pixels = value & 0x02;
-            std::cout << "Show bg in leftmost 8px: " << this->show_background_in_leftmost_8pixels << std::endl;
+            //std::cout << "Show bg in leftmost 8px: " << this->show_background_in_leftmost_8pixels << std::endl;
             this->show_sprites_in_leftmost_8pixels = value & 0x04;
-            std::cout << "Show sprites in leftmost 8px: " << this->show_sprites_in_leftmost_8pixels << std::endl;
+            //std::cout << "Show sprites in leftmost 8px: " << this->show_sprites_in_leftmost_8pixels << std::endl;
 
             this->show_background = value & 0x08;
-            std::cout << "Show background: " << this->show_background << std::endl;
+            //std::cout << "Show background: " << this->show_background << std::endl;
             this->show_sprites = value & 0x10;
-            std::cout << "Show sprites: " << this->show_sprites << std::endl;
+            //std::cout << "Show sprites: " << this->show_sprites << std::endl;
 
             this->emphasize_red = value & 0x20;
-            std::cout << "Emphasize red: " << this->emphasize_red << std::endl;
+        //    std::cout << "Emphasize red: " << this->emphasize_red << std::endl;
             this->emphasize_green = value & 0x40;
-            std::cout << "Emphasize green: " << this->emphasize_green << std::endl;
+        //    std::cout << "Emphasize green: " << this->emphasize_green << std::endl;
             this->emphasize_blue = value & 0x80;
-            std::cout << "Emphasize blue: " << this->emphasize_blue << std::endl;
+        //    std::cout << "Emphasize blue: " << this->emphasize_blue << std::endl;
 
             this->last_write_to_reg = value;
             break;
@@ -438,9 +438,9 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             this->PPUSTATUS = this->last_write_to_reg & 0x1F;
             //printf("Last write to reg: %02x\n", this->last_write_to_reg & 0x1f);
             this->PPUSTATUS |= ((this->sprite_overflow) ? 0x20 : 0x00);
-            std::cout << "Sprite overflow: " << this->sprite_overflow << std::endl;
+        //    std::cout << "Sprite overflow: " << this->sprite_overflow << std::endl;
             this->PPUSTATUS |= ((this->sprite_zero_hit) ? 0x40 : 0x00);
-            std::cout << "In VBlank: " << this->in_vblank << std::endl;
+        //    std::cout << "In VBlank: " << this->in_vblank << std::endl;
             this->PPUSTATUS |= ((this->in_vblank) ? 0x80 : 0x00);
             //printf("PPUSTATUS: %02x\n", this->PPUSTATUS);
             this->in_vblank = false;
@@ -493,4 +493,3 @@ uint8_t PPU::ReadFromOAM() {
 
     return this->OAM[this->OAMADDR];
 }
-

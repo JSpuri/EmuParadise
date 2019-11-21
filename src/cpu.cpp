@@ -111,7 +111,7 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
         value = (ReadZeroAddr(addr) + (this->x & 0x00FF)) & 0xFF;
 
     else if(instructionMode == M_ZERO_PAGE_Y)
-        value = ReadZeroAddr(addr) + (this->y & 0x00FF);
+        value = (ReadZeroAddr(addr) + (this->y & 0x00FF)) & 0xFF;
 
     else if(instructionMode == M_ABSOLUTE)
         value = ReadAbsAddr(addr);

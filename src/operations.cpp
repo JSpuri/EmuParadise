@@ -679,7 +679,7 @@ void TAX(int mode, CPU *cpu) {
     cpu->x = cpu->a;
     if (cpu->x == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
-    if (cpu->x < 0) cpu->ps[N] = 1;
+    if (cpu->x & 0x80) cpu->ps[N] = 1;
     else cpu->ps[N] = 0;
 
 }
@@ -690,7 +690,7 @@ void TAY(int mode, CPU *cpu) {
     cpu->y = cpu->a;
     if (cpu->y == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
-    if (cpu->y < 0) cpu->ps[N] = 1;
+    if (cpu->y & 0x80) cpu->ps[N] = 1;
     else cpu->ps[N] = 0;
 
 }
@@ -701,7 +701,7 @@ void TSX(int mode, CPU *cpu) {
     cpu->x = cpu->sp;
     if (cpu->x == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
-    if (cpu->x < 0) cpu->ps[N] = 1;
+    if (cpu->x & 0x80) cpu->ps[N] = 1;
     else cpu->ps[N] = 0;
 
 }
@@ -712,7 +712,7 @@ void TXA(int mode, CPU *cpu) {
     cpu->a = cpu->x;
     if (cpu->a == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
-    if (cpu->a < 0) cpu->ps[N] = 1;
+    if (cpu->a & 0x80) cpu->ps[N] = 1;
     else cpu->ps[N] = 0;
 
 }
@@ -728,7 +728,7 @@ void TYA(int mode, CPU *cpu) {
     cpu->a = cpu->y;
     if (cpu->a == 0) cpu->ps[Z] = 1;
     else cpu->ps[Z] = 0;
-    if (cpu->a < 0) cpu->ps[N] = 1;
+    if (cpu->a & 0x80) cpu->ps[N] = 1;
     else cpu->ps[N] = 0;
 
 }

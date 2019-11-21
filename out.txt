@@ -1,0 +1,14338 @@
+kddd
+load background
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 1
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 2
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 3
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 4
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 5
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 6
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 7
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 8
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 9
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 10
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 11
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 12
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 13
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 14
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 15
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 16
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 17
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 18
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 19
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 20
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 21
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 22
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 23
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 24
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 25
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 26
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 27
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 28
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 29
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 30
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 31
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32
+Tile number: 0
+Palette number: 0
+Color number 1: 0
+Color number 2: 0
+Color number 3: 0
+j: 0
+j: 1
+j: 2
+j: 3
+j: 4
+j: 5
+j: 6
+j: 7
+New Row: 32

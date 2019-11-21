@@ -1,0 +1,1 @@
+adc_abs_x.s:		Na linha 56 do arquivo o asm6f acaba otimizando e considerando $00FF como apenas $FF, desta forma há a errada interpretação como zeropage, x quando na verdade é absolute, x

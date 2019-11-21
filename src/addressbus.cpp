@@ -243,7 +243,7 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
         }
 
         else if(address >= PRG_ROM_1_BANK_START){
-
+            this->cpu->last_accessed_mem = address;
             if(address < PRG_ROM_2_BANK_START){
                 address -= PRG_ROM_1_BANK_START;
                 value = this->PRG_ROM[address];
@@ -261,7 +261,7 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
                 }
             }
 
-            this->cpu->last_accessed_mem = address;
+
         }
     }
 
