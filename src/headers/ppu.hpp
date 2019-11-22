@@ -56,6 +56,12 @@ class PPU : public Processor {
         uint16_t vector_bg_att_lower_bit;
         uint16_t vector_bg_att_higher_bit;
 
+        uint8_t vector_fg_pat_lower[8];
+        uint8_t vector_fg_pat_higher[8];
+
+        uint8_t sprite_scanline[8 * 4];
+        uint8_t sprite_count;
+
         uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y] = {0};
 
         uint8_t PPUCTRL;

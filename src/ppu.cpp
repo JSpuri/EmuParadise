@@ -91,8 +91,17 @@ void PPU::Clock() {
         if(this->scanline == 0 && this->cycle == 0)
             this->cycle = 1;
 
-        if(this->scanline == -1 && this->cycle == 1)
+        if(this->scanline == -1 && this->cycle == 1){
             this->in_vblank = false;
+            this->sprite_overflow = false;
+            this->sprite_zero_hit = false;
+
+            for(int i = 0; i < 8; ++i){
+                this->vector_fg_pat_lower[i] = 0;
+                this->vector_fg_pat_higher[i] = 0;
+            }
+
+        }
 
         if((this->cycle >= 2 && this->cycle < 258) || (this->cycle >= 321 && this->cycle < 338)){
 
@@ -105,6 +114,18 @@ void PPU::Clock() {
 
                 this->vector_bg_att_lower_bit <<= 1;
                 this->vector_bg_att_higher_bit <<= 1;
+            }
+
+            if(this->show_sprites && this->cycle >= 1 && this->cycle < 258){
+
+                for(int i = 0; i < this->sprite_count; ++i){
+                    if(this->sprite_scanline[i * sizeof(uint8_t) + 3] > 0)
+                        this->sprite_scanline[i * sizeof(uint8_t) + 3] -= 1;
+                    else{
+                        this->vector_fg_pat_lower[i] <<= 1;
+                        this->vector_fg_pat_higher[i] <<= 1;
+                    }
+                }
             }
 
             ////printf("%d\n", (cycle - 1)%8);
@@ -210,9 +231,11 @@ void PPU::Clock() {
 
         if(this->scanline == -1 && this->cycle >= 280 && cycle < 305){
 
-            this->vram_addr.fine_cam_position_y = tram_addr.fine_cam_position_y;
-            this->vram_addr.nametable_y = this->tram_addr.nametable_y;
-            this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
+            if(this->show_sprites || this->show_background){
+                this->vram_addr.fine_cam_position_y = tram_addr.fine_cam_position_y;
+                this->vram_addr.nametable_y = this->tram_addr.nametable_y;
+                this->vram_addr.cam_position_y = this->tram_addr.cam_position_y;
+            }
         }
 
     }
