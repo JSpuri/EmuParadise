@@ -33,7 +33,7 @@ uint8_t Controller::ReadJoypad1() {
 
     if(this->strobe1){
         this->strobe1 = false;
-        return this->joypad1 & 0x01;
+        return 0x01;
     }
 
     else if(this->counter1 > 0){

@@ -49,7 +49,7 @@ int main(int argc, const char *argv[]){
     tela(ppu.GetPMatrix(), &controllers);
 
     // Main cpu loop
-    while(addr_bus.Clock()){}
+    addr_bus.Clock();
 
 	return 0;
 }

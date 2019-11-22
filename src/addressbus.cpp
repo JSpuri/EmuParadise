@@ -1,5 +1,7 @@
 #include "headers/addressbus.hpp"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controllers) {
 
@@ -86,19 +88,34 @@ AddressBus::AddressBus(char *nesfile, CPU *cpu, PPU *ppu, Controller *controller
 
 bool AddressBus::Clock() {
 
-    this->ppu->Clock();
+    using namespace std::chrono_literals;
 
-    if(this->system_clock % 3 == 0)
-        this->run_emulation = this->cpu->Clock();
+    this->run_emulation = true;
 
-    if(this->ppu->nmi){
-        this->ppu->nmi = false;
+    auto targetTime = 16ms;
+
+    while(this->run_emulation) {
+
+        auto before = std::chrono::high_resolution_clock::now();
+
+        while(this->ppu->nmi == false) {
+            this->ppu->Clock();
+
+            if(this->system_clock % 3 == 0)
+                this->run_emulation = this->cpu->Clock();
+
+            this->system_clock++;
+        }
         this->cpu->NMI();
+        this->ppu->nmi = false;
+        auto after = std::chrono::high_resolution_clock::now();
+
+        std::chrono::high_resolution_clock::duration sleepTime = after - before;
+
+        std::this_thread::sleep_for(targetTime - sleepTime);
     }
 
-    this->system_clock++;
-
-    return this->run_emulation;
+    return true;
 }
 
 // Analisa qual classe quer escrever e, a partir dai, redireciona o valor
