@@ -147,6 +147,17 @@ uint8_t CPU::ReadFrom(uint16_t addr) {
     return this->addr_bus->ReadFrom(0, addr);
 }
 
+void CPU::PushToStack(uint8_t value){
+
+    this->WriteTo(0x0100 | (this->sp--), value);
+}
+
+uint8_t CPU::PopFromStack(){
+
+    uint8_t value = this->ReadFrom(0x0100 | (++this->sp));
+    return value;
+}
+
 // Sets which address bus the CPU will write/read to/from
 void CPU::SetAddressBus(AddressBus *addr_bus){
 
@@ -347,8 +358,8 @@ void CPU::setInstruction(uint8_t opcode) {
 
 void CPU::NMI() {
 
-    this->WriteTo(0x0100 + (this->sp--), this->pc >> 8);
-    this->WriteTo(0x0100 + (this->sp--), this->pc & 0x00FF);
+    this->PushToStack((this->pc >> 8) & 0x00FF);
+    this->PushToStack(this->pc & 0x00FF);
 
     this->ps[Bb] = 0;
     this->ps[Bb-1] = 1;

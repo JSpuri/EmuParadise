@@ -38,6 +38,9 @@ class CPU : public Processor {
         void WriteTo(uint16_t addr, uint8_t value);
         uint8_t ReadFrom(uint16_t addr);
 
+        void PushToStack(uint8_t value);
+        uint8_t PopFromStack();
+
         void SetAddressBus(AddressBus *addr_bus);
 
         void setInstructionMode(int mode);

@@ -318,8 +318,8 @@ void JSR(int mode, CPU *cpu) {
 
     uint16_t absolute_addr = (cpu->pc) + 3;
 
-    cpu->WriteTo(0x0100 + (cpu->sp)--, absolute_addr >> 8);
-    cpu->WriteTo(0x0100 + (cpu->sp)--, absolute_addr & 0xFF);
+    cpu->PushToStack((absolute_addr >> 8) & 0x00FF);
+    cpu->PushToStack(absolute_addr & 0x00FF);
 
     absolute_addr = cpu->ResolveOPArgAddr(mode, cpu->pc + 1);
     //printf("JSR %02x\n", absolute_addr);
@@ -429,7 +429,7 @@ void ORA(int mode, CPU *cpu) {
 
 void PHA(int mode, CPU *cpu) {
     //printf("PHA\n");
-    cpu->WriteTo(0x0100 + (cpu->sp--), cpu->a);
+    cpu->PushToStack(cpu->a);
 }
 
 void PHP(int mode, CPU *cpu) {
@@ -443,14 +443,13 @@ void PHP(int mode, CPU *cpu) {
 
     //printf("PHP (cpu->ps: %02x\n", aux);
 
-    cpu->WriteTo(0x0100 + (cpu->sp--), aux);
-
+    cpu->PushToStack(aux);
 }
 
 void PLA(int mode, CPU *cpu) {
 
     //printf("PLA (cpu->A: %02x => ", cpu->a);
-    cpu->a = cpu->ReadFrom((0x0100 + (++cpu->sp)));
+    cpu->a = cpu->PopFromStack();
     //printf("%02x\n", cpu->a);
 
     if(cpu->a == 0x00)	cpu->ps[6] = 1;
@@ -464,7 +463,7 @@ void PLA(int mode, CPU *cpu) {
 void PLP(int mode, CPU *cpu) {
 
     //printf("PLP\n");
-    uint8_t aux = cpu->ReadFrom((0x0100 + (++cpu->sp)));
+    uint8_t aux = cpu->PopFromStack();
 
     for(int i = 0; i < 8; i++) {
 
@@ -602,7 +601,7 @@ void ROR(int mode, CPU *cpu) {
 
 void RTI(int mode, CPU *cpu) {
 
-    uint8_t aux = cpu->ReadFrom(0x0100 + (++cpu->sp));
+    uint8_t aux = cpu->PopFromStack();
 
     for(int i = 0; i < 8; i++) {
 
@@ -616,15 +615,15 @@ void RTI(int mode, CPU *cpu) {
     }
 
     //printf("RTI (cpu->pc : %02x) => ", cpu->pc);
-    cpu->pc = cpu->ReadFrom((0x0100 + (++cpu->sp)));
-    cpu->pc += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8 ;
+    cpu->pc = cpu->PopFromStack();
+    cpu->pc |= (cpu->PopFromStack() << 8) & 0xFF00;
     //printf("%02x\n", cpu->pc);
 }
 
 void RTS(int mode, CPU *cpu) {
 
-    uint16_t absolute_addr = cpu->ReadFrom(0x0100 + (++cpu->sp));
-    absolute_addr += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8;
+    uint16_t absolute_addr = cpu->PopFromStack();
+    absolute_addr |= (cpu->PopFromStack() << 8) & 0xFF00;
 
     //printf("RTS (cpu->pc : %02x) => %02x\n", cpu->pc, absolute_addr);
     cpu->pc = absolute_addr;
