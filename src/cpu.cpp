@@ -280,7 +280,13 @@ uint16_t CPU::ResolveIndirect(uint16_t addr) {
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
 
     uint16_t value = this->ReadFrom(absolute_addr) & 0x00FF;
-    value += this->ReadFrom(absolute_addr + 1) << 8;
+
+    if((absolute_addr & 0x00FF) == 0x0FF){
+        value += this->ReadFrom((absolute_addr & 0xFF00)) << 8;
+    }
+    else{
+        value += this->ReadFrom(absolute_addr + 1) << 8;
+    }
     return value;
 }
 
