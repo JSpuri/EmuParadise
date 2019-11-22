@@ -23,6 +23,8 @@ SDL_Event event;
 
 Uint32* pixels = new Uint32[NES_WIDTH * NES_HEIGHT];
 
+const Uint8* keystates;
+
 void tela(uint32_t *p_matrix, Controller *controllers) {
 
     joypads = controllers;
@@ -62,11 +64,14 @@ void tela(uint32_t *p_matrix, Controller *controllers) {
 
 void updateControllers() {
     int i = 0;
+
+	keystates = SDL_GetKeyboardState(NULL);
+
     for (; SDL_PollEvent(&event) && i < 2; i++) {   //[> Loop until there are no events left on the queue <]
         switch (event.type) {         //[> Process the appropiate event type <]
             case SDL_KEYUP:
                     // printf("Tecla soltada!\n");
-                switch(event.key.keysym.sym){
+                /*switch(event.key.keysym.sym){
                     case SDLK_v: joypads->ReleaseButtonJP1('A'); break;
                     case SDLK_b: joypads->ReleaseButtonJP1('B'); break;
                     case SDLK_g: joypads->ReleaseButtonJP1('s'); break;
@@ -108,7 +113,7 @@ void updateControllers() {
                     case SDLK_LEFT: joypads->PressButtonJP2('L'); break;
                     case SDLK_RIGHT: joypads->PressButtonJP2('R'); break;
                 }
-                break;
+                break;*/
 
             case SDL_MOUSEMOTION:
                 break;
@@ -122,6 +127,15 @@ void updateControllers() {
             //printf("I don't know what this event is!\n");
         }
     }
+
+	if(keystates[SDL_SCANCODE_UP])		joypads->PressButtonJP1('U');
+	if(keystates[SDL_SCANCODE_DOWN])	joypads->PressButtonJP1('D');
+	if(keystates[SDL_SCANCODE_RIGHT])	joypads->PressButtonJP1('R');
+	if(keystates[SDL_SCANCODE_LEFT])	joypads->PressButtonJP1('L');
+	if(keystates[SDL_SCANCODE_Z])		joypads->PressButtonJP1('A');
+	if(keystates[SDL_SCANCODE_X])		joypads->PressButtonJP1('B');
+	if(keystates[SDL_SCANCODE_V])		joypads->PressButtonJP1('s');
+	if(keystates[SDL_SCANCODE_C])		joypads->PressButtonJP1('S');
 }
 
 void updateTela(uint32_t *p_matrix) {
@@ -142,4 +156,3 @@ void updateTela(uint32_t *p_matrix) {
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
-
