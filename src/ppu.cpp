@@ -238,6 +238,116 @@ void PPU::Clock() {
             }
         }
 
+        if(this->cycle == 257 && this->scanline >= 0){
+
+            memset(this->sprite_scanline, 0xFF, 8*4*sizeof(uint8_t));
+            this->sprite_count = 0;
+
+            for(uint8_t i = 0; i < 8; ++i){
+                this->vector_fg_pat_lower[i] = 0;
+                this->vector_fg_pat_higher[i] = 0;
+            }
+
+            uint8_t num_oam_entry = 0;
+            this->sprite_zero_hit_possible = false;
+
+            while(num_oam_entry < 64 && this->sprite_count < 9){
+
+                int16_t diff = ((int16_t)scanline - (int16_t)this->OAM[num_oam_entry * sizeof(uint8_t)]);
+
+                if(diff >= 0 && diff < (this->sprite_size.second)){
+
+                    if(this->sprite_count < 8){
+
+                        if(num_oam_entry == 0){
+                            this->sprite_zero_hit_possible = true;
+                        }
+
+                        memcpy(&(this->sprite_scanline[this->sprite_count * sizeof(uint8_t)]), &(this->OAM[num_oam_entry]), 4*sizeof(uint8_t));
+                        this->sprite_count++;
+                    }
+                }
+
+                num_oam_entry++;
+            }
+
+            this->sprite_overflow = ((this->sprite_count > 8) ? true : false);
+        }
+
+        if(this->cycle == 340){
+        
+            for(uint8_t i = 0; i < this->sprite_count; i++){
+
+                uint8_t sprite_pat_bits_lower, sprite_pat_bits_higher;
+                uint16_t sprite_pat_addr_lower, sprite_pat_addr_higher;
+
+                if(this->sprite_size.second == 8){
+
+                    if((this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x80) == 0){
+                        sprite_pat_addr_lower = this->sprite_pattern_table_addr 
+                                                | this->sprite_scanline[i*sizeof(uint8_t) + 1] << 4
+                                                | (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]);
+                    }
+                    else{
+                        sprite_pat_addr_lower = this->sprite_pattern_table_addr 
+                                                | this->sprite_scanline[i*sizeof(uint8_t) + 1] << 4
+                                                | (7 -(this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]));
+                    }
+                }
+                else{
+                    if((this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x80) == 0){
+                        if(this->scanline - this->sprite_scanline[i*sizeof(uint8_t) + 2] < 8){
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE) << 4)
+                                                    |((this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+
+                        }
+                        else{
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE) + 1) << 4)
+                                                    |((this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                        }
+                    }
+                    else{
+                        if(this->scanline - this->sprite_scanline[i*sizeof(uint8_t) + 2] < 8){
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE)+ 1) << 4)
+                                                    |(7 - (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+
+                        }
+                        else{
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE)) << 4)
+                                                    |(7 - (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                        }
+                    }
+                }
+
+                sprite_pat_addr_higher = sprite_pat_addr_lower + 8;
+
+                sprite_pat_bits_lower = this->ReadFrom(sprite_pat_addr_lower);
+                sprite_pat_bits_higher = this->ReadFrom(sprite_pat_addr_higher);
+
+                if(this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x40){
+
+					// https://stackoverflow.com/a/2602885
+					auto flipbyte = [](uint8_t b)
+					{
+						b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+						b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+						b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+						return b;
+					};
+
+                    sprite_pat_bits_lower = flipbyte(sprite_pat_bits_lower);
+                    sprite_pat_bits_higher = flipbyte(sprite_pat_bits_higher);
+                }
+
+                this->vector_fg_pat_lower[i] = sprite_pat_bits_lower;
+                this->vector_fg_pat_higher[i] = sprite_pat_bits_higher;
+            }
+        }
+
     }
 
     if(this->scanline == 240){

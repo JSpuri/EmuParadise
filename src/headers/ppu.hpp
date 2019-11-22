@@ -41,8 +41,8 @@ class PPU : public Processor {
     private:
         AddressBus *addr_bus;
 
-        int scanline;
-        int cycle;
+        int16_t scanline;
+        int16_t cycle;
 
         uint8_t next_bg_tile_id;
         uint8_t next_bg_tile_att;
@@ -61,6 +61,8 @@ class PPU : public Processor {
 
         uint8_t sprite_scanline[8 * 4];
         uint8_t sprite_count;
+
+        bool sprite_zero_hit_possible;
 
         uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y] = {0};
 
