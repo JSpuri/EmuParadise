@@ -383,6 +383,40 @@ void PPU::Clock() {
 
     }
 
+    uint8_t fg_pixel = 0;
+    uint8_t fg_palette = 0;
+    uint8_t fg_priority = 0;
+
+    if(this->show_sprites){
+
+        this->sprite_zero_being_rendered = false;
+
+        for(uint8_t i = 0; i < this->sprite_count; ++i){
+
+            if(this->sprite_scanline[i*sizeof(uint8_t) + 3] == 0){
+
+                uint8_t fg_pixel_lo = (this->vector_fg_pat_lower[i] & 0x80) > 0;
+                uint8_t fg_pixel_hi = (this->vector_fg_pat_higher[i] & 0x80) > 0;
+                fg_pixel = (fg_pixel_hi << 1) | fg_pixel_lo;
+
+                fg_palette = (this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x03) + 0x04;
+                fg_priority = (this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x20) == 0;
+
+                if(fg_pixel != 0){
+
+                    if(i == 0)
+                        this->sprite_zero_being_rendered = true;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    //uint8_t pixel = 0;
+    //uint8_t palette = 0;
+
+    //if(bg_pixel == 0 && fg_pixel == 0)
     //Set pixel here
     uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
     ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);

@@ -63,6 +63,7 @@ class PPU : public Processor {
         uint8_t sprite_count;
 
         bool sprite_zero_hit_possible;
+        bool sprite_zero_being_rendered;
 
         uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y] = {0};
 
