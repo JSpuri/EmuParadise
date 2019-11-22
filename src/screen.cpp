@@ -128,7 +128,8 @@ void updateTela(uint32_t *p_matrix) {
                 break;
 
             default:                 //[> Report an unhandled event <]
-                printf("I don't know what this event is!\n");
+                break;
+            //printf("I don't know what this event is!\n");
     }
     }
 

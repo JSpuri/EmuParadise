@@ -343,7 +343,7 @@ void CPU::runInstruction() {
         }
     }
 
-    if (this->logEnabled) {
+    if (true) {
         if (this->instructionAccessedMemory)
             logls();
         else

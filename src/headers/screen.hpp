@@ -14,7 +14,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int NES_WIDTH = 256;
-const int NES_HEIGHT = 240;
+const int NES_HEIGHT = 224;
 
 void tela(uint32_t *p_matrix, Controller *controllers);
 void updateTela(uint32_t *p_matrix);
