@@ -112,6 +112,10 @@ void PPU::Clock() {
 
                 case 0:
 
+
+					this->vector_bg_att_lower_bit  = (this->vector_bg_att_lower_bit & 0xFF00) | ((this->next_bg_tile_att & 0b01) ? 0xFF : 0x00);
+					this->vector_bg_att_higher_bit  = (this->vector_bg_att_higher_bit & 0xFF00) | ((this->next_bg_tile_att & 0b10) ? 0xFF : 0x00);
+
                     this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
                     this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
                     ////printf("vram_addr: %04x\n", vram_addr.reg);
@@ -188,6 +192,9 @@ void PPU::Clock() {
 
         if(this->cycle == 257){
 
+			this->vector_bg_att_lower_bit  = (this->vector_bg_att_lower_bit & 0xFF00) | ((this->next_bg_tile_att & 0b01) ? 0xFF : 0x00);
+			this->vector_bg_att_higher_bit  = (this->vector_bg_att_higher_bit & 0xFF00) | ((this->next_bg_tile_att & 0b10) ? 0xFF : 0x00);
+
             this->vector_bg_pat_lower_bit = (this->vector_bg_pat_lower_bit & 0xFF00) | this->next_bg_tile_lower;
             this->vector_bg_pat_higher_bit = (this->vector_bg_pat_higher_bit & 0xFF00) | this->next_bg_tile_higher;
 
@@ -245,7 +252,6 @@ void PPU::Clock() {
 
     //Set pixel here
     uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
-
     ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
     if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240)) {
         this->p_matrix[cycle + scanline * SCREEN_SIZE_X] = colors[pixel];
