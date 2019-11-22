@@ -332,10 +332,10 @@ void CPU::runInstruction() {
         }
     }
 
-     if (this->instructionAccessedMemory)
-         logls();
-     else
-         log();
+    //  if (this->instructionAccessedMemory)
+    //      logls();
+    //  else
+    //      log();
 }
 
 void CPU::setInstruction(uint8_t opcode) {
