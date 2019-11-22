@@ -275,7 +275,7 @@ void PPU::Clock() {
         }
 
         if(this->cycle == 340){
-        
+
             for(uint8_t i = 0; i < this->sprite_count; i++){
 
                 uint8_t sprite_pat_bits_lower, sprite_pat_bits_higher;
@@ -284,12 +284,12 @@ void PPU::Clock() {
                 if(this->sprite_size.second == 8){
 
                     if((this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x80) == 0){
-                        sprite_pat_addr_lower = this->sprite_pattern_table_addr 
+                        sprite_pat_addr_lower = this->sprite_pattern_table_addr
                                                 | this->sprite_scanline[i*4*sizeof(uint8_t) + 1] << 4
                                                 | (this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]);
                     }
                     else{
-                        sprite_pat_addr_lower = this->sprite_pattern_table_addr 
+                        sprite_pat_addr_lower = this->sprite_pattern_table_addr
                                                 | this->sprite_scanline[i*4*sizeof(uint8_t) + 1] << 4
                                                 | (7 -(this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]));
                     }
@@ -455,7 +455,7 @@ void PPU::Clock() {
         }
     }
 
-    
+
     //Set pixel here
     ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
     pixel = this->ReadFrom(0x3F00 + (palette_pixel << 2) + pixel);

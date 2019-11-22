@@ -60,22 +60,12 @@ void tela(uint32_t *p_matrix, Controller *controllers) {
 
 }
 
-void updateTela(uint32_t *p_matrix) {
-
-	// srand(time(NULL));
-
-	//for (int i = 0; i < NES_WIDTH; i++) {
-		//for (int j = 0; j < NES_HEIGHT; j++) {
-            //pixels[j * NES_WIDTH + i] = colors[(*p_matrix)[i][j]];
-        //}
-    //}
-
-
-    while (SDL_PollEvent(&event)) {   //[> Loop until there are no events left on the queue <]
+void updateControllers() {
+    int i = 0;
+    for (; SDL_PollEvent(&event) && i < 2; i++) {   //[> Loop until there are no events left on the queue <]
         switch (event.type) {         //[> Process the appropiate event type <]
-
             case SDL_KEYUP:
-                    printf("Tecla soltada!\n");
+                    // printf("Tecla soltada!\n");
                 switch(event.key.keysym.sym){
                     case SDLK_v: joypads->ReleaseButtonJP1('A'); break;
                     case SDLK_b: joypads->ReleaseButtonJP1('B'); break;
@@ -98,7 +88,7 @@ void updateTela(uint32_t *p_matrix) {
                 break;
 
             case SDL_KEYDOWN:        //[> Handle a KEYDOWN event <]
-                    printf("Tecla pressionada!\n");
+                    // printf("Tecla pressionada!\n");
                 switch(event.key.keysym.sym){
                     case SDLK_v: joypads->PressButtonJP1('A'); break;
                     case SDLK_b: joypads->PressButtonJP1('B'); break;
@@ -130,8 +120,21 @@ void updateTela(uint32_t *p_matrix) {
             default:                 //[> Report an unhandled event <]
                 break;
             //printf("I don't know what this event is!\n");
+        }
     }
-    }
+}
+
+void updateTela(uint32_t *p_matrix) {
+
+	// srand(time(NULL));
+
+	//for (int i = 0; i < NES_WIDTH; i++) {
+		//for (int j = 0; j < NES_HEIGHT; j++) {
+            //pixels[j * NES_WIDTH + i] = colors[(*p_matrix)[i][j]];
+        //}
+    //}
+
+    updateControllers();
 
     SDL_UpdateTexture(texture, NULL, p_matrix, NES_WIDTH * sizeof(uint32_t));
 

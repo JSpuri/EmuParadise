@@ -18,6 +18,7 @@ const int NES_HEIGHT = 224;
 
 void tela(uint32_t *p_matrix, Controller *controllers);
 void updateTela(uint32_t *p_matrix);
+void updateControllers();
 //void put_pixel8(SDL_Surface* surface, int x, int y, Uint8 pixel);
 //bool initSDL();
 //bool loadMedia();
