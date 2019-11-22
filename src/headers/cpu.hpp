@@ -54,6 +54,8 @@ class CPU : public Processor {
 
         void NMI();
 
+        bool logEnabled;
+
     private:
         AddressBus *addr_bus;
 

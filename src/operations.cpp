@@ -23,7 +23,7 @@ void setFlagsCMP(uint8_t operand, uint8_t registrador, CPU *cpu){ // also used i
 
     cpu->ps[Z] = ((registrador - operand) == 0);
 
-	if(abs(registrador) >= abs(operand))
+	if(registrador >= operand)
 		cpu->ps[C] = 1;
 	else
 		cpu->ps[C] = 0;
@@ -618,6 +618,7 @@ void RTI(int mode, CPU *cpu) {
     cpu->pc = cpu->PopFromStack();
     cpu->pc |= (cpu->PopFromStack() << 8) & 0xFF00;
     //printf("%02x\n", cpu->pc);
+    if (cpu->pc == 0xc0c0) cpu->logEnabled = true;
 }
 
 void RTS(int mode, CPU *cpu) {
@@ -625,8 +626,9 @@ void RTS(int mode, CPU *cpu) {
     uint16_t absolute_addr = cpu->PopFromStack();
     absolute_addr |= (cpu->PopFromStack() << 8) & 0xFF00;
 
-    //printf("RTS (cpu->pc : %02x) => %02x\n", cpu->pc, absolute_addr);
     cpu->pc = absolute_addr;
+
+    if (cpu->pc == 0xc0c0) cpu->logEnabled = true;
 
 }
 
