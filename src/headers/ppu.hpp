@@ -21,7 +21,7 @@ class PPU : public Processor {
 
         void Clock();
 
-        void WriteTo(uint16_t addr, int8_t value) override;
+        void WriteTo(uint16_t addr, uint8_t value) override;
         uint8_t ReadFrom(uint16_t addr) override;
 
         void WriteToRegister(uint16_t addr, uint8_t value);

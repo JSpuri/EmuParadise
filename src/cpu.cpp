@@ -57,9 +57,9 @@ bool CPU::Clock() {
 // This method returns a word (8 bits) - the instruction argument,
 // depending on the operation instructionMode. If the argument is a address, a word will
 // be retrieved from that address - or the indirect address, if applied.
-int8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
+uint8_t CPU::ResolveOPArgWord(int instructionMode, uint16_t addr) {
 
-    int8_t value = 0;
+    uint8_t value = 0;
 
     if(instructionMode == M_IMMEDIATE)
         value = ReadImmediate(addr);
@@ -136,7 +136,7 @@ uint16_t CPU::ResolveOPArgAddr(int instructionMode, uint16_t addr) {
 
 
 // Sends write information to bus, storing last_accessed_mem
-void CPU::WriteTo(uint16_t addr, int8_t value) {
+void CPU::WriteTo(uint16_t addr, uint8_t value) {
 
     this->addr_bus->WriteTo(0, addr, (uint8_t)value);
 }
@@ -156,70 +156,70 @@ void CPU::SetAddressBus(AddressBus *addr_bus){
 
 // Reads a word (8 bit) from the address, to be used in ResolveOPArgWord
 // to retrieve immediate arguments in instructions
-int8_t CPU::ReadImmediate(uint16_t addr) {
+uint8_t CPU::ReadImmediate(uint16_t addr) {
 
-    int8_t immediate = this->ReadFrom(addr);
+    uint8_t immediate = this->ReadFrom(addr);
     return immediate;
 }
 
 // Retrieves a word from a zero page address
-int8_t CPU::ResolveZeroAddr(uint16_t addr) {
+uint8_t CPU::ResolveZeroAddr(uint16_t addr) {
 
     uint8_t zero_pg_addr = this->ReadFrom(addr) & 0x00FF;
 
-    int8_t value = this->ReadFrom(zero_pg_addr);
+    uint8_t value = this->ReadFrom(zero_pg_addr);
     return value;
 }
 
 // Retrieves a word from a zero page address with x offset
-int8_t CPU::ResolveZeroAddrX(uint16_t addr) {
+uint8_t CPU::ResolveZeroAddrX(uint16_t addr) {
 
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
-    int8_t value = this->ReadFrom((zero_pg_addr + (this->x & 0x00FF)) & 0x00FF);
+    uint8_t value = this->ReadFrom((zero_pg_addr + (this->x & 0x00FF)) & 0x00FF);
     return value;
 }
 
 // Retrieves a word from a zero page address with y offset
-int8_t CPU::ResolveZeroAddrY(uint16_t addr) {
+uint8_t CPU::ResolveZeroAddrY(uint16_t addr) {
 
     uint8_t zero_pg_addr = this->ReadFrom(addr);
 
-    int8_t value = this->ReadFrom((zero_pg_addr + (this->y & 0x00FF))&0x00FF);
+    uint8_t value = this->ReadFrom((zero_pg_addr + (this->y & 0x00FF))&0x00FF);
     return value;
 }
 
 // Reads a word (8 bit) from the address, to be used in ResolveOPArgWord
 // to retrieve relative arguments in instructions
-int8_t CPU::ReadRelative(uint16_t addr) {
+uint8_t CPU::ReadRelative(uint16_t addr) {
 
-    int8_t immediate = this->ReadFrom(addr);
+    uint8_t immediate = this->ReadFrom(addr);
     return immediate;
 }
 
 // Retrieves a word from an absolute address
-int8_t CPU::ResolveAbsAddr(uint16_t addr) {
+uint8_t CPU::ResolveAbsAddr(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
 
-    int8_t value = this->ReadFrom(absolute_addr);
+    uint8_t value = this->ReadFrom(absolute_addr);
     return value;
 }
 
 // Retrieves a word from an absolute address with x offset
-int8_t CPU::ResolveAbsAddrX(uint16_t addr) {
+uint8_t CPU::ResolveAbsAddrX(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
 
     // Page crossing with absolute addresses with offsets adds one to cpu cycle
     if(((absolute_addr + this->x) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
-    int8_t value = this->ReadFrom(absolute_addr + (this->x & 0x00FF));
+    uint8_t value = this->ReadFrom(absolute_addr + (this->x & 0x00FF));
     return value;
 }
 
 // Retrieves a word from an absolute address with y offset
-int8_t CPU::ResolveAbsAddrY(uint16_t addr) {
+uint8_t CPU::ResolveAbsAddrY(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr);
 
@@ -227,12 +227,12 @@ int8_t CPU::ResolveAbsAddrY(uint16_t addr) {
     if(((absolute_addr + this->y) & 0xFF00) != (absolute_addr & 0xFF00))
         this->instructionNumCycles++;
 
-    int8_t value = this->ReadFrom(absolute_addr + (this->y & 0x00FF));
+    uint8_t value = this->ReadFrom(absolute_addr + (this->y & 0x00FF));
     return value;
 }
 
 // Retrieves a word from an indirect address with x offset
-int8_t CPU::ResolveIndirectX(uint16_t addr) {
+uint8_t CPU::ResolveIndirectX(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr) & 0x00FF;
 
@@ -243,7 +243,7 @@ int8_t CPU::ResolveIndirectX(uint16_t addr) {
 }
 
 // Retrieves a word from an indirect address with y offset
-int8_t CPU::ResolveIndirectY(uint16_t addr) {
+uint8_t CPU::ResolveIndirectY(uint16_t addr) {
 
     uint16_t absolute_addr = this->ReadAbsAddr(addr) & 0x00FF;
 

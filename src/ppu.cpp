@@ -271,7 +271,7 @@ void PPU::Clock() {
 
 
 // Write value to memory according to PPU address table
-void PPU::WriteTo(uint16_t addr, int8_t value) {
+void PPU::WriteTo(uint16_t addr, uint8_t value) {
     this->addr_bus->WriteTo(1, addr, value);
 }
 
