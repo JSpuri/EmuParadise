@@ -62,7 +62,7 @@ PPU::PPU() {
     this->sprite_zero_hit = false;
     this->in_vblank = false;
 
-    this->OAMADDR = 0;
+    this->OAMADDR = 0x00;
     this->OAMDATA = 0;
 
     this->PPUSCROLL = 0;
@@ -358,7 +358,7 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
 
         case OAMDATA_ADDR:
             this->OAMDATA = value;
-            this->WriteToOAM( this->OAMDATA);
+            this->OAM[this->OAMADDR++] = this->OAMDATA;
 
             this->last_write_to_reg = value;
             break;
@@ -393,7 +393,7 @@ void PPU::WriteToRegister(uint16_t addr, uint8_t value) {
             if(this->address_latch){
 
                 this->tram_addr.reg = (this->tram_addr.reg & 0xFF00) | value;
-                this->vram_addr.reg = this->tram_addr.reg;
+                this->vram_addr = this->tram_addr;
                 this->address_latch = false;
                 //printf("(t/v)ram_addr.reg: %04x\n", this->tram_addr.reg);
             }
@@ -457,7 +457,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             break;
 
         case OAMDATA_ADDR:
-            this->OAMDATA = this->ReadFromOAM();
+            this->OAMDATA = this->OAM[this->OAMADDR];
             this->PPUGenLatch = this->OAMDATA;
             break;
 
@@ -466,7 +466,7 @@ uint8_t PPU::ReadFromRegister(uint16_t addr) {
             this->PPUGenLatch = this->PPUDATA;
             this->PPUDATA = this->ReadFrom(this->vram_addr.reg);
 
-            if(this->vram_addr.reg > 0x3F00)
+            if(this->vram_addr.reg >= 0x3F00)
                 this->PPUGenLatch = this->PPUDATA;
 
             //printf("PPUDATA: %02x\n", this->PPUGenLatch);
@@ -489,13 +489,3 @@ uint32_t* PPU::GetPMatrix() {
     return this->p_matrix;
 }
 
-void PPU::WriteToOAM(uint8_t value) {
-
-    this->OAM[this->OAMADDR] = value;
-    this->OAMADDR++;
-}
-
-uint8_t PPU::ReadFromOAM() {
-
-    return this->OAM[this->OAMADDR];
-}

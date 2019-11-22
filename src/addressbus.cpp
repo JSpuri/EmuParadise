@@ -136,9 +136,9 @@ void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
         else if(address == OAMDMA_ADDR){
 
             ppu->WriteToRegister(address, word);
-            uint16_t abs_address = word << 8;
+            uint16_t abs_address = (word << 8) & 0xFF00;
 
-            for(uint16_t i = 0x00; i < 0x100; i++){
+            for(uint16_t i = 0x00; i < 0x100; ++i){
                 ppu->WriteToRegister(OAMDATA_ADDR, this->cpu->ReadFrom(abs_address + i));
             }
         }

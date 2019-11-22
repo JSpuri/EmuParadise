@@ -31,6 +31,13 @@ class PPU : public Processor {
 
         uint32_t *GetPMatrix();
 
+        // OAM stores sprite data (64 sprites with 4 bytes each)
+        // Pos 0: Y Position (OAM_Y_POS)
+        // Pos 1: Index (OAM_INDEX_N)
+        // Pos 2: Attributes (OAM_ATTRIBUTES)
+        // Pos 3: X Position (OAM_X_POS)
+        std::vector<uint8_t> OAM;
+
     private:
         AddressBus *addr_bus;
 
@@ -50,13 +57,6 @@ class PPU : public Processor {
         uint16_t vector_bg_att_higher_bit;
 
         uint32_t p_matrix[SCREEN_SIZE_X * SCREEN_SIZE_Y] = {0};
-
-        // OAM stores sprite data (64 sprites with 4 bytes each)
-        // Pos 0: Y Position (OAM_Y_POS)
-        // Pos 1: Index (OAM_INDEX_N)
-        // Pos 2: Attributes (OAM_ATTRIBUTES)
-        // Pos 3: X Position (OAM_X_POS)
-        std::vector<uint8_t> OAM;
 
         uint8_t PPUCTRL;
         // ============================ The variables underneath here are contained in PPUCTRL
@@ -147,9 +147,6 @@ class PPU : public Processor {
         uint8_t PPUGenLatch;
 
         bool frame_complete;
-
-        void WriteToOAM(uint8_t value);
-        uint8_t ReadFromOAM();
 };
 
 
