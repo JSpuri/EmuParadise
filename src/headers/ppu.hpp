@@ -36,7 +36,8 @@ class PPU : public Processor {
         // Pos 1: Index (OAM_INDEX_N)
         // Pos 2: Attributes (OAM_ATTRIBUTES)
         // Pos 3: X Position (OAM_X_POS)
-        std::vector<uint8_t> OAM;
+        //std::vector<uint8_t> OAM;
+        uint8_t OAM[256];
 
     private:
         AddressBus *addr_bus;

@@ -34,7 +34,7 @@ PPU::PPU() {
     this->vector_bg_att_lower_bit = 0;
     this->vector_bg_att_higher_bit = 0;
 
-    this->OAM.resize(OAM_SIZE, 0);
+    //this->OAM.resize(OAM_SIZE, 0);
 
     this->PPUCTRL = 0;
     this->nametable_x_offset = 0;
@@ -240,7 +240,7 @@ void PPU::Clock() {
 
         if(this->cycle == 257 && this->scanline >= 0){
 
-            memset(this->sprite_scanline, 0xFF, 8*4*sizeof(uint8_t));
+            memset(this->sprite_scanline, 0x00, 8*4*sizeof(uint8_t));
             this->sprite_count = 0;
 
             for(uint8_t i = 0; i < 8; ++i){
@@ -253,7 +253,7 @@ void PPU::Clock() {
 
             while(num_oam_entry < 64 && this->sprite_count < 9){
 
-                int16_t diff = ((int16_t)scanline - (int16_t)this->OAM[num_oam_entry * sizeof(uint8_t)]);
+                int16_t diff = ((int16_t)scanline - (int16_t)this->OAM[num_oam_entry * 4 * sizeof(uint8_t)]);
 
                 if(diff >= 0 && diff < (this->sprite_size.second)){
 
@@ -263,7 +263,7 @@ void PPU::Clock() {
                             this->sprite_zero_hit_possible = true;
                         }
 
-                        memcpy(&(this->sprite_scanline[this->sprite_count * sizeof(uint8_t)]), &(this->OAM[num_oam_entry]), 4*sizeof(uint8_t));
+                        memcpy(&(this->sprite_scanline[this->sprite_count * 4 *sizeof(uint8_t)]), &(this->OAM[num_oam_entry * 4 * sizeof(uint8_t)]), 4*sizeof(uint8_t));
                         this->sprite_count++;
                     }
                 }
@@ -283,42 +283,42 @@ void PPU::Clock() {
 
                 if(this->sprite_size.second == 8){
 
-                    if((this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x80) == 0){
+                    if((this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x80) == 0){
                         sprite_pat_addr_lower = this->sprite_pattern_table_addr 
-                                                | this->sprite_scanline[i*sizeof(uint8_t) + 1] << 4
-                                                | (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]);
+                                                | this->sprite_scanline[i*4*sizeof(uint8_t) + 1] << 4
+                                                | (this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]);
                     }
                     else{
                         sprite_pat_addr_lower = this->sprite_pattern_table_addr 
-                                                | this->sprite_scanline[i*sizeof(uint8_t) + 1] << 4
-                                                | (7 -(this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]));
+                                                | this->sprite_scanline[i*4*sizeof(uint8_t) + 1] << 4
+                                                | (7 -(this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]));
                     }
                 }
                 else{
-                    if((this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x80) == 0){
-                        if(this->scanline - this->sprite_scanline[i*sizeof(uint8_t) + 2] < 8){
-                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
-                                                    |((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE) << 4)
-                                                    |((this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                    if((this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x80) == 0){
+                        if(this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t) + 2] < 8){
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0xFE) << 4)
+                                                    |((this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]) & 0x07);
 
                         }
                         else{
-                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
-                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE) + 1) << 4)
-                                                    |((this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0xFE) + 1) << 4)
+                                                    |((this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]) & 0x07);
                         }
                     }
                     else{
-                        if(this->scanline - this->sprite_scanline[i*sizeof(uint8_t) + 2] < 8){
-                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
-                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE)+ 1) << 4)
-                                                    |(7 - (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                        if(this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t) + 2] < 8){
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0xFE)+ 1) << 4)
+                                                    |(7 - (this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]) & 0x07);
 
                         }
                         else{
-                            sprite_pat_addr_lower = ((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0x01) << 12)
-                                                    |(((this->sprite_scanline[i*sizeof(uint8_t) + 1] & 0xFE)) << 4)
-                                                    |(7 - (this->scanline - this->sprite_scanline[i*sizeof(uint8_t)]) & 0x07);
+                            sprite_pat_addr_lower = ((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0x01) << 12)
+                                                    |(((this->sprite_scanline[i*4*sizeof(uint8_t) + 1] & 0xFE)) << 4)
+                                                    |(7 - (this->scanline - this->sprite_scanline[i*4*sizeof(uint8_t)]) & 0x07);
                         }
                     }
                 }
@@ -328,7 +328,7 @@ void PPU::Clock() {
                 sprite_pat_bits_lower = this->ReadFrom(sprite_pat_addr_lower);
                 sprite_pat_bits_higher = this->ReadFrom(sprite_pat_addr_higher);
 
-                if(this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x40){
+                if(this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x40){
 
 					// https://stackoverflow.com/a/2602885
 					auto flipbyte = [](uint8_t b)
@@ -393,14 +393,14 @@ void PPU::Clock() {
 
         for(uint8_t i = 0; i < this->sprite_count; ++i){
 
-            if(this->sprite_scanline[i*sizeof(uint8_t) + 3] == 0){
+            if(this->sprite_scanline[i*4*sizeof(uint8_t) + 3] == 0){
 
                 uint8_t fg_pixel_lo = (this->vector_fg_pat_lower[i] & 0x80) > 0;
                 uint8_t fg_pixel_hi = (this->vector_fg_pat_higher[i] & 0x80) > 0;
                 fg_pixel = (fg_pixel_hi << 1) | fg_pixel_lo;
 
-                fg_palette = (this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x03) + 0x04;
-                fg_priority = (this->sprite_scanline[i*sizeof(uint8_t) + 2] & 0x20) == 0;
+                fg_palette = (this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x03) + 0x04;
+                fg_priority = (this->sprite_scanline[i*4*sizeof(uint8_t) + 2] & 0x20) == 0;
 
                 if(fg_pixel != 0){
 
