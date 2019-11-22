@@ -119,8 +119,8 @@ void PPU::Clock() {
             if(this->show_sprites && this->cycle >= 1 && this->cycle < 258){
 
                 for(int i = 0; i < this->sprite_count; ++i){
-                    if(this->sprite_scanline[i * sizeof(uint8_t) + 3] > 0)
-                        this->sprite_scanline[i * sizeof(uint8_t) + 3] -= 1;
+                    if(this->sprite_scanline[i * 4*  sizeof(uint8_t) + 3] > 0)
+                        this->sprite_scanline[i * 4 * sizeof(uint8_t) + 3] -= 1;
                     else{
                         this->vector_fg_pat_lower[i] <<= 1;
                         this->vector_fg_pat_higher[i] <<= 1;
