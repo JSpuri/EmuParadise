@@ -413,13 +413,52 @@ void PPU::Clock() {
         }
     }
 
-    //uint8_t pixel = 0;
-    //uint8_t palette = 0;
+    uint8_t pixel = 0;
+    uint8_t palette_pixel = 0;
 
-    //if(bg_pixel == 0 && fg_pixel == 0)
+    if(bg_pixel == 0 && fg_pixel == 0){
+        pixel = 0;
+        palette_pixel = 0;
+    }
+    else if(bg_pixel == 0 && fg_pixel > 0){
+        pixel = fg_pixel;
+        palette_pixel = fg_palette;
+    }
+    else if(bg_pixel > 0 && fg_pixel == 0){
+        pixel = bg_pixel;
+        palette_pixel = bg_palette;
+    }
+    else if(bg_pixel > 0 && fg_pixel > 0){
+
+        if(fg_priority){
+            pixel = fg_pixel;
+            palette_pixel = fg_palette;
+        }
+        else{
+            pixel = bg_pixel;
+            palette_pixel = bg_palette;
+        }
+
+        if(this->sprite_zero_hit_possible && this->sprite_zero_being_rendered){
+
+            if(this->show_sprites && this->show_background){
+
+                if(!(this->show_background_in_leftmost_8pixels || this->show_sprites_in_leftmost_8pixels)){
+                    if(this->cycle >= 9 && this->cycle < 258)
+                        this->sprite_zero_hit = true;
+                }
+                else{
+                    if(this->cycle >= 1 && this->cycle < 258)
+                        this->sprite_zero_hit = true;
+                }
+            }
+        }
+    }
+
+    
     //Set pixel here
-    uint8_t pixel = this->ReadFrom(0x3F00 + (bg_palette << 2) + bg_pixel);
     ////printf("Vou setar [%d][%d] com %02x\n", cycle, scanline, pixel);
+    pixel = this->ReadFrom(0x3F00 + (palette_pixel << 2) + pixel);
     if((this->cycle >= 0 && this->cycle < 256) && (this->scanline >= 0 && this->scanline < 240)) {
         this->p_matrix[cycle + scanline * SCREEN_SIZE_X] = colors[pixel];
     }
