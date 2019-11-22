@@ -332,10 +332,13 @@ void CPU::runInstruction() {
         }
     }
 
-    //  if (this->instructionAccessedMemory)
-    //      logls();
-    //  else
-    //      log();
+    if (this->logEnabled) {
+        if (this->instructionAccessedMemory)
+            logls();
+        else
+            log();
+        if (this->pc == 0xc1de) this->logEnabled = false;
+    }
 }
 
 void CPU::setInstruction(uint8_t opcode) {

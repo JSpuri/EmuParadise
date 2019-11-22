@@ -615,10 +615,10 @@ void RTI(int mode, CPU *cpu) {
 
     }
 
-    //printf("RTI (cpu->pc : %02x) => ", cpu->pc);
     cpu->pc = cpu->ReadFrom((0x0100 + (++cpu->sp)));
     cpu->pc += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8 ;
-    //printf("%02x\n", cpu->pc);
+
+    if (cpu->pc == 0xc0c0) cpu->logEnabled = true;
 }
 
 void RTS(int mode, CPU *cpu) {
@@ -626,8 +626,9 @@ void RTS(int mode, CPU *cpu) {
     uint16_t absolute_addr = cpu->ReadFrom(0x0100 + (++cpu->sp));
     absolute_addr += cpu->ReadFrom(0x0100 + (++cpu->sp)) << 8;
 
-    //printf("RTS (cpu->pc : %02x) => %02x\n", cpu->pc, absolute_addr);
     cpu->pc = absolute_addr;
+
+    if (cpu->pc == 0xc0c0) cpu->logEnabled = true;
 
 }
 
