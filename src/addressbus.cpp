@@ -106,7 +106,6 @@ bool AddressBus::Clock() {
 void AddressBus::WriteTo(int processorType, uint16_t address, uint8_t word) {
 
     if(processorType == 0){
-        this->cpu->last_accessed_mem = address;
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
@@ -207,7 +206,6 @@ uint8_t AddressBus::ReadFrom(int processorType, uint16_t address) {
 
     if(processorType == 0){
 
-        this->cpu->last_accessed_mem = address;
         if(address < INTERNAL_CPU_RAM_ENDING){
             //the % operator is due to the mirroring of the ram on
             //$0800-$0FFF, $1000-$17FF and $1800-1FFF
