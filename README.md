@@ -21,10 +21,11 @@ In the root folder of the project, run:
 * `$ make` to compile the current state of the emulator;
 * `$ make test` to run current CPU tests;
 * `$ make clean` to remove files created on testing and compiling cases;
+> Note: We used C++ 14 
 
 ### Our emulator currently have:
 * [X] CPU
-* [ ] PPU
+* [X] PPU
 * [ ] APU
 
 

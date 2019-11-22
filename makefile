@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-std=gnu++11 -O3
+CCFLAGS=-std=gnu++14 -O3
 SDLFLAG=$$(sdl2-config --cflags --libs)
 
 SRC=./src
@@ -67,4 +67,3 @@ clean:
 
 res:
 	for f in log/*.log;do cp $f res/$(basename "$f" .log).r;done
-
